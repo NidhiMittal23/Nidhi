@@ -1,0 +1,29 @@
+{
+    "development": {
+        "Endpoints": {
+            "document": "http://127.0.0.1:9000/documents/"
+        },
+        "roles": {
+            "ADMIN": [
+                {
+                    "name": "Documents",
+                    "url": "/documents",
+                    "icon": "&#xf0a3;"
+                },
+                {
+                    "name": "Licenses",
+                    "url": "/licenses",
+                    "icon": "&#xf0a3;"
+                }
+            ],
+            "FSL": [
+                {
+                    "name": "Documents",
+                    "url": "/documents",
+                    "icon": "&#xf0a3;" 
+                }
+            ]
+        },
+
+    }
+}
