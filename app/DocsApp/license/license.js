@@ -21,11 +21,35 @@ licenseApp.config(function($stateProvider, $urlRouterProvider) {
 })
 
 
-licenseApp.controller('licenseCtrl', function($scope) {
-    $scope.licenseList = [{'id': 1, 'name': 'ISO', 'abbreviate': 'ISO', 'granting_authority': 'Comodities Organisation'},
-                          {'id': 2, 'name': 'FSCC', 'abbreviate': 'FSCC', 'granting_authority': 'Food Organisation'}]
+licenseApp.controller('licenseCtrl', function($scope, licenseAPIservice) {
+    licenseAPIservice.getlicense().success(function (response) {
+        $scope.licenseList = response;
+    })
 })
 
+
 licenseApp.controller('licenseAlterCtrl', function($scope, $stateParams) {
-    console.log("In here");
+    
 })
+
+
+licenseApp.factory('licenseAPIservice', function($http) {
+
+    var licenseAPI = {};
+
+    licenseAPI.getlicense = function() {
+      return $http({
+        method: 'GET', 
+        url: 'http://localhost:9000/licences/'
+      });
+    }
+
+    licenseAPI.getLicenseDetails = function(id) {
+      return $http({
+        method: 'JSONP', 
+        url: 'http://ergast.com/api/f1/2013/drivers/'+ id +'/driverStandings.json?callback=JSON_CALLBACK'
+      });
+    }
+
+    return licenseAPI;
+  });
