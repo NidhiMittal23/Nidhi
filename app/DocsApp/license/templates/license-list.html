@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" ui-sref="addLicense">Add License</button>
+<button type="button" class="btn btn-primary" ng-click="addNewLicense()">Add License</button>
 <div class="table-responsive">
   <table class="table table-hover">
     <thead>
@@ -10,7 +10,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="license in licenseList" style="cursor: hand;cursor: pointer;" ui-sref="editLicense({name: license.name})">
+            <tr ng-repeat="license in licenseList" style="cursor: hand;cursor: pointer;" ng-click="editExistLicense(license.id, license.name)">
               <td>{{license.id ? license.id : 'N/A'}}</td>
               <td>{{license.name ? license.name : 'N/A'}}</td>
               <td>{{license.abbreviate ? license.abbreviate : 'N/A'}}</td>

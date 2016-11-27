@@ -3,6 +3,8 @@ var licenseService = angular.module('license.services', []);
 licenseService.factory('licenseAPIservice', function($http) {
 
     var licenseAPI = {};
+
+    //endpoints corresponding to license
     var licenseUrl = {
         'endpoint': 'http://localhost:9000/licences/'
     }
@@ -17,7 +19,7 @@ licenseService.factory('licenseAPIservice', function($http) {
     licenseAPI.getLicenseDetails = function(id) {
         return $http({
             method: 'GET', 
-            url: licenseUrl.endpoint
+            url: licenseUrl.endpoint + id
         });
     }
 

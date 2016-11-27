@@ -11,11 +11,14 @@ licenseApp.config(function($stateProvider, $urlRouterProvider) {
         .state('addLicense', {
             url: '/license/add',
             templateUrl: 'DocsApp/license/templates/license-alter.html',
-            controller: 'licenseAlterCtrl'
+            controller: 'licenseAlterCtrl',
+            params: {}
         })
 
         .state('editLicense', {
             url: '/license/edit/{name}',
-            template: "<p>Edit license state </p>"
+            templateUrl: 'DocsApp/license/templates/license-alter.html',
+            controller: 'licenseAlterCtrl',
+            params: {id: null, name: null}
         })
 })

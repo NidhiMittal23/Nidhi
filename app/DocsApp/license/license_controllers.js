@@ -1,6 +1,14 @@
 var licenseController = angular.module('license.controllers', ['ui-notification']);
 
-licenseController.controller('licenseCtrl', function($scope, licenseAPIservice) {
+licenseController.controller('licenseCtrl', function($state, $scope, licenseAPIservice) {
+
+    $scope.addNewLicense = function() {
+        $state.go('addLicense', {});
+    }
+
+    $scope.editExistLicense = function(id, name) {
+        $state.go('editLicense', {id: id, name: name});
+    }
 
     licenseAPIservice.getlicense().success(function (response, status) {
         $scope.licenseList = response;
@@ -20,12 +28,28 @@ licenseController.controller('licenseCtrl', function($scope, licenseAPIservice) 
 });
 
 
-licenseController.controller('licenseAlterCtrl', function($scope, $stateParams, licenseAPIservice, Notification) {
+licenseController.controller('licenseAlterCtrl', function($scope, $state, $stateParams, licenseAPIservice, Notification) {
+    
     $scope.licenseModel = {};
+    
+    if ($state.current.name == 'editLicense') {
+        $scope.isEdit = true;
+        var id = $stateParams.id
+        
+        // request to server to get detail of perticular license.
+        licenseAPIservice.getLicenseDetails(id).success(function (response, status) {
+            //populate the input field with data.
+            $scope.licenseModel = response;
+        })
+
+    }
+    else if ($state.current.name == 'addLicense') {
+        $scope.isEdit = false;
+    }
 
     var params = $scope.licenseModel;
-
-    $scope.addNewLicense = function() {
+    // on submit button click
+    $scope.addNewLicense = function(params) {
         licenseAPIservice.postLicenseDetail(params).success(function (response, status) {
             var licenseName = params.name;
             Notification.success(licenseName+' added successfully');
@@ -43,4 +67,5 @@ licenseController.controller('licenseAlterCtrl', function($scope, $stateParams, 
             }
         })
     }
+
 })

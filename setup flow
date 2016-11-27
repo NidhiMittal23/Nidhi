@@ -1,0 +1,16 @@
+To build new components:
+
+1) If using sublime editor turn tabs into space
+2) add component dependencies in index.html
+  <script src="DocsApp/license/license.js"></script>
+  <script src="DocsApp/license/license_controllers.js"></script>
+  <script src="DocsApp/license/license_services.js"></script>
+ 
+NOTE: make seperate controller and service as code looks structured
+
+3) inject component(e.g. 'license') in 'myApp' module
+
+4) based on requirement as Notification is only used in license-controller, inject dependencies likewise
+
+5) put ng-model name of input field same as params to be send to endpoints, it gets easy to pass params.
+
