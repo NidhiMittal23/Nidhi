@@ -19,37 +19,3 @@ licenseApp.config(function($stateProvider, $urlRouterProvider) {
             template: "<p>Edit license state </p>"
         })
 })
-
-
-// licenseApp.controller('licenseCtrl', function($scope, licenseAPIservice) {
-//     licenseAPIservice.getlicense().success(function (response) {
-//         $scope.licenseList = response;
-//     })
-// })
-
-
-// licenseApp.controller('licenseAlterCtrl', function($scope, $stateParams) {
-    
-// })
-
-
-// licenseApp.factory('licenseAPIservice', function($http) {
-
-//     var licenseAPI = {};
-
-//     licenseAPI.getlicense = function() {
-//       return $http({
-//         method: 'GET', 
-//         url: 'http://localhost:9000/licences/'
-//       });
-//     }
-
-//     licenseAPI.getLicenseDetails = function(id) {
-//       return $http({
-//         method: 'JSONP', 
-//         url: 'http://ergast.com/api/f1/2013/drivers/'+ id +'/driverStandings.json?callback=JSON_CALLBACK'
-//       });
-//     }
-
-//     return licenseAPI;
-//   });
