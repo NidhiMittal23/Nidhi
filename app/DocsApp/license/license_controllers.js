@@ -49,7 +49,7 @@ licenseController.controller('licenseAlterCtrl', function($scope, $state, $state
 
     var params = $scope.licenseModel;
     // on submit button click
-    $scope.addNewLicense = function(params) {
+    $scope.addNewLicense = function() {
         licenseAPIservice.postLicenseDetail(params).success(function (response, status) {
             var licenseName = params.name;
             Notification.success(licenseName+' added successfully');
