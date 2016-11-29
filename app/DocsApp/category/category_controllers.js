@@ -49,8 +49,8 @@ categoryController.controller('categoryAlterCtrl', function($scope, $state, $sta
 
     var params = $scope.categoryModel;
     // on submit button click
-    $scope.addNewLicense = function(params) {
-        licenseAPIservice.postCategoryDetail(params).success(function (response, status) {
+    $scope.addNewCategory = function() {
+        categoryAPIservice.postCategoryDetail(params).success(function (response, status) {
             var categoryName = params.name;
             Notification.success(categoryName+' added successfully');
         }).error( function(response, status) {
