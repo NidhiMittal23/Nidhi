@@ -1,0 +1,16 @@
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="industry in industryList" style="cursor: hand;cursor: pointer;" ng-click="editExistIndustry(industry.id, industry.name)">
+              <td>{{industry.id ? industry.id : 'N/A'}}</td>
+              <td>{{industry.name ? industry.name : 'N/A'}}</td>
+            </tr>
+          </tbody>
+  </table>
+</div>
