@@ -8,4 +8,11 @@ industryApp.config(function($stateProvider, $urlRouterProvider){
             controller: 'industryCtrl'
         })
 
+        .state('addIndustry', {
+            url: '/industry/add',
+            templateUrl: 'DocsApp/industry/templates/industry-alter.html',
+            controller: 'industryAlterCtrl',
+            params: {}
+        })
+
 })
