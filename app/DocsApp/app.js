@@ -5,7 +5,8 @@ var myApp = angular.module('myApp', [
   'ui.router',
   'myApp.version',
   'license',
-  'category'
+  'category',
+  'industry'
 ])
 
 myApp.config(function($stateProvider, $urlRouterProvider) {
@@ -13,5 +14,5 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
 });
 
 myApp.controller('navigationCtrl', function($scope){
-    $scope.navList = ['license', 'category'];
+    $scope.navList = ['license', 'category', 'industry'];
 });
