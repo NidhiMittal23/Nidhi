@@ -37,5 +37,22 @@ industryService.factory('industryAPIservice', function($http) {
         });
     }
 
+
+    industryAPI.putIndustryDetail = function(id,params) {
+        console.log(id + "=" + params.name);
+        return $http({
+            method: 'PUT',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: industryUrl.endpoint,
+            transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+            data: { id: id, name: params.name }
+        });
+    }
+
     return industryAPI;
 });

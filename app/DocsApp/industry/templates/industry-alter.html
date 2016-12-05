@@ -1,7 +1,8 @@
 <div class="panel panel-default">
 
   <!-- check if state is edit -->
-  <div class="panel-heading font-bold">Add industry</div>
+  <div class="panel-heading font-bold" ng-if="isEdit===true">Edit industry</div>
+  <div class="panel-heading font-bold" ng-if="isEdit===false">Add industry</div>
     <div class="panel-body">
       <form class="form-horizontal">
         <div class="form-group">
@@ -12,10 +13,10 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary" ng-click="addNewIndustry()">Add</button>
+            <button type="submit" class="btn btn-primary" ng-click="editExistIndustry()" ng-if="isEdit===true">Edit</button>
+            <button type="submit" class="btn btn-primary" ng-click="addNewIndustry()" ng-if="isEdit===false">Add</button>
           </div>
         </div>
       </form>
     </div>
-  </div>
 </div>
