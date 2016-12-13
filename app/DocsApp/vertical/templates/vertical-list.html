@@ -8,7 +8,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="vertical in verticalList.results" style="cursor: hand;cursor: pointer;">
+            <tr ng-repeat="vertical in verticalList.results" style="cursor: hand;cursor: pointer;" ng-click="editExistVertical(vertical.id, vertical.name)">
               <td>{{vertical.id ? vertical.id : 'N/A'}}</td>
               <td>{{vertical.name ? vertical.name : 'N/A'}}</td>
             </tr>

@@ -1,7 +1,8 @@
 <div class="panel panel-default">
 
   <!-- check if state is edit -->
-  <div class="panel-heading font-bold">Add vertical</div>
+  <div class="panel-heading font-bold" ng-if="isEdit===true">Edit vertical</div>
+  <div class="panel-heading font-bold" ng-if="isEdit===false">Add vertical</div>
     <div class="panel-body">
       <form class="form-horizontal">
         <div class="form-group">
@@ -12,7 +13,8 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary" ng-click="addNewVertical()" >Add</button>
+          <button type="submit" class="btn btn-primary" ng-click="editExistVertical()" ng-if="isEdit===true">Edit</button>
+            <button type="submit" class="btn btn-primary" ng-click="addNewVertical()" ng-if="isEdit===false">Add</button>
           </div>
         </div>
       </form>

@@ -14,4 +14,11 @@ verticalApp.config(function($stateProvider, $urlRouterProvider){
             controller: 'verticalAlterCtrl',
             params: {}
         })
+
+        .state('editVertical', {
+            url: '/vertical/edit/{name}',
+            templateUrl: 'DocsApp/vertical/templates/vertical-alter.html',
+            controller: 'verticalAlterCtrl',
+            params: {id: null, name: null}
+        })
 })
