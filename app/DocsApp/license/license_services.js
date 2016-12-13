@@ -6,7 +6,7 @@ licenseService.factory('licenseAPIservice', function($http) {
 
     //endpoints corresponding to license
     var licenseUrl = {
-        'endpoint': 'http://localhost:9000/licences/'
+        'endpoint': 'http://localhost:9000/license/'
     }
 
     licenseAPI.getlicense = function() {

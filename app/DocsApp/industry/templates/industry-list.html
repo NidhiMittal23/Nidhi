@@ -8,7 +8,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="industry in industryList" style="cursor: hand;cursor: pointer;" ng-click="editExistIndustry(industry.id, industry.name)">
+            <tr ng-repeat="industry in industryList.results" style="cursor: hand;cursor: pointer;" ng-click="editExistIndustry(industry.id, industry.name)">
               <td>{{industry.id ? industry.id : 'N/A'}}</td>
               <td>{{industry.name ? industry.name : 'N/A'}}</td>
             </tr>

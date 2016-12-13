@@ -5,7 +5,7 @@ industryService.factory('industryAPIservice', function($http) {
     var industryAPI = {};
 
     var industryUrl = {
-        'endpoint': 'http://localhost:9000/industries/'
+        'endpoint': 'http://localhost:9000/industry/'
     }
 
     industryAPI.getIndustry = function() {
