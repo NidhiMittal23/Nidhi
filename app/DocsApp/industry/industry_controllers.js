@@ -49,7 +49,6 @@ industryController.controller('industryAlterCtrl', function($scope, $state, $sta
     var params = $scope.industryModel;
 
     $scope.addNewIndustry = function() {
-        console.log($scope.industryModel);
         industryAPIservice.postIndustryDetail(params).success(function (response, status) {
             var industryName = params.name;
             Notification.success(industryName+' added successfully');

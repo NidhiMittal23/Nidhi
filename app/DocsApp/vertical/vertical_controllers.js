@@ -26,3 +26,30 @@ verticalController.controller('verticalCtrl', function($state, $scope, verticalA
         }
     })
 });
+
+verticalController.controller('verticalAlterCtrl', function($scope, $state, $stateParams, verticalAPIservice, Notification) {
+
+    $scope.verticalModel = {};
+
+    var params = $scope.verticalModel;
+
+    $scope.addNewVertical = function() {
+        verticalAPIservice.postVerticalDetail(params).success(function (response, status) {
+            var verticalName = params.name;
+            Notification.success(verticalName+' added successfully');
+        }).error(function (response, status) {
+            if (status == 400) {
+                if ('name' in response) {
+                    Notification.error(response['name'][0]);
+                }
+            }
+            else if (status == 500) {
+                Notification.error("Server error occured, Contact Admin");
+            }
+            else {
+                Notification.error("Error occured, Contact Admin");
+            }
+        })
+    }
+
+});
