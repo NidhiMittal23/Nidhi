@@ -8,7 +8,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="category in categoryList" style="cursor: hand;cursor: pointer;" ng-click="editExistCategory(category.id, category.name)">
+            <tr ng-repeat="category in categoryList.results" style="cursor: hand;cursor: pointer;" ng-click="editExistCategory(category.id, category.name)">
               <td>{{category.id ? category.id : 'N/A'}}</td>
               <td>{{category.name ? category.name : 'N/A'}}</td>
             </tr>

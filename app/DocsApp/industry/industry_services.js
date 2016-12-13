@@ -5,7 +5,7 @@ industryService.factory('industryAPIservice', function($http) {
     var industryAPI = {};
 
     var industryUrl = {
-        'endpoint': 'http://localhost:9000/industries/'
+        'endpoint': 'http://localhost:9000/industry/'
     }
 
     industryAPI.getIndustry = function() {
@@ -34,6 +34,23 @@ industryService.factory('industryAPIservice', function($http) {
                 return str.join("&");
             },
             data: params
+        });
+    }
+
+
+    industryAPI.putIndustryDetail = function(id,params) {
+        console.log(id + "=" + params.name);
+        return $http({
+            method: 'PUT',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: industryUrl.endpoint,
+            transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+            data: { id: id, name: params.name }
         });
     }
 

@@ -6,7 +6,7 @@ categoryService.factory('categoryAPIservice', function($http) {
 
     //endpoints corresponding to category
     var categoryUrl = {
-        'endpoint': 'http://localhost:9000/categories/'
+        'endpoint': 'http://localhost:9000/category/'
     }
 
     categoryAPI.getcategory = function() {

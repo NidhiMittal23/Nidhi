@@ -10,8 +10,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="license in licenseList" style="cursor: hand;cursor: pointer;" ng-click="editExistLicense(license.id, license.name)">
-              <td>{{license.id ? license.id : 'N/A'}}</td>
+            <tr ng-repeat="license in licenseList.results" style="cursor: hand;cursor: pointer;" ng-click="editExistLicense(license.id, license.name)">
+              <td>{{license.id ? license.id : "N/A"}}</td>
               <td>{{license.name ? license.name : 'N/A'}}</td>
               <td>{{license.abbreviate ? license.abbreviate : 'N/A'}}</td>
               <td>{{license.granting_authority ? license.granting_authority : 'N/A' }}</td>
