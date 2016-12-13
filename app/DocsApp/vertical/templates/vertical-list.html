@@ -1,0 +1,17 @@
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="vertical in verticalList.results" style="cursor: hand;cursor: pointer;">
+              <td>{{vertical.id ? vertical.id : 'N/A'}}</td>
+              <td>{{vertical.name ? vertical.name : 'N/A'}}</td>
+            </tr>
+          </tbody>
+  </table>
+</div>
