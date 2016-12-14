@@ -1,17 +1,17 @@
-var industryController = angular.module('industry.controllers', ['ui-notification']);
+var verticalController = angular.module('vertical.controllers', ['ui-notification']);
 
-industryController.controller('industryCtrl', function($state, $scope, industryAPIservice) {
+verticalController.controller('verticalCtrl', function($state, $scope, verticalAPIservice) {
 
-    $scope.addNewIndustry = function() {
-        $state.go('addIndustry', {});
+    $scope.addNewVertical = function() {
+        $state.go('addVertical', {});
     }
 
-    $scope.editExistIndustry = function(id, name) {
-        $state.go('editIndustry', {id: id, name: name});
+    $scope.editExistVertical = function(id, name) {
+        $state.go('editVertical', {id: id, name: name});
     }
 
-    industryAPIservice.getIndustry().success(function (response, status) {
-        $scope.industryList = response;
+    verticalAPIservice.getVertical().success(function (response, status) {
+        $scope.verticalList = response;
     }).error(function(response, status) {
         if (status == 400) {
             if ('name' in response) {
@@ -27,31 +27,31 @@ industryController.controller('industryCtrl', function($state, $scope, industryA
     })
 });
 
-industryController.controller('industryAlterCtrl', function($scope, $state, $stateParams, industryAPIservice, Notification) {
+verticalController.controller('verticalAlterCtrl', function($scope, $state, $stateParams, verticalAPIservice, Notification) {
 
-    $scope.industryModel = {};
+    $scope.verticalModel = {};
 
-    if ($state.current.name == 'editIndustry') {
+    if ($state.current.name == 'editVertical') {
         $scope.isEdit = true;
         var id = $stateParams.id
         
-        // request to server to get detail of perticular industry.
-        industryAPIservice.getIndustryDetails(id).success(function (response, status) {
+        // request to server to get detail of perticular vertical.
+        verticalAPIservice.getVerticalDetails(id).success(function (response, status) {
             //populate the input field with data.
-            $scope.industryModel = response;
+            $scope.verticalModel = response;
         })
 
     }
-    else if ($state.current.name == 'addIndustry') {
+    else if ($state.current.name == 'addVertical') {
         $scope.isEdit = false;
     }
 
-    var params = $scope.industryModel;
+    var params = $scope.verticalModel;
 
-    $scope.addNewIndustry = function() {
-        industryAPIservice.postIndustryDetail(params).success(function (response, status) {
-            var industryName = params.name;
-            Notification.success(industryName+' added successfully');
+    $scope.addNewVertical = function() {
+        verticalAPIservice.postVerticalDetail(params).success(function (response, status) {
+            var verticalName = params.name;
+            Notification.success(verticalName+' added successfully');
         }).error(function (response, status) {
             if (status == 400) {
                 if ('name' in response) {
@@ -67,10 +67,10 @@ industryController.controller('industryAlterCtrl', function($scope, $state, $sta
         })
     }
 
-    $scope.editExistIndustry = function() {
-        var newval = $scope.industryModel;
+    $scope.editExistVertical = function() {
+        var newval = $scope.verticalModel;
         var pid = id
-        industryAPIservice.putIndustryDetail(pid, newval).success(function (response, status) {
+        verticalAPIservice.putVerticalDetail(pid, newval).success(function (response, status) {
 
             Notification.success(newval.name+' updated successfully');
         }).error(function (response, status) {
@@ -88,4 +88,4 @@ industryController.controller('industryAlterCtrl', function($scope, $state, $sta
         })
     }
 
-})
+});
