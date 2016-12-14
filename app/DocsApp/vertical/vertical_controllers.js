@@ -69,9 +69,7 @@ verticalController.controller('verticalAlterCtrl', function($scope, $state, $sta
 
     $scope.editExistVertical = function() {
         var newval = $scope.verticalModel;
-        var pid = id
-        verticalAPIservice.putVerticalDetail(pid, newval).success(function (response, status) {
-
+        verticalAPIservice.putVerticalDetail(newval).success(function (response, status) {
             Notification.success(newval.name+' updated successfully');
         }).error(function (response, status) {
             if (status == 400) {
