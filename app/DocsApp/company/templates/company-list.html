@@ -1,0 +1,17 @@
+<button type="button" class="btn btn-primary" ng-click="addNewCompany()">Add Company</button>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="company in companyList.results" style="cursor: hand;cursor: pointer;" ng-click="editExistCompany(company.id, company.name)">
+              <td>{{company.id ? company.id : 'N/A'}}</td>
+              <td>{{company.name ? company.name : 'N/A'}}</td>
+            </tr>
+          </tbody>
+  </table>
+</div>
