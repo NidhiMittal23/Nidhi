@@ -1,3 +1,31 @@
+<div class="row">
+
+<div class="col-md-4">
+
+<div class="panel panel-default">
+
+  <!-- check if state is edit -->
+  <div class="panel-heading font-bold" ng-if="isEdit===true">Sub Category</div>
+  <div class="panel-heading font-bold" ng-if="isEdit===false">Add sub-Category</div>
+    
+    <div class="table-responsive">
+      <table class="table table-hover">
+        
+          <tbody>
+            <tr ng-repeat="sub in categoryModel.subcategories">
+              <td>{{sub ? sub : 'N/A'}}</td>
+            </tr>
+          </tbody>
+       </table>
+
+    </div>
+
+</div>
+
+</div>
+
+<div class="col-md-8">
+
 <div class="panel panel-default">
 
   <!-- check if state is edit -->
@@ -19,5 +47,8 @@
         </div>
       </form>
     </div>
-  </div>
+</div>
+
+</div>
+
 </div>
