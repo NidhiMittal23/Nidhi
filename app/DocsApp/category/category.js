@@ -4,12 +4,14 @@ categoryApp.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('category', {
             url: '/category',
+            parent: 'home',
             templateUrl: 'DocsApp/category/templates/category-list.html',
             controller: 'categoryCtrl'
         })
 
         .state('addCategory', {
             url: '/category/add',
+            parent: 'home',
             templateUrl: 'DocsApp/category/templates/category-alter.html',
             controller: 'categoryAlterCtrl',
             params: {}
@@ -17,6 +19,7 @@ categoryApp.config(function($stateProvider, $urlRouterProvider) {
 
         .state('editCategory', {
             url: '/category/edit/{name}',
+            parent: 'home',
             templateUrl: 'DocsApp/category/templates/category-alter.html',
             controller: 'categoryAlterCtrl',
             params: {id: null, name: null}

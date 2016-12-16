@@ -1,0 +1,19 @@
+var authServiceApp = angular.module('authService', ['ui.router', 'authService.auth', 'authService.home'])
+
+
+authServiceApp.config(function($stateProvider, $urlRouterProvider, $authProvider) {
+    // put urls at some global place
+    $authProvider.loginUrl = 'http://localhost:9000/auth/login';
+
+    $stateProvider
+        .state('auth', {
+            url: '/auth',
+            templateUrl: 'DocsApp/authService/views/authView.html',
+            controller: 'AuthController as auth'
+        })
+        .state('home', {
+            url: '/home',
+            templateUrl: 'DocsApp/authService/views/homeView.html',
+            controller: 'HomeController as home'
+        });
+});
