@@ -1,4 +1,4 @@
-var authServiceApp = angular.module('authService', ['ui.router', 'authService.auth', 'authService.home'])
+var authServiceApp = angular.module('authService', ['ui.router', 'authService.auth', 'authService.home', 'authService.services'])
 
 
 authServiceApp.config(function($stateProvider, $urlRouterProvider, $authProvider) {
@@ -9,7 +9,7 @@ authServiceApp.config(function($stateProvider, $urlRouterProvider, $authProvider
         .state('auth', {
             url: '/auth',
             templateUrl: 'DocsApp/authService/views/authView.html',
-            controller: 'AuthController as auth'
+            controller: 'AuthController as auth',
         })
         .state('home', {
             url: '/home',

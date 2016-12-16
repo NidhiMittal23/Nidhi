@@ -2,7 +2,7 @@ var authController = angular.module('authService.auth', ['ui-notification', 'sat
 
 authController.controller('AuthController', function($auth, $state) {
     var vm = this;
-        
+
     vm.login = function() {
 
         var credentials = {

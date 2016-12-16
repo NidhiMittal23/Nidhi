@@ -24,7 +24,7 @@ myApp.run(function ($rootScope, $state, $auth) {
         var userToken = $auth.getToken();
 
         // todo: cross check token, will be another good check
-        if (toState.authenticate && (typeof userToken ==='undefined')) {
+        if (toState.authenticate && (userToken == null)) {
             $state.transitionTo("auth");
             event.preventDefault(); 
         }
