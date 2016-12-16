@@ -13,7 +13,9 @@ authServiceApp.config(function($stateProvider, $urlRouterProvider, $authProvider
         })
         .state('home', {
             url: '/home',
+            data : {requireLogin : true },
             templateUrl: 'DocsApp/authService/views/homeView.html',
-            controller: 'HomeController as home'
+            controller: 'HomeController as home',
+            authenticate: true
         });
 });

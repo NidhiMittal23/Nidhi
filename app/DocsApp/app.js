@@ -14,24 +14,19 @@ var myApp = angular.module('myApp', [
 ])
 
 myApp.config(function($stateProvider, $urlRouterProvider, $authProvider) {
-	// put urls at some global place
-	// $authProvider.loginUrl = 'http://localhost:9000/auth/login';
-    
+
     $urlRouterProvider.otherwise('/auth');
 
-    // $stateProvider
-    //     .state('auth', {
-    //         url: '/auth',
-    //         templateUrl: 'DocsApp/authService/views/authView.html',
-    //         controller: 'AuthController as auth'
-    //     })
-    //     .state('home', {
-    //         url: '/home',
-    //         templateUrl: 'DocsApp/authService/views/homeView.html',
-    //         controller: 'HomeController as home'
-    //     });
 });
 
-// myApp.controller('navigationCtrl', function($scope){
-//     $scope.navList = ['license', 'category', 'industry', 'vertical', 'company'];
-// });
+myApp.run(function ($rootScope, $state, $auth) {
+    $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+        var userToken = $auth.getToken();
+
+        // todo: cross check token, will be another good check
+        if (toState.authenticate && (typeof userToken ==='undefined')) {
+            $state.transitionTo("auth");
+            event.preventDefault(); 
+        }
+    });
+});

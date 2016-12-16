@@ -6,7 +6,8 @@ licenseApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/license',
             parent: 'home',
             templateUrl: 'DocsApp/license/templates/license-list.html',
-            controller: 'licenseCtrl'
+            controller: 'licenseCtrl',
+            authenticate: true
         })
 
         .state('addLicense', {
@@ -14,7 +15,8 @@ licenseApp.config(function($stateProvider, $urlRouterProvider) {
             parent: 'home',
             templateUrl: 'DocsApp/license/templates/license-alter.html',
             controller: 'licenseAlterCtrl',
-            params: {}
+            params: {},
+            authenticate: true
         })
 
         .state('editLicense', {
@@ -22,6 +24,7 @@ licenseApp.config(function($stateProvider, $urlRouterProvider) {
             parent: 'home',
             templateUrl: 'DocsApp/license/templates/license-alter.html',
             controller: 'licenseAlterCtrl',
-            params: {id: null, name: null}
+            params: {id: null, name: null},
+            authenticate: true
         })
 })

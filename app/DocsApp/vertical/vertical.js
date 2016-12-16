@@ -6,7 +6,8 @@ verticalApp.config(function($stateProvider, $urlRouterProvider){
             url: '/vertical',
             parent: 'home',
             templateUrl: 'DocsApp/vertical/templates/vertical-list.html',
-            controller: 'verticalCtrl'
+            controller: 'verticalCtrl',
+            authenticate: true
         })
 
         .state('addVertical', {
@@ -14,7 +15,8 @@ verticalApp.config(function($stateProvider, $urlRouterProvider){
             parent: 'home',
             templateUrl: 'DocsApp/vertical/templates/vertical-alter.html',
             controller: 'verticalAlterCtrl',
-            params: {}
+            params: {},
+            authenticate: true
         })
 
         .state('editVertical', {
@@ -22,6 +24,7 @@ verticalApp.config(function($stateProvider, $urlRouterProvider){
             parent: 'home',
             templateUrl: 'DocsApp/vertical/templates/vertical-alter.html',
             controller: 'verticalAlterCtrl',
-            params: {id: null, name: null}
+            params: {id: null, name: null},
+            authenticate: true
         })
 })

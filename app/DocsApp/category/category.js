@@ -6,7 +6,8 @@ categoryApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/category',
             parent: 'home',
             templateUrl: 'DocsApp/category/templates/category-list.html',
-            controller: 'categoryCtrl'
+            controller: 'categoryCtrl',
+            authenticate: true
         })
 
         .state('addCategory', {
@@ -14,7 +15,8 @@ categoryApp.config(function($stateProvider, $urlRouterProvider) {
             parent: 'home',
             templateUrl: 'DocsApp/category/templates/category-alter.html',
             controller: 'categoryAlterCtrl',
-            params: {}
+            params: {},
+            authenticate: true
         })
 
         .state('editCategory', {
@@ -22,6 +24,7 @@ categoryApp.config(function($stateProvider, $urlRouterProvider) {
             parent: 'home',
             templateUrl: 'DocsApp/category/templates/category-alter.html',
             controller: 'categoryAlterCtrl',
-            params: {id: null, name: null}
+            params: {id: null, name: null},
+            authenticate: true
         })
 })
