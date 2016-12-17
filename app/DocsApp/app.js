@@ -21,8 +21,8 @@ myApp.config(function($stateProvider, $urlRouterProvider, $authProvider) {
 
 myApp.run(function ($rootScope, $state, $auth) {
     $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-        var userToken = $auth.getToken();
-
+        var userToken = $auth.getToken(); //(userToken == null)
+        // debugger;
         // todo: cross check token, will be another good check
         if (toState.authenticate && (userToken == null)) {
             $state.transitionTo("auth");

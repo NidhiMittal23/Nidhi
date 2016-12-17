@@ -8,9 +8,6 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
 
     vm.logout = function() {
 
-        //todo: check this works
-        authAPIservice.serverLogout();
-        // implement logout
         $auth.logout();
         $state.transitionTo("auth");
     }
