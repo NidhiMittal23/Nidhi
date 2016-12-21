@@ -1,0 +1,14 @@
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" ui-sref="#">Food Pro Docs</a>
+    </div>
+    <ul class="nav navbar-nav" ng-repeat="option in navList" >
+        <li><a ui-sref="{{option}}">{{option}}</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <button class="btn btn-danger navbar-btn" ng-click="home.logout()">Logout</button>
+    </ul>
+</nav>
+
+<div class="container" ui-view></div>
+

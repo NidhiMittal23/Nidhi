@@ -4,21 +4,27 @@ industryApp.config(function($stateProvider, $urlRouterProvider){
     $stateProvider
         .state('industry',{
             url: '/industry',
+            parent: 'home',
             templateUrl: 'DocsApp/industry/templates/industry-list.html',
-            controller: 'industryCtrl'
+            controller: 'industryCtrl',
+            authenticate: true
         })
 
         .state('addIndustry', {
             url: '/industry/add',
+            parent: 'home',
             templateUrl: 'DocsApp/industry/templates/industry-alter.html',
             controller: 'industryAlterCtrl',
-            params: {}
+            params: {},
+            authenticate: true
         })
 
         .state('editIndustry', {
             url: '/industry/edit/{name}',
+            parent: 'home',
             templateUrl: 'DocsApp/industry/templates/industry-alter.html',
             controller: 'industryAlterCtrl',
-            params: {id: null, name: null}
+            params: {id: null, name: null},
+            authenticate: true
         })
 })

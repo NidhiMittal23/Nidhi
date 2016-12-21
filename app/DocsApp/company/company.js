@@ -4,7 +4,9 @@ companyApp.config(function($stateProvider, $urlRouterProvider){
 	$stateProvider
 		.state('company',{
 			url: '/company',
+			parent: 'home',
 			templateUrl: 'DocsApp/company/templates/company-list.html',
-            controller: 'companyCtrl'
+            controller: 'companyCtrl',
+            authenticate: true
 		})
 })

@@ -19,22 +19,15 @@
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="DocsApp/app.css">
-  <link rel="stylesheet" href="bower_components/angular-ui-notification/dist/angular-ui-notification.css"
+  <link rel="stylesheet" href="bower_components/angular-ui-notification/dist/angular-ui-notification.css">
 
 
   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<body ng-controller="navigationCtrl">
-  <nav class="navbar navbar-inverse" role="navigation">
-    <div class="navbar-header">
-        <a class="navbar-brand" ui-sref="#">Food Pro Docs</a>
-    </div>
-    <ul class="nav navbar-nav" ng-repeat="option in navList" >
-        <li><a ui-sref="{{option}}">{{option}}</a></li>
-    </ul>
-  </nav>
-
-  <div class="container" ui-view></div>
+<body>
+  <div class="container">
+    <div ui-view></div>
+  </div>
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -51,9 +44,17 @@
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>  
   <script src="bower_components/angular-ui-notification/dist/angular-ui-notification.js"></script>
+  <script src="bower_components/ngstorage/ngStorage.js"></script>
+  <script src="bower_components/satellizer/dist/satellizer.js"></script>
 
   <!-- App Dependecies -->
   <script src="DocsApp/app.js"></script>
+
+  <!-- auth service App -->
+  <script src="DocsApp/authService/auth.js"></script>
+  <script src="DocsApp/authService/auth_controllers.js"></script>
+  <script src="DocsApp/authService/auth_services.js"></script>
+  <script src="DocsApp/authService/home_controllers.js"></script>
 
   <!-- license App  -->
   <script src="DocsApp/license/license.js"></script>
@@ -78,10 +79,8 @@
       <!-- company App  -->
   <script src="DocsApp/company/company.js"></script>
   <script src="DocsApp/company/company_controllers.js"></script>
-  <script src="DocsApp/company/company_services.js"></script> 
+  <script src="DocsApp/company/company_services.js"></script>
 
-  <script src="DocsApp/view1/view1.js"></script>
-  <script src="DocsApp/view2/view2.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
