@@ -19,7 +19,7 @@ categoryService.factory('categoryAPIservice', function($http) {
     categoryAPI.getCategoryDetails = function(id) {
         return $http({
             method: 'GET', 
-            url: categoryUrl.endpoint + id
+            url: categoryUrl.endpoint + id + '/'
         });
     }
 

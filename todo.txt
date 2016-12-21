@@ -4,4 +4,5 @@ TODO:
 2. and SIGNIN full setup front end and back end.(done)
 3. logout (how to work with token based auth)
 4. role based authentication.
-5. has been blocked by CORS policy: Request requires preflight, which is disallowed to follow cross-origin redirect... issue while fetching.
+
+has been blocked by CORS policy: Request requires preflight, which is disallowed to follow cross-origin redirect... issue while fetching.

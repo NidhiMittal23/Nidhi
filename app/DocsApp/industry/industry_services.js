@@ -18,7 +18,7 @@ industryService.factory('industryAPIservice', function($http) {
     industryAPI.getIndustryDetails = function(id) {
         return $http({
             method: 'GET', 
-            url: industryUrl.endpoint + id
+            url: industryUrl.endpoint + id + '/'
         });
     }
 
@@ -39,11 +39,10 @@ industryService.factory('industryAPIservice', function($http) {
 
 
     industryAPI.putIndustryDetail = function(id,params) {
-        console.log(id + "=" + params.name);
         return $http({
             method: 'PUT',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            url: industryUrl.endpoint,
+            url: industryUrl.endpoint + id + '/',
             transformRequest: function(obj) {
                 var str = [];
                 for(var p in obj)
