@@ -9,4 +9,12 @@ documentApp.config(function($stateProvider, $urlRouterProvider){
 			controller: 'documentCtrl',
 			authenticate: true
 		})
+
+		.state('docVersion', {
+			url: '/{name}',
+			parent: 'home',
+			templateUrl: 'DocsApp/document/templates/docVersion-list.html',
+			controller: 'docVersionCtrl',
+			authenticate: true
+		})
 })

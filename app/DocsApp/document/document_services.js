@@ -15,6 +15,13 @@ documentService.factory('documentAPIservice', function($http) {
         });
     }
 
+    documentAPI.getDocVersion =function(id) {
+        return $http({
+            method: 'GET',
+            url: documentUrl.endpoint + "/" + id
+        });
+    }
+
     return documentAPI;
 
 });
