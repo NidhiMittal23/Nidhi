@@ -15,6 +15,7 @@ documentApp.config(function($stateProvider, $urlRouterProvider){
 			parent: 'home',
 			templateUrl: 'DocsApp/document/templates/docVersion-list.html',
 			controller: 'docVersionCtrl',
+			params: {id: null, name: null},
 			authenticate: true
 		})
 })

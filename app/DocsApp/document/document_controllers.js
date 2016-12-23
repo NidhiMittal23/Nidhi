@@ -8,7 +8,11 @@ documentController.controller('documentCtrl', function($state, $scope, documentA
 
     $scope.gotoDocVersion = function(id, name) {
         $state.go('docVersion', {id: id, name : name});
-    };
+    }
+
+    $scope.gotoDocVersion = function(id, name) {
+        $state.go('docVersion', {id: id, name : name});
+    }
 
     $scope.editExistDocument = function(id, name) {
         $state.go('editDocument', {id: id, name: name});
@@ -31,7 +35,9 @@ documentController.controller('documentCtrl', function($state, $scope, documentA
     })
 });
 
-documentController.controller('docVersionCtrl', function($state, $scope, documentAPIservice) {
+documentController.controller('docVersionCtrl', function($state, $stateParams, $scope, documentAPIservice) {
+
+    var id = $stateParams.id
 
     $scope.addNewDocVersion = function() {
         $state.go('adddocversion', {});

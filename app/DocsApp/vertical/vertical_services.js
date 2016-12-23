@@ -18,7 +18,7 @@ verticalService.factory('verticalAPIservice', function($http) {
     verticalAPI.getVerticalDetails = function(id) {
         return $http({
             method: 'GET', 
-            url: verticalUrl.endpoint + id
+            url: verticalUrl.endpoint + id + "/"
         });
     }
 

@@ -7,7 +7,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="docVersion in docVersionList.results.versions" style="cursor: hand;cursor: pointer;" ng-click="editExistDocVersion(docVersion.id, docVersion.name)">
+            <tr ng-repeat="docVersion in docVersionList.versions" style="cursor: hand;cursor: pointer;" ng-click="editExistDocVersion(docVersion.id, docVersion.name)">
               <td>{{docVersion ? docVersion : 'N/A'}}</td>
             </tr>
           </tbody>
