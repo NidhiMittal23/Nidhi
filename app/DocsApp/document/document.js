@@ -18,4 +18,13 @@ documentApp.config(function($stateProvider, $urlRouterProvider){
 			params: {id: null, name: null},
 			authenticate: true
 		})
+
+		.state('addDocVersion', {
+            url: '/docVersion/add',
+            parent: 'home',
+            templateUrl: 'DocsApp/document/templates/docVersion-alter.html',
+            controller: 'docVersionAlterCtrl',
+            params: {id: null, name: null, docId: null},
+            authenticate: true
+        })
 })
