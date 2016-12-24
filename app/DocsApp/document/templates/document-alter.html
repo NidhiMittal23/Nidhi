@@ -1,0 +1,106 @@
+<div class="panel panel-default">
+
+  <!-- check if state is edit -->
+  <!-- <div class="panel-heading font-bold" ng-if="isEdit===true">Edit vertical</div> -->
+  <div class="panel-heading font-bold" ng-if="isEdit===false">Add document</div>
+  <div class="panel-body">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="name">Name:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="name" placeholder="Enter Name" ng-model="documentModel.name" ng-required="true">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+        <!-- <button type="submit" class="btn btn-primary" ng-click="editExistDocument()" ng-if="isEdit===true">Edit</button> -->
+        <button type="submit" class="btn btn-primary" ng-click="addNewDocument()" ng-if="isEdit===false">Add</button>
+
+        <!-- <button type="submit" class="btn btn-success" ng-click="addDocumentVersion()" ng-if="isEdit===false">Add Version</button>
+
+        <button type="submit" class="btn btn-danger" ng-click="buildDocumentRelation()" ng-if="isEdit===false">Add Relation</button> -->
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<div class="panel panel-default" ng-init="init()">
+
+  <!-- check if state is edit -->
+  <!-- <div class="panel-heading font-bold" ng-if="isEdit===true">Edit vertical</div> -->
+  <div class="panel-heading font-bold" ng-if="isEdit===false">Add Sub Category</div>
+  <div class="panel-body">
+    <form class="form-horizontal">
+
+      <div class="form-group">
+        <label class="control-label col-sm-2">Select Category:</label>
+        <div class="col-sm-6">
+          <select ng-model="documentSubCategoryModel.categorySelected" ng-change="documentSubCategoryModel.selectedCategoryId(documentSubCategoryModel.categorySelected)" class="form-control custom-form-control">
+            <options value="">Select any option</options>
+            <option ng-repeat="option in documentSubCategoryModel.categoryOption" ng-model="documentSubCategoryModel.categorySelected" value="{{option.id}}">{{option.name}}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ############################### -->
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="name">Sub Category Name:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="name" placeholder="Enter Name" ng-model="documentSubCategoryModel.name" ng-required="true">
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+        <!-- <button type="submit" class="btn btn-primary" ng-click="editExistDocument()" ng-if="isEdit===true">Edit</button> -->
+        <button type="submit" class="btn btn-primary" ng-click="addDocumentSubCategory()" ng-if="isEdit===false">Add SubCategory</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<div class="panel panel-default" ng-init="init()">
+
+  <!-- check if state is edit -->
+  <!-- <div class="panel-heading font-bold" ng-if="isEdit===true">Edit vertical</div> -->
+  <div class="panel-heading font-bold" ng-if="isEdit===false">Assocaite Document Relation</div>
+  <div class="panel-body">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="control-label col-sm-2">Select Vertical:</label>
+        <div class="col-sm-6">
+          <select ng-model="documentRelationModel.verticalSelected" ng-change="documentRelationModel.selectedVerticalId(documentRelationModel.verticalSelected)" class="form-control custom-form-control">
+            <options value="">Select any option</options>
+            <option ng-repeat="option in documentRelationModel.verticalOption" ng-model="documentRelationModel.verticalSelected" value="{{option.id}}">{{option.name}}</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label class="control-label col-sm-2">Select License:</label>
+        <div class="col-sm-6">
+          <select ng-model="documentRelationModel.licenseSelected" ng-change="documentRelationModel.selectedLicenseId(documentRelationModel.licenseSelected)" class="form-control custom-form-control">
+            <options value="">Select any option</options>
+            <option ng-repeat="option in documentRelationModel.licenseOption" ng-model="documentRelationModel.licenseSelected" value="{{option.id}}">{{option.name}}</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-danger" ng-click="buildDocumentRelation()" ng-if="isEdit===false">Add Relation</button>
+      </div>
+    
+    </form>
+  </div>
+</div>
