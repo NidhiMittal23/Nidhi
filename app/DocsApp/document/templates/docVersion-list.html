@@ -1,0 +1,15 @@
+<button type="button" class="btn btn-primary" ng-click="addNewDocVersion()">Add Version</button>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+            <tr>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="docVersion in docVersionList.versions" style="cursor: hand;cursor: pointer;" ng-click="editExistDocVersion(docVersion.id, docVersion.name)">
+              <td>{{docVersion ? docVersion : 'N/A'}}</td>
+            </tr>
+          </tbody>
+  </table>
+</div>

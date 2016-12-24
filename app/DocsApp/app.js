@@ -10,6 +10,7 @@ var myApp = angular.module('myApp', [
   'industry',
   'vertical',
   'company',
+  'document',
   'authService'
 ])
 
