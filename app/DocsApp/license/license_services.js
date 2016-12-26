@@ -19,7 +19,7 @@ licenseService.factory('licenseAPIservice', function($http) {
     licenseAPI.getLicenseDetails = function(id) {
         return $http({
             method: 'GET', 
-            url: licenseUrl.endpoint + id
+            url: licenseUrl.endpoint + id + '/'
         });
     }
 
