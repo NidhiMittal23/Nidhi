@@ -19,6 +19,15 @@ documentApp.config(function($stateProvider, $urlRouterProvider){
             authenticate: true
         })
 
+        .state('editDocument', {
+            url: '/document/edit/{name}',
+            parent: 'home',
+            templateUrl: 'DocsApp/document/templates/document-alter.html',
+            controller: 'documentAlterCtrl',
+            params: {id: null, name: null},
+            authenticate: true
+        })
+
         .state('docVersion', {
             url: '/{name}',
             parent: 'home',

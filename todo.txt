@@ -6,3 +6,7 @@ TODO:
 4. role based authentication.
 
 has been blocked by CORS policy: Request requires preflight, which is disallowed to follow cross-origin redirect... issue while fetching. (done)
+
+TODO:
+
+1. edit document (think of flow)
