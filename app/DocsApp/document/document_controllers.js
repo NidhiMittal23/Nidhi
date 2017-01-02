@@ -40,7 +40,7 @@ documentController.controller('docVersionCtrl', function($state, $stateParams, $
     var id = $stateParams.id
 
     $scope.addNewDocVersion = function() {
-        $state.go('adddocversion', {});
+        $state.go('addDocVersion', {docId: id});
     }
 
     $scope.editExistDocVersion = function(id, name) {
@@ -62,4 +62,23 @@ documentController.controller('docVersionCtrl', function($state, $stateParams, $
             Notification.error("Error occured, contact Admin");
         }
     })
+});
+
+
+documentController.controller('docVersionAlterCtrl', function($scope, $state, $stateParams, documentAPIservice, Notification /*, Upload */) {
+
+    $scope.docVersionModel = {};
+
+    var params = $scope.docVersionModel;
+    var docid = $stateParams.docId;
+    params.document = docid;
+
+    // have to move this login to service
+    $scope.addNewDocVersion = function(){
+
+        var uploadUrl = 'http://localhost:9000/version/';
+        documentAPIservice.postDocVersionDetail(uploadUrl, $scope.docVersionModel)
+    };
+
+
 });
