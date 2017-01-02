@@ -73,7 +73,7 @@ documentController.controller('docVersionAlterCtrl', function($scope, $state, $s
     var docid = $stateParams.docId;
     params.document = docid;
 
-
+    // have to move this login to service
     $scope.addNewDocVersion = function(){
 
         var uploadUrl = 'http://localhost:9000/version/';
