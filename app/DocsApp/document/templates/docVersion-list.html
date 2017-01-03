@@ -7,8 +7,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="docVersion in docVersionList.versions" style="cursor: hand;cursor: pointer;" ng-click="editExistDocVersion(docVersion.id, docVersion.name)">
-              <td>{{docVersion ? docVersion : 'N/A'}}</td>
+            <tr ng-repeat="docVersion in docVersionList.versions" style="cursor: hand;cursor: pointer;">
+              <td ng-click="editExistDocVersion(docVersion.id, docVersion.name)">{{docVersion.name ? docVersion.name : 'N/A'}}</td>
+              <td> <a href="{{docVersion.docfile ? docVersion.docfile : 'N/A'}}" target="_blank">{{docVersion.docfile ? docVersion.docfile : 'N/A'}} </a></td>
             </tr>
           </tbody>
   </table>
