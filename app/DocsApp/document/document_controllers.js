@@ -1,6 +1,6 @@
 var documentController = angular.module('document.controllers', ['ui-notification']);
 
-documentController.controller('documentCtrl', function($state, $scope, documentAPIservice) {
+documentController.controller('documentCtrl', function($state, $scope, documentAPIservice, _) {
 
     $scope.addNewDocument = function() {
         $state.go('addDocument', {});
@@ -16,6 +16,21 @@ documentController.controller('documentCtrl', function($state, $scope, documentA
 
     documentAPIservice.getDocument().success(function (response, status) {
         $scope.documentList = response;
+
+        // some subcategories may be null
+        $scope.groupByCategory = _.groupBy(response.results, function(obj) {
+            if (obj.subcategories == null) {
+                return obj.subcategories;
+            }
+            else {
+                return obj.subcategories.category;
+            }
+
+        });
+        // console.log(groupByCategory);
+        
+
+
     }).error(function(response, status) {
         if (status == 400) {
             if ('name' in response) {
@@ -62,7 +77,8 @@ documentController.controller('docVersionCtrl', function($state, $stateParams, $
 });
 
 
-documentController.controller('docVersionAlterCtrl', function($scope, $state, $stateParams, documentAPIservice, Notification /*, Upload */) {
+documentController.controller('docVersionAlterCtrl', function($scope, $state, $stateParams,
+    documentAPIservice, Notification /*, Upload */) {
 
     $scope.docVersionModel = {};
 
@@ -80,7 +96,8 @@ documentController.controller('docVersionAlterCtrl', function($scope, $state, $s
 
 
 documentController.controller('documentAlterCtrl', function($state, $stateParams, $scope,
-        documentAPIservice, verticalAPIservice, licenseAPIservice, categoryAPIservice, $q) {
+        documentAPIservice, verticalAPIservice, licenseAPIservice, categoryAPIservice, $q,
+        Notification) {
     $scope.documentModel = {};
     $scope.documentRelationModel = {};
     $scope.documentSubCategoryModel = {};
@@ -88,20 +105,19 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     $scope.init = function() {
 
         // populate option for dropDown
-        $scope.documentSubCategoryModel.selectedCategoryId = function(categoryId) {
-            // console.log(categoryId);
-            $scope.documentSubCategoryModel.categorySelected = categoryId;
-        }
+        // $scope.documentSubCategoryModel.selectedCategoryId = function(categoryObj) {
+        //     $scope.documentSubCategoryModel.categorySelected = categoryObj;
+        // }
 
-        $scope.documentRelationModel.selectedVerticalId = function(verticalId) {
-            console.log(verticalId);
-            $scope.documentRelationModel.verticalSelected = verticalId;
-        }
+        // $scope.documentRelationModel.selectedVerticalId = function(verticalObj) {
+        //     console.log(verticalObj);
+        //     $scope.documentRelationModel.verticalSelected = verticalObj;
+        // }
 
-        $scope.documentRelationModel.selectedLicenseId = function(licenseId) {
-            console.log(licenseId);
-            $scope.documentRelationModel.licenseSelected = licenseId;
-        }
+        // $scope.documentRelationModel.selectedLicenseId = function(licenseObj) {
+        //     console.log(licenseObj);
+        //     $scope.documentRelationModel.licenseSelected = licenseObj;
+        // }
 
         var categories = categoryAPIservice.getcategory();
         var verticals = verticalAPIservice.getVertical();
@@ -115,7 +131,6 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
 
         });
 
-
     }
 
     if ($state.current.name == 'editDocument') {
@@ -123,12 +138,18 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         var docId = $stateParams.id;
         var docName = $stateParams.name;
 
-
-        
         // request to server to get detail of perticular vertical.
-        verticalAPIservice.getVerticalDetails(id).success(function (response, status) {
+        documentAPIservice.getDocumentDetail(docId).success(function (response, status) {
             //populate the input field with data.
             $scope.documentModel = response;
+            if (response.subcategories !== null) {
+                $scope.documentSubCategoryModel.name = response.subcategories.name;
+                categoryAPIservice.getCategoryDetails(response.subcategories.category).success(function (response, status) {
+
+                    //selected Category object
+                    $scope.documentSubCategoryModel.categorySelected = response;
+                });
+            }
         })
 
     }
@@ -143,8 +164,7 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         documentAPIservice.postDocumentDetail(params).success(function (response, status) {
             var documentName = response.name;
             $scope.documentModel.newDocumentId = response.id;
-            // Notification.success(documentName+' added successfully');
-            console.log("New Document Added");
+            Notification.success(documentName+' added successfully');
             // todo
             // Add version: Upload file
 
@@ -163,16 +183,20 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         })
     }
 
+    $scope.editExistDocument = function() {
+        console.log("add edit document function here");
+
+    }
+
     // Associate Subcategory to newly Created Document
     $scope.addDocumentSubCategory = function() {
         var params = $scope.documentSubCategoryModel;
         params.document = $scope.documentModel.newDocumentId;
-        params.category = $scope.documentSubCategoryModel.categorySelected;
+        params.category = $scope.documentSubCategoryModel.categorySelected.id;
         categoryAPIservice.postSubCategoryDetail(params).success(function (response, status) {
-            $scope.documentRelationModel.subcategoryAdded = response.id;
-            console.log(response.name);
-            // var subCategoryName = params.name;
-            // Notification.success(subCategoryName+' added successfully');
+            $scope.documentRelationModel.subcategoryAddedId = response.id;
+            var subCategoryName = response.name;
+            Notification.success(subCategoryName+' added successfully');
         }).error(function (response, status) {
             if (status == 400) {
                 if ('name' in response) {
@@ -188,36 +212,20 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         })
     }
 
-    $scope.editExistDocument = function() {
-        console.log("here");
-        // var newval = $scope.documentModel;
-        // verticalAPIservice.putVerticalDetail(newval).success(function (response, status) {
-        //     Notification.success(newval.name+' updated successfully');
-        // }).error(function (response, status) {
-        //     if (status == 400) {
-        //         if ('name' in response) {
-        //             Notification.error(response['name'][0]);
-        //         }
-        //     }
-        //     else if (status == 500) {
-        //         Notification.error("Server error occured, Contact Admin");
-        //     }
-        //     else {
-        //         Notification.error("Error occured, Contact Admin");
-        //     }
-        // })
+    $scope.editDocumentSubCategory = function() {
+        // console.log($scope.documentSubCategoryModel.categorySelected);
+        console.log("edit DocumentSubCategory");
     }
 
 
     $scope.buildDocumentRelation = function() {
         var params = {};
-        params.vertical_id = $scope.documentRelationModel.verticalSelected;
-        params.license_id = $scope.documentRelationModel.licenseSelected;
-        params.subcategory_id = $scope.documentRelationModel.subcategoryAdded;
+        params.vertical_id = $scope.documentRelationModel.verticalSelected.id;
+        params.license_id = $scope.documentRelationModel.licenseSelected.id;
+        params.subcategory_id = $scope.documentRelationModel.subcategoryAddedId;
         documentAPIservice.postDocumentRelationDetail(params).success(function (response, status) {
-            console.log(response);
-            // var subCategoryName = params.name;
-            // Notification.success(subCategoryName+' added successfully');
+            // console.log(response);
+            Notification.success('Relation created successfully');
         }).error(function (response, status) {
             if (status == 400) {
                 if ('name' in response) {
@@ -231,6 +239,10 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
                 Notification.error("Error occured, Contact Admin");
             }
         })
+    }
+
+    $scope.editBuildDocumentRelation = function() {
+        console.log("edit buildDocumentRelation");
     }
 
 });
