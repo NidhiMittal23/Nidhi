@@ -27,7 +27,7 @@ companyController.controller('companyCtrl', function($state, $scope, companyAPIs
     })
 });
 
-companyController.controller('companyAlterCtrl', function($scope, $state, $stateParams, $q, companyAPIservice,
+companyController.controller('companyAlterCtrl', function($scope, $state, $stateParams, $q, Notification, companyAPIservice, industryAPIservice,
     licenseAPIservice, verticalAPIservice) {
     $scope.companyModel = {};
     $scope.companySiteModel = {};
@@ -47,14 +47,26 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
         $scope.isEdit = false;
     }
 
-    $scope.init = function () {
+    $scope.initCompany = function () {
+        $scope.companyModel.industrySelected = [];
+        $scope.companyModel.selectedIndustryId = function(industryId) {
+            $scope.companyModel.industrySelected = industryId;
+        }
+
+        industryAPIservice.getIndustry().success(function(response){
+            $scope.companyModel.industryOption = response.results;
+        });
+    }
+
+    $scope.initSite = function () {
+        $scope.companySiteModel.licenseSelected = [];
+        $scope.companySiteModel.verticalSelected = [];
+
         $scope.companySiteModel.selectedLicenseId = function(licenseId) {
-            console.log(licenseId);
             $scope.companySiteModel.licenseSelected = licenseId;
         }
 
         $scope.companySiteModel.selectedVerticalId = function(verticalId) {
-            console.log(verticalId);
             $scope.companySiteModel.verticalSelected = verticalId;
         }
 
@@ -71,11 +83,13 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
     $scope.addNewCompany = function() {
         var params = $scope.companyModel;
         // default industry has been to set to {'1': 'Food'}
-        params.industry = "1";
+        if (params.industrySelected.length == 0){
+            params.industrySelected = ["1"];
+        }
         companyAPIservice.postCompanyDetail(params).success(function (response, status) {
-            console.log(response);
+            $scope.siteCompany = response;
             var companyName = params.name;
-            // Notification.success(companyName+' added successfully');
+            Notification.success(companyName+' added successfully');
         }).error( function(response, status) {
             if (status == 400) {
                 if ('name' in response) {
@@ -94,29 +108,31 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
     // todo: complete POST.. adding site info
     $scope.addNewCompanySite = function() {
         var params = $scope.companySiteModel;
-        params.license = $scope.companySiteModel.licenseSelected;
-        delete params.licenseSelected;
-        params.vertical = $scope.companySiteModel.verticalSelected;
-        delete params.verticalSelected;
-        delete params.licenseOption;
-        delete params.verticalOption;
-        console.log(params);
-        // companyAPIservice.postCompanyDetail(params).success(function (response, status) {
-        //     console.log(response);
-        //     var companyName = params.name;
-        //     Notification.success(companyName+' added successfully');
-        // }).error( function(response, status) {
-        //     if (status == 400) {
-        //         if ('name' in response) {
-        //             Notification.error(response['name'][0]);
-        //         }
-        //     }
-        //     else if (status == 500) {
-        //         Notification.error("Server error occured, Contact Admin");
-        //     }
-        //     else {
-        //         Notification.error("Error occured, Contact Admin");
-        //     }
-        // })
+        params.siteCompanyId = $scope.siteCompany.id;
+
+        if (params.licenseSelected.length == 0){
+            params.licenseSelected = ["1"];
+        }
+
+        if (params.verticalSelected.length == 0){
+            params.verticalSelected = ["1"];
+        }
+        
+        companyAPIservice.postCompanySiteDetail(params).success(function (response, status) {
+            var siteName = params.name;
+            Notification.success(siteName+' added successfully');
+        }).error( function(response, status) {
+            if (status == 400) {
+                if ('name' in response) {
+                    Notification.error(response['name'][0]);
+                }
+            }
+            else if (status == 500) {
+                Notification.error("Server error occured, Contact Admin");
+            }
+            else {
+                Notification.error("Error occured, Contact Admin");
+            }
+        })
     }
 });

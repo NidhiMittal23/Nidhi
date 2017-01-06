@@ -2,7 +2,7 @@ var companyService = angular.module('company.services', []);
 
 companyService.factory('companyAPIservice', function($http) {
 
-	var companyAPI = {};
+    var companyAPI = {};
 
     var companyUrl = {
         'endpoint': 'http://localhost:9000/company/',
@@ -42,10 +42,14 @@ companyService.factory('companyAPIservice', function($http) {
     }
 
     companyAPI.postCompanyDetail = function(params) {
+
         var payload = new FormData();
 
         payload.append('name', params.name);
-        payload.append('industry', params.industry);
+        var l = params.industrySelected.length;
+        for (i=0; i<l; i++) {
+            payload.append('industry', params.industrySelected[i]);
+        }
 
         return $http({
             url: companyUrl.endpoint,
@@ -62,14 +66,20 @@ companyService.factory('companyAPIservice', function($http) {
     companyAPI.postCompanySiteDetail = function(params) {
         var payload = new FormData();
 
+        payload.append('company', params.siteCompanyId);
         payload.append('name', params.name);
         payload.append('location', params.location);
-        // loop within params.vertical and params.license to complete payload
-        // form.append("vertical", "1");
-        // form.append("vertical", "2");
+        
+        for (i=0; i<params.licenseSelected.length; i++) {
+            payload.append('license', params.licenseSelected[i]);
+        }
+
+        for (i=0; i<params.verticalSelected.length; i++) {
+            payload.append('vertical', params.verticalSelected[i]);
+        }
 
         return $http({
-            url: companyUrl.endpoint,
+            url: companyUrl.siteEndpoint,
             method: 'POST',
             data: payload,
             //assign content-type as undefined, the browser
