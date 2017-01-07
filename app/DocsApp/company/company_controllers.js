@@ -83,9 +83,7 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
     $scope.addNewCompany = function() {
         var params = $scope.companyModel;
         // default industry has been to set to {'1': 'Food'}
-        if (params.industrySelected.length == 0){
-            params.industrySelected = ["1"];
-        }
+
         companyAPIservice.postCompanyDetail(params).success(function (response, status) {
             $scope.siteCompany = response;
             var companyName = params.name;
@@ -105,18 +103,10 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
         })
     }
 
-    // todo: complete POST.. adding site info
+
     $scope.addNewCompanySite = function() {
         var params = $scope.companySiteModel;
         params.siteCompanyId = $scope.siteCompany.id;
-
-        if (params.licenseSelected.length == 0){
-            params.licenseSelected = ["1"];
-        }
-
-        if (params.verticalSelected.length == 0){
-            params.verticalSelected = ["1"];
-        }
         
         companyAPIservice.postCompanySiteDetail(params).success(function (response, status) {
             var siteName = params.name;

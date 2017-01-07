@@ -1,6 +1,6 @@
 var companyService = angular.module('company.services', []);
 
-companyService.factory('companyAPIservice', function($http) {
+companyService.factory('companyAPIservice', function($http, _) {
 
     var companyAPI = {};
 
@@ -46,10 +46,10 @@ companyService.factory('companyAPIservice', function($http) {
         var payload = new FormData();
 
         payload.append('name', params.name);
-        var l = params.industrySelected.length;
-        for (i=0; i<l; i++) {
-            payload.append('industry', params.industrySelected[i]);
-        }
+
+        _.each(params.industrySelected, function(industry) {
+            payload.append('industry', industry);
+        });
 
         return $http({
             url: companyUrl.endpoint,
@@ -70,13 +70,13 @@ companyService.factory('companyAPIservice', function($http) {
         payload.append('name', params.name);
         payload.append('location', params.location);
         
-        for (i=0; i<params.licenseSelected.length; i++) {
-            payload.append('license', params.licenseSelected[i]);
-        }
+        _.each(params.licenseSelected, function(license) {
+            payload.append('license', license);
+        });
 
-        for (i=0; i<params.verticalSelected.length; i++) {
-            payload.append('vertical', params.verticalSelected[i]);
-        }
+        _.each(params.verticalSelected, function(vertical) {
+            payload.append('vertical', vertical);
+        });
 
         return $http({
             url: companyUrl.siteEndpoint,

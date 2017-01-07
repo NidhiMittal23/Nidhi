@@ -46,3 +46,7 @@ myApp.directive('fileModel', ['$parse', function($parse){
         }
     }
 }])
+
+myApp.constant('_',
+    window._
+);

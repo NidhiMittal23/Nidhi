@@ -1,6 +1,4 @@
-<div class="panel panel-default">
-
-  <div class="panel panel-default" ng-init="initCompany()">
+<div class="panel panel-default" ng-init="initCompany()">
 
   <!-- check if state is edit -->
   <div class="panel-heading font-bold" ng-if="isEdit===true">Edit Company</div>
@@ -16,7 +14,7 @@
         <div class="form-group">
         <label class="control-label col-sm-2">Select Industry:</label>
         <div class="col-sm-6">
-          <select multiple ng-model="companyModel.industrySelected" ng-change="companyModel.selectedIndustryId(companyModel.industrySelected)" class="form-control custom-form-control">
+          <select multiple ng-model="companyModel.industrySelected" ng-change="companyModel.selectedIndustryId(companyModel.industrySelected)" class="form-control custom-form-control" required>
             <options value="">Select any option</options>
             <option ng-repeat="option in companyModel.industryOption" ng-model="companyModel.industrySelected" value="{{option.id}}">{{option.name}}</option>
           </select>
@@ -31,8 +29,8 @@
         </div>
       </form>
     </div>
-  </div>
 </div>
+
 
 <div class="panel panel-default" ng-init="initSite()">
 
@@ -56,7 +54,7 @@
         <div class="form-group">
         <label class="control-label col-sm-2">Select License:</label>
         <div class="col-sm-6">
-          <select multiple ng-model="companySiteModel.licenseSelected" ng-change="companySiteModel.selectedLicenseId(companySiteModel.licenseSelected)" class="form-control custom-form-control">
+          <select multiple ng-model="companySiteModel.licenseSelected" ng-change="companySiteModel.selectedLicenseId(companySiteModel.licenseSelected)" class="form-control custom-form-control" required>
             <options value="">Select any option</options>
             <option ng-repeat="option in companySiteModel.licenseOption" ng-model="companySiteModel.licenseSelected" value="{{option.id}}">{{option.name}}</option>
           </select>
@@ -65,7 +63,7 @@
       <div class="form-group">
         <label class="control-label col-sm-2">Select Vertical:</label>
         <div class="col-sm-6">
-          <select multiple ng-model="companySiteModel.verticalSelected" ng-change="companySiteModel.selectedVerticalId(companySiteModel.verticalSelected)" class="form-control custom-form-control">
+          <select multiple ng-model="companySiteModel.verticalSelected" ng-change="companySiteModel.selectedVerticalId(companySiteModel.verticalSelected)" class="form-control custom-form-control" required>
             <options value="">Select any option</options>
             <option ng-repeat="option in companySiteModel.verticalOption" ng-model="companySiteModel.verticalSelected" value="{{option.id}}">{{option.name}}</option>
           </select>
