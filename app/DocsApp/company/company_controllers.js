@@ -6,6 +6,10 @@ companyController.controller('companyCtrl', function($state, $scope, companyAPIs
         $state.go('addCompany', {});
     }
 
+    $scope.gotoCompanySite = function(id, name) {
+        $state.go('companySite', {id: id, name : name});
+    }
+
     $scope.editExistCompany = function(id, name) {
         $state.go('editCompany', {id: id, name: name});
     }
@@ -125,4 +129,106 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
             }
         })
     }
+});
+
+companyController.controller('companySiteCtrl', function($state, $stateParams, $scope, companyAPIservice) {
+
+    var id = $stateParams.id
+
+    $scope.addNewCompanySite = function() {
+        $state.go('addCompanySite', {companyId: id});
+    }
+
+    $scope.gotoSiteDoc = function(id, name) {
+        $state.go('siteDoc', {id: id, name : name});
+    }
+
+    $scope.editExistCompanySite = function(id, name) {
+        $state.go('editCompanySite', {id: id, name: name});
+    }
+
+    companyAPIservice.getCompanySite(id).success(function (response, status) {
+        $scope.companySiteList = response;
+    }).error(function(response, status) {
+        if (status == 400) {
+            if ('name' in response) {
+                Notification.error(response['name'][0]);
+            }
+        }
+        else if (status == 500) {
+            Notification.error("Server error occured, Contact Admin");
+        }
+        else {
+            Notification.error("Error occured, contact Admin");
+        }
+    })
+});
+
+companyController.controller('siteDocCtrl', function($state, $stateParams, $scope, companyAPIservice) {
+
+    var id = $stateParams.id
+
+    $scope.editExistSiteDoc = function(id, name) {
+        $state.go('editSiteDoc', {id: id, name: name});
+    }
+
+    $scope.resultArray = [];
+    $scope.siteDocList = [];
+
+    //getting site detail...
+    companyAPIservice.getCompanySiteDetails(id).success(function (response, status) {
+        
+
+        //getting license and vertical from site for intersection...
+        var licences=response.license;
+        var verticals = response.vertical;
+
+
+        //loop for taking all licences...
+        _.each(licences, function(lic) {
+            //getting license detail...to get relation...
+            companyAPIservice.getLicenseDetails(lic).success(function(response, status) {
+                var relations=response.relations;
+
+                //taking each relation associated with license
+                _.each(relations, function(rel) {
+                    companyAPIservice.getRelationDetails(rel).success(function(response, status) {
+                        var relVerId = response.vertical.id;
+
+                        //intersecting site:vertical with relation:vertical
+                        _.each(verticals, function(vert) {
+                            if(vert == relVerId){
+
+                                //avoiding duplicate document entry in the List
+                                if($scope.resultArray.indexOf(response.subcategory.document) === -1) {
+
+                                    $scope.resultArray.push(response.subcategory.document);
+
+                                    companyAPIservice.getDocument(response.subcategory.document).success(function(response, status){
+                                        $scope.siteDocList.push({name :response.name, id : response.id });
+                                    })
+                                }
+                            }
+                        });
+                        
+                    })
+                });
+            })
+        });
+        
+    }).error(function(response, status) {
+        if (status == 400) {
+            if ('name' in response) {
+                Notification.error(response['name'][0]);
+            }
+        }
+        else if (status == 500) {
+            Notification.error("Server error occured, Contact Admin");
+        }
+        else {
+            Notification.error("Error occured, contact Admin");
+        }
+    })
+
+
 });

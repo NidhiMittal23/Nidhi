@@ -10,6 +10,24 @@ companyApp.config(function($stateProvider, $urlRouterProvider){
             authenticate: true
         })
 
+        .state('companySite', {
+            url: '/company-name:{name}',
+            parent: 'home',
+            templateUrl: 'DocsApp/company/templates/companySite-list.html',
+            controller: 'companySiteCtrl',
+            params: {id: null, name: null},
+            authenticate: true
+        })
+
+        .state('siteDoc', {
+            url: '/company/site-name:{name}',
+            parent: 'home',
+            templateUrl: 'DocsApp/company/templates/companySiteDoc-list.html',
+            controller: 'siteDocCtrl',
+            params: {id: null, name: null},
+            authenticate: true
+        })
+
         .state('addCompany', {
             url: '/company/add',
             parent: 'home',

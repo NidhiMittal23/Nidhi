@@ -11,11 +11,11 @@ documentApp.config(function($stateProvider, $urlRouterProvider){
         })
 
 		.state('docVersion', {
-			url: '/{name}',
+			url: '/document-name:{name}',
 			parent: 'home',
 			templateUrl: 'DocsApp/document/templates/docVersion-list.html',
 			controller: 'docVersionCtrl',
-			params: {id: null, name: null},
+			params: {id: null, dName: null},
 			authenticate: true
 		})
 

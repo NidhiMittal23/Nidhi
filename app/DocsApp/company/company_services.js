@@ -6,7 +6,10 @@ companyService.factory('companyAPIservice', function($http, _) {
 
     var companyUrl = {
         'endpoint': 'http://localhost:9000/company/',
-        'siteEndpoint': 'http://localhost:9000/site/'
+        'siteEndpoint': 'http://localhost:9000/site/',
+        'licenseEndpoint':'http://localhost:9000/license/',
+        'relationEndpoint':'http://localhost:9000/relation/',
+        'documentEndpoint':'http://localhost:9000/document/',
     }
 
     companyAPI.getCompany =function() {
@@ -22,6 +25,43 @@ companyService.factory('companyAPIservice', function($http, _) {
             url: companyUrl.endpoint + id + '/'
         });
     }
+
+    companyAPI.getCompanySite =function(id) {
+        return $http({
+            method: 'GET',
+            url: companyUrl.endpoint + id + "/"
+        });
+    }
+
+    companyAPI.getCompanySiteDetails =function(id) {
+        return $http({
+            method: 'GET',
+            url: companyUrl.siteEndpoint + id + "/"
+        });
+    }
+
+    companyAPI.getLicenseDetails = function(id) {
+        return $http({
+            method: 'GET', 
+            url: companyUrl.licenseEndpoint + id + '/'
+        });
+    }
+
+    companyAPI.getRelationDetails = function(id) {
+        return $http({
+            method: 'GET', 
+            url: companyUrl.relationEndpoint + id + '/'
+        });
+    }
+
+    companyAPI.getDocument = function(id) {
+        return $http({
+            method: 'GET', 
+            url: companyUrl.documentEndpoint + id + '/'
+        });
+    }
+
+
 
     companyAPI.postCompanyDetail = function(params) {
         var payload = new FormData();
