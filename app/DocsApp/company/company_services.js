@@ -7,9 +7,7 @@ companyService.factory('companyAPIservice', function($http, _) {
     var companyUrl = {
         'endpoint': 'http://localhost:9000/company/',
         'siteEndpoint': 'http://localhost:9000/site/',
-        'licenseEndpoint':'http://localhost:9000/license/',
         'relationEndpoint':'http://localhost:9000/relation/',
-        'documentEndpoint':'http://localhost:9000/document/',
     }
 
     companyAPI.getCompany =function() {
@@ -40,24 +38,10 @@ companyService.factory('companyAPIservice', function($http, _) {
         });
     }
 
-    companyAPI.getLicenseDetails = function(id) {
-        return $http({
-            method: 'GET', 
-            url: companyUrl.licenseEndpoint + id + '/'
-        });
-    }
-
     companyAPI.getRelationDetails = function(id) {
         return $http({
             method: 'GET', 
             url: companyUrl.relationEndpoint + id + '/'
-        });
-    }
-
-    companyAPI.getDocument = function(id) {
-        return $http({
-            method: 'GET', 
-            url: companyUrl.documentEndpoint + id + '/'
         });
     }
 

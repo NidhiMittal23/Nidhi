@@ -16,10 +16,17 @@ documentService.factory('documentAPIservice', function($http, Notification) {
         });
     }
 
+    documentAPI.getDocumentDetails =function(id) {
+        return $http({
+            method: 'GET',
+            url: documentUrl.endpoint+ id + '/'
+        });
+    }
+
     documentAPI.getDocVersion =function(id) {
         return $http({
             method: 'GET',
-            url: documentUrl.endpoint + id + "/"
+            url: documentUrl.endpoint + id + '/'
         });
     }
 

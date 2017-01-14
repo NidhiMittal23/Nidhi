@@ -164,7 +164,7 @@ companyController.controller('companySiteCtrl', function($state, $stateParams, $
     })
 });
 
-companyController.controller('siteDocCtrl', function($state, $stateParams, $scope, companyAPIservice) {
+companyController.controller('siteDocCtrl', function($state, $stateParams, $scope, companyAPIservice, licenseAPIservice, documentAPIservice) {
 
     var id = $stateParams.id
 
@@ -187,7 +187,7 @@ companyController.controller('siteDocCtrl', function($state, $stateParams, $scop
         //loop for taking all licences...
         _.each(licences, function(lic) {
             //getting license detail...to get relation...
-            companyAPIservice.getLicenseDetails(lic).success(function(response, status) {
+            licenseAPIservice.getLicenseDetails(lic).success(function(response, status) {
                 var relations=response.relations;
 
                 //taking each relation associated with license
@@ -204,7 +204,7 @@ companyController.controller('siteDocCtrl', function($state, $stateParams, $scop
 
                                     $scope.resultArray.push(response.subcategory.document);
 
-                                    companyAPIservice.getDocument(response.subcategory.document).success(function(response, status){
+                                    documentAPIservice.getDocumentDetails(response.subcategory.document).success(function(response, status){
                                         $scope.siteDocList.push({name :response.name, id : response.id, versions : response.versions });
                                     })
                                 }
