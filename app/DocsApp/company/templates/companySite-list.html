@@ -9,7 +9,6 @@
           <tbody>
             <tr ng-repeat="companySite in companySiteList.sites" style="cursor: hand;cursor: pointer;">
               <td ng-click="gotoSiteDoc(companySite.id, companySite.name)">{{companySite.name ? companySite.name : 'N/A'}}</td>
-              <td> <a href="http://{{companySite.name ? companySite.name : 'N/A'}}" target="_blank">{{companySite.name ? companySite.name : 'N/A'}} </a></td>
             </tr>
           </tbody>
   </table>
