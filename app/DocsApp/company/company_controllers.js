@@ -174,7 +174,7 @@ companyController.controller('siteDocCtrl', function($state, $stateParams, $scop
 
     $scope.resultArray = [];
     $scope.siteDocList = [];
-
+    var params = $scope.siteDocModel;
     //getting site detail...
     companyAPIservice.getCompanySiteDetails(id).success(function (response, status) {
         
@@ -205,7 +205,7 @@ companyController.controller('siteDocCtrl', function($state, $stateParams, $scop
                                     $scope.resultArray.push(response.subcategory.document);
 
                                     companyAPIservice.getDocument(response.subcategory.document).success(function(response, status){
-                                        $scope.siteDocList.push({name :response.name, id : response.id });
+                                        $scope.siteDocList.push({name :response.name, id : response.id, versions : response.versions });
                                     })
                                 }
                             }
