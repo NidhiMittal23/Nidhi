@@ -131,6 +131,14 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
 
         });
 
+        $scope.documentRelationModel.selectedLicenseId = function(licenseId) {
+            $scope.documentRelationModel.licenseSelected = licenseId;
+        }
+
+        $scope.documentRelationModel.selectedVerticalId = function(verticalId) {
+            $scope.documentRelationModel.verticalSelected = verticalId;
+        }
+
     }
 
     if ($state.current.name == 'editDocument') {
@@ -219,26 +227,40 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
 
 
     $scope.buildDocumentRelation = function() {
-        var params = {};
-        params.vertical_id = $scope.documentRelationModel.verticalSelected.id;
-        params.license_id = $scope.documentRelationModel.licenseSelected.id;
-        params.subcategory_id = $scope.documentRelationModel.subcategoryAddedId;
-        documentAPIservice.postDocumentRelationDetail(params).success(function (response, status) {
-            // console.log(response);
-            Notification.success('Relation created successfully');
-        }).error(function (response, status) {
-            if (status == 400) {
-                if ('name' in response) {
-                    Notification.error(response['name'][0]);
+        
+
+        _.each($scope.documentRelationModel.verticalSelected, function(verticalObj) {
+
+            _.each($scope.documentRelationModel.licenseSelected, function(licenseObj) {
+                var params = {
+                    vertical_id : verticalObj.id,
+                    license_id : licenseObj.id,
+                    subcategory_id : $scope.documentRelationModel.subcategoryAddedId,
+                };
+                /*defining params before the loop leds to requesting sam params reference*/
+
+                documentAPIservice.postDocumentRelationDetail(params).success(function (response, status) {
+                //console.log(response);
+                Notification.success('Relation created successfully');
+                }).error(function (response, status) {
+                if (status == 400) {
+                    if ('name' in response) {
+                        Notification.error(response['name'][0]);
+                    }
                 }
-            }
-            else if (status == 500) {
-                Notification.error("Server error occured, Contact Admin");
-            }
-            else {
-                Notification.error("Error occured, Contact Admin");
-            }
-        })
+                else if (status == 500) {
+                    Notification.error("Server error occured, Contact Admin");
+                }
+                else {
+                    Notification.error("Error occured, Contact Admin");
+                }
+
+                })
+
+
+            });
+        });
+        
     }
 
     $scope.editBuildDocumentRelation = function() {
