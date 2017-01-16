@@ -23,12 +23,35 @@ documentService.factory('documentAPIservice', function($http, Notification) {
         });
     }
 
+    documentAPI.getDocumentDetail = function (id) {
+        return $http({
+            method: 'GET',
+            url: documentUrl.endpoint + id + "/"
+        });
+    }
+
     documentAPI.getDocVersion =function(id) {
         return $http({
             method: 'GET',
             url: documentUrl.endpoint + id + '/'
         });
     }
+
+    // documentAPI.putDocumentDetail = function(params) {
+    //     var id = params.id;
+    //     return $http({
+    //         method: 'PUT',
+    //         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    //         url: verticalUrl.endpoint + id + '/',
+    //         transformRequest: function(obj) {
+    //             var str = [];
+    //             for(var p in obj)
+    //                 str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    //             return str.join("&");
+    //         },
+    //         data: params
+    //     });
+    // }
 
     documentAPI.postDocVersionDetail = function(uploadUrl, data){
         var fd = new FormData();
