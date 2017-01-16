@@ -12,5 +12,12 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
         $state.transitionTo("auth");
     }
 
-    $scope.navList = [{ name : 'License', val : 'license'}, { name : 'Category', val : 'category'}, { name : 'Industry', val : 'industry'}, { name : 'Vertical', val : 'vertical'}, { name : 'Company', val : 'company'}, { name : 'Document Management', val : 'document'}];
+    $scope.navList = [
+    	{ name : 'License', val : 'license'},
+    	{ name : 'Category', val : 'category'},
+    	{ name : 'Industry', val : 'industry'},
+    	{ name : 'Vertical', val : 'vertical'},
+    	{ name : 'Company Management', val : 'company'},
+    	{ name : 'Document Management', val : 'document'}
+    ];
 });

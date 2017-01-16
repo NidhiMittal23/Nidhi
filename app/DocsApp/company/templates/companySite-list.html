@@ -1,0 +1,15 @@
+<button type="button" class="btn btn-primary" ng-click="addNewCompanySite()">Add new Site</button>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+            <tr>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="companySite in companySiteList.sites" style="cursor: hand;cursor: pointer;">
+              <td ng-click="gotoSiteDoc(companySite.id, companySite.name)">{{companySite.name ? companySite.name : 'N/A'}}</td>
+            </tr>
+          </tbody>
+  </table>
+</div>

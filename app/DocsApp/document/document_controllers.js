@@ -32,7 +32,7 @@ documentController.controller('documentCtrl', function($state, $scope, documentA
 });
 
 
-documentController.controller('docVersionCtrl', function($state, $stateParams, $scope, documentAPIservice) {
+documentController.controller('docVersionCtrl', function($state, $stateParams, $scope, Notification, documentAPIservice) {
 
     var id = $stateParams.id
 

@@ -1,0 +1,25 @@
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+            <tr>
+              <th>Name</th>
+              <th>Select Version</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="document in siteDocList"  >
+              <td style="cursor: hand;cursor: pointer;" ng-click="gotoDocVersion(document.id, document.name)">{{document.name ? document.name : 'N/A'}}</td>
+              <td>
+                <div class="col-sm-6">
+                  <select name="selectVersion" id="selectVersion" 
+                    ng-options = "option.name for option in document.versions track by option.id"
+                    ng-model = "siteDocModel" >
+                  </select>
+                </div>
+              </td>
+              <td><a href="{{siteDocModel.docfile}}" target="_blank">{{siteDocModel.docfile}}</a> </td>
+            </tr>
+          </tbody>
+  </table>
+</div>
