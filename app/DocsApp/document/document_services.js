@@ -6,7 +6,8 @@ documentService.factory('documentAPIservice', function($http, Notification) {
 
 	var documentUrl = {
 		'endpoint': 'http://localhost:9000/document/',
-        'relationEndPoint': 'http://localhost:9000/relation/'
+        'relationEndPoint': 'http://localhost:9000/relation/',
+        'versionEndPoint': 'http://localhost:9000/version/'
 	}
 
 	documentAPI.getDocument =function() {
@@ -93,6 +94,13 @@ documentService.factory('documentAPIservice', function($http, Notification) {
                 return str.join("&");
             },
             data: params
+        });
+    }
+
+    documentAPI.deleteVersion = function(id) {
+        return $http({
+            method: 'DELETE',
+            url: documentUrl.versionEndPoint + id + '/'
         });
     }
 

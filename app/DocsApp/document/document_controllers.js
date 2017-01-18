@@ -1,6 +1,6 @@
 var documentController = angular.module('document.controllers', ['ui-notification']);
 
-documentController.controller('documentCtrl', function($state, $scope, documentAPIservice, _, categoryAPIservice) {
+documentController.controller('documentCtrl', function($state, $window , $scope, documentAPIservice, _, categoryAPIservice, Notification) {
 
     $scope.addNewDocument = function() {
         $state.go('addDocument', {});
@@ -12,6 +12,16 @@ documentController.controller('documentCtrl', function($state, $scope, documentA
 
     $scope.editExistDocument = function(id, name) {
         $state.go('editDocument', {id: id, name: name});
+    }
+
+    $scope.versionDelete = function(id) {
+        documentAPIservice.deleteVersion(id).success(function(response) {
+            $scope.reloadRoute();
+        })
+    }
+
+    $scope.reloadRoute = function() {
+        $window.location.reload();
     }
 
     categoryAPIservice.getcategory().success(function(response,status) {
