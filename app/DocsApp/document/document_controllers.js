@@ -263,40 +263,22 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
 
 
     $scope.buildDocumentRelation = function() {
-        
-
-        _.each($scope.documentRelationModel.verticalSelected, function(verticalObj) {
-
-            _.each($scope.documentRelationModel.licenseSelected, function(licenseObj) {
+        var promiseList = [];
+        _.each($scope.documentRelationModel.licenseSelected, function(licenseObj) {
+            _.each($scope.documentRelationModel.verticalSelected, function(verticalObj) {
                 var params = {
                     vertical_id : verticalObj.id,
                     license_id : licenseObj.id,
                     subcategory_id : $scope.documentRelationModel.subcategoryAddedId,
                 };
-                /*defining params before the loop leds to requesting sam params reference*/
+                promiseList.push(documentAPIservice.postDocumentRelationDetail(params));
+            })
+        })
 
-                documentAPIservice.postDocumentRelationDetail(params).success(function (response, status) {
-                //console.log(response);
-                Notification.success('Relation created successfully');
-                }).error(function (response, status) {
-                if (status == 400) {
-                    if ('name' in response) {
-                        Notification.error(response['name'][0]);
-                    }
-                }
-                else if (status == 500) {
-                    Notification.error("Server error occured, Contact Admin");
-                }
-                else {
-                    Notification.error("Error occured, Contact Admin");
-                }
-
-                })
-
-
-            });
+        $q.all(promiseList).then(function(values) {
+            // have to make request failure more concreate #todo
+            Notification.success('Relation created successfully');
         });
-        
     }
 
     $scope.editBuildDocumentRelation = function() {

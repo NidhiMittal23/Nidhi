@@ -11,7 +11,8 @@ var myApp = angular.module('myApp', [
   'vertical',
   'company',
   'document',
-  'authService'
+  'authService',
+  '720kb.tooltips'
 ])
 
 myApp.config(function($stateProvider, $urlRouterProvider, $authProvider) {
