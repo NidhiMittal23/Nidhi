@@ -26,10 +26,35 @@
 <!-- <div ng-repeat="(category, document) in groupByCategory">
   {{category}}
 </div> -->
+<table ng-repeat="(category, documentList) in groupByCategory" class="table table-hover">
+  <thead>
+            <tr>
+              <th>{{categoryName[category]}}</th>
+            </tr>
+  </thead>
+  </tbody>
+            <tr ng-repeat="document in documentList">
+              <td style="cursor: hand;cursor: pointer;" class="col-md-3" ng-click="gotoDocVersion(document.id, document.name)">{{document.name ? document.name : 'N/A'}}</td>
+              <td class="col-md-3">
+                  <select name="selectVersion" id="selectVersion" 
+                    ng-options = "option.state for option in document.versions track by option.id"
+                    ng-model = "DocVersionModel" style="width: 150px; max-height: 28px" class="form-control custom-form-control">
+                  </select>
+              </td>
 
-<form ng-repeat="(category, documentList) in groupByCategory">
+              <td class="col-md-3"><span ng-if="DocVersionModel">
+                <a href="{{DocVersionModel.docfile}}" target="_blank">view</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href=""><span class="glyphicon glyphicon-trash"></span>delete</a></span>
+              </td>
+
+              <td style="cursor: pointer" ng-click="editExistDocument(document.id, document.name)" >Setting<span> </span><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></td>
+            </tr>
+  </tbody>
+</table>
+
+<!-- <form ng-repeat="(category, documentList) in groupByCategory">
   <fieldset>
-    <legend>{{category}}</legend>
+    <legend>{{categoryName[category]}}</legend>
       <div class="table-responsive">
         <table class="table table-hover">
           <thead>
@@ -49,4 +74,4 @@
         </table>
       </div>
   </fieldset>
-</form>
+</form> -->

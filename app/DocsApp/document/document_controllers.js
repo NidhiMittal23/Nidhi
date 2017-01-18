@@ -1,6 +1,6 @@
 var documentController = angular.module('document.controllers', ['ui-notification']);
 
-documentController.controller('documentCtrl', function($state, $scope, documentAPIservice, _) {
+documentController.controller('documentCtrl', function($state, $scope, documentAPIservice, _, categoryAPIservice) {
 
     $scope.addNewDocument = function() {
         $state.go('addDocument', {});
@@ -14,8 +14,31 @@ documentController.controller('documentCtrl', function($state, $scope, documentA
         $state.go('editDocument', {id: id, name: name});
     }
 
+    categoryAPIservice.getcategory().success(function(response,status) {
+        $scope.categoryName = [];
+        $scope.categoryName["null"] = "uncategorized";
+
+        _.each(response.results,function(obj) {
+            $scope.categoryName[obj.id]= obj.name;
+        });
+        //console.log($scope.categoryName);
+    }).error(function(response, status) {
+        if (status == 400) {
+            if ('name' in response) {
+                Notification.error(response['name'][0]);
+            }
+        }
+        else if (status == 500) {
+            Notification.error("Server error occured, Contact Admin");
+        }
+        else {
+            Notification.error("Error occured, contact Admin");
+        }
+    })
+
     documentAPIservice.getDocument().success(function (response, status) {
         $scope.documentList = response;
+        //console.log(response);
 
         // some subcategories may be null
         $scope.groupByCategory = _.groupBy(response.results, function(obj) {
@@ -27,7 +50,7 @@ documentController.controller('documentCtrl', function($state, $scope, documentA
             }
 
         });
-        // console.log(groupByCategory);
+        //console.log($scope.groupByCategory);
         
 
 
