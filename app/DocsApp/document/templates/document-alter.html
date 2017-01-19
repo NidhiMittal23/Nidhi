@@ -16,7 +16,7 @@
             <input type="text" class="form-control" id="name" placeholder="Enter Name" ng-model="documentModel.name" ng-required="true">
           </div>
         </div>
-        <div class="form-group">
+        <div ng-if="docMile==false" class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
           <button type="submit" class="btn btn-primary" ng-click="editExistDocument()" ng-if="isEdit===true">Edit Document</button>
           <button type="submit" class="btn btn-primary" ng-click="addNewDocument()" ng-if="isEdit===false">Add Document</button>
@@ -56,7 +56,7 @@
               <input type="file" id="docfile" file-model=documentVersionModel.docfile>
             </div>
           </div>
-          <div class="form-group">
+          <div ng-if="docMile == true && verMile==false" class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-primary" ng-click="addNewDocumentVersion()" >Add</button>
             </div>
@@ -99,7 +99,7 @@
         </div>
 
 
-        <div class="form-group">
+        <div ng-if="verMile==true && catMile==false" class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
           <button type="submit" class="btn btn-primary" ng-click="editDocumentSubCategory()" ng-if="isEdit===true">Edit SubCategory</button>
           <button type="submit" class="btn btn-primary" ng-click="addDocumentSubCategory()" ng-if="isEdit===false">Add SubCategory</button>
@@ -146,7 +146,7 @@
         </div>
 
 
-        <div class="form-group">
+        <div ng-if="catMile==true && relMile==false" class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
           <button type="submit" class="btn btn-primary" ng-click="editBuildDocumentRelation()" ng-if="isEdit===true">Edit Relation</button>
           <button type="submit" class="btn btn-danger" ng-click="buildDocumentRelation()" ng-if="isEdit===false">Add Relation</button>
