@@ -1,6 +1,6 @@
 var documentController = angular.module('document.controllers', ['ui-notification']);
 
-documentController.controller('documentCtrl', function($state, $scope, documentAPIservice, _, categoryAPIservice) {
+documentController.controller('documentCtrl', function($state, $window ,$scope, documentAPIservice, _, categoryAPIservice) {
 
     $scope.addNewDocument = function() {
         $state.go('addDocument', {});
