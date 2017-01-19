@@ -36,6 +36,38 @@
   </li>
 
   <li>
+    <i ng-if="verMile == false" class="milestone-default glyphicon glyphicon-ok"></i>
+    <i ng-if="verMile == true" class="milestone-primary glyphicon glyphicon-ok"></i>
+    <div class="panel panel-default">
+
+    <!-- check if state is edit -->
+    <div class="panel-heading font-bold" >Add a new Version</div>
+      <div class="panel-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="name">Name:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="name" placeholder="Enter Name" ng-model="documentVersionModel.name" ng-required="true">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="file">File:</label>
+            <div class="col-sm-10">
+              <input type="file" id="docfile" file-model=documentVersionModel.docfile>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary" ng-click="addNewDocumentVersion()" >Add</button>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+
+  </li>
+
+  <li>
     <i ng-if="catMile == false" class="milestone-default glyphicon glyphicon-ok"></i>
     <i ng-if="catMile == true" class="milestone-primary glyphicon glyphicon-ok"></i>
 

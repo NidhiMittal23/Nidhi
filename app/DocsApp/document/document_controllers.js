@@ -27,6 +27,40 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
         $window.location.reload();
     }
 
+    $scope.getDocumentByPage = function(link) {
+        documentAPIservice.getDocumentPage(link).success(function (response, status) {
+        $scope.documentList = response;
+
+        // some subcategories may be null
+        $scope.groupByCategory = _.groupBy(response.results, function(obj) {
+            if (obj.subcategories == null) {
+                return obj.subcategories;
+            }
+            else {
+                return obj.subcategories.category;
+            }
+
+        });
+        //console.log($scope.groupByCategory);
+        
+
+
+    }).error(function(response, status) {
+        if (status == 400) {
+            if ('name' in response) {
+                Notification.error(response['name'][0]);
+            }
+        }
+        else if (status == 500) {
+            Notification.error("Server error occured, Contact Admin");
+        }
+        else {
+            Notification.error("Error occured, contact Admin");
+        }
+    })
+
+    }
+
     categoryAPIservice.getcategory().success(function(response,status) {
         $scope.categoryName = [];
         $scope.categoryName["null"] = "uncategorized";
@@ -49,9 +83,9 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
         }
     })
 
+
     documentAPIservice.getDocument().success(function (response, status) {
         $scope.documentList = response;
-        //console.log(response);
 
         // some subcategories may be null
         $scope.groupByCategory = _.groupBy(response.results, function(obj) {
@@ -137,9 +171,11 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     $scope.documentModel = {};
     $scope.documentRelationModel = {};
     $scope.documentSubCategoryModel = {};
+    $scope.documentVersionModel = {};
 
     $scope.initMile = function() {
         $scope.docMile = false;
+        $scope.verMile = false;
         $scope.catMile = false;
         $scope.relMile = false;
 
@@ -234,6 +270,17 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
             }
         })
     }
+
+    $scope.addNewDocumentVersion = function(){
+
+        var params = $scope.documentVersionModel;
+        var docid = $scope.documentModel.newDocumentId;
+        params.document = docid;
+
+        var uploadUrl = 'http://localhost:9000/version/';
+        documentAPIservice.postDocVersionDetail(uploadUrl, $scope.documentVersionModel);
+        $scope.verMile = true;
+    };
 
     $scope.editExistDocument = function() {
         console.log("add edit document function here");

@@ -17,6 +17,13 @@ documentService.factory('documentAPIservice', function($http, Notification) {
         });
     }
 
+    documentAPI.getDocumentPage =function(url) {
+        return $http({
+            method: 'GET',
+            url: url
+        });
+    }
+
     documentAPI.getDocumentDetails =function(id) {
         return $http({
             method: 'GET',
