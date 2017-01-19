@@ -64,7 +64,23 @@ documentService.factory('documentAPIservice', function($http, Notification) {
         }).success(function(data, status) {
         // file is uploaded successfully
         Notification.success(data.name+' added successfully');
+        }).error(function(response, status) {
+            if (status == 400) {
+                if ('name' in response) {
+                    Notification.error(response['name'][0]);
+                }
+                if ('non_field_errors' in response) {
+                    Notification.error(response['non_field_errors'][0]);
+                }
+            }
+            else if (status == 500) {
+                Notification.error("Server error occured, Contact Admin");
+            }
+            else {
+                Notification.error("Error occured, contact Admin");
+            }
         })
+        // make transformRequest #todo
     }
 
     documentAPI.postDocumentDetail = function(params) {

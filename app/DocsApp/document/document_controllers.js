@@ -1,6 +1,7 @@
 var documentController = angular.module('document.controllers', ['ui-notification']);
 
-documentController.controller('documentCtrl', function($state, $window ,$scope, documentAPIservice, _, categoryAPIservice) {
+documentController.controller('documentCtrl', function($state, $window ,$scope, documentAPIservice,
+    _, categoryAPIservice, Notification) {
 
     $scope.addNewDocument = function() {
         $state.go('addDocument', {});
@@ -16,6 +17,8 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
 
     $scope.versionDelete = function(id) {
         documentAPIservice.deleteVersion(id).success(function(response) {
+            // add notification message #todo
+            // hint add callback
             $scope.reloadRoute();
         })
     }
