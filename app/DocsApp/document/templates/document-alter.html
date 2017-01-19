@@ -40,12 +40,13 @@
 
       <div class="form-group">
         <label class="control-label col-sm-2" for="selectCategory">Select Category:</label>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
           <select name="selectCategory" id="selectCategory"
             ng-options="option.name for option in documentSubCategoryModel.categoryOption track by option.id"
-            ng-model="documentSubCategoryModel.categorySelected">
+            ng-model="documentSubCategoryModel.categorySelected" class="form-control custom-form-control" required>
           </select>
         </div>
+        <a ui-sref="category" tooltips tooltip-template="Manage Category"><span class="glyphicon glyphicon-cog"></span></a>
       </div>
 
       <!-- ############################### -->
@@ -77,33 +78,26 @@
   <div class="panel-body">
     <form class="form-horizontal">
       <div class="form-group">
-        <label class="control-label col-sm-2" for="selectVertical">Select Vertical:</label>
-        <div class="col-sm-6">
-          <select name="selectVertical" id="selectVertical"
-            ng-options="option.name for option in documentRelationModel.verticalOption track by option.id"
-            ng-model="documentRelationModel.verticalSelected">
+        <label class="control-label col-sm-2" for="selectLicense">Select License:</label>
+        <div class="col-sm-4">
+          <select multiple ng-model="documentRelationModel.licenseSelected" ng-change="documentRelationModel.selectedLicenseId(documentRelationModel.licenseSelected)"
+            ng-options="option.name for option in documentRelationModel.licenseOption track by option.id" class="form-control custom-form-control" required>
+            <option ng-repeat="option in documentRelationModel.licenseOption" ng-model="documentRelationModel.licenseSelected" value="{{option.id}}">{{option.name}}</option>
           </select>
-
-          <!-- <select ng-model="documentRelationModel.verticalSelected" ng-change="documentRelationModel.selectedVerticalId(documentRelationModel.verticalSelected)" class="form-control custom-form-control">
-            <options value="">Select any option</options>
-            <option ng-repeat="option in documentRelationModel.verticalOption" ng-model="documentRelationModel.verticalSelected" value="{{option.id}}">{{option.name}}</option>
-          </select> -->
         </div>
+        <a ui-sref="license" tooltips tooltip-template="Manage License"><span class="glyphicon glyphicon-cog" /></a>
       </div>
 
 
       <div class="form-group">
-        <label class="control-label col-sm-2" for="selectLicense">Select License:</label>
-        <div class="col-sm-6">
-          <select name="selectLicense" id="selectLicense"
-            ng-options="option.name for option in documentRelationModel.licenseOption track by option.id"
-            ng-model="documentRelationModel.licenseSelected">
+        <label class="control-label col-sm-2" for="selectVertical">Select Vertical:</label>
+        <div class="col-sm-4">
+          <select multiple ng-model="documentRelationModel.verticalSelected" ng-change="documentRelationModel.selectedVerticalId(documentRelationModel.verticalSelected)"
+            ng-options="option.name for option in documentRelationModel.verticalOption track by option.id" class="form-control custom-form-control" required>
+            <option ng-repeat="option in documentRelationModel.verticalOption" ng-model="documentRelationModel.verticalSelected" value="{{option.id}}">{{option.name}}</option>
           </select>
-          <!-- <select ng-model="documentRelationModel.licenseSelected" ng-change="documentRelationModel.selectedLicenseId(documentRelationModel.licenseSelected)" class="form-control custom-form-control">
-            <options value="">Select any option</options>
-            <option ng-repeat="option in documentRelationModel.licenseOption" ng-model="documentRelationModel.licenseSelected" value="{{option.id}}">{{option.name}}</option>
-          </select> -->
         </div>
+        <a ui-sref="vertical" tooltips tooltip-template="Manage Vertical"><span class="glyphicon glyphicon-cog"></span></a>
       </div>
 
 

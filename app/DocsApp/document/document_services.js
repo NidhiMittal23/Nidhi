@@ -6,7 +6,8 @@ documentService.factory('documentAPIservice', function($http, Notification) {
 
 	var documentUrl = {
 		'endpoint': 'http://localhost:9000/document/',
-        'relationEndPoint': 'http://localhost:9000/relation/'
+        'relationEndPoint': 'http://localhost:9000/relation/',
+        'versionEndPoint': 'http://localhost:9000/version/'
 	}
 
 	documentAPI.getDocument =function() {
@@ -63,7 +64,23 @@ documentService.factory('documentAPIservice', function($http, Notification) {
         }).success(function(data, status) {
         // file is uploaded successfully
         Notification.success(data.name+' added successfully');
+        }).error(function(response, status) {
+            if (status == 400) {
+                if ('name' in response) {
+                    Notification.error(response['name'][0]);
+                }
+                if ('non_field_errors' in response) {
+                    Notification.error(response['non_field_errors'][0]);
+                }
+            }
+            else if (status == 500) {
+                Notification.error("Server error occured, Contact Admin");
+            }
+            else {
+                Notification.error("Error occured, contact Admin");
+            }
         })
+        // make transformRequest #todo
     }
 
     documentAPI.postDocumentDetail = function(params) {
@@ -93,6 +110,13 @@ documentService.factory('documentAPIservice', function($http, Notification) {
                 return str.join("&");
             },
             data: params
+        });
+    }
+
+    documentAPI.deleteVersion = function(id) {
+        return $http({
+            method: 'DELETE',
+            url: documentUrl.versionEndPoint + id + '/'
         });
     }
 
