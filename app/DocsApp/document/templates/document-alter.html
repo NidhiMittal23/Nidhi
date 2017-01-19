@@ -149,9 +149,10 @@
 
 </ul>
 
-
+<!-- ######################*************##################################### -->
 <!-- Edit Document -->
-
+<!-- we are building seperate html panel for edit document; here we have code repition; if time permits we will integrate this to generic html template for both add and edit
+ -->
 <div ng-if="isEdit===true">
   
   <div class="panel panel-default">
@@ -217,47 +218,39 @@
 
     <!-- check if state is edit -->
     <div class="panel-heading font-bold">Edit Assocaite Document Relation</div>
-      <form class="form-horizontal">
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="selectLicense">Select License:</label>
-          <div class="col-sm-4">
-            <select multiple ng-model="documentRelationModel.licenseSelected" ng-change="documentRelationModel.selectedLicenseId(documentRelationModel.licenseSelected)"
-            ng-options="option.name for option in documentRelationModel.licenseOption track by option.id" class="form-control custom-form-control" required>
-              <option ng-repeat="option in documentRelationModel.licenseOption" ng-model="documentRelationModel.licenseSelected" value="{{option.id}}">{{option.name}}</option>
-            </select>
+      <div class="panel-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="selectLicense">Select License:</label>
+            <div class="col-sm-4">
+              <select multiple ng-model="documentRelationModel.licenseSelected" ng-change="documentRelationModel.selectedLicenseId(documentRelationModel.licenseSelected)"
+              ng-options="option.name for option in documentRelationModel.licenseOption track by option.id" class="form-control custom-form-control" required>
+                <option ng-repeat="option in documentRelationModel.licenseOption" ng-model="documentRelationModel.licenseSelected" value="{{option.id}}">{{option.name}}</option>
+              </select>
+            </div>
+            <a ui-sref="license" tooltips tooltip-template="Manage License"><span class="glyphicon glyphicon-cog" /></a>
           </div>
-          <a ui-sref="license" tooltips tooltip-template="Manage License"><span class="glyphicon glyphicon-cog" /></a>
-        </div>
 
 
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="selectVertical">Select Vertical:</label>
-          <div class="col-sm-4">
-            <select multiple ng-model="documentRelationModel.verticalSelected" ng-change="documentRelationModel.selectedVerticalId(documentRelationModel.verticalSelected)"
-            ng-options="option.name for option in documentRelationModel.verticalOption track by option.id" class="form-control custom-form-control" required>
-              <option ng-repeat="option in documentRelationModel.verticalOption" ng-model="documentRelationModel.verticalSelected" value="{{option.id}}">{{option.name}}</option>
-            </select>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="selectVertical">Select Vertical:</label>
+            <div class="col-sm-4">
+              <select multiple ng-model="documentRelationModel.verticalSelected" ng-change="documentRelationModel.selectedVerticalId(documentRelationModel.verticalSelected)"
+              ng-options="option.name for option in documentRelationModel.verticalOption track by option.id" class="form-control custom-form-control" required>
+                <option ng-repeat="option in documentRelationModel.verticalOption" ng-model="documentRelationModel.verticalSelected" value="{{option.id}}">{{option.name}}</option>
+              </select>
+            </div>
+            <a ui-sref="vertical" tooltips tooltip-template="Manage Vertical"><span class="glyphicon glyphicon-cog"></span></a>
           </div>
-          <a ui-sref="vertical" tooltips tooltip-template="Manage Vertical"><span class="glyphicon glyphicon-cog"></span></a>
-        </div>
 
 
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-          <button type="submit" class="btn btn-primary" ng-click="editBuildDocumentRelation()">Edit Relation</button>
-        </div>
-    
-      </form>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary" ng-click="editBuildDocumentRelation()">Edit Relation</button>
+          </div>
+      
+        </form>
+      </div>
     </div>
   </div>
-
 </div>
-
-
-
-
-
-
-
-
-
