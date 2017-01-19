@@ -138,6 +138,13 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     $scope.documentRelationModel = {};
     $scope.documentSubCategoryModel = {};
 
+    $scope.initMile = function() {
+        $scope.docMile = false;
+        $scope.catMile = false;
+        $scope.relMile = false;
+
+    };
+
     $scope.init = function() {
 
         // populate option for dropDown
@@ -209,6 +216,7 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
             var documentName = response.name;
             $scope.documentModel.newDocumentId = response.id;
             Notification.success(documentName+' added successfully');
+            $scope.docMile = true;
             // todo
             // Add version: Upload file
 
@@ -230,6 +238,9 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     $scope.editExistDocument = function() {
         console.log("add edit document function here");
 
+        //in .success() add following
+        $scope.docMile = true;
+
     }
 
     // Associate Subcategory to newly Created Document
@@ -241,6 +252,7 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
             $scope.documentRelationModel.subcategoryAddedId = response.id;
             var subCategoryName = response.name;
             Notification.success(subCategoryName+' added successfully');
+            $scope.catMile = true;
         }).error(function (response, status) {
             if (status == 400) {
                 if ('name' in response) {
@@ -259,6 +271,10 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     $scope.editDocumentSubCategory = function() {
         // console.log($scope.documentSubCategoryModel.categorySelected);
         console.log("edit DocumentSubCategory");
+
+        //in success() add following
+        $scope.catMile = true;
+
     }
 
 
@@ -278,11 +294,15 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         $q.all(promiseList).then(function(values) {
             // have to make request failure more concreate #todo
             Notification.success('Relation created successfully');
+            $scope.relMile = true;
         });
     }
 
     $scope.editBuildDocumentRelation = function() {
         console.log("edit buildDocumentRelation");
+
+        //in success() add following
+        $scope.relMile = true;
     }
 
 });
