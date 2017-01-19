@@ -12,11 +12,11 @@ var myApp = angular.module('myApp', [
   'company',
   'document',
   'authService',
-  '720kb.tooltips'
+  '720kb.tooltips',
 ])
 
-myApp.config(function($stateProvider, $urlRouterProvider, $authProvider) {
-
+myApp.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider) {
+    $httpProvider.interceptors.push('RequestsErrorHandler');
     $urlRouterProvider.otherwise('/auth');
 
 });
@@ -47,6 +47,33 @@ myApp.directive('fileModel', ['$parse', function($parse){
         }
     }
 }])
+
+myApp.factory('RequestsErrorHandler', function($q) {
+  return {
+    'responseError': function(rejection) {
+      if (rejection.status == 400) {
+        if ('data' in rejection){
+          if (('non_field_errors') in rejection.data) {
+            // have to include Notification #todo
+            alert(rejection.data.non_field_errors);
+          }
+          if (('name') in rejection.data) {
+            alert(rejection.data.name[0]);
+          }
+        }
+      }
+      else if (rejection.status == 500) {
+        alert("Server error occured, Contact Admin");
+        // Notification.error("Server error occured, Contact Admin");
+      }
+      else {
+        alert("Error occured, contact Admin");
+        // Notification.error("Error occured, contact Admin");
+      }
+      return $q.reject(rejection);
+    },
+  }
+});
 
 myApp.constant('_',
     window._

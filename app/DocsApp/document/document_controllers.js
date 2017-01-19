@@ -45,18 +45,6 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
         
 
 
-    }).error(function(response, status) {
-        if (status == 400) {
-            if ('name' in response) {
-                Notification.error(response['name'][0]);
-            }
-        }
-        else if (status == 500) {
-            Notification.error("Server error occured, Contact Admin");
-        }
-        else {
-            Notification.error("Error occured, contact Admin");
-        }
     })
 
     }
@@ -69,20 +57,7 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
             $scope.categoryName[obj.id]= obj.name;
         });
         //console.log($scope.categoryName);
-    }).error(function(response, status) {
-        if (status == 400) {
-            if ('name' in response) {
-                Notification.error(response['name'][0]);
-            }
-        }
-        else if (status == 500) {
-            Notification.error("Server error occured, Contact Admin");
-        }
-        else {
-            Notification.error("Error occured, contact Admin");
-        }
     })
-
 
     documentAPIservice.getDocument().success(function (response, status) {
         $scope.documentList = response;
@@ -98,21 +73,6 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
 
         });
         //console.log($scope.groupByCategory);
-        
-
-
-    }).error(function(response, status) {
-        if (status == 400) {
-            if ('name' in response) {
-                Notification.error(response['name'][0]);
-            }
-        }
-        else if (status == 500) {
-            Notification.error("Server error occured, Contact Admin");
-        }
-        else {
-            Notification.error("Error occured, contact Admin");
-        }
     })
 });
 
@@ -131,18 +91,6 @@ documentController.controller('docVersionCtrl', function($state, $stateParams, $
 
     documentAPIservice.getDocVersion(id).success(function (response, status) {
         $scope.docVersionList = response;
-    }).error(function(response, status) {
-        if (status == 400) {
-            if ('name' in response) {
-                Notification.error(response['name'][0]);
-            }
-        }
-        else if (status == 500) {
-            Notification.error("Server error occured, Contact Admin");
-        }
-        else {
-            Notification.error("Error occured, contact Admin");
-        }
     })
 });
 
@@ -256,18 +204,6 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
             // todo
             // Add version: Upload file
 
-        }).error(function (response, status) {
-            if (status == 400) {
-                if ('name' in response) {
-                    Notification.error(response['name'][0]);
-                }
-            }
-            else if (status == 500) {
-                Notification.error("Server error occured, Contact Admin");
-            }
-            else {
-                Notification.error("Error occured, Contact Admin");
-            }
         })
     }
 
@@ -300,18 +236,6 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
             var subCategoryName = response.name;
             Notification.success(subCategoryName+' added successfully');
             $scope.catMile = true;
-        }).error(function (response, status) {
-            if (status == 400) {
-                if ('name' in response) {
-                    Notification.error(response['name'][0]);
-                }
-            }
-            else if (status == 500) {
-                Notification.error("Server error occured, Contact Admin");
-            }
-            else {
-                Notification.error("Error occured, Contact Admin");
-            }
         })
     }
 
