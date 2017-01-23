@@ -177,6 +177,7 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         documentAPIservice.getDocumentDetail(docId).success(function (response, status) {
             //populate the input field with data.
             $scope.documentModel = response;
+            $scope.documentRelationModel.subcategoryAddedId = response.subcategories.id;
             if (response.subcategories !== null) {
                 $scope.documentSubCategoryModel.name = response.subcategories.name;
                 categoryAPIservice.getCategoryDetails(response.subcategories.category).success(function (response, status) {
@@ -185,13 +186,17 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
                     $scope.documentSubCategoryModel.categorySelected = response;
                 });
 
-                var relCreated = response.subcategories.relations;
-                var licId = [];
+
+                //populate edit relation fields with data
+
+                var licId = [];// separate array to store only id as checking duplicate object was difficult
                 var verId = [];
-                var relLicense = [];
+                var relLicense = [];// $scope.documentRelationModel.licenseSelected is not defined so creating separate array to store objects
                 var relVertical = [];
-                console.log(relCreated);
-                _.each(relCreated, function(id) {
+
+                $scope.relExisting = response.subcategories.relations;
+
+                _.each($scope.relExisting, function(id) {
                     documentAPIservice.getRelationDetail(id).success(function (response, status) {
                         console.log(response);
 
@@ -207,6 +212,7 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
                         
                     })
                 })
+
                 console.log(relLicense);
                 console.log(relVertical);
                 $scope.documentRelationModel.licenseSelected = relLicense;
@@ -297,10 +303,31 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     }
 
     $scope.editBuildDocumentRelation = function() {
-        console.log("edit buildDocumentRelation");
+        var promiseList = [];
+        var deleteList = [];
+        _.each($scope.documentRelationModel.licenseSelected, function(licenseObj) {
+            _.each($scope.documentRelationModel.verticalSelected, function(verticalObj) {
+                var params = {
+                    vertical_id : verticalObj.id,
+                    license_id : licenseObj.id,
+                    subcategory_id : $scope.documentRelationModel.subcategoryAddedId,
+                };
+                promiseList.push(documentAPIservice.postDocumentRelationDetail(params));
+            })
+        })
 
-        //in success() add following
-        $scope.relMile = true;
+        _.each($scope.relExisting, function(id) {
+            deleteList.push(documentAPIservice.deleteRelation(id));
+        })
+
+        $q.all(deleteList).then(function(values) {
+            Notification.error('deleted old relations');
+        });
+
+        $q.all(promiseList).then(function(values) {
+            // have to make request failure more concreate #todo
+            Notification.success(' New Relations added !');
+        });
     }
 
 });
