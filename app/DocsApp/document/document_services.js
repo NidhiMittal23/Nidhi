@@ -45,6 +45,13 @@ documentService.factory('documentAPIservice', function($http, Notification) {
         });
     }
 
+    documentAPI.getRelationDetail = function(id) {
+        return $http({
+            method: 'GET',
+            url: documentUrl.relationEndPoint + id + '/'
+        });
+    }
+
     // documentAPI.putDocumentDetail = function(params) {
     //     var id = params.id;
     //     return $http({
@@ -108,6 +115,13 @@ documentService.factory('documentAPIservice', function($http, Notification) {
         return $http({
             method: 'DELETE',
             url: documentUrl.versionEndPoint + id + '/'
+        });
+    }
+
+    documentAPI.deleteRelation = function(id) {
+        return $http({
+            method: 'DELETE',
+            url: documentUrl.relationEndPoint + id + '/'
         });
     }
 

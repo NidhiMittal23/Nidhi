@@ -184,6 +184,33 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
                     //selected Category object
                     $scope.documentSubCategoryModel.categorySelected = response;
                 });
+
+                var relCreated = response.subcategories.relations;
+                var licId = [];
+                var verId = [];
+                var relLicense = [];
+                var relVertical = [];
+                console.log(relCreated);
+                _.each(relCreated, function(id) {
+                    documentAPIservice.getRelationDetail(id).success(function (response, status) {
+                        console.log(response);
+
+                        if(licId.indexOf(response.license.id) === -1) {
+                            licId.push(response.license.id);
+                            relLicense.push(response.license);
+                        }
+
+                        if(verId.indexOf(response.vertical.id) === -1) {
+                            verId.push(response.vertical.id);
+                            relVertical.push(response.vertical);
+                        }
+                        
+                    })
+                })
+                console.log(relLicense);
+                console.log(relVertical);
+                $scope.documentRelationModel.licenseSelected = relLicense;
+                $scope.documentRelationModel.verticalSelected = relVertical;
             }
         })
 

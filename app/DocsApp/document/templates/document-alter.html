@@ -116,6 +116,7 @@
             </select>
           </div>
           <a ui-sref="license" tooltips tooltip-template="Manage License"><span class="glyphicon glyphicon-cog" /></a>
+          <input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput">
         </div>
 
 
@@ -228,7 +229,10 @@
                 <option ng-repeat="option in documentRelationModel.licenseOption" ng-model="documentRelationModel.licenseSelected" value="{{option.id}}">{{option.name}}</option>
               </select>
             </div>
+            <div class="col-sm-4">
             <a ui-sref="license" tooltips tooltip-template="Manage License"><span class="glyphicon glyphicon-cog" /></a>
+              <tags-input name="tags" placeholder="add license" ng-model="documentRelationModel.licenseSelected" display-property="name"></tags-input>
+            </div>
           </div>
 
 
@@ -240,7 +244,10 @@
                 <option ng-repeat="option in documentRelationModel.verticalOption" ng-model="documentRelationModel.verticalSelected" value="{{option.id}}">{{option.name}}</option>
               </select>
             </div>
-            <a ui-sref="vertical" tooltips tooltip-template="Manage Vertical"><span class="glyphicon glyphicon-cog"></span></a>
+            <div class="col-sm-4">
+              <a ui-sref="vertical" tooltips tooltip-template="Manage Vertical"><span class="glyphicon glyphicon-cog"></span></a>
+              <tags-input name="tags" placeholder="add vertical" ng-model="documentRelationModel.verticalSelected" display-property="name"></tags-input>
+            </div>
           </div>
 
 

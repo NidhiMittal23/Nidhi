@@ -13,6 +13,7 @@ var myApp = angular.module('myApp', [
   'document',
   'authService',
   '720kb.tooltips',
+  'ngTagsInput',
 ])
 
 myApp.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider) {
