@@ -230,7 +230,9 @@
             </div>
             <div class="col-sm-4">
             <a ui-sref="license" tooltips tooltip-template="Manage License"><span class="glyphicon glyphicon-cog" /></a>
-              <tags-input name="tags" placeholder="add license" ng-model="documentRelationModel.licenseSelected" display-property="name"></tags-input>
+              <tags-input name="tags" placeholder="selected licences" ng-model="documentRelationModel.licenseSelected" display-property="name" add-from-autocomplete-only="true">
+                <auto-complete min-length="1" source="licenseQuery()"></auto-complete>
+              </tags-input>
             </div>
           </div>
 
@@ -245,7 +247,9 @@
             </div>
             <div class="col-sm-4">
               <a ui-sref="vertical" tooltips tooltip-template="Manage Vertical"><span class="glyphicon glyphicon-cog"></span></a>
-              <tags-input name="tags" placeholder="add vertical" ng-model="documentRelationModel.verticalSelected" display-property="name"></tags-input>
+              <tags-input name="tags" placeholder="selected verticals" ng-model="documentRelationModel.verticalSelected" display-property="name" add-from-autocomplete-only="true">
+                <auto-complete min-length="1" source="verticalQuery()"></auto-complete>
+              </tags-input>
             </div>
           </div>
 

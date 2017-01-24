@@ -305,6 +305,11 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     $scope.editBuildDocumentRelation = function() {
         var promiseList = [];
         var deleteList = [];
+
+        $q.all(deleteList).then(function(values) {
+            Notification.error('deleted old relations');
+        });
+
         _.each($scope.documentRelationModel.licenseSelected, function(licenseObj) {
             _.each($scope.documentRelationModel.verticalSelected, function(verticalObj) {
                 var params = {
@@ -320,14 +325,20 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
             deleteList.push(documentAPIservice.deleteRelation(id));
         })
 
-        $q.all(deleteList).then(function(values) {
-            Notification.error('deleted old relations');
-        });
+        
 
         $q.all(promiseList).then(function(values) {
             // have to make request failure more concreate #todo
             Notification.success(' New Relations added !');
         });
+    }
+
+    $scope.verticalQuery = function() {
+        return $scope.documentRelationModel.verticalOption;
+    }
+
+    $scope.licenseQuery = function() {
+        return $scope.documentRelationModel.licenseOption;
     }
 
 });
