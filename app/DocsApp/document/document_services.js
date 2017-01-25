@@ -125,6 +125,21 @@ documentService.factory('documentAPIservice', function($http, Notification) {
         });
     }
 
+    documentAPI.putDocumentDetail = function(params) {
+        return $http({
+           method: 'PUT',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: documentUrl.endpoint + params.id + '/',
+            transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+            data: params
+        });
+    }
+
     return documentAPI;
 
 });

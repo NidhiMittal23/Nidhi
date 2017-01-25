@@ -61,5 +61,20 @@ categoryService.factory('categoryAPIservice', function($http) {
         });
     }
 
+    categoryAPI.putSubCategoryDetail = function(params, id) {
+        return $http({
+            method: 'PUT',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: categoryUrl.subcategoryEndpoint + id + '/',
+            transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+            data: params
+        });
+    }
+
     return categoryAPI;
 });

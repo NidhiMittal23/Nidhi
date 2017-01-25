@@ -121,6 +121,8 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     $scope.documentSubCategoryModel = {};
     $scope.documentVersionModel = {};
 
+    $scope.buttonHide = false ;
+
     $scope.initMile = function() {
         $scope.docMile = false;
         $scope.verMile = false;
@@ -252,17 +254,29 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     };
 
     $scope.editExistDocument = function() {
-        console.log("add edit document function here");
-
-        //in .success() add following
-        $scope.docMile = true;
+        var params = $scope.documentModel;
+        documentAPIservice.putDocumentDetail(params).success(function (response, status) {
+            Notification.success(params.name + ' updated successfully');
+        }).error(function (response, status) {
+            if (status == 400) {
+                if ('name' in response) {
+                    Notification.error(response['name'][0]);
+                }
+            }
+            else if (status == 500) {
+                Notification.error("Server error occured, Contact Admin");
+            }
+            else {
+                Notification.error("Error occured, Contact Admin");
+            }
+        })
 
     }
 
     // Associate Subcategory to newly Created Document
     $scope.addDocumentSubCategory = function() {
         var params = $scope.documentSubCategoryModel;
-        params.document = $scope.documentModel.newDocumentId;
+        params.document = $scope.documentModel.id;
         params.category = $scope.documentSubCategoryModel.categorySelected.id;
         categoryAPIservice.postSubCategoryDetail(params).success(function (response, status) {
             $scope.documentRelationModel.subcategoryAddedId = response.id;
@@ -273,12 +287,25 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     }
 
     $scope.editDocumentSubCategory = function() {
-        // console.log($scope.documentSubCategoryModel.categorySelected);
-        console.log("edit DocumentSubCategory");
-
-        //in success() add following
-        $scope.catMile = true;
-
+        var params = $scope.documentSubCategoryModel;
+        var subCatId = $scope.documentRelationModel.subcategoryAddedId;
+        params.document = $scope.documentModel.id;
+        params.category = $scope.documentSubCategoryModel.categorySelected.id;
+        categoryAPIservice.putSubCategoryDetail(params, subCatId).success(function (response, status) {
+            Notification.success(params.name + ' updated successfully');
+        }).error(function (response, status) {
+            if (status == 400) {
+                if ('name' in response) {
+                    Notification.error(response['name'][0]);
+                }
+            }
+            else if (status == 500) {
+                Notification.error("Server error occured, Contact Admin");
+            }
+            else {
+                Notification.error("Error occured, Contact Admin");
+            }
+        })
     }
 
 
@@ -306,33 +333,45 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         var promiseList = [];
         var deleteList = [];
 
-        $q.all(deleteList).then(function(values) {
-            Notification.error('deleted old relations');
-        });
+        
 
-        _.each($scope.documentRelationModel.licenseSelected, function(licenseObj) {
-            _.each($scope.documentRelationModel.verticalSelected, function(verticalObj) {
-                var params = {
-                    vertical_id : verticalObj.id,
-                    license_id : licenseObj.id,
-                    subcategory_id : $scope.documentRelationModel.subcategoryAddedId,
-                };
-                promiseList.push(documentAPIservice.postDocumentRelationDetail(params));
-            })
-        })
-
+        
         _.each($scope.relExisting, function(id) {
             deleteList.push(documentAPIservice.deleteRelation(id));
         })
 
+        console.log(deleteList);
+
+        $q.all(deleteList).then(function(values) {
+            Notification.error('deleted old relations');
+            deleteList.length = 0;
+            console.log(deleteList);
+
+
+            _.each($scope.documentRelationModel.licenseSelected, function(licenseObj) {
+                _.each($scope.documentRelationModel.verticalSelected, function(verticalObj) {
+                    var params = {
+                        vertical_id : verticalObj.id,
+                        license_id : licenseObj.id,
+                        subcategory_id : $scope.documentRelationModel.subcategoryAddedId,
+                    };
+                    documentAPIservice.postDocumentRelationDetail(params).success(function(response){
+                        console.log(response);
+                    });
+                })
+            })
+
+        }).then(function(values){
+            Notification.success('new relations created');
+            $scope.buttonHide = true;
+        });
+
+        
         
 
-        $q.all(promiseList).then(function(values) {
-            // have to make request failure more concreate #todo
-            Notification.success(' New Relations added !');
-        });
+        
     }
-
+    //code for autofill tags, present in edit relation
     $scope.verticalQuery = function() {
         return $scope.documentRelationModel.verticalOption;
     }
