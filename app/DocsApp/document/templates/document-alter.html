@@ -205,8 +205,11 @@
 
 
         <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
+          <div ng-if="noSubCategory==false" class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-primary" ng-click="editDocumentSubCategory()">Edit SubCategory</button>
+          </div>
+          <div ng-if="noSubCategory==true" class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary" ng-click="addDocumentSubCategory()">Add SubCategory</button>
           </div>
         </div>
       </form>
@@ -254,7 +257,7 @@
           </div>
 
 
-          <div ng-if="buttonHide == false" class="form-group">
+          <div ng-if="buttonHide == false && noSubCategory==false" class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-primary" ng-click="editBuildDocumentRelation()">Edit Relation</button>
             </div>

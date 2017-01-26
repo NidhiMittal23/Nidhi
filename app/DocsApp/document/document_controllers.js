@@ -122,6 +122,7 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     $scope.documentVersionModel = {};
 
     $scope.buttonHide = false ;
+    $scope.noSubCategory = false;
 
     $scope.initMile = function() {
         $scope.docMile = false;
@@ -179,8 +180,10 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         documentAPIservice.getDocumentDetail(docId).success(function (response, status) {
             //populate the input field with data.
             $scope.documentModel = response;
-            $scope.documentRelationModel.subcategoryAddedId = response.subcategories.id;
+            
             if (response.subcategories !== null) {
+
+                $scope.documentRelationModel.subcategoryAddedId = response.subcategories.id;
                 $scope.documentSubCategoryModel.name = response.subcategories.name;
                 categoryAPIservice.getCategoryDetails(response.subcategories.category).success(function (response, status) {
 
@@ -219,6 +222,10 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
                 //console.log(relVertical);
                 $scope.documentRelationModel.licenseSelected = relLicense;
                 $scope.documentRelationModel.verticalSelected = relVertical;
+            }
+            else{
+                $scope.noSubCategory = true;
+                $scope.documentModel.newDocumentId = docId;
             }
         })
 
@@ -283,6 +290,7 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
             var subCategoryName = response.name;
             Notification.success(subCategoryName+' added successfully');
             $scope.catMile = true;
+            $scope.noSubCategory = false ;
         })
     }
 
