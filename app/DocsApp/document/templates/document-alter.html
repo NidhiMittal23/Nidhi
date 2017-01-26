@@ -257,7 +257,14 @@
           <div ng-if="buttonHide == false" class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-primary" ng-click="editBuildDocumentRelation()">Edit Relation</button>
+            </div>
           </div>
+          <div ng-if="buttonHide == true" class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div>Relations Updated!<span  class="glyphicon glyphicon-ok"></span> *to re-Edit relations, visit settings page again.</div>
+            </div>
+          </div>
+            
       
         </form>
       </div>

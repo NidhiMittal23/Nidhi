@@ -200,7 +200,7 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
 
                 _.each($scope.relExisting, function(id) {
                     documentAPIservice.getRelationDetail(id).success(function (response, status) {
-                        console.log(response);
+                        //console.log(response);
 
                         if(licId.indexOf(response.license.id) === -1) {
                             licId.push(response.license.id);
@@ -215,8 +215,8 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
                     })
                 })
 
-                console.log(relLicense);
-                console.log(relVertical);
+                //console.log(relLicense);
+                //console.log(relVertical);
                 $scope.documentRelationModel.licenseSelected = relLicense;
                 $scope.documentRelationModel.verticalSelected = relVertical;
             }
@@ -276,7 +276,7 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     // Associate Subcategory to newly Created Document
     $scope.addDocumentSubCategory = function() {
         var params = $scope.documentSubCategoryModel;
-        params.document = $scope.documentModel.id;
+        params.document = $scope.documentModel.newDocumentId;
         params.category = $scope.documentSubCategoryModel.categorySelected.id;
         categoryAPIservice.postSubCategoryDetail(params).success(function (response, status) {
             $scope.documentRelationModel.subcategoryAddedId = response.id;
@@ -340,12 +340,12 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
             deleteList.push(documentAPIservice.deleteRelation(id));
         })
 
-        console.log(deleteList);
+        //console.log(deleteList);
 
         $q.all(deleteList).then(function(values) {
             Notification.error('deleted old relations');
             deleteList.length = 0;
-            console.log(deleteList);
+            //console.log(deleteList);
 
 
             _.each($scope.documentRelationModel.licenseSelected, function(licenseObj) {
@@ -356,7 +356,7 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
                         subcategory_id : $scope.documentRelationModel.subcategoryAddedId,
                     };
                     documentAPIservice.postDocumentRelationDetail(params).success(function(response){
-                        console.log(response);
+                        //console.log(response);
                     });
                 })
             })
