@@ -7,7 +7,7 @@ documentService.factory('documentAPIservice', function($http, Notification) {
     var documentUrl = {
         'endpoint': 'http://localhost:9000/document/',
         'relationEndPoint': 'http://localhost:9000/relation/',
-        'versionEndPoint': 'http://localhost:9000/version/'
+        'versionEndPoint': 'http://localhost:9000/version/',
     }
 
     documentAPI.getDocument =function() {
@@ -118,6 +118,13 @@ documentService.factory('documentAPIservice', function($http, Notification) {
         });
     }
 
+    documentAPI.resetVersion = function(id) {
+        return $http({
+            method: 'POST',
+            url: documentUrl.versionEndPoint + id + '/version_reset/'
+        });
+    }
+
     documentAPI.deleteRelation = function(id) {
         return $http({
             method: 'DELETE',
@@ -138,6 +145,13 @@ documentService.factory('documentAPIservice', function($http, Notification) {
             },
             data: params
         });
+    }
+
+    documentAPI.getFileSource = function(url) {
+        return $http({
+            method: 'GET',
+            url: url
+        })
     }
 
     return documentAPI;

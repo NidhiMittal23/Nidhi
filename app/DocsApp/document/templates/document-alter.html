@@ -247,9 +247,9 @@
               ng-options="option.name for option in documentRelationModel.verticalOption track by option.id" class="form-control custom-form-control" required>
                 <option ng-repeat="option in documentRelationModel.verticalOption" ng-model="documentRelationModel.verticalSelected" value="{{option.id}}">{{option.name}}</option>
               </select>
+              <a align='right' ui-sref="vertical" tooltips tooltip-template="Manage Vertical"><span class="glyphicon glyphicon-cog"></span></a>
             </div>
             <div class="col-sm-4">
-              <a ui-sref="vertical" tooltips tooltip-template="Manage Vertical"><span class="glyphicon glyphicon-cog"></span></a>
               <tags-input name="tags" placeholder="selected verticals" ng-model="documentRelationModel.verticalSelected" display-property="name" add-from-autocomplete-only="true">
                 <auto-complete min-length="1" source="verticalQuery()"></auto-complete>
               </tags-input>

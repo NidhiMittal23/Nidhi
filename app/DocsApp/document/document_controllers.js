@@ -1,7 +1,7 @@
 var documentController = angular.module('document.controllers', ['ui-notification']);
 
 documentController.controller('documentCtrl', function($state, $window ,$scope, documentAPIservice,
-    _, categoryAPIservice, Notification) {
+    _, categoryAPIservice, Notification, $http) {
 
     $scope.addNewDocument = function() {
         $state.go('addDocument', {});
@@ -20,6 +20,25 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
             // add notification message #todo
             // hint add callback
             $scope.reloadRoute();
+        })
+    }
+
+    $scope.versionReset = function(id) {
+        documentAPIservice.resetVersion(id).success(function(response) {
+            // add notification message #todo
+            // hint add callback
+            $scope.reloadRoute();
+        })
+    }
+
+
+    $scope.versionFileView = function(docfileUrl) {
+        // Its a hackey way to view file as file recieved as embedded textarea (used by tinymce)
+        // Just remove textarea with div and it works to view the page without any editor
+        documentAPIservice.getFileSource(docfileUrl).success(function(response) {
+            response = response.replace("textarea", "div");
+            var wnd = window.open("about:blank", "", "_blank");
+            wnd.document.write(response);
         })
     }
 
@@ -106,7 +125,6 @@ documentController.controller('docVersionAlterCtrl', function($scope, $state, $s
 
     // have to move this login to service
     $scope.addNewDocVersion = function(){
-
         var uploadUrl = 'http://localhost:9000/version/';
         documentAPIservice.postDocVersionDetail(uploadUrl, $scope.docVersionModel)
     };
@@ -133,21 +151,6 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     };
 
     $scope.init = function() {
-
-        // populate option for dropDown
-        // $scope.documentSubCategoryModel.selectedCategoryId = function(categoryObj) {
-        //     $scope.documentSubCategoryModel.categorySelected = categoryObj;
-        // }
-
-        // $scope.documentRelationModel.selectedVerticalId = function(verticalObj) {
-        //     console.log(verticalObj);
-        //     $scope.documentRelationModel.verticalSelected = verticalObj;
-        // }
-
-        // $scope.documentRelationModel.selectedLicenseId = function(licenseObj) {
-        //     console.log(licenseObj);
-        //     $scope.documentRelationModel.licenseSelected = licenseObj;
-        // }
 
         var categories = categoryAPIservice.getcategory();
         var verticals = verticalAPIservice.getVertical();
@@ -254,7 +257,6 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         var params = $scope.documentVersionModel;
         var docid = $scope.documentModel.newDocumentId;
         params.document = docid;
-
         var uploadUrl = 'http://localhost:9000/version/';
         documentAPIservice.postDocVersionDetail(uploadUrl, $scope.documentVersionModel);
         $scope.verMile = true;
