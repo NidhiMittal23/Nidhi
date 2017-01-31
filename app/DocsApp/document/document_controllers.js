@@ -49,15 +49,36 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
 
     }
 
+    $scope.subcategoryModel = null;
+    $scope.documentModel = null;
+    $scope.subCat = false;
+
     categoryAPIservice.getcategory().success(function(response,status) {
         $scope.categoryName = [];
         $scope.categoryName["null"] = "uncategorized";
+        $scope.categoryModel = response.results;
 
         _.each(response.results,function(obj) {
             $scope.categoryName[obj.id]= obj.name;
         });
-        //console.log($scope.categoryName);
+
+
+        console.log(response.results[1]);
     })
+
+    $scope.setModel = function(id) {
+        console.log(id);
+        $scope.subcategoryModel = $scope.categoryModel[id-1].subcategories;
+        $scope.subCat = true;
+    };
+
+    $scope.getCategoryDocument = function(id) {
+        console.log("docId= "+id);
+        documentAPIservice.getDocumentDetails(id).success(function(response, status) {
+            $scope.documentModel = response;
+        });
+
+    }
 
     documentAPIservice.getDocument().success(function (response, status) {
         $scope.documentList = response;
@@ -74,6 +95,45 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
         });
         //console.log($scope.groupByCategory);
     })
+
+    $scope.manactive = false;
+    $scope.sopactive = false;
+    $scope.chkactive = false;
+
+    $scope.toggleman = function(){
+        if($scope.manactive==true){
+            $scope.manactive=false;
+        }
+        else{
+            $scope.manactive=true;
+        }
+        $scope.sopactive=false;
+        $scope.chkactive=false;
+    }
+    $scope.togglesop = function(){
+        if($scope.sopactive==true){
+            $scope.sopactive=false;
+        }
+        else{
+            $scope.sopactive=true;
+        }
+        $scope.manactive=false;
+        $scope.chkactive=false;
+    }
+    $scope.togglechk = function(){
+        if($scope.chkactive==true){
+            $scope.chkactive=false;
+        }
+        else{
+            $scope.chkactive=true;
+        }
+        $scope.manactive=false;
+        $scope.sopactive=false;
+    }
+
+
+
+
 });
 
 
