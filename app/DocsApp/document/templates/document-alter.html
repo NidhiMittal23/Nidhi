@@ -100,7 +100,7 @@
 
   <li>
     <i ng-if="relMile == false" class="milestone-default glyphicon glyphicon-ok"></i>
-    <i ng-if="relMile == true" class="milestone-success glyphicon glyphicon-ok"></i>
+    <i ng-if="relMile == true" class="milestone-primary glyphicon glyphicon-ok"></i>
 
     <div class="panel panel-default" ng-init="init()">
 
@@ -205,8 +205,11 @@
 
 
         <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
+          <div ng-if="noSubCategory==false" class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-primary" ng-click="editDocumentSubCategory()">Edit SubCategory</button>
+          </div>
+          <div ng-if="noSubCategory==true" class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary" ng-click="addDocumentSubCategory()">Add SubCategory</button>
           </div>
         </div>
       </form>
@@ -228,7 +231,12 @@
                 <option ng-repeat="option in documentRelationModel.licenseOption" ng-model="documentRelationModel.licenseSelected" value="{{option.id}}">{{option.name}}</option>
               </select>
             </div>
+            <div class="col-sm-4">
             <a ui-sref="license" tooltips tooltip-template="Manage License"><span class="glyphicon glyphicon-cog" /></a>
+              <tags-input name="tags" placeholder="selected licences" ng-model="documentRelationModel.licenseSelected" display-property="name" add-from-autocomplete-only="true">
+                <auto-complete min-length="1" source="licenseQuery()"></auto-complete>
+              </tags-input>
+            </div>
           </div>
 
 
@@ -239,15 +247,27 @@
               ng-options="option.name for option in documentRelationModel.verticalOption track by option.id" class="form-control custom-form-control" required>
                 <option ng-repeat="option in documentRelationModel.verticalOption" ng-model="documentRelationModel.verticalSelected" value="{{option.id}}">{{option.name}}</option>
               </select>
+              <a align='right' ui-sref="vertical" tooltips tooltip-template="Manage Vertical"><span class="glyphicon glyphicon-cog"></span></a>
             </div>
-            <a ui-sref="vertical" tooltips tooltip-template="Manage Vertical"><span class="glyphicon glyphicon-cog"></span></a>
+            <div class="col-sm-4">
+              <tags-input name="tags" placeholder="selected verticals" ng-model="documentRelationModel.verticalSelected" display-property="name" add-from-autocomplete-only="true">
+                <auto-complete min-length="1" source="verticalQuery()"></auto-complete>
+              </tags-input>
+            </div>
           </div>
 
 
-          <div class="form-group">
+          <div ng-if="buttonHide == false && noSubCategory==false" class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-primary" ng-click="editBuildDocumentRelation()">Edit Relation</button>
+            </div>
           </div>
+          <div ng-if="buttonHide == true" class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div>Relations Updated!<span  class="glyphicon glyphicon-ok"></span> *to re-Edit relations, visit settings page again.</div>
+            </div>
+          </div>
+            
       
         </form>
       </div>

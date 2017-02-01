@@ -2,15 +2,15 @@ var documentService = angular.module('document.services', []);
 
 documentService.factory('documentAPIservice', function($http, Notification) {
 
-	var documentAPI = {};
+    var documentAPI = {};
 
-	var documentUrl = {
-		'endpoint': 'http://localhost:9000/document/',
+    var documentUrl = {
+        'endpoint': 'http://localhost:9000/document/',
         'relationEndPoint': 'http://localhost:9000/relation/',
-        'versionEndPoint': 'http://localhost:9000/version/'
-	}
+        'versionEndPoint': 'http://localhost:9000/version/',
+    }
 
-	documentAPI.getDocument =function() {
+    documentAPI.getDocument =function() {
         return $http({
             method: 'GET',
             url: documentUrl.endpoint
@@ -42,6 +42,13 @@ documentService.factory('documentAPIservice', function($http, Notification) {
         return $http({
             method: 'GET',
             url: documentUrl.endpoint + id + '/'
+        });
+    }
+
+    documentAPI.getRelationDetail = function(id) {
+        return $http({
+            method: 'GET',
+            url: documentUrl.relationEndPoint + id + '/'
         });
     }
 
@@ -109,6 +116,42 @@ documentService.factory('documentAPIservice', function($http, Notification) {
             method: 'DELETE',
             url: documentUrl.versionEndPoint + id + '/'
         });
+    }
+
+    documentAPI.resetVersion = function(id) {
+        return $http({
+            method: 'POST',
+            url: documentUrl.versionEndPoint + id + '/version_reset/'
+        });
+    }
+
+    documentAPI.deleteRelation = function(id) {
+        return $http({
+            method: 'DELETE',
+            url: documentUrl.relationEndPoint + id + '/'
+        });
+    }
+
+    documentAPI.putDocumentDetail = function(params) {
+        return $http({
+           method: 'PUT',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: documentUrl.endpoint + params.id + '/',
+            transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+            data: params
+        });
+    }
+
+    documentAPI.getFileSource = function(url) {
+        return $http({
+            method: 'GET',
+            url: url
+        })
     }
 
     return documentAPI;
