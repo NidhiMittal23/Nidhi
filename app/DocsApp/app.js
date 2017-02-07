@@ -15,7 +15,8 @@ var myApp = angular.module('myApp', [
   '720kb.tooltips',
   'ngTagsInput',
   'ngMaterial',
-  'ngMessages'
+  'ngMessages',
+  'md.data.table'
 ])
 
 myApp.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider) {

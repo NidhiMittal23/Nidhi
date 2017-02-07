@@ -10,6 +10,8 @@ licenseController.controller('licenseCtrl', function($state, $scope, licenseAPIs
         $state.go('editLicense', {id: id, name: name});
     }
 
+    $scope.selected = [];
+
     licenseAPIservice.getlicense().success(function (response, status) {
         $scope.licenseList = response;
     }).error( function(response, status) {
