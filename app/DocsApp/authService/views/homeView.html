@@ -53,6 +53,9 @@
                 <li ng-repeat="option in home.navList" class="parent-list-item version-picker">
                     <a class="md-button md-ink-ripple" ui-sref="{{option.val}}">{{option.name}}</a>
                     
+            <ul class="docs-menu" ng-repeat="option in navList" >
+                <li>
+                    <a class="md-button md-ink-ripple active" ui-sref="{{option.val}}">{{option.name}}</a>
                 </li>
             </ul>
         </md-content>
