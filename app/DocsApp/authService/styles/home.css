@@ -1,7 +1,7 @@
 body[ng-cloak] {
   display:none;
 }
-body {
+/*body {
     background-color: #FEEBC8;
 }
 div[flex="30"] {
@@ -20,10 +20,10 @@ section[flex="20"] {
 section[flex=""] {
  background-color: rgba(0, 128, 0, 0.35);
 }
-
+*/
 
 /* Important to set height for column layout */
-.boxWithHeight {
+/*.boxWithHeight {
   box-sizing: border-box;
   height: 100%;
 }
@@ -35,9 +35,4 @@ section[flex=""] {
 
 section {
   background-color: #dedede;
-}
-
-/*
-Copyright 2016 Google Inc. All Rights Reserved. 
-Use of this source code is governed by an MIT-style license that can be in foundin the LICENSE file at http://material.angularjs.org/license.
-*/
+}*/

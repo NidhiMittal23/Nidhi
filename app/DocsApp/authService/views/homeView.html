@@ -13,32 +13,29 @@
 <div class="container" ui-view></div>
  -->
 
-<div ng-cloak>
-	<md-toolbar class="md-warn">
-     	<div class="md-toolbar-tools">
-        	<h2 class="md-flex">HTML 5</h2>
-     	</div>
-  	</md-toolbar>
-  	<md-content flex layout-padding>
-     <p>HTML5 is the next major revision of the HTML standard superseding HTML 4.01, XHTML 1.0, and XHTML 1.1. HTML5 is a standard for structuring and presenting content on the World Wide Web.</p>
-     <p>HTML5 is a cooperation between the World Wide Web Consortium (W3C) and the Web Hypertext Application Technology Working Group (WHATWG).</p>
-     <p>The new standard incorporates features like video playback and drag-and-drop that have been previously dependent on third-party browser plug-ins such as Adobe Flash, Microsoft Silverlight, and Google Gears.</p>
-  	</md-content>
+<div ng-cloak layout="row">
+    <md-sidebar flex=20 style="background-color: rgb(30, 109, 67)" md-component-id="left" class="md-whiteframe-z2 md-sidenav-left">
+        <header class="nav-header">
+            <!-- <a ng-href="/" class="docs-logo" href="https://material.angularjs.org/"> on image click redirect some where-->
+            <a>
+                <img src="DocsApp/authService/styles/angular-logo.svg" alt="" style="height: 150px; width: auto; display: block">
+                <h1 class="docs-logotype md-heading ng-isolate-scope">Food Pro Docs</h1>
+            </a>
+        </header>
+        <md-content flex="" role="navigation" class="_md flex">
+            <ul class="docs-menu" ng-repeat="option in navList" >
+                <li><a ui-sref="{{option.val}}">{{option.name}}</a></li>
+            </ul>
+        </md-content>
+    </md-sidebar>
+    <div flex layout="column" >
+        <md-toolbar class="md-whiteframe-z2" style="background-color: white">
+        Rest Toolbar
+        </md-toolbar>
+        <md-content style="background-color: white">
+            <div ui-view></div>
+        </md-content>
+    </div>
 </div>
 
-<!-- <body layout="row" class="icondemoFontIconsWithLigatures" ng-cloak>
-
-  <div flex="30" layout="column" class="boxWithHeight" layout-padding>
-    flex="30"
-    <section flex="40">flex="40"</section>
-    <section flex>flex</section>
-  </div>
-  <div flex layout="column" class="boxWithHeight" layout-padding>
-    flex
-    <section flex="70">flex="70"</section>
-    <section flex="20">flex="20"</section>
-    <section flex >flex </section>
-  </div>
-
-</body> -->
 
