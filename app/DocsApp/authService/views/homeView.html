@@ -1,30 +1,19 @@
-<!-- <nav class="navbar navbar-inverse" role="navigation">
-    <div class="navbar-header">
-        <a class="navbar-brand" ui-sref="#">Food Pro Docs</a>
-    </div>
-    <ul class="nav navbar-nav" ng-repeat="option in navList" >
-        <li><a ui-sref="{{option.val}}">{{option.name}}</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <button class="btn btn-danger navbar-btn" ng-click="home.logout()">Logout</button>
-    </ul>
-</nav>
-
-<div class="container" ui-view></div>
- -->
-
-<div ng-cloak layout="row">
-    <md-sidebar flex=20 style="background-color: rgb(30, 109, 67)" md-component-id="left" class="md-whiteframe-z2 md-sidenav-left">
+<div class="ng-cloak docs-body" layout="row">
+    <!-- with md-closed.. sidebar does not shows up --> 
+    <md-sidebar class="site-sidenav md-sidenav-left md-whiteframe-z2 hide-print ng-isolate-scope _md md-locked-open" hide-print="" md-component-id="left" md-is-locked-open="$mdMedia(&#39;gt-sm&#39;)" tabindex="-1">
         <header class="nav-header">
             <!-- <a ng-href="/" class="docs-logo" href="https://material.angularjs.org/"> on image click redirect some where-->
-            <a>
-                <img src="DocsApp/authService/styles/angular-logo.svg" alt="" style="height: 150px; width: auto; display: block">
+            <a class="docs-logo">
+                <img src="DocsApp/authService/styles/angular-logo.svg" alt="">
                 <h1 class="docs-logotype md-heading ng-isolate-scope">Food Pro Docs</h1>
             </a>
         </header>
         <md-content flex="" role="navigation" class="_md flex">
-            <ul class="docs-menu" ng-repeat="option in navList" >
-                <li><a ui-sref="{{option.val}}">{{option.name}}</a></li>
+            <ul class="docs-menu">
+                <li ng-repeat="option in navList" class="parent-list-item version-picker">
+                    <a class="md-button md-ink-ripple" ui-sref="{{option.val}}">{{option.name}}</a>
+                    
+                </li>
             </ul>
         </md-content>
     </md-sidebar>
