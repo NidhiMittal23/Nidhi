@@ -16,7 +16,8 @@ var myApp = angular.module('myApp', [
   'ngTagsInput',
   'ngMaterial',
   'ngMessages',
-  'md.data.table'
+  'md.data.table',
+  'ngMaterialSidemenu'
 ])
 
 myApp.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider) {

@@ -1,10 +1,13 @@
 var homeController = angular.module('authService.home', ['ui-notification', 'satellizer']);
 
-homeController.controller('HomeController', function($http, $auth, $scope, $state, authAPIservice) {
+homeController.controller('HomeController', function($http, $auth, $scope, $state, authAPIservice, _,
+                                                     categoryAPIservice) {
     var vm = this;
 
     vm.users;
     vm.error;
+    vm.categories;
+    vm.categoryGroup;
 
     vm.logout = function() {
 
@@ -12,7 +15,7 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
         $state.transitionTo("auth");
     }
 
-    $scope.navList = [
+    vm.navList = [
     	{ name : 'License', val : 'license', type: 'link'},
     	{ name : 'Category', val : 'category', type: 'link'},
     	{ name : 'Industry', val : 'industry', type: 'link'},
@@ -20,6 +23,28 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
     	{ name : 'Company Management', val : 'company', type: 'toggle'},
     	{ name : 'Document Management', val : 'document', type: 'toggle'}
     ];
+
+    categoryAPIservice.getcategory()
+    .then(function(response){
+        vm.categories = response.data.results;
+    })
+
+    user_sites = localStorage.getItem('sites');
+    if (user_sites != "undefined" || user_sites != "null") {
+        // todo check for user in multiple site
+        authAPIservice.getSiteDocuments(user_sites)
+        .then(function(response){
+            results = response.data.results;
+            vm.categoryGroup = _.groupBy(results, function(doc){
+                return doc.subcategory.category;
+            });
+            console.log(vm.categoryGroup);
+            // console.log(vm.categories);
+
+        })
+        
+        
+    }
 });
 
 // todo navigation with respect to user

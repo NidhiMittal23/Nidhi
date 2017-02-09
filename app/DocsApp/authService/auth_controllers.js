@@ -1,6 +1,6 @@
 var authController = angular.module('authService.auth', ['ui-notification', 'satellizer']);
 
-authController.controller('AuthController', function($auth, $state) {
+authController.controller('AuthController', function($auth, $state, authAPIservice) {
     var vm = this;
     vm.authStatus = {}
 
@@ -33,6 +33,14 @@ authController.controller('AuthController', function($auth, $state) {
         });
     }
 
+    vm.getUserSites = function() {
+        authAPIservice.getUserSites()
+        .then(function(response){
+            var sites = response.data.sites;
+            localStorage.setItem('sites', sites);
+        })
+    }
+
     vm.login = function() {
         var credentials = {
             email: vm.username,
@@ -42,7 +50,14 @@ authController.controller('AuthController', function($auth, $state) {
         // Use Satellizer's $auth service to login
         $auth.login(credentials)
         .then(function(data) {
-
+            if (localStorage) {
+                vm.getUserSites()
+            }
+            else{
+                alert("sorry.. No Web Storage Supported");
+                $state.go('auth', {});
+            }
+            
             // var authToken = auth_token
             vm.authStatus.alert = false;
             // If login is successful, redirect to the users state

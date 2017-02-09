@@ -9,12 +9,35 @@
             </a>
         </header>
         <md-content flex="" role="navigation" class="_md flex">
-            <ul class="docs-menu">
+            <md-sidemenu>
+              <md-sidemenu-group>
+                <md-subheader class="md-no-sticky">Document Management</md-subheader>
+                <!-- ng-repeat all the CATEGORY w.r.t user site md-heading="Name of Category"-->
+                <!-- sidemenu-button will be subcatgory inside that category  -->
+                <!-- vm.categoryGroup -->
+                <md-sidemenu-button ui-sref="#">{{categoryId}}</md-sidemenu-button>
+
+                <!-- <md-sidemenu-content md-icon="home" md-heading="Menu 1" md-arrow="true">
+                  <md-sidemenu-button href="#">Submenu 1</md-sidemenu-button>
+                  <md-sidemenu-button href="#">Submenu 2</md-sidemenu-button>
+                  <md-sidemenu-button href="#">Submenu 3</md-sidemenu-button>
+                </md-sidemenu-content> -->
+              </md-sidemenu-group>
+
+              <!-- <md-sidemenu-group>
+                <md-divider></md-divider>
+
+                <md-subheader class="md-no-sticky">Company Management</md-subheader>
+
+                <md-sidemenu-button href="#">Menu 4</md-sidemenu-button>
+              </md-sidemenu-group> -->
+            </md-sidemenu>
+            <!-- <ul class="docs-menu">
                 <li ng-repeat="option in navList" class="parent-list-item version-picker">
                     <a class="md-button md-ink-ripple" ui-sref="{{option.val}}">{{option.name}}</a>
                     
                 </li>
-            </ul>
+            </ul> -->
         </md-content>
     </md-sidebar>
     <div flex layout="column" >
@@ -27,4 +50,95 @@
     </div>
 </div>
 
+<!-- <md-sidemenu>
+  <md-sidemenu-group>
+    <md-subheader class="md-no-sticky">Caption</md-subheader>
 
+    <md-sidemenu-content md-icon="home" md-heading="Menu 1" md-arrow="true">
+      <md-sidemenu-button href="#">Submenu 1</md-sidemenu-button>
+      <md-sidemenu-button href="#">Submenu 2</md-sidemenu-button>
+      <md-sidemenu-button href="#">Submenu 3</md-sidemenu-button>
+    </md-sidemenu-content>
+  </md-sidemenu-group>
+
+  <md-sidemenu-group>
+    <md-divider></md-divider>
+
+    <md-subheader class="md-no-sticky">Caption</md-subheader>
+
+    <md-sidemenu-button href="#">Menu 4</md-sidemenu-button>
+  </md-sidemenu-group>
+</md-sidemenu> -->
+
+
+<!-- <md-toolbar layout="row">
+      <div class="md-toolbar-tools">
+
+          <md-button ng-click="toggleSidenav('left')" class="md-icon-button">
+              <md-icon>
+                  <i class="material-icons md-24">menu</i>
+              </md-icon>
+          </md-button>
+
+          <h1>Service</h1>
+      </div>
+  </md-toolbar>
+
+  <div layout="row" flex>
+      <md-sidenav style="overflow-y: scroll" layout="column" class="md-sidenav-left md-whiteframe-z2"
+                  md-component-id="left">
+
+          <div layout="row" layout-padding>
+              <h1 class="md-title">olimou/material-sidenav-menu</h1>
+          </div>
+
+          <md-divider></md-divider>
+
+          <md-menu-sidenav>
+              <md-menu-sidenav-item>
+                  <md-menu-sidenav-title>
+                      <md-toogle-menu layout="row" flex>
+                          <md-icon flex="15">face</md-icon>
+                          <h1 class="md-body-2" flex>Mapa</h1>
+                      </md-toogle-menu>
+
+                      <md-icon flex="15">pause</md-icon>
+                  </md-menu-sidenav-title>
+
+                  <md-menu-sidenav-content>
+                      <md-menu-sidenav-subitem>Item 1</md-menu-sidenav-subitem>
+                      <md-menu-sidenav-subitem>Item 2</md-menu-sidenav-subitem>
+                      <md-menu-sidenav-subitem>Item 3</md-menu-sidenav-subitem>
+                  </md-menu-sidenav-content>
+              </md-menu-sidenav-item>
+
+              <md-divider></md-divider>
+
+              <md-menu-sidenav-item>
+                  <md-menu-sidenav-title>
+                      <md-toogle-menu layout="row" flex>
+                          <md-icon flex="15">face</md-icon>
+                          <h1 class="md-body-2" flex>Mapa</h1>
+                          <md-icon flex="15">pause</md-icon>
+                      </md-toogle-menu>
+
+                  </md-menu-sidenav-title>
+
+                  <md-menu-sidenav-content>
+                      <md-menu-sidenav-subitem>Item 1</md-menu-sidenav-subitem>
+                      <md-menu-sidenav-subitem>Item 2</md-menu-sidenav-subitem>
+                      <md-menu-sidenav-subitem>Item 3</md-menu-sidenav-subitem>
+                      <md-menu-sidenav-subitem>Item 4</md-menu-sidenav-subitem>
+                  </md-menu-sidenav-content>
+              </md-menu-sidenav-item>
+          </md-menu-sidenav>
+      </md-sidenav>
+
+      <div layout="column" flex id="content">
+          <md-content layout="column" flex class="md-padding" ng-view="">
+
+          </md-content>
+      </div>
+  </div>
+
+ -->
