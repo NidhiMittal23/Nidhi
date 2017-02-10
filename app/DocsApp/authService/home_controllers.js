@@ -39,7 +39,7 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
                 return doc.subcategory.category;
             });
             console.log(vm.categoryGroup);
-            // console.log(vm.categories);
+            console.log(vm.categories);
 
         })
         

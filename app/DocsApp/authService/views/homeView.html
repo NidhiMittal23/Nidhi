@@ -9,13 +9,30 @@
             </a>
         </header>
         <md-content flex="" role="navigation" class="_md flex">
+          <!-- <md-menu-item class="md-indent" ng-repeat="cat in categories" type="checkbox"> -->
+            <!-- <md-icon md-svg-src="img/icons/menu.svg"></md-icon> -->
+            <!-- <md-button ng-click="ctrl.sampleAction('redo', $event)"> -->
+              <!-- {{cat.name}} -->
+            <!-- </md-button> -->
+            
+          <!-- </md-menu-item> -->
+
+
+
             <md-sidemenu>
               <md-sidemenu-group>
                 <md-subheader class="md-no-sticky">Document Management</md-subheader>
+                  <md-sidemenu-button ng-repeat="cat in home.categories" href="#">{{cat.name}}</md-sidemenu-button>
+              </md-sidemenu-group>
+              <md-sidemenu-group>
+                <md-subheader class="md-no-sticky">Company Management</md-subheader>
                 <!-- ng-repeat all the CATEGORY w.r.t user site md-heading="Name of Category"-->
                 <!-- sidemenu-button will be subcatgory inside that category  -->
                 <!-- vm.categoryGroup -->
-                <md-sidemenu-button ui-sref="#">{{categoryId}}</md-sidemenu-button>
+                <!-- ng-repeat="cat in categories" -->
+                <!-- <md-sidemenu-button ui-sref="#" >{{cat.name}}</md-sidemenu-button> -->
+                <!-- <md-sidemenu-button ui-sref="#">M</md-sidemenu-button>
+                <md-sidemenu-button ui-sref="#">M</md-sidemenu-button> -->
 
                 <!-- <md-sidemenu-content md-icon="home" md-heading="Menu 1" md-arrow="true">
                   <md-sidemenu-button href="#">Submenu 1</md-sidemenu-button>
@@ -32,12 +49,12 @@
                 <md-sidemenu-button href="#">Menu 4</md-sidemenu-button>
               </md-sidemenu-group> -->
             </md-sidemenu>
-            <!-- <ul class="docs-menu">
-                <li ng-repeat="option in navList" class="parent-list-item version-picker">
+            <ul class="docs-menu">
+                <li ng-repeat="option in home.navList" class="parent-list-item version-picker">
                     <a class="md-button md-ink-ripple" ui-sref="{{option.val}}">{{option.name}}</a>
                     
                 </li>
-            </ul> -->
+            </ul>
         </md-content>
     </md-sidebar>
     <div flex layout="column" >
