@@ -1,4 +1,4 @@
-<div class="ng-cloak docs-body" layout="row">
+<div class="ng-cloak docs-body" layout="row" ng-init="home.homeInit()">
     <!-- with md-closed.. sidebar does not shows up --> 
     <md-sidebar class="site-sidenav md-sidenav-left md-whiteframe-z2 hide-print ng-isolate-scope _md md-locked-open" hide-print="" md-component-id="left" md-is-locked-open="$mdMedia(&#39;gt-sm&#39;)" tabindex="-1">
         <header class="nav-header">
@@ -22,7 +22,7 @@
             <md-sidemenu>
               <md-sidemenu-group>
                 <md-subheader class="md-no-sticky">Document Management</md-subheader>
-                  <md-sidemenu-button ng-repeat="cat in home.categories" href="#">{{cat.name}}</md-sidemenu-button>
+                  <md-sidemenu-button ng-repeat="cat in home.categoryIdNameMap" href="#">{{cat.name}}</md-sidemenu-button>
               </md-sidemenu-group>
               <md-sidemenu-group>
                 <md-subheader class="md-no-sticky">Company Management</md-subheader>

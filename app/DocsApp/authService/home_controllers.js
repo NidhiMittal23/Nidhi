@@ -8,6 +8,7 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
     vm.error;
     vm.categories;
     vm.categoryGroup;
+    vm.categoryIdNameMap = [];
 
     vm.logout = function() {
         $auth.logout();
@@ -19,6 +20,16 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
     };
 
 
+    vm.homeInit = function() {
+        // For Document Management: prerequisites get categories
+        categoryAPIservice.getcategory()
+        .then(function(response){
+            vm.categories = response.data.results;
+        })
+
+        // For Company Management: prerequisites get user company 
+    }
+
     vm.navList = [
     	{ name : 'License', val : 'license', type: 'link'},
     	{ name : 'Category', val : 'category', type: 'link'},
@@ -28,27 +39,36 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
     	{ name : 'Document Management', val : 'document', type: 'toggle'}
     ];
 
-    categoryAPIservice.getcategory()
-    .then(function(response){
-        vm.categories = response.data.results;
-    })
-
-    user_sites = localStorage.getItem('sites');
-    if (user_sites != "undefined" || user_sites != "null") {
+    
+    // Document mangement Related Controlling
+    userSites = localStorage.getItem('sites');
+    if (userSites != "undefined" || userSites != "null") {
         // todo check for user in multiple site
-        authAPIservice.getSiteDocuments(user_sites)
+        authAPIservice.getSiteDocuments(userSites)
         .then(function(response){
             results = response.data.results;
             vm.categoryGroup = _.groupBy(results, function(doc){
                 return doc.subcategory.category;
             });
-            console.log(vm.categoryGroup);
-            console.log(vm.categories);
-
+            
+            for (var catId in vm.categoryGroup) {
+                _.each(vm.categories, function(category) {
+                    if (catId == String(category.id)){
+                        var data = {
+                            'id': category.id,
+                            'name': category.name,
+                            'state': 'todo',
+                        }
+                        vm.categoryIdNameMap.push(data);
+                    }
+                })
+            }
         })
         
         
     }
+
+    // Company Managemnt Related Controlling
 });
 
 // todo navigation with respect to user
