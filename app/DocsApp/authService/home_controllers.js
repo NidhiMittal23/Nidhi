@@ -1,7 +1,7 @@
 var homeController = angular.module('authService.home', ['ui-notification', 'satellizer']);
 
 homeController.controller('HomeController', function($http, $auth, $scope, $state, authAPIservice, _,
-                                                     categoryAPIservice) {
+                                                     categoryAPIservice, companyAPIservice) {
     var vm = this;
 
     vm.users;
@@ -41,9 +41,12 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
 
     
     // Document mangement Related Controlling
-    userSites = localStorage.getItem('sites');
+    var userSites = localStorage.getItem('sites');
+    // debugger;
+    // todo: check for userSites with multiple sites id
     if (userSites != "undefined" || userSites != "null") {
-        // todo check for user in multiple site
+        var userSitesList = userSites.split();
+        // Todo: How to show document if there are multiple sites
         authAPIservice.getSiteDocuments(userSites)
         .then(function(response){
             results = response.data.results;
@@ -69,6 +72,22 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
     }
 
     // Company Managemnt Related Controlling
+    var isAdmin = localStorage.getItem('isAdmin');
+    if (isAdmin) {
+        companyAPIservice.getCompany().then(function(response) {
+            // todo: get all company in sidebar
+            })
+    }
+    else{
+        var companyId = localStorage.getItem('company');
+        if (companyId != "undefined" || companyId != "null") {
+            companyAPIservice.getCompanyDetails(companyId).then(function(response) {
+                // todo: get user specific
+            })
+        }
+    }
+    
+    
 });
 
 // todo navigation with respect to user
