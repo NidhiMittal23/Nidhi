@@ -38,11 +38,7 @@
 
                 <md-sidemenu-button href="#">Menu 4</md-sidemenu-button>
               </md-sidemenu-group> -->
-            </md-sidemenu>
-            <ul class="docs-menu">
-                <li ng-repeat="option in home.navList" class="parent-list-item version-picker">
-                    <a class="md-button md-ink-ripple" ui-sref="{{option.val}}">{{option.name}}</a>
-                    
+            </md-sidemenu>        
             <ul class="docs-menu" ng-repeat="option in navList" >
                 <li>
                     <a class="md-button md-ink-ripple active" ui-sref="{{option.val}}">{{option.name}}</a>
