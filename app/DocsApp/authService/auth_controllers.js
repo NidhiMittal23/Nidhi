@@ -33,15 +33,35 @@ authController.controller('AuthController', function($auth, $state, authAPIservi
         });
     }
 
-    vm.getUserSites = function() {
-        authAPIservice.getUserSites()
-        .then(function(response){
-            var sites = response.data.sites;
-            localStorage.setItem('sites', sites);
-        })
+    vm.whenLoggedIn = function(callback) {
+        callback();
     }
 
     vm.login = function() {
+
+        var setUserLocally = function() {
+            if (localStorage) {
+                authAPIservice.getUserSites()
+                .then(function(response){
+                    var sitesObjList = response.data.sites;
+                    var sites = _.map(sitesObjList, function(site){
+                        return site.id
+                    })
+                    var site_filter = _.find(sitesObjList, function(site) {
+                        return typeof site.company != null;
+                    })
+                    localStorage.setItem('company', String(site_filter.company));
+                    localStorage.setItem('sites', String(sites));
+                    localStorage.setItem('isAdmin', response.data.is_superuser);
+                    localStorage.setItem('isLead', response.data.is_lead);
+                })   
+            }
+            else{
+                alert("sorry.. No Web Storage Supported");
+                $state.go('auth', {});
+            }
+        }
+
         var credentials = {
             email: vm.username,
             password: vm.password
@@ -50,13 +70,7 @@ authController.controller('AuthController', function($auth, $state, authAPIservi
         // Use Satellizer's $auth service to login
         $auth.login(credentials)
         .then(function(data) {
-            if (localStorage) {
-                vm.getUserSites()
-            }
-            else{
-                alert("sorry.. No Web Storage Supported");
-                $state.go('auth', {});
-            }
+            vm.whenLoggedIn(setUserLocally);
             
             // var authToken = auth_token
             vm.authStatus.alert = false;
@@ -76,6 +90,7 @@ authController.controller('AuthController', function($auth, $state, authAPIservi
                     vm.authStatus.message = "Invalid Credentials";
                 }
             }
+            // console.log("in here");
         });
     }
 });

@@ -27,4 +27,6 @@ categoryApp.config(function($stateProvider, $urlRouterProvider) {
             params: {id: null, name: null},
             authenticate: true
         })
+
+        // TODO: fetch subcategories based on category+site
 })
