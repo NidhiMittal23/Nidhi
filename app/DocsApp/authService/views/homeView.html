@@ -53,6 +53,9 @@
                 <li ng-repeat="option in home.navList" class="parent-list-item version-picker">
                     <a class="md-button md-ink-ripple" ui-sref="{{option.val}}">{{option.name}}</a>
                     
+            <ul class="docs-menu" ng-repeat="option in navList" >
+                <li>
+                    <a class="md-button md-ink-ripple active" ui-sref="{{option.val}}">{{option.name}}</a>
                 </li>
             </ul>
         </md-content>
@@ -60,6 +63,26 @@
     <div flex layout="column" >
         <md-toolbar class="md-whiteframe-z2" style="background-color: white">
         Rest Toolbar
+            
+                <md-menu>
+                  <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="$mdOpenMenu()">
+                    <md-icon md-menu-origin md-svg-icon="DocsApp/authService/styles/ic_account_circle_black_24px.svg"></md-icon>
+                  </md-button>
+                  <md-menu-content width="4">
+                    <md-menu-item>
+                      <md-button>
+                        Profile
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-button ng-click="home.logout()">
+                        Logout
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-divider></md-menu-divider>
+                  </md-menu-content>
+                </md-menu>
+            
         </md-toolbar>
         <md-content md-scroll-y class="_md layout-column flex">
             <div ui-view></div>
