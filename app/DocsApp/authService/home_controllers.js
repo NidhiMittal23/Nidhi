@@ -10,10 +10,14 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
     vm.categoryGroup;
 
     vm.logout = function() {
-
         $auth.logout();
         $state.transitionTo("auth");
     }
+    vm.openMenu = function($mdMenu, ev) {
+      originatorEv = ev;
+      $mdMenu.open(ev);
+    };
+
 
     vm.navList = [
     	{ name : 'License', val : 'license', type: 'link'},
