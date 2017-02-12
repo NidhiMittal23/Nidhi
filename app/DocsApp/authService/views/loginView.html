@@ -1,4 +1,45 @@
-<div class="col-sm-4 col-sm-offset-4">
+<div layout-gt-xs="row" style=" height: 100vh">
+
+
+  <div flex="60" style="background-color: #393b3f">
+    <div flex layout-fill style="padding: 20%; color: #a6a8a6">
+        
+        <h2 class="md-display-1">Welcome</h2>
+        <p class="md-title">Got a new product! Register your company and get your product licensed.</p>
+        <md-button style="background-color: #7dcea8; color: #393b3f" ui-sref="signup" ng-click="auth.signup()">signup</md-button>
+    </div>
+  </div>
+
+
+  <div flex="40" style="background-color: #7dcea8">
+    <div style="padding: 20%; color: #ffffff;" layout-gt-sm="column">
+
+        <h3 class="md-headline">Login here</h3>
+
+        <md-input-container>
+            <label>email*</label>
+            <input ng-model="auth.username">
+        </md-input-container>
+
+        <md-input-container>
+            <label>password*</label>
+            <input ng-model="auth.password" type="password">
+        </md-input-container>
+
+        <md-button style="background-color: #393b3f" ng-click="auth.login()">Login</md-button>
+
+        <p>
+            <a href="#/forgotPassword" style="color: #ffffff"> forgot password?</a>
+        </p>
+
+        
+    </div>
+  </div>
+
+
+</div>
+
+<!-- <div class="col-sm-4 col-sm-offset-4">
     <div class="well">
         <h3>Login</h3>
         <form>
@@ -17,4 +58,4 @@
     <div class="alert alert-info" ng-if="auth.authStatus.alert">
         {{ auth.authStatus.message }}
     </div>
-</div>
+</div> -->
