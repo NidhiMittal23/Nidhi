@@ -26,5 +26,10 @@ authServiceApp.config(function($stateProvider, $urlRouterProvider, $authProvider
             templateUrl: 'DocsApp/authService/views/homeView.html',
             controller: 'HomeController as home',
             authenticate: true
+        })
+
+        .state('reset', {
+            url: '/forgotPassword',
+            templateUrl: 'DocsApp/authService/views/resetPass.html',
         });
 });
