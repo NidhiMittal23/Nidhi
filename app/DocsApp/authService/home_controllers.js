@@ -59,8 +59,7 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
                     if (catId == String(category.id)){
                         var data = {
                             'id': category.id,
-                            'name': category.name,
-                            'state': 'todo',
+                            'name': category.name
                         }
                         vm.categoryIdNameMap.push(data);
                     }

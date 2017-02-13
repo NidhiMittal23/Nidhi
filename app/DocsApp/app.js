@@ -17,7 +17,7 @@ var myApp = angular.module('myApp', [
   'ngMaterial',
   'ngMessages',
   'md.data.table',
-  'ngMaterialSidemenu'
+  'ngMaterialSidemenu',
 ])
 
 myApp.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider) {

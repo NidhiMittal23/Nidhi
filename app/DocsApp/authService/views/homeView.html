@@ -12,7 +12,7 @@
             <md-sidemenu>
               <md-sidemenu-group>
                 <md-subheader class="md-no-sticky">Document Management</md-subheader>
-                  <md-sidemenu-button ng-repeat="cat in home.categoryIdNameMap" href="#">{{cat.name}}</md-sidemenu-button>
+                  <md-sidemenu-button ng-repeat="cat in home.categoryIdNameMap" ui-sref="getSubCategory({id: cat.id, name: cat.name})">{{cat.name}}</md-sidemenu-button>
               </md-sidemenu-group>
               <md-sidemenu-group>
                 <md-subheader class="md-no-sticky">Company Management</md-subheader>
