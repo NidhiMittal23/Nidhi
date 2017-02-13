@@ -1,6 +1,7 @@
 var categoryController = angular.module('category.controllers', ['ui-notification']);
 
-categoryController.controller('categoryCtrl', function($state, $scope, categoryAPIservice) {
+categoryController.controller('categoryCtrl', function($state, $scope, categoryAPIservice, $stateParams) {
+    var cat = this;
 
     $scope.addNewCategory = function() {
         $state.go('addCategory', {});
@@ -10,21 +11,25 @@ categoryController.controller('categoryCtrl', function($state, $scope, categoryA
         $state.go('editCategory', {id: id, name: name});
     }
 
-    categoryAPIservice.getcategory().success(function (response, status) {
-        $scope.categoryList = response;
-    }).error( function(response, status) {
-        if (status == 400) {
-            if ('name' in response) {
-                Notification.error(response['name'][0]);
+    if ($state.current.name == "getSubCategory") {
+        var categoryId = $stateParams.id;
+        var categoryName = $stateParams.name;
+        categoryAPIservice.getCategoryDetails(categoryId)
+        .then(function(response) {
+            if ('subcategories' in response.data) {
+                cat.subcategories = response.data.subcategories;
+                console.log(cat.subcategories);
             }
-        }
-        else if (status == 500) {
-            Notification.error("Server error occured, Contact Admin");
-        }
-        else {
-            Notification.error("Error occured, Contact Admin");
-        }
-    })
+            else{
+                // todo return message in notification !
+            }
+        })
+    }
+    else{
+        categoryAPIservice.getcategory().success(function (response, status) {
+            $scope.categoryList = response;
+        })
+    }
 });
 
 
