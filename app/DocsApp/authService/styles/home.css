@@ -73,7 +73,6 @@ a.docs-logo {
           transform: scale(1.2);
 }
 
-<<<<<<< d5bd9e3c17c891bbef53a7422d3525b848518e9e
 /* Provide some layout/padding enhancements for mobile/small devices */
 @media(max-width: 500px) {
   /* Reduce the size of the nav logo/header */
@@ -195,80 +194,4 @@ a.docs-logo {
 .md-button-toggle .md-toggle-icon.toggled {
   -webkit-transform: rotate(0deg);
           transform: rotate(0deg);
-=======
-.site-sidenav {
-  background: #106CC8;
-}
-.site-sidenav md-content {
-  background: transparent;
-}
-.site-sidenav > * {
-  min-width: 218px;
-}
-
-div.docs-body {
-  overflow: hidden;
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.docs-menu,
-.docs-menu ul {
-  list-style: none;
-  padding: 0;
-  max-width: 100%;
-  overflow-x: hidden;
-}
-.docs-menu li {
-  margin: 0;
-}
-.docs-menu > li:nth-child(1) {
-  border-top: none;
-}
-
-.docs-logo {
-  text-align: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  padding: 0 0 16px;
-  margin: 0 auto;
-}
-.docs-logo:focus {
-  outline: none;
-}
-.docs-logo > img {
-  height: 150px;
-  width: auto;
-  display: block;
-  -webkit-transform-origin: 50% 0;
-          transform-origin: 50% 0;
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
-}
-
-.nav-header {
-  background-color: #106CC8;
-  background: -webkit-linear-gradient(#185694, #106cc8);
-  background: linear-gradient(#185694, #106cc8);
-  border-bottom: 1px solid #267ED5;
-  -webkit-flex-shrink: 0;
-          flex-shrink: 0;
-  z-index: 2;
-}
-
-.docs-menu .menu-toggle-list a.md-button {
-  display: block;
-  padding: 0 16px 0 32px;
-  text-transform: none;
-  text-rendering: optimizeLegibility;
-  font-weight: 500;
->>>>>>> working with home page html and css
 }

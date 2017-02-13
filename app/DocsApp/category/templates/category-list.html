@@ -1,22 +1,7 @@
-<!-- <button type="button" class="btn btn-primary" ng-click="addNewCategory()">Add Category</button>
-<div class="table-responsive">
-  <table class="table table-hover">
-    <thead>
-            <tr>
-              <th>Id</th>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="category in categoryList.results" style="cursor: hand;cursor: pointer;" ng-click="editExistCategory(category.id, category.name)">
-              <td>{{category.id ? category.id : 'N/A'}}</td>
-              <td>{{category.name ? category.name : 'N/A'}}</td>
-            </tr>
-          </tbody>
-  </table>
-</div>
- -->
-<div layout-padding flex="noshrink">
+ <button type="button" class="btn btn-primary" ng-click="addNewCategory()">Add Category</button>
+<p>Add Table to Add/Edit Category</p>
+
+<!-- <div layout-padding flex="noshrink">
   <md-toolbar class="md-table-toolbar md-default">
   <div class="md-toolbar-tools">
     <span>Subcategory</span>
@@ -31,10 +16,160 @@
       </tr>
     </thead>
       <tbody md-body>
-      <tr md-row md-select-id="subcategory" ng-repeat="sub in subcategory.subcategories">
+      <tr md-row md-select-id="subcategory" ng-repeat-start="sub in subcategory.subcategories" ng-click="selected = $index">
         <td md-cell>{{sub.id}}</td>
         <td md-cell>{{sub.name ? sub.name : 'N/A'}}</td>
+      </tr>
+      <tr ng-repeat-end ng-if="selected == $index">
+        <td>
+          <md-card md-theme-watch="">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Card with image</span>
+                  <span class="md-subhead">Small</span>
+                </md-card-title-text>
+                <md-card-title-media>
+                  <div class="md-media-sm card-media"></div>
+                </md-card-title-media>
+              </md-card-title>
+              <md-card-actions layout="row" layout-align="end center">
+                <md-button>Action 1</md-button>
+                <md-button>Action 2</md-button>
+              </md-card-actions>
+            </md-card>
+        </td>
+      </tr>
     </tbody>
     </table>
   </md-table-container>
-</div>  
+</div> -->  
+
+<!-- <md-expansion-panel md-component-id="panelOne">
+
+  <md-expansion-panel-collapsed>
+    <div class="md-title">Title</div>
+    <div class="md-summary">Summary</div>
+    <md-expansion-panel-icon></md-expansion-panel-icon>
+  </md-expansion-panel-collapsed>
+
+
+  <md-expansion-panel-expanded>
+
+    <md-expansion-panel-header>
+      <div class="md-title">Expanded Title</div>
+      <div class="md-summary">Expanded Summary</div>
+      <md-expansion-panel-icon></md-expansion-panel-icon>
+    </md-expansion-panel-header>
+
+    <md-expansion-panel-content>
+      <h4>Content</h4>
+      <p>Put content in here</p>
+    </md-expansion-panel-content>
+
+    <md-expansion-panel-footer>
+      <div flex></div>
+      <md-button class="md-warn" ng-click="$panel.collapse()">Collapse</md-button>
+    </md-expansion-panel-footer>
+
+  </md-expansion-panel-expanded>
+
+</md-expansion-panel> -->
+
+
+<!-- <md-list ng-repeat="sub in subcategory.subcategories">
+
+   <md-list-item md-expando>
+      <md-icon src="{{topic.icon}}"></md-icon>
+     <label>{{sub.name}}</label>
+   </md-list-item>
+
+</md-list>  -->
+
+<!-- <md-content layout="row" flex layout-align="center" layout-fill>
+    <div flex="70" class="content" ui-view>
+      <md-item ng-repeat="user in users" class="item"
+         ng-class="{ 'selected-item': $index == selectedUserIndex}">
+        <md-item-content class="user tile md-whiteframe-z1"
+                         ng-class="{ 'selected md-whiteframe-z2': $index == selectedUserIndex}"
+                         layout="column">
+          <div layout="row" layout-fill ng-click="selectUserIndex($index)" class="folded">
+            <div class="md-tile-left">
+              <img ng-src="{{ user.face }}" class="face">
+            </div>
+            <div class="md-tile-content" layout="column" layout-align="center start">
+              <h3>{{ user.name.first + " " + user.name.last }}</h3>
+      
+              <p ng-hide="$index == selectedUserIndex">
+                <span>Something</span>
+              </p>
+            </div>
+          </div>
+          <md-divider layout-fill ng-show="$index == selectedUserIndex"></md-divider>
+          <div layout="column" layout-fill class="expanded">
+            <md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch="">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Card with image</span>
+                  <span class="md-subhead">Small</span>
+                </md-card-title-text>
+                <md-card-title-media>
+                  <div class="md-media-sm card-media"></div>
+                </md-card-title-media>
+              </md-card-title>
+              <md-card-actions layout="row" layout-align="end center">
+                <md-button>Action 1</md-button>
+                <md-button>Action 2</md-button>
+              </md-card-actions>
+            </md-card>
+          </div>
+        </md-item-content>
+        <md-divider class="divider-inset" ng-if="!$last"></md-divider>
+      </md-item>
+    </div>
+  </md-content>
+-->
+
+<!-- card by default DRAFT version - button view and delete and Edit -->
+
+
+
+<!-- <md-content layout="row" flex layout-align="center" layout-fill>
+  <div flex="70" class="content" ui-view>
+    <md-item ng-repeat="user in users" class="item"
+       ng-class="{ 'selected-item': $index == selectedUserIndex}">
+      <md-item-content class="user tile md-whiteframe-z1"
+                       ng-class="{ 'selected md-whiteframe-z2': $index == selectedUserIndex}"
+                       layout="column">
+        <div layout="row" layout-fill ng-click="selectUserIndex($index)" class="folded">
+          <div class="md-tile-left">
+            <img ng-src="{{ user.face }}" class="face">
+          </div>
+          <div class="md-tile-content" layout="column" layout-align="center start">
+            <h3>{{ user.name.first + " " + user.name.last }}</h3>
+    
+            <p ng-hide="$index == selectedUserIndex">
+              <span>Something</span>
+            </p>
+          </div>
+        </div>
+        <md-divider layout-fill ng-show="$index == selectedUserIndex"></md-divider>
+        <div layout="column" layout-fill class="expanded">
+          <span>some content</span>
+          <br/>
+          <span>some content</span>
+          <br/>
+          <span>some content</span>
+          <br/>
+          <span>some content</span>
+          <br/>
+          <span>some content</span>
+          <br/>
+          <span>some content</span>
+          <br/>
+          <span>some content</span>
+        </div>
+      </md-item-content>
+      <md-divider class="divider-inset" ng-if="!$last"></md-divider>
+    </md-item>
+  </div>
+</md-content>

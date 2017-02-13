@@ -1,10 +1,9 @@
-'use strict';
+// 'use strict';
 
 // Declare app level module which depends on views, and components
 var myApp = angular.module('myApp', [
   'ui.router',
   'satellizer',
-  'myApp.version',
   'license',
   'category',
   'industry',
@@ -18,6 +17,7 @@ var myApp = angular.module('myApp', [
   'ngMessages',
   'md.data.table',
   'ngMaterialSidemenu',
+  'ngMdIcons'
 ])
 
 myApp.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider) {

@@ -1,4 +1,38 @@
-<div class="row">
+<md-card ng-repeat="sub in document.subcategories" class="subcategoryCard">
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-subhead"><strong>{{sub.name}}</strong></span>
+      <span class="md-caption">{{sub.document}}</span>
+    </md-card-title-text>
+    <md-card-title-media>
+      <div class="md-media-sm card-media"></div>
+    </md-card-title-media>
+  </md-card-title>
+  <md-card-actions layout="row" layout-align="end center" >
+      <md-input-container style="">
+        <label>Select Version</label>
+        <md-select ng-model="selectedItem" md-selected-text="getSelectedText()">
+          <md-optgroup label="items">
+            <md-option ng-value="item" ng-repeat="item in items">Item {{item}}</md-option>
+          </md-optgroup>
+        </md-select>
+      </md-input-container>
+      <ng-md-icon class="subcategoryCardButton" icon="mode_edit" size="20" style="fill:#a5c2f7"></ng-md-icon>
+      <ng-md-icon class="subcategoryCardButton" icon="refresh" size="20" style="fill:#777e89"></ng-md-icon>
+      <ng-md-icon class="subcategoryCardButton" icon="visibility" size="20" style="fill:#c7f7a5"></ng-md-icon>
+      <ng-md-icon class="subcategoryCardButton" icon="delete" size="20" style="fill:#f7a5a5"></ng-md-icon>
+      </md-card-actions>
+    </div>
+</md-card>
+
+
+
+
+
+
+
+
+<!-- <div class="row">
   <div class="col-md-4">
     <button type="button" class="btn btn-primary" ng-click="addNewDocument()">Add document</button>
   </div>
@@ -52,3 +86,4 @@
   </tbody>
 </table>
 </div>
+ -->

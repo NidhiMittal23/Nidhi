@@ -1,8 +1,10 @@
 var documentController = angular.module('document.controllers', ['ui-notification']);
 
 documentController.controller('documentCtrl', function($state, $window ,$scope, documentAPIservice,
-    _, categoryAPIservice, Notification, $http) {
+    _, categoryAPIservice, Notification, $http, $stateParams) {
 
+    var doc = this;
+    
     $scope.addNewDocument = function() {
         $state.go('addDocument', {});
     }
@@ -78,21 +80,41 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
         //console.log($scope.categoryName);
     })
 
-    documentAPIservice.getDocument().success(function (response, status) {
-        $scope.documentList = response;
 
-        // some subcategories may be null
-        $scope.groupByCategory = _.groupBy(response.results, function(obj) {
-            if (obj.subcategories == null) {
-                return obj.subcategories;
+    if ($state.current.name == "documentDetail") {
+        var categoryId = $stateParams.id;
+        var categoryName = $stateParams.name;
+        categoryAPIservice.getCategoryDetails(categoryId)
+        .then(function(response) {
+            if ('subcategories' in response.data) {
+                doc.subcategories = response.data.subcategories;
+                // todo: get user's docuemnt from docuemnt list subcat_doc = [1, 23, 43]..
+                // Logic : user->site->document = user_doc
+                // user_doc intersect subcat_doc
             }
-            else {
-                return obj.subcategories.category;
+            else{
+                // todo return message in notification !
             }
+        })
+    }
+    else{
+        documentAPIservice.getDocument().success(function (response, status) {
+            $scope.documentList = response;
 
-        });
-        //console.log($scope.groupByCategory);
-    })
+            // some subcategories may be null
+            $scope.groupByCategory = _.groupBy(response.results, function(obj) {
+                if (obj.subcategories == null) {
+                    return obj.subcategories;
+                }
+                else {
+                    return obj.subcategories.category;
+                }
+
+            });
+            //console.log($scope.groupByCategory);
+        })
+    }
+    
 });
 
 

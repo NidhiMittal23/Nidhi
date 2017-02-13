@@ -1,6 +1,6 @@
 var categoryController = angular.module('category.controllers', ['ui-notification']);
 
-categoryController.controller('categoryCtrl', function($state, $scope, categoryAPIservice, $stateParams) {
+categoryController.controller('categoryCtrl', function($state, $scope, categoryAPIservice) {
     var cat = this;
 
     $scope.addNewCategory = function() {
@@ -11,25 +11,9 @@ categoryController.controller('categoryCtrl', function($state, $scope, categoryA
         $state.go('editCategory', {id: id, name: name});
     }
 
-    if ($state.current.name == "getSubCategory") {
-        var categoryId = $stateParams.id;
-        var categoryName = $stateParams.name;
-        categoryAPIservice.getCategoryDetails(categoryId)
-        .then(function(response) {
-            if ('subcategories' in response.data) {
-                cat.subcategories = response.data.subcategories;
-                console.log(cat.subcategories);
-            }
-            else{
-                // todo return message in notification !
-            }
-        })
-    }
-    else{
-        categoryAPIservice.getcategory().success(function (response, status) {
-            $scope.categoryList = response;
-        })
-    }
+    categoryAPIservice.getcategory().success(function (response, status) {
+        $scope.categoryList = response;
+    })
 });
 
 
@@ -58,18 +42,6 @@ categoryController.controller('categoryAlterCtrl', function($scope, $state, $sta
         categoryAPIservice.postCategoryDetail(params).success(function (response, status) {
             var categoryName = params.name;
             Notification.success(categoryName+' added successfully');
-        }).error( function(response, status) {
-            if (status == 400) {
-                if ('name' in response) {
-                    Notification.error(response['name'][0]);
-                }
-            }
-            else if (status == 500) {
-                Notification.error("Server error occured, Contact Admin");
-            }
-            else {
-                Notification.error("Error occured, Contact Admin");
-            }
         })
     }
 

@@ -12,7 +12,7 @@
             <md-sidemenu>
               <md-sidemenu-group>
                 <md-subheader class="md-no-sticky">Document Management</md-subheader>
-                  <md-sidemenu-button ng-repeat="cat in home.categoryIdNameMap" ui-sref="getSubCategory({id: cat.id, name: cat.name})">{{cat.name}}</md-sidemenu-button>
+                  <md-sidemenu-button ng-repeat="cat in home.categoryIdNameMap" ui-sref="documentDetail({id: cat.id, name: cat.name})">{{cat.name}}</md-sidemenu-button>
               </md-sidemenu-group>
               <md-sidemenu-group>
                 <md-subheader class="md-no-sticky">Company Management</md-subheader>
@@ -48,27 +48,24 @@
     </md-sidebar>
     <div flex layout="column" >
         <md-toolbar class="md-whiteframe-z2" style="background-color: white">
-        Rest Toolbar
-            
-                <md-menu>
-                  <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="$mdOpenMenu()">
-                    <md-icon md-menu-origin md-svg-icon="DocsApp/authService/styles/ic_account_circle_black_24px.svg"></md-icon>
-                  </md-button>
-                  <md-menu-content width="4">
-                    <md-menu-item>
-                      <md-button>
-                        Profile
-                      </md-button>
-                    </md-menu-item>
-                    <md-menu-item>
-                      <md-button ng-click="home.logout()">
-                        Logout
-                      </md-button>
-                    </md-menu-item>
-                    <md-menu-divider></md-menu-divider>
-                  </md-menu-content>
-                </md-menu>
-            
+          <md-menu>
+            <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="$mdOpenMenu()">
+              <md-icon md-menu-origin md-svg-icon="DocsApp/authService/styles/ic_account_circle_black_24px.svg"></md-icon>
+            </md-button>
+            <md-menu-content width="4">
+              <md-menu-item>
+                <md-button>
+                  Profile
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="home.logout()">
+                  Logout
+                </md-button>
+              </md-menu-item>
+              <md-menu-divider></md-menu-divider>
+            </md-menu-content>
+          </md-menu>
         </md-toolbar>
         <md-content md-scroll-y class="_md layout-column flex">
             <div ui-view></div>

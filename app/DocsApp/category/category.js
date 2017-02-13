@@ -27,14 +27,4 @@ categoryApp.config(function($stateProvider, $urlRouterProvider) {
             params: {id: null, name: null},
             authenticate: true
         })
-
-        // TODO: fetch subcategories based on category+site
-        .state('getSubCategory', {
-            url: '/category/:id?name',
-            parent: 'home',
-            templateUrl: 'DocsApp/category/templates/category-list.html',
-            controller: 'categoryCtrl as subcategory',
-            params: {id: null, name: null},
-            authenticate: true
-        })
 })
