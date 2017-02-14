@@ -1,197 +1,54 @@
-/* 1. todo: Work on page as whole(how principle components like 
-   md-sidebar, md-toolbar and md-content should adjust): its behaviour based on screen size */
-/* 2. todo:Work on md-sidebar */
-/* 3/4. Work on md-toolbar */
-/* 3/4. Work on md-content */
-
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
+/*html, body {
+  height: 100%;
+}
+body {
+  padding: 50px 0 0 0;
 }
 
-div.docs-body {
-  overflow: hidden;
-  max-width: 100%;
-  max-height: 100%;
+.navmenu {
+  padding-top: 50px;
 }
 
-.site-sidenav {
-  background: #e1e4ea;
-}
-.site-sidenav md-content {
-  background: transparent;
-}
-.site-sidenav,
-.site-sidenav.md-locked-open-add-active,
-.site-sidenav.md-locked-open {
-  width:     272px;
-  min-width: 272px;
-  max-width: 272px;
-}
-.site-sidenav > * {
-  min-width: 218px;
-}
-
-.nav-header {
-  background-color: #e1e4ea;
-  background: -webkit-linear-gradient(#d0d5dd , #e1e4ea);
-  background: linear-gradient(#d0d5dd , #e1e4ea);
-  border-bottom: 1px solid #267ED5;
-  -webkit-flex-shrink: 0;
-          flex-shrink: 0;
-  z-index: 2;
-}
-
-
-a.docs-logo {
-  border-bottom: none;
-}
-.docs-logo {
+.navbar {
+  display: block;
   text-align: center;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  padding: 0 0 16px;
-  margin: 0 auto;
 }
-.docs-logo:focus {
-  outline: none;
+.navbar-brand {
+  display: inline-block;
+  float: none;
 }
-.docs-logo > img {
-  height: 150px;
-  width: auto;
-  display: block;
-  -webkit-transform-origin: 50% 0;
-          transform-origin: 50% 0;
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
+.navbar-toggle {
+  position: absolute;
+  float: left;
+  margin-left: 15px;
 }
 
-/* Provide some layout/padding enhancements for mobile/small devices */
-@media(max-width: 500px) {
-  /* Reduce the size of the nav logo/header */
-  .docs-logo > img {
-    height: 75px;
-    margin-top: 10px;
-  }
-
-  .docs-logo h1 {
-    font-size: 18px;
-    line-height: 2rem;
-  }
-
-  /* Reduce the padding around standard doc content */
-  .docs-ng-view .doc-content {
-    margin: 8px;
-    padding: 0;
-  }
-
-  /* Reduce the padding around doc demos */
-  .docs-ng-view docs-demo {
-    padding: 0;
-  }
-
-  .docs-ng-view docs-demo:first-child {
-    margin-top: 0;
-  }
-
-  .docs-ng-view docs-demo .doc-demo-content {
-    margin: 0;
-  }
-}
-.docs-logotype {
-  color: white;
-  text-align: center;
-  font-weight: 400;
-  font-size: 26px;
-}
-
-
-.docs-menu,
-.docs-menu ul {
-  list-style: none;
-  padding: 0;
+.container {
   max-width: 100%;
-  overflow-x: hidden;
-}
-.docs-menu li {
-  margin: 0;
-}
-.docs-menu > li:nth-child(1) {
-  border-top: none;
 }
 
-
-.docs-tools .md-button.md-icon-button {
-  min-height: 0;
-  height: auto;
-}
-.docs-menu .md-button {
-  border-radius: 0;
-  color: white;
-  cursor: pointer;
-  display: block;
-  -webkit-box-align: inherit;
-  -webkit-align-items: inherit;
-          align-items: inherit;
-  line-height: 40px;
-  margin: 0;
-  max-height: 40px;
-  overflow: hidden;
-  padding: 0px 16px;
-  text-align: left;
-  text-decoration: none;
-  white-space: normal;
-  width: 100%;
+@media (min-width: 1px) {
+  .navbar-toggle {
+    display: block !important;
+  }
 }
 
-.docs-menu .md-button,
-.docs-menu .md-button {
-  unicode-bidi: embed;
-  text-align: left;
+@media (min-width: 992px) {
+  body {
+    padding: 0 0 0 300px;
+  }
+  .navmenu {
+    padding-top: 0;
+  }
+  .navbar {
+    display: none !important;
+  }
 }
 
-.docs-menu .md-button:hover,
-.docs-menu .md-button:focus {
-  background: #267ED5 !important;
+.list-group.panel > .list-group-item {
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px
 }
-.docs-menu .md-button md-icon {
-  color: white;
-}
-
-.docs-menu .menu-toggle-list a.md-button {
-  display: block;
-  padding: 0 16px 0 32px;
-  text-transform: none;
-  text-rendering: optimizeLegibility;
-  font-weight: 500;
-}
-.docs-menu .md-button.active {
-  background: #267ED5;
-}
-.docs-menu button.md-button::-moz-focus-inner {
-  padding: 0;
-}
-
-.md-button-toggle .md-toggle-icon {
-  display: block;
-  margin-left: auto;
-  speak: none;
-  vertical-align: middle;
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
-  -webkit-transition: -webkit-transform 0.3s ease-in-out;
-  transition: -webkit-transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-}
-.md-button-toggle .md-toggle-icon.toggled {
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
-}
+.list-group-submenu {
+  margin-left:20px;
+}*/

@@ -13,11 +13,15 @@ var myApp = angular.module('myApp', [
   'authService',
   '720kb.tooltips',
   'ngTagsInput',
-  'ngMaterial',
-  'ngMessages',
-  'md.data.table',
-  'ngMaterialSidemenu',
-  'ngMdIcons'
+  // angular material
+  // 'ngMaterial',
+  // 'ngMessages',
+  // 'md.data.table',
+  // 'ngMaterialSidemenu',
+  // 'ngMdIcons'
+  'ngAnimate',
+  'ngTouch',
+  'ui.bootstrap'
 ])
 
 myApp.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider) {

@@ -1,8 +1,94 @@
-<div class="ng-cloak docs-body" layout="row" ng-init="home.homeInit()">
-    <!-- with md-closed.. sidebar does not shows up --> 
+
+
+<!-- <div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
+  <a class="navmenu-brand visible-md visible-lg" href="#">Project name</a>
+  <ul class="nav navmenu-nav">
+    <li class="active"><a href="./">Slide in</a></li>
+    <li><a href="../navmenu-push/">Push</a></li>
+    <li><a href="../navmenu-reveal/">Reveal</a></li>
+    <li><a href="../navbar-offcanvas/">Off canvas navbar</a></li>
+  </ul>
+  <ul class="nav navmenu-nav">
+    <li><a href="#">Link</a></li>
+    <li><a href="#">Link</a></li>
+    <li><a href="#">Link</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+      <ul class="dropdown-menu navmenu-nav">
+        <li><a href="#">Action</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+        <li class="divider"></li>
+        <li class="dropdown-header">Nav header</li>
+        <li><a href="#">Separated link</a></li>
+        <li><a href="#">One more separated link</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<div class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg">
+  <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="navbar-brand" href="#">Project name</a>
+</div>
+
+<div class="container">
+  <div class="page-header">
+    <h1>Navmenu Template</h1>
+  </div>
+  <p class="lead">This example shows the navmenu element. If the viewport is <b>less than 992px</b> the menu will be placed the off canvas and will be shown with a slide in effect.</p>
+  <p>Also take a look at the examples for a navmenu with <a href="../navmenu-push">push effect</a> and <a href="../navmenu-reveal">reveal effect</a>.</p>
+</div> -->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      
+      <div id="MainMenu">
+        <div class="list-group panel">
+          <a href="#demo3" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">Item 3</a>
+          <div class="collapse" id="demo3">
+            <a href="#SubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubMenu1">Subitem 1 <i class="fa fa-caret-down"></i></a>
+            <div class="collapse list-group-submenu" id="SubMenu1">
+              <a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 1 a</a>
+              <a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 2 b</a>
+              <a href="#SubSubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubSubMenu1">Subitem 3 c <i class="fa fa-caret-down"></i></a>
+              <div class="collapse list-group-submenu list-group-submenu-1" id="SubSubMenu1">
+                <a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 1</a>
+                <a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 2</a>
+              </div>
+              <a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 4 d</a>
+            </div>
+            <a href="javascript:;" class="list-group-item">Subitem 2</a>
+            <a href="javascript:;" class="list-group-item">Subitem 3</a>
+          </div>
+          <a href="#demo4" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">Item 4</a>
+          <div class="collapse" id="demo4">
+            <a href="" class="list-group-item">Subitem 1</a>
+            <a href="" class="list-group-item">Subitem 2</a>
+            <a href="" class="list-group-item">Subitem 3</a>
+          </div>
+           <a href="#demo5" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">Item 5</a>
+            <div class="collapse" id="demo5">
+            <a href="#" class="list-group-item">Subitem 1</a>
+            <a href="" class="list-group-item">Subitem 2</a>
+            <a href="" class="list-group-item">Subitem 3</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>  
+  </div>  
+</div>
+
+
+<!-- <div class="ng-cloak docs-body" layout="row" ng-init="home.homeInit()">
     <md-sidebar class="site-sidenav md-sidenav-left md-whiteframe-z2 hide-print ng-isolate-scope _md md-locked-open" hide-print="" md-component-id="left" md-is-locked-open="$mdMedia(&#39;gt-sm&#39;)" tabindex="-1">
         <header class="nav-header">
-            <!-- <a ng-href="/" class="docs-logo" href="https://material.angularjs.org/"> on image click redirect some where-->
             <a class="docs-logo">
                 <img src="DocsApp/authService/styles/angular-logo.svg" alt="">
                 <h1 class="docs-logotype md-heading ng-isolate-scope">Food Pro Docs</h1>
@@ -16,28 +102,7 @@
               </md-sidemenu-group>
               <md-sidemenu-group>
                 <md-subheader class="md-no-sticky">Company Management</md-subheader>
-                <!-- ng-repeat all the CATEGORY w.r.t user site md-heading="Name of Category"-->
-                <!-- sidemenu-button will be subcatgory inside that category  -->
-                <!-- vm.categoryGroup -->
-                <!-- ng-repeat="cat in categories" -->
-                <!-- <md-sidemenu-button ui-sref="#" >{{cat.name}}</md-sidemenu-button> -->
-                <!-- <md-sidemenu-button ui-sref="#">M</md-sidemenu-button>
-                <md-sidemenu-button ui-sref="#">M</md-sidemenu-button> -->
-
-                <!-- <md-sidemenu-content md-icon="home" md-heading="Menu 1" md-arrow="true">
-                  <md-sidemenu-button href="#">Submenu 1</md-sidemenu-button>
-                  <md-sidemenu-button href="#">Submenu 2</md-sidemenu-button>
-                  <md-sidemenu-button href="#">Submenu 3</md-sidemenu-button>
-                </md-sidemenu-content> -->
               </md-sidemenu-group>
-
-              <!-- <md-sidemenu-group>
-                <md-divider></md-divider>
-
-                <md-subheader class="md-no-sticky">Company Management</md-subheader>
-
-                <md-sidemenu-button href="#">Menu 4</md-sidemenu-button>
-              </md-sidemenu-group> -->
             </md-sidemenu>        
             <ul class="docs-menu" ng-repeat="option in home.navList" >
                 <li>
@@ -72,96 +137,5 @@
         </md-content>
     </div>
 </div>
-
-<!-- <md-sidemenu>
-  <md-sidemenu-group>
-    <md-subheader class="md-no-sticky">Caption</md-subheader>
-
-    <md-sidemenu-content md-icon="home" md-heading="Menu 1" md-arrow="true">
-      <md-sidemenu-button href="#">Submenu 1</md-sidemenu-button>
-      <md-sidemenu-button href="#">Submenu 2</md-sidemenu-button>
-      <md-sidemenu-button href="#">Submenu 3</md-sidemenu-button>
-    </md-sidemenu-content>
-  </md-sidemenu-group>
-
-  <md-sidemenu-group>
-    <md-divider></md-divider>
-
-    <md-subheader class="md-no-sticky">Caption</md-subheader>
-
-    <md-sidemenu-button href="#">Menu 4</md-sidemenu-button>
-  </md-sidemenu-group>
-</md-sidemenu> -->
-
-
-<!-- <md-toolbar layout="row">
-      <div class="md-toolbar-tools">
-
-          <md-button ng-click="toggleSidenav('left')" class="md-icon-button">
-              <md-icon>
-                  <i class="material-icons md-24">menu</i>
-              </md-icon>
-          </md-button>
-
-          <h1>Service</h1>
-      </div>
-  </md-toolbar>
-
-  <div layout="row" flex>
-      <md-sidenav style="overflow-y: scroll" layout="column" class="md-sidenav-left md-whiteframe-z2"
-                  md-component-id="left">
-
-          <div layout="row" layout-padding>
-              <h1 class="md-title">olimou/material-sidenav-menu</h1>
-          </div>
-
-          <md-divider></md-divider>
-
-          <md-menu-sidenav>
-              <md-menu-sidenav-item>
-                  <md-menu-sidenav-title>
-                      <md-toogle-menu layout="row" flex>
-                          <md-icon flex="15">face</md-icon>
-                          <h1 class="md-body-2" flex>Mapa</h1>
-                      </md-toogle-menu>
-
-                      <md-icon flex="15">pause</md-icon>
-                  </md-menu-sidenav-title>
-
-                  <md-menu-sidenav-content>
-                      <md-menu-sidenav-subitem>Item 1</md-menu-sidenav-subitem>
-                      <md-menu-sidenav-subitem>Item 2</md-menu-sidenav-subitem>
-                      <md-menu-sidenav-subitem>Item 3</md-menu-sidenav-subitem>
-                  </md-menu-sidenav-content>
-              </md-menu-sidenav-item>
-
-              <md-divider></md-divider>
-
-              <md-menu-sidenav-item>
-                  <md-menu-sidenav-title>
-                      <md-toogle-menu layout="row" flex>
-                          <md-icon flex="15">face</md-icon>
-                          <h1 class="md-body-2" flex>Mapa</h1>
-                          <md-icon flex="15">pause</md-icon>
-                      </md-toogle-menu>
-
-                  </md-menu-sidenav-title>
-
-                  <md-menu-sidenav-content>
-                      <md-menu-sidenav-subitem>Item 1</md-menu-sidenav-subitem>
-                      <md-menu-sidenav-subitem>Item 2</md-menu-sidenav-subitem>
-                      <md-menu-sidenav-subitem>Item 3</md-menu-sidenav-subitem>
-                      <md-menu-sidenav-subitem>Item 4</md-menu-sidenav-subitem>
-                  </md-menu-sidenav-content>
-              </md-menu-sidenav-item>
-          </md-menu-sidenav>
-      </md-sidenav>
-
-      <div layout="column" flex id="content">
-          <md-content layout="column" flex class="md-padding" ng-view="">
-
-          </md-content>
-      </div>
-  </div>
 
  -->
