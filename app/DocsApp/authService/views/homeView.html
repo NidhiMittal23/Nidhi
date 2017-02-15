@@ -1,3 +1,51 @@
+<!-- <p>Resize window to less than 768 pixels to display mobile menu toggle button.</p>
+ -->  
+<!-- <nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">A menu</a>
+  </div>
+  <div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
+    <ul class="nav navbar-nav">
+      <li><a ui-sref="vertical">Link 1</a></li>
+      <li><a href="#">Link 2</a></li>
+    </ul>
+  </div>
+</nav>
+ -->
+
+
+<uib-accordion close-others="oneAtATime">
+  <div uib-accordion-group class="panel-default" heading="{{group.title}}" ng-repeat="group in groups">
+      {{group.content}}
+    </div>
+</uib-accordion>
+
+<pageslide class="top-nav" ps-open="checked" ps-side="top">
+  <div>
+    <p>some random content...</p>
+  </div>
+</pageslide>
+
+<pageslide class="left-nav" ps-open="checked" ps-side="left">
+  <div class="company-logo">
+    <a class="company-logo-logo">
+        <img src="DocsApp/authService/styles/angular-logo.svg" alt="">
+    </a>
+  </div>
+  <hr>
+  <uib-accordion close-others="oneAtATime">
+    <div uib-accordion-group class="panel-default" heading="{{group.title}}" ng-repeat="group in groups">
+        {{group.content}}
+      </div>
+  </uib-accordion>
+</pageslide>
+
 
 
 <!-- <div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
@@ -44,46 +92,7 @@
   <p>Also take a look at the examples for a navmenu with <a href="../navmenu-push">push effect</a> and <a href="../navmenu-reveal">reveal effect</a>.</p>
 </div> -->
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2">
-      
-      <div id="MainMenu">
-        <div class="list-group panel">
-          <a href="#demo3" class="list-group-item list-group-item-success" data-toggle="collapse" data-parent="#MainMenu">Item 3</a>
-          <div class="collapse" id="demo3">
-            <a href="#SubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubMenu1">Subitem 1 <i class="fa fa-caret-down"></i></a>
-            <div class="collapse list-group-submenu" id="SubMenu1">
-              <a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 1 a</a>
-              <a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 2 b</a>
-              <a href="#SubSubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubSubMenu1">Subitem 3 c <i class="fa fa-caret-down"></i></a>
-              <div class="collapse list-group-submenu list-group-submenu-1" id="SubSubMenu1">
-                <a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 1</a>
-                <a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 2</a>
-              </div>
-              <a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 4 d</a>
-            </div>
-            <a href="javascript:;" class="list-group-item">Subitem 2</a>
-            <a href="javascript:;" class="list-group-item">Subitem 3</a>
-          </div>
-          <a href="#demo4" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">Item 4</a>
-          <div class="collapse" id="demo4">
-            <a href="" class="list-group-item">Subitem 1</a>
-            <a href="" class="list-group-item">Subitem 2</a>
-            <a href="" class="list-group-item">Subitem 3</a>
-          </div>
-           <a href="#demo5" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#MainMenu">Item 5</a>
-            <div class="collapse" id="demo5">
-            <a href="#" class="list-group-item">Subitem 1</a>
-            <a href="" class="list-group-item">Subitem 2</a>
-            <a href="" class="list-group-item">Subitem 3</a>
-          </div>
-        </div>
-      </div>
-      
-    </div>  
-  </div>  
-</div>
+
 
 
 <!-- <div class="ng-cloak docs-body" layout="row" ng-init="home.homeInit()">

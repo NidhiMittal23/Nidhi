@@ -1,11 +1,34 @@
-/*html, body {
+html, body {
   height: 100%;
 }
 body {
   padding: 50px 0 0 0;
 }
 
-.navmenu {
+/*.horizontal-collapse {
+  height: 70px;
+}
+.navbar-collapse.in {
+  overflow-y: hidden;
+}*/
+  
+
+.left-nav {
+  background-color: lightsteelblue;
+  width: 300px !important;
+}
+
+.top-nav {
+  height: 50px !important;
+  left: 300px !important;
+  background-color: azure;
+}
+
+.company-logo {
+  padding: 50px;
+}
+
+/*.navmenu {
   padding-top: 50px;
 }
 

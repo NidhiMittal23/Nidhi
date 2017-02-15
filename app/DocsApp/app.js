@@ -21,7 +21,8 @@ var myApp = angular.module('myApp', [
   // 'ngMdIcons'
   'ngAnimate',
   'ngTouch',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'pageslide-directive'
 ])
 
 myApp.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider) {

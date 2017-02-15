@@ -10,6 +10,17 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
     vm.categoryGroup;
     vm.categoryIdNameMap = [];
 
+  //   $scope.isNavCollapsed = true;
+  // $scope.isCollapsed = false;
+  
+    $scope.checked = true;
+    $scope.oneAtATime = true;
+
+    $scope.groups = [
+        { title: "Dynamic Title 1", content: "Dynamic content 1" }, 
+        { title: "Dynamic Title 2", content: "Dynamic content 2" }
+    ];
+
     vm.logout = function() {
         $auth.logout();
         $state.transitionTo("auth");
