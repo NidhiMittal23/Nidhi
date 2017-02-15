@@ -26,37 +26,7 @@
     </div>
 </uib-accordion> -->
 
-<pageslide class="top-nav" ps-open="checked" ps-side="top" ps-click-outside="false" ps-auto-close="false">
-  <div>
-    <p>some random content...</p>
-  </div>
-</pageslide>
 
-<pageslide class="left-nav" ps-open="checked" ps-side="left" ps-click-outside="false" ps-auto-close="false">
-  <div class="company-logo">
-    <a class="company-logo-logo">
-        <img src="DocsApp/authService/styles/angular-logo.svg" alt="">
-    </a>
-  </div>
-  <hr>
-  <uib-accordion ng-repeat="(phylum, phylum_examples) in animals">
-    <div uib-accordion-group class="panel-default" heading="{{phylum}}">
-      <uib-accordion ng-repeat="(class, class_examples) in phylum_examples">
-        <div uib-accordion-group class="panel-default" heading="{{class}}">
-          <uib-accordion ng-repeat="animal in class_examples">
-            <div uib-accordion-group class="panel-default" heading="{{animal}}">
-            </div>
-          </uib-accordion>
-        </div>
-      </uib-accordion>
-    </div>
-  </uib-accordion>
-  <!-- <uib-accordion close-others="oneAtATime">
-    <div uib-accordion-group class="panel-default" heading="{{group.title}}" ng-repeat="group in groups">
-      {{group.content}}
-    </div>
-  </uib-accordion> -->
-</pageslide>
 
 
 
