@@ -44,40 +44,10 @@ body {
   }
 }
 
-/*html, body {
-  height: 100%;
-}*/
-/*body {
-  padding: 50px 0 0 0;
-}*/
-
-/*.horizontal-collapse {
-  height: 70px;
-}
-.navbar-collapse.in {
-  overflow-y: hidden;
-}*/
-  
-/*w.r.t ui.bootstrap*/
-/*.left-nav {
-  background-color: lightsteelblue;
-  width: 300px !important;
-}
-
-.top-nav {
-  height: 50px !important;
-  left: 300px !important;
-  background-color: azure;
-}
-
 .company-logo {
-  padding: 50px;
+  padding: 0 50px;
 }
 
-.page-content {
-  margin-left: 300px !important;
-  padding: 20px;
-}*/
 
 /*.navmenu {
   padding-top: 50px;

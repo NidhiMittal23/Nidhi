@@ -14,8 +14,7 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
     $scope.oneAtATime = true;
 
     $scope.animals = { 
-        vertibrates: {mammals: ['lion', 'dog'], birds: ['hawk', 'sparrow']},
-        invertibrates: {'insects': ['bee', 'ant']}
+        'Company Management': {'Company': ['FreshFoodDesk', 'Flipkart', 'many more...'], birds: ['hawk', 'sparrow']}
     };
 
     vm.logout = function() {

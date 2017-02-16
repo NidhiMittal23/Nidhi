@@ -19,10 +19,11 @@ var myApp = angular.module('myApp', [
   // 'md.data.table',
   // 'ngMaterialSidemenu',
   // 'ngMdIcons'
+  // angular bootsrap
   'ngAnimate',
   'ngTouch',
   'ui.bootstrap',
-  'pageslide-directive'
+  // 'pageslide-directive'
 ])
 
 myApp.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider) {

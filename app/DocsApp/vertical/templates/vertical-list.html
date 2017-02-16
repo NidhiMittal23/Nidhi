@@ -1,4 +1,4 @@
-<!-- <button type="button" class="btn btn-primary" ng-click="addNewVertical()">Add Vertical</button>
+<button type="button" class="btn btn-primary" ng-click="addNewVertical()">Add Vertical</button>
 <div class="table-responsive">
   <table class="table table-hover">
     <thead>
@@ -15,27 +15,3 @@
           </tbody>
   </table>
 </div>
- -->
-
-<div layout-padding flex="noshrink">
-  <md-toolbar class="md-table-toolbar md-default">
-  <div class="md-toolbar-tools">
-    <span>Vertical</span>
-  </div>
-  </md-toolbar>
-  <md-table-container>
-    <table md-table md-r ng-model="selected">
-      <thead md-head>
-      <tr md-row>
-        <th md-column>Id</th>
-        <th md-column>Name</th>
-      </tr>
-    </thead>
-      <tbody md-body>
-      <tr md-row md-select-id="vertical" ng-repeat="vertical in verticalList.results">
-        <td md-cell>{{vertical.id}}</td>
-        <td md-cell>{{vertical.name ? vertical.name : 'N/A'}}</td>
-    </tbody>
-    </table>
-  </md-table-container>
-</div>  
