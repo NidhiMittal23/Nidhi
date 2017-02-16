@@ -45,8 +45,8 @@ documentApp.config(function($stateProvider, $urlRouterProvider){
             authenticate: true
         })
 
-        .state('documentDetail', {
-            url: '/document/:id?name',
+        .state('siteDocument', {
+            url: '/site-document',
             parent: 'home',
             templateUrl: 'DocsApp/document/templates/document-list.html',
             controller: 'documentCtrl as document',

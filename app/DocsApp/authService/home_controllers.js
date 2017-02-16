@@ -26,69 +26,69 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
 
     vm.homeInit = function() {
         // For Document Management: prerequisites get categories
-        categoryAPIservice.getcategory()
-        .then(function(response){
-            vm.categories = response.data.results;
-        })
+        // categoryAPIservice.getcategory()
+        // .then(function(response){
+        //     vm.categories = response.data.results;
+        // })
 
         // For Company Management: prerequisites get user company 
     }
 
-    vm.navList = [
-    	{ name : 'License', val : 'license', type: 'link'},
-    	{ name : 'Category', val : 'category', type: 'link'},
-    	{ name : 'Industry', val : 'industry', type: 'link'},
-    	{ name : 'Vertical', val : 'vertical', type: 'link'},
-    	{ name : 'Company Management', val : 'company', type: 'toggle'},
-    	{ name : 'Document Management', val : 'document', type: 'toggle'}
-    ];
+    // vm.navList = [
+    // 	{ name : 'License', val : 'license', type: 'link'},
+    // 	{ name : 'Category', val : 'category', type: 'link'},
+    // 	{ name : 'Industry', val : 'industry', type: 'link'},
+    // 	{ name : 'Vertical', val : 'vertical', type: 'link'},
+    // 	{ name : 'Company Management', val : 'company', type: 'toggle'},
+    // 	{ name : 'Document Management', val : 'document', type: 'toggle'}
+    // ];
 
     
     // Document mangement Related Controlling
-    var userSites = localStorage.getItem('sites');
-    // debugger;
-    // todo: check for userSites with multiple sites id
-    if (userSites != "undefined" || userSites != "null") {
-        var userSitesList = userSites.split();
-        // Todo: How to show document if there are multiple sites
-        authAPIservice.getSiteDocuments(userSites)
-        .then(function(response){
-            results = response.data.results;
-            vm.categoryGroup = _.groupBy(results, function(doc){
-                return doc.subcategory.category;
-            });
+    // var userSites = localStorage.getItem('sites');
+    // // debugger;
+    // // todo: check for userSites with multiple sites id
+    // if (userSites != "undefined" || userSites != "null") {
+    //     var userSitesList = userSites.split();
+    //     // Todo: How to show document if there are multiple sites
+    //     authAPIservice.getSiteDocuments(userSites)
+    //     .then(function(response){
+    //         results = response.data.results;
+    //         vm.categoryGroup = _.groupBy(results, function(doc){
+    //             return doc.subcategory.category;
+    //         });
             
-            for (var catId in vm.categoryGroup) {
-                _.each(vm.categories, function(category) {
-                    if (catId == String(category.id)){
-                        var data = {
-                            'id': category.id,
-                            'name': category.name
-                        }
-                        vm.categoryIdNameMap.push(data);
-                    }
-                })
-            }
-        })
+    //         for (var catId in vm.categoryGroup) {
+    //             _.each(vm.categories, function(category) {
+    //                 if (catId == String(category.id)){
+    //                     var data = {
+    //                         'id': category.id,
+    //                         'name': category.name
+    //                     }
+    //                     vm.categoryIdNameMap.push(data);
+    //                 }
+    //             })
+    //         }
+    //     })
         
         
-    }
+    // }
 
     // Company Managemnt Related Controlling
-    var isAdmin = localStorage.getItem('isAdmin');
-    if (isAdmin) {
-        companyAPIservice.getCompany().then(function(response) {
-            // todo: get all company in sidebar
-            })
-    }
-    else{
-        var companyId = localStorage.getItem('company');
-        if (companyId != "undefined" || companyId != "null") {
-            companyAPIservice.getCompanyDetails(companyId).then(function(response) {
-                // todo: get user specific
-            })
-        }
-    }
+    // var isAdmin = localStorage.getItem('isAdmin');
+    // if (isAdmin) {
+    //     companyAPIservice.getCompany().then(function(response) {
+    //         // todo: get all company in sidebar
+    //         })
+    // }
+    // else{
+    //     var companyId = localStorage.getItem('company');
+    //     if (companyId != "undefined" || companyId != "null") {
+    //         companyAPIservice.getCompanyDetails(companyId).then(function(response) {
+    //             // todo: get user specific
+    //         })
+    //     }
+    // }
     
     
 });

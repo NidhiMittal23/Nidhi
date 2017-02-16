@@ -18,7 +18,7 @@ authController.controller('AuthController', function($auth, $state, authAPIservi
             vm.authStatus.register = true
         })
         .catch(function(response) {
-            // Handle errors here.
+            // Handle errors here. 
             var status = response['status'].toString();
             if (['400', '405'].indexOf(status) >= 0) {
                 vm.authStatus.alert = true;
@@ -50,6 +50,7 @@ authController.controller('AuthController', function($auth, $state, authAPIservi
                     var site_filter = _.find(sitesObjList, function(site) {
                         return typeof site.company != null;
                     })
+                    // Store locally User related info
                     localStorage.setItem('company', String(site_filter.company));
                     localStorage.setItem('sites', String(sites));
                     localStorage.setItem('isAdmin', response.data.is_superuser);

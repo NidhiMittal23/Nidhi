@@ -10,6 +10,7 @@ documentService.factory('documentAPIservice', function($http, Notification) {
         'versionEndPoint': 'http://localhost:9000/version/',
     }
 
+    // document service
     documentAPI.getDocument =function() {
         return $http({
             method: 'GET',
