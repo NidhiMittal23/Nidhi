@@ -46,10 +46,16 @@ documentApp.config(function($stateProvider, $urlRouterProvider){
         })
 
         .state('siteDocument', {
-            url: '/site-document',
+            url: '/site-document/:siteId?owner',
             parent: 'home',
             templateUrl: 'DocsApp/document/templates/document-list.html',
             controller: 'documentCtrl as document',
+            params : {
+                siteId: null,
+                owner: {
+                    value: 'admin'
+                }
+            },
             authenticate: true
         })
 
