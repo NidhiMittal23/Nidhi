@@ -97,7 +97,11 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
         .then(function(response) {
             var siteDocuments = response.data.results;
             // todo: build site TOC
-            debugger;
+            // Sort w.r.t category,
+            $scope.categoryGroup = _.groupBy(siteDocuments, function(doc){
+                return doc.subcategory.category;
+            });
+            console.log($scope.categoryGroup);
         })
     }
     else{
