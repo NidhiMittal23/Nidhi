@@ -1,3 +1,69 @@
+<div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
+  <a class="navmenu-brand visible-md visible-lg" href="#">Project name</a>
+  <ul class="nav navmenu-nav">
+    <li class="active"><a href="./">Slide in</a></li>
+    <li><a ui-sref="license">License</a></li>
+    <li><a href="../navmenu-reveal/">Reveal</a></li>
+    <li><a href="../navbar-offcanvas/">Off canvas navbar</a></li>
+  </ul>
+  <uib-accordion ng-repeat="(phylum, phylum_examples) in animals">
+    <div uib-accordion-group class="panel-default" heading="{{phylum}}">
+      <uib-accordion ng-repeat="(class, class_examples) in phylum_examples">
+        <div uib-accordion-group class="panel-default" heading="{{class}}">
+          <uib-accordion ng-repeat="animal in class_examples">
+            <div uib-accordion-group class="panel-default" heading="{{animal}}">
+            </div>
+          </uib-accordion>
+        </div>
+      </uib-accordion>
+    </div>
+  </uib-accordion>
+  <!-- <ul class="nav navmenu-nav">
+    <li><a href="#">Link</a></li>
+    <li><a href="#">Link</a></li>
+    <li><a href="#">Link</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+      <ul class="dropdown-menu navmenu-nav">
+        <li><a href="#">Action</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+        <li class="divider"></li>
+        <li class="dropdown-header">Nav header</li>
+        <li><a href="#">Separated link</a></li>
+        <li><a href="#">One more separated link</a></li>
+      </ul>
+    </li>
+  </ul> -->
+</div>
+
+<div class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg">
+  <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="navbar-brand" href="#">Project name</a>
+</div>
+
+<div class="container">
+  <div class="page-header">
+    <h1>Navmenu Template</h1>
+  </div>
+  <div ui-view></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- <p>Resize window to less than 768 pixels to display mobile menu toggle button.</p>
  -->  
 <!-- <nav class="navbar navbar-default" role="navigation">
@@ -26,7 +92,7 @@
     </div>
 </uib-accordion> -->
 
-<pageslide class="top-nav" ps-open="true" ps-side="top" ps-click-outside="false" ps-auto-close="false">
+<!-- <pageslide class="top-nav" ps-open="true" ps-side="top" ps-click-outside="false" ps-auto-close="false">
   <div>
     <p>some random content...</p>
   </div>
@@ -51,16 +117,16 @@
       </uib-accordion>
     </div>
   </uib-accordion>
-  <a ui-sref="license"> License </a>
+  <a ui-sref="license"> License </a> -->
   <!-- <uib-accordion close-others="oneAtATime">
     <div uib-accordion-group class="panel-default" heading="{{group.title}}" ng-repeat="group in groups">
       {{group.content}}
     </div>
   </uib-accordion> -->
-</pageslide>
+<!-- </pageslide>
 <div class="page-content">
   <div ui-view></div>
-</div>
+</div> -->
 
 
 
