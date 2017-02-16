@@ -21,6 +21,7 @@
     "ng-tags-input": "3.1.1",
     "ang-accordion": "*",
     "v-accordion": "^1.6.0",
-    "angular-bootstrap": "^2.5.0"
+    "angular-bootstrap": "^2.5.0",
+    "angular-pageslide-directive": "^2.1.4"
   }
 }

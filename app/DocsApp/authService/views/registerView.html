@@ -1,27 +1,21 @@
-<div style="background-color: #393b3f; height: 100vh">
-    <div flex class="regForm" style="background-color: #7dcea8; height: 80%; width: 40%; min-height: 500px; min-width: 400px">
+<div class="row"  style=" background-color: #393b3f; height: 100vh ; min-width: 400px; min-height: 500px">
+    <div class="regForm" style="background-color: #7dcea8; margin: auto; height: 80%; width: 40%; min-height: 400px; min-width: 400px">
+
+        <div style="padding: 20%; color: #ffffff; font-size: 15px">
         
-        <div layout="column" ng-cloak class="md-inline-form" style="padding: 10%; color: #ffffff;">
-
-
-        <h3 class="md-headline">Register here</h3>
-
-        <md-input-container>
-            <label>email*</label>
-            <input ng-model="auth.email">
-        </md-input-container>
-
-        <md-input-container>
-            <label>password*</label>
-            <input ng-model="auth.password" type="password">
-        </md-input-container>
-
-        <md-input-container>
-            <label>confirm your password*</label>
-            <input ng-model="auth.password" type="password">
-        </md-input-container>
-
-        <md-button style="background-color: #393b3f" ng-click="auth.register()">register</md-button>
+        <form>
+            <h3 style="text-align: center;">register here</h3><br>
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email" ng-model="auth.email">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" ng-model="auth.password">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Confirm password" ng-model="auth.chkpassword">
+            </div>
+            <button class="btn" style="background-color: #393b3f" ng-click="auth.register()">Sign Up</button>
+        </form>
 
         </div>
 
