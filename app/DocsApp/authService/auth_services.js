@@ -16,12 +16,5 @@ authService.factory('authAPIservice', function($http, $auth) {
         })
     }
 
-    authAPI.getSiteDocuments = function(siteId) {
-        return $http({
-            method: 'GET',
-            url: authUrl.siteDocs + siteId + '/get_site_documents/'
-        })
-    }
-
     return authAPI;
 });

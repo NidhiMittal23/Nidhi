@@ -1,7 +1,7 @@
 var documentController = angular.module('document.controllers', ['ui-notification']);
 
 documentController.controller('documentCtrl', function($state, $window ,$scope, documentAPIservice,
-    _, categoryAPIservice, Notification, $http, $stateParams) {
+    _, categoryAPIservice, companyAPIservice, Notification, $http, $stateParams) {
 
     var doc = this;
     
@@ -63,11 +63,8 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
 
         });
         //console.log($scope.groupByCategory);
-        
 
-
-    })
-
+        })
     }
 
     categoryAPIservice.getcategory().success(function(response,status) {
@@ -81,23 +78,23 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
     })
 
 
-    if ($state.current.name == "documentDetail") {
-        var categoryId = $stateParams.id;
-        var categoryName = $stateParams.name;
-        categoryAPIservice.getCategoryDetails(categoryId)
+    if ($state.current.name == "siteDocument") {
+        // Document Managemet is available for admin to access
+        var userSiteStr = localStorage.getItem('sites');
+        var userSite = userSiteStr.split();
+        if (userSite.length > 1) {
+            Notification.error("Can only Fetch one Site at a time; Contact Admin");
+            $state.go('auth', {});
+        }
+        companyAPIservice.getSiteDocuments(parseInt(userSiteStr))
         .then(function(response) {
-            if ('subcategories' in response.data) {
-                doc.subcategories = response.data.subcategories;
-                // todo: get user's docuemnt from docuemnt list subcat_doc = [1, 23, 43]..
-                // Logic : user->site->document = user_doc
-                // user_doc intersect subcat_doc
-            }
-            else{
-                // todo return message in notification !
-            }
+            var siteDocuments = response.data.results;
+            // todo: build site TOC
+            debugger;
         })
     }
     else{
+        // fetch all documents in archieve; this includes all site copies
         documentAPIservice.getDocument().success(function (response, status) {
             $scope.documentList = response;
 
@@ -288,20 +285,7 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         var params = $scope.documentModel;
         documentAPIservice.putDocumentDetail(params).success(function (response, status) {
             Notification.success(params.name + ' updated successfully');
-        }).error(function (response, status) {
-            if (status == 400) {
-                if ('name' in response) {
-                    Notification.error(response['name'][0]);
-                }
-            }
-            else if (status == 500) {
-                Notification.error("Server error occured, Contact Admin");
-            }
-            else {
-                Notification.error("Error occured, Contact Admin");
-            }
         })
-
     }
 
     // Associate Subcategory to newly Created Document
@@ -325,18 +309,6 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         params.category = $scope.documentSubCategoryModel.categorySelected.id;
         categoryAPIservice.putSubCategoryDetail(params, subCatId).success(function (response, status) {
             Notification.success(params.name + ' updated successfully');
-        }).error(function (response, status) {
-            if (status == 400) {
-                if ('name' in response) {
-                    Notification.error(response['name'][0]);
-                }
-            }
-            else if (status == 500) {
-                Notification.error("Server error occured, Contact Admin");
-            }
-            else {
-                Notification.error("Error occured, Contact Admin");
-            }
         })
     }
 
