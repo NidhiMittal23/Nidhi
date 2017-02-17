@@ -79,9 +79,6 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
 
         });
         //console.log($scope.groupByCategory);
-        
-
-
     })
 
     }
@@ -98,18 +95,16 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
 
     documentAPIservice.getDocument().success(function (response, status) {
         $scope.documentList = response;
-
-        // some subcategories may be null
+        console.log(response);
         $scope.groupByCategory = _.groupBy(response.results, function(obj) {
-            if (obj.subcategories == null) {
-                return obj.subcategories;
+            if (obj.subcategory == null) {
+                return obj.subcategory;
             }
             else {
-                return obj.subcategories.category;
+                return obj.subcategory.category;
             }
 
         });
-        //console.log($scope.groupByCategory);
     })
 });
 
