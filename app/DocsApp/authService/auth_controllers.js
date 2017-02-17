@@ -35,7 +35,7 @@ authController.controller('AuthController', function($auth, $state) {
 
     vm.login = function() {
         var credentials = {
-            username: vm.username,
+            email: vm.email,
             password: vm.password
         }
         
