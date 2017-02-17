@@ -1,14 +1,46 @@
-<nav class="navbar navbar-inverse" role="navigation">
-    <div class="navbar-header">
-        <a class="navbar-brand" ui-sref="#">Food Pro Docs</a>
+<div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
+  <a class="navmenu-brand visible-md visible-lg" ui-sref="Link to Dashboard">Food Pro Docs</a>
+  <ul class="nav navmenu-nav">
+    <li>
+      <div class="company-logo">
+        <a class="company-logo-logo">
+            <img src="DocsApp/authService/styles/angular-logo.svg" alt="">
+        </a>
+      </div>
+    </li>
+    <hr>
+    <li><a ui-sref="license">License</a></li>
+    <li><a ui-sref="vertical">Vertical</a></li>
+    <li><a ui-sref="siteDocument">Document Management</a></li>
+  </ul>
+  <uib-accordion ng-repeat="(phylum, phylum_examples) in animals">
+    <div uib-accordion-group class="panel-default" heading="{{phylum}}">
+      <uib-accordion ng-repeat="(class, class_examples) in phylum_examples">
+        <div uib-accordion-group class="panel-default" heading="{{class}}">
+          <uib-accordion ng-repeat="animal in class_examples">
+            <div uib-accordion-group class="panel-default" heading="{{animal}}">
+            </div>
+          </uib-accordion>
+        </div>
+      </uib-accordion>
     </div>
-    <ul class="nav navbar-nav" ng-repeat="option in navList" >
-        <li><a ui-sref="{{option.val}}">{{option.name}}</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <button class="btn btn-danger navbar-btn" ng-click="home.logout()">Logout</button>
-    </ul>
-</nav>
+  </uib-accordion>
+</div>
 
-<div class="container" ui-view></div>
+<div class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg">
+  <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="navbar-brand" href="#">Project name</a>
+</div>
+
+<div class="container">
+  <div class="page-header">
+    <h3>Navmenu Template</h3>
+  </div>
+  <div ui-view></div>
+</div>
+
 
