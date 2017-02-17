@@ -10,6 +10,13 @@ companyService.factory('companyAPIservice', function($http, _) {
         'relationEndpoint':'http://localhost:9000/relation/',
     }
 
+    companyAPI.getSiteDocuments = function(siteId) {
+        return $http({
+            method: 'GET',
+            url: companyUrl.siteEndpoint + siteId + '/get_site_documents/'
+        })
+    }
+
     companyAPI.getCompany =function() {
         return $http({
             method: 'GET',

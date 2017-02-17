@@ -1,7 +1,7 @@
 var documentController = angular.module('document.controllers', ['ui-notification']);
 
 documentController.controller('documentCtrl', function($state, $window ,$scope, documentAPIservice,
-    _, categoryAPIservice, Notification, $http) {
+    _, categoryAPIservice, companyAPIservice, Notification, $http) {
 
     $scope.addNewDocument = function() {
         $state.go('addDocument', {});
@@ -93,19 +93,52 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
         //console.log($scope.categoryName);
     })
 
-    documentAPIservice.getDocument().success(function (response, status) {
-        $scope.documentList = response;
-        console.log(response);
-        $scope.groupByCategory = _.groupBy(response.results, function(obj) {
-            if (obj.subcategory == null) {
-                return obj.subcategory;
-            }
-            else {
-                return obj.subcategory.category;
-            }
+    if ($state.current.name == "siteDocument") {
+        // TODO: Write logic to who call the siteDocuemnt and what should me userSite ?
+        // Document Managemet is available for admin to access
+        var userSite = "1";
+        // if ('owner' in $stateParams) {
+        //     var owner = $stateParams.owner;
+        //     if (owner == "admin") {
+        //         var userSiteStr = localStorage.getItem('sites');
+        //         var userSiteList = userSiteStr.split();
+        //         if (userSiteList.length > 1) {
+        //             Notification.error("Can only Fetch one Site at a time; Contact Admin");
+        //             $state.go('auth', {});
+        //         }
+        //         var userSite = parseInt(userSiteStr);
+        //     }
+        // }
+        companyAPIservice.getSiteDocuments(userSite)
+        .then(function(response) {
+            var siteDocuments = response.data
+            // todo: build site TOC
+            // embed server domain Name to docfile if not present
+            $scope.groupByCategory = _.groupBy(siteDocuments.results, function(obj){
+                if (obj.subcategory == null) {
+                    return obj.subcategory;
+                }
+                else {
+                    return obj.subcategory.category;
+                }
+            });
+        })
+    }
+    else {
+        documentAPIservice.getDocument().success(function (response, status) {
+            $scope.documentList = response;
+            $scope.groupByCategory = _.groupBy(response.results, function(obj) {
+                if (obj.subcategory == null) {
+                    return obj.subcategory;
+                }
+                else {
+                    return obj.subcategory.category;
+                }
 
-        });
-    })
+            });
+        })
+    }
+
 });
 
 
