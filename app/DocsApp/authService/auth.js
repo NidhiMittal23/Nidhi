@@ -3,6 +3,7 @@ var authServiceApp = angular.module('authService', ['ui.router', 'authService.au
 
 authServiceApp.config(function($stateProvider, $urlRouterProvider, $authProvider) {
     // put urls at some global place
+    $authProvider.tokenType = 'JWT';
     $authProvider.loginUrl = 'http://localhost:9000/auth/login/';
     $authProvider.signupUrl = 'http://localhost:9000/auth/register/'    
 
