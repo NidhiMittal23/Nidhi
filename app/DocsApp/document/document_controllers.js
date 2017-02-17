@@ -38,8 +38,26 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
         documentAPIservice.getFileSource(docfileUrl).success(function(response) {
             response = response.replace("textarea", "div");
             var wnd = window.open("about:blank", "", "_blank");
+            if (win) {
+                //Browser has allowed it to be opened
+                win.focus();
+            } else {
+                //Browser has blocked it
+                alert('Please allow popups for this website');
+            }
             wnd.document.write(response);
         })
+    }
+
+    $scope.versionFileEdit = function(docfileUrl) {
+        var win = window.open(docfileUrl, '_blank');
+        if (win) {
+            //Browser has allowed it to be opened
+            win.focus();
+        } else {
+            //Browser has blocked it
+            alert('Please allow popups for this website');
+        }
     }
 
     $scope.reloadRoute = function() {
