@@ -12,18 +12,6 @@ categoryController.controller('categoryCtrl', function($state, $scope, categoryA
 
     categoryAPIservice.getcategory().success(function (response, status) {
         $scope.categoryList = response;
-    }).error( function(response, status) {
-        if (status == 400) {
-            if ('name' in response) {
-                Notification.error(response['name'][0]);
-            }
-        }
-        else if (status == 500) {
-            Notification.error("Server error occured, Contact Admin");
-        }
-        else {
-            Notification.error("Error occured, Contact Admin");
-        }
     })
 });
 

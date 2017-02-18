@@ -8,10 +8,12 @@ industryService.factory('industryAPIservice', function($http) {
         'endpoint': 'http://localhost:9000/industry/'
     }
 
-    industryAPI.getIndustry = function() {
+    industryAPI.getIndustry = function(params) {
         return $http({
             method: 'GET',
-            url: industryUrl.endpoint
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: industryUrl.endpoint,
+            params: params
         });
     }
 
