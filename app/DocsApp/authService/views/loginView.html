@@ -1,26 +1,26 @@
-<div class="row login" style="min-height: 500px">
+<div class="row login layer" style="min-height: 500px; height: 100vh ; width: 101vw;">
 
-    <div class="col-sm-8" style="background-color: #393b3f; height: 100%">
-        <div style="padding: 20%; color: #a6a8a6">
+    <div class="col-sm-8" style="background-color: #f4f5f7; height: 100%">
+        <div style="padding: 20%; color: #444">
             
             <h2>Welcome</h2>
             <p>Got a new product! Register your company and get your product licensed.</p>
-            <button class="btn" style="background-color: #7dcea8; color: #393b3f" ui-sref="signup" ng-click="auth.signup()">register</button>
+            <button class="btn" style="background-color: #393b3f; color: #a6a8a6" ui-sref="signup" ng-click="auth.signup()">register</button>
         </div>
     </div>
 
-    <div class="col-sm-4" style="background-color: #7dcea8; height: 100%">
-        <div style="padding: 20%; padding-top: 50%; color: #ffffff; font-size: 15px">
+    <div class="col-sm-4" style="background-color: #dbdcdd; height: 100%">
+        <div style="padding: 20%; padding-top: 50%; font-size: 15px">
             <form>
                 <h3 style="padding-left: 35%">login</h3></br>
                 <div class="form-group">
-                <input ng-model="auth.username" type="email" class="form-control" placeholder="Email">
+                <input ng-model="auth.email" type="email" class="form-control" placeholder="Email">
                 </div>
                 <div class="form-group">
                 <input ng-model="auth.password" type="password" class="form-control" placeholder="Password">
                 </div>
                 <p>
-            <a href="#/forgotPassword" style="color: #ffffff"> forgot password?</a>
+            <a href="#/forgotPassword" style="color: #444"> forgot password?</a>
         </p>
                 <button ng-click="auth.login()" style="background-color: #393b3f; color: #a6a8a6; width: 100%" type="submit" class="btn">Submit</button>
             </form>
