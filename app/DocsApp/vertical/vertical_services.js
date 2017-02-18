@@ -8,10 +8,12 @@ verticalService.factory('verticalAPIservice', function($http) {
         'endpoint': 'http://localhost:9000/vertical/'
     }
 
-    verticalAPI.getVertical =function() {
+    verticalAPI.getVertical =function(params) {
         return $http({
             method: 'GET',
-            url: verticalUrl.endpoint
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: verticalUrl.endpoint,
+            params: params
         });
     }
 

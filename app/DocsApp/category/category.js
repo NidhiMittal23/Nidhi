@@ -20,7 +20,7 @@ categoryApp.config(function($stateProvider, $urlRouterProvider) {
         })
 
         .state('editCategory', {
-            url: '/category/edit/{name}',
+            url: '/category/edit/:id?name',
             parent: 'home',
             templateUrl: 'DocsApp/category/templates/category-alter.html',
             controller: 'categoryAlterCtrl',
