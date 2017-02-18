@@ -20,7 +20,7 @@ licenseApp.config(function($stateProvider, $urlRouterProvider) {
         })
 
         .state('editLicense', {
-            url: '/license/edit/{name}',
+            url: '/license/edit/:id?name',
             parent: 'home',
             templateUrl: 'DocsApp/license/templates/license-alter.html',
             controller: 'licenseAlterCtrl',
