@@ -18,4 +18,8 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
             birds: ['hawk', 'sparrow']
         }
     };
+
+    $scope.isNavCollapsed = true;
+    $scope.isCollapsed = false;
+    $scope.isCollapsedHorizontal = false;
 });

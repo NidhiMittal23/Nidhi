@@ -38,9 +38,40 @@
 
 <div class="container">
   <div class="page-header">
-    <h3>Navmenu Template</h3>
+    <nav class="navbar navbar-header-bar" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- <a class="navbar-brand" href="#">A menu</a> -->
+      </div>
+      <div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
+        <ul class="nav navbar-nav pull-right">
+          <li><a tooltip-placement="bottom" uib-tooltip="Platform Settings" ui-sref="platformSettings"><i class="glyphicon glyphicon-tasks"></i></a></li>
+          <li><a tooltip-placement="bottom" uib-tooltip="logout" href="javascript:"><i ng-click="home.logout()" class="glyphicon glyphicon-log-out"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- <div class="btn-group" uib-dropdown uib-keyboard-nav>
+        <button id="simple-btn-keyboard-nav" type="button" class="btn btn-primary" uib-dropdown-toggle>
+            <span><i class="glyphicon glyphicon-fire"></i></span>
+        </button>
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+            <li role="menuitem"><a href="#">Action</a></li>
+            <li role="menuitem"><a href="#">Another action</a></li>
+            <li role="menuitem"><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li role="menuitem"><a href="#">Separated link</a></li>
+        </ul>
+    </div> -->
+    <!-- <i ng-click="auth.logout()" class="glyphicon glyphicon-fire"></i> -->
   </div>
   <div ui-view></div>
 </div>
 
-
+<!-- .glyphicon-tasks -->
+<!-- .glyphicon-log-out -->
+<!-- .glyphicon-blackboard -->
