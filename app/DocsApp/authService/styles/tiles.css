@@ -1,0 +1,78 @@
+    .orange-btn {
+  background-color: orange;
+  height: 100%;
+  width: 100%;
+}
+.orange-btn:hover,
+.orange-btn:active,
+.orange-btn:focus {
+  background-color: #cc8400;
+}
+.yellow-btn {
+  background-color: yellow;
+  height: 100%;
+  width: 100%;
+}
+.yellow-btn:hover {
+  background-color: #cccc00;
+}
+.green-btn {
+  background-color: green;
+  height: 100%;
+  width: 100%;
+}
+.green-btn:hover {
+  background-color: #004d00;
+}
+.light-orange-btn {
+  background-color: #ffc966;
+  height: 100%;
+  width: 100%;
+}
+.light-orange-btn:hover {
+  background-color: #ffb733;
+  color: black;
+}
+.buttonBlock {
+  margin-bottom: 10px;
+  display: table;
+}
+.ownThumbnail {
+  padding: 4px;
+  line-height: 1.42857143;
+  display: block;
+  margin-bottom: 20px;
+  color: black;
+}
+.ownThumbnail:hover {
+  color: black;
+  border: none;
+}
+.ownThumbnail.active {
+  background-color: gray;
+  color: black;
+}
+.ownThumbnail,
+.ownThumbnail i,
+.ownThumbnail p {
+  color: black;
+}
+a[disabled].ownThumbnail,
+a[disabled].ownThumbnail i,
+a[disabled].ownThumbnail p {
+  background-color: #ccc;
+  color: gray;
+}
+.thumbnailContent {
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+}
+.thumbnailContent i {
+  margin-top: 2px;
+}
+.thumbnailContent p {
+  padding-top: 2px;
+  text-transform: uppercase;
+  font-size: 0.89em;
+}
