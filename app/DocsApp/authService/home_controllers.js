@@ -1,9 +1,9 @@
 var homeController = angular.module('authService.home', ['ui-notification', 'satellizer']);
 
 homeController.controller('HomeController', function($http, $auth, $scope, $state, authAPIservice,
-    companyAPIservice, _) {
+    companyAPIservice, _, $timeout) {
     var vm = this;
-
+    $timeout(callAtTimeout, 700);
     vm.users;
     vm.error;
     vm.adminSiteId = authAPIservice.adminSiteId;
@@ -27,32 +27,36 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
     // 2. If the user is Client:
     //      a. Company Management, Sites Info
     //      b. No Document Management 
-    vm.isAdmin = (localStorage.getItem("isAdmin") === 'true');
-    params.page = 1;
-    if (vm.isAdmin) {
-        // fetch all company Info
-        companyAPIservice.getCompany(params).success(function (response, status) {
-            // From Company Managemnt : Remove Admin Company from Company List from View fetch It
-            // TODO: id is hardcoded
-            var companyArr = response.results;
-            companyArr = _.without(companyArr, _.findWhere(companyArr, {
-              id: vm.adminSiteId
-            }));
-            $scope.companyMangement = {
-                'Company Management': {
-                    'Company': companyArr,
-                }
-            }
-        })
-    }
-    else {
-        vm.companyId = localStorage.getItem("company");
-        companyAPIservice.getCompanyDetails(vm.companyId).success(function(response, status) {
-            $scope.SiteMangement = {}
-            $scope.SiteMangement[response.name] = response.sites;
-        })
-    }
     
+    // Timeout is called as asynchronsly home.controllers runs before auth.controller after login
+    // Hence localStorage.getItem run before localStorage.setItem
+    function callAtTimeout() {
+        vm.isAdmin = (localStorage.getItem("isAdmin") === 'true');
+        params.page = 1;
+        if (vm.isAdmin) {
+            // fetch all company Info
+            companyAPIservice.getCompany(params).success(function (response, status) {
+                // From Company Managemnt : Remove Admin Company from Company List from View fetch It
+                // TODO: id is hardcoded
+                var companyArr = response.results;
+                companyArr = _.without(companyArr, _.findWhere(companyArr, {
+                  id: vm.adminSiteId
+                }));
+                $scope.companyMangement = {
+                    'Company Management': {
+                        'Company': companyArr,
+                    }
+                }
+            })
+        }
+        else {
+            vm.companyId = localStorage.getItem("company");
+            companyAPIservice.getCompanyDetails(vm.companyId).success(function(response, status) {
+                $scope.SiteMangement = {}
+                $scope.SiteMangement[response.name] = response.sites;
+            })
+        }
+    }
     
 
     $scope.isNavCollapsed = true;
