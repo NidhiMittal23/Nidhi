@@ -9,9 +9,12 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
     var params = {};
 
     vm.logout = function() {
-
         $auth.logout();
-        $state.transitionTo("auth");
+        localStorage.removeItem('company');
+        localStorage.removeItem('sites');
+        localStorage.removeItem('isAdmin');
+        localStorage.removeItem('isLead');
+        $state.go('auth');
     }
 
     $scope.animals = { 
