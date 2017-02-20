@@ -24,8 +24,9 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
         }
     };
 
-    // [{name: 'FoodDocs', sites: [{name: 'FoodDocs-Site1'}, {name: 'FoodDocs-Site2'}]}]
+    // TODO: Set company Drop Dwon based on User's Company
 
+    vm.isAdmin = (localStorage.getItem("isAdmin") === 'true');
     params.page = 1;
     companyAPIservice.getCompany(params).success(function (response, status) {
         // From Company Managemnt : Remove Admin Company from Company List from View fetch It

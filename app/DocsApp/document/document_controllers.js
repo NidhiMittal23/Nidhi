@@ -94,21 +94,6 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
     })
 
     if ($state.current.name == "siteDocument") {
-        // TODO: Write logic to who call the siteDocuemnt and what should me userSite ?
-        // Document Managemet is available for admin to access
-        // var userSite = "1";
-        // if ('owner' in $stateParams) {
-        //     var owner = $stateParams.owner;
-        //     if (owner == "admin") {
-        //         var userSiteStr = localStorage.getItem('sites');
-        //         var userSiteList = userSiteStr.split();
-        //         if (userSiteList.length > 1) {
-        //             Notification.error("Can only Fetch one Site at a time; Contact Admin");
-        //             $state.go('auth', {});
-        //         }
-        //         var userSite = parseInt(userSiteStr);
-        //     }
-        // }
         userSite = $stateParams.siteId;
         companyAPIservice.getSiteDocuments(userSite)
         .then(function(response) {

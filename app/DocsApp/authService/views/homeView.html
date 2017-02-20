@@ -10,7 +10,11 @@
         </div>
       </li>
       <hr>
-      <li><a ui-sref="document"><h5>Document Management</h5></a></li>
+      <!-- Show Document mangement When User is Admin -->
+      <!-- Admin Site : 1 Hardcoded -->
+      <div ng-if="home.isAdmin === true">
+        <li><a ui-sref="siteDocument({siteId: 1})"><h5>Document Management</h5></a></li>
+      </div>
     </ul>
     <uib-accordion ng-repeat="(managerName, manager) in companyMangement">
       <div uib-accordion-group class="panel-default" is-open="status.open">

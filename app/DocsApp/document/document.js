@@ -52,9 +52,7 @@ documentApp.config(function($stateProvider, $urlRouterProvider){
             controller: 'documentCtrl as document',
             params : {
                 siteId: null,
-                owner: {
-                    value: 'admin'
-                }
+                owner: null
             },
             authenticate: true
         })
