@@ -1,7 +1,7 @@
 var homeController = angular.module('authService.home', ['ui-notification', 'satellizer']);
 
 homeController.controller('HomeController', function($http, $auth, $scope, $state, authAPIservice,
-    companyAPIservice) {
+    companyAPIservice, _) {
     var vm = this;
 
     vm.users;
@@ -25,9 +25,15 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
 
     params.page = 1;
     companyAPIservice.getCompany(params).success(function (response, status) {
+        // From Company Managemnt : Remove Admin Company from Company List from View fetch It
+        // TODO: id is hardcoded
+        var companyArr = response.results;
+        companyArr = _.without(companyArr, _.findWhere(companyArr, {
+          id: 1
+        }));
         $scope.companyMangement = {
             'Company Management': {
-                'Company': response.results,
+                'Company': companyArr,
             }
         }
     })
