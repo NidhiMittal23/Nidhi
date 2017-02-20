@@ -3,12 +3,13 @@ var documentService = angular.module('document.services', []);
 documentService.factory('documentAPIservice', function($http, Notification) {
 
     var documentAPI = {};
-
     var documentUrl = {
         'endpoint': 'http://localhost:9000/document/',
         'relationEndPoint': 'http://localhost:9000/relation/',
         'versionEndPoint': 'http://localhost:9000/version/',
     }
+
+    documentAPI.serverDomain = "http://localhost:9000";
 
     documentAPI.getDocument =function() {
         return $http({

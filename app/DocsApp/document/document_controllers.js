@@ -2,7 +2,8 @@ var documentController = angular.module('document.controllers', ['ui-notificatio
 
 documentController.controller('documentCtrl', function($state, $window ,$scope, documentAPIservice,
     _, categoryAPIservice, companyAPIservice, Notification, $http, $stateParams) {
-
+    $scope.serverDomain = documentAPIservice.serverDomain;
+    console.log($scope.serverDomain);
     $scope.addNewDocument = function() {
         $state.go('addDocument', {});
     }
@@ -38,9 +39,9 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
         documentAPIservice.getFileSource(docfileUrl).success(function(response) {
             response = response.replace("textarea", "div");
             var wnd = window.open("about:blank", "", "_blank");
-            if (win) {
+            if (wnd) {
                 //Browser has allowed it to be opened
-                win.focus();
+                wnd.focus();
             } else {
                 //Browser has blocked it
                 alert('Please allow popups for this website');
