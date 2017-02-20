@@ -1,7 +1,7 @@
 <div ng-init="companyInitial()">
-  <button type="button" class="btn btn-primary" ng-click="addNewCompany()">Add Company</button>
+  <button type="button" class="btn btn-default" ng-click="addNewCompany()">Add Company</button>
   <div class="table-responsive">
-    <table class="table table-hover">
+    <table class="table table-hover table-striped">
       <thead>
               <tr>
                 <th><span style="padding-left: 60px"> Name</span></th>
@@ -16,4 +16,5 @@
             </tbody>
     </table>
   </div>
+  <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged()"></ul>
 </div>

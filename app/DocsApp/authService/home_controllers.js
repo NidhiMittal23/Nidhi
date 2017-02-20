@@ -60,10 +60,16 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
                 // stat: '365',
                 title: 'Industry',
                 link: '#/home/industry',
+            },
+            {
+                icon: 'fa fa-building-o',
+                // stat: '365',
+                title: 'Company',
+                link: '#/home/company',
             }],
         colSize: "col-lg-4",
         tileType: "tile-md-square",
-        colors: ["#fca9cf", "#a8a5f7", "#efd2a0", "#8f8e91"]
+        colors: ["#fca9cf", "#a8a5f7", "#efd2a0", "#8f8e91", "#5893f4"]
     };
 
 });

@@ -10,7 +10,7 @@
         </div>
       </li>
       <hr>
-      <li><a ui-sref="document">Document Management</a></li>
+      <li><a ui-sref="document"><h5>Document Management</h5></a></li>
     </ul>
     <uib-accordion ng-repeat="(managerName, manager) in companyMangement">
       <div uib-accordion-group class="panel-default" is-open="status.open">
@@ -44,7 +44,7 @@
             </uib-accordion>
             <!-- go to Company Table -->
             <uib-accordion>
-              <a> Check Companies </a>
+              <a ui-sref="company"> Check Companies </a>
             </uib-accordion>
           </div>
         </uib-accordion>
