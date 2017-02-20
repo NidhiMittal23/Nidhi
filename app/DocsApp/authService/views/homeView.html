@@ -58,10 +58,10 @@
     </div>
     <!-- if logged in user is Client -->
     <div ng-if="home.isAdmin === false">
-      <uib-accordion ng-repeat="(a, sites) in SiteMangement">
+      <uib-accordion ng-repeat="(companyName, companySites) in SiteMangement">
         <div uib-accordion-group class="panel-default">
           <uib-accordion-heading>
-            {{a}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            {{companyName}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
           </uib-accordion-heading>
           <!-- Sites Accordion -->
           <uib-accordion>
@@ -69,7 +69,7 @@
               <uib-accordion-heading>Sites
               </uib-accordion-heading>
               <!-- get sites object correponding to Company -->
-              <uib-accordion ng-repeat="site in sites">
+              <uib-accordion ng-repeat="site in companySites">
                 <a ui-sref="siteDocument({siteId: site.id})">{{site.name}}</a>
               </uib-accordion>
             </div>
