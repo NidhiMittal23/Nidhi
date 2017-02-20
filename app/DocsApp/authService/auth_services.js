@@ -15,6 +15,8 @@ authService.factory('authAPIservice', function($http, $auth) {
             url: authUrl.endpoint + 'me/'
         })
     }
-    
+
+    authAPI.adminSiteId = 1;
+
     return authAPI;
 });

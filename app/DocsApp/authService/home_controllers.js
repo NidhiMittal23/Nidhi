@@ -6,6 +6,8 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
 
     vm.users;
     vm.error;
+    vm.adminSiteId = authAPIservice.adminSiteId;
+    vm.companyId;
     var params = {};
 
     vm.logout = function() {
@@ -17,30 +19,41 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
         $state.go('auth');
     }
 
-    $scope.animals = { 
-        'Company Management': {
-            'Company': ['FreshFoodDesk', 'Flipkart', 'many more...'],
-            birds: ['hawk', 'sparrow']
-        }
-    };
-
     // TODO: Set company Drop Dwon based on User's Company
 
+    // 1. If the user is Admin:
+    //      a. Company Management, list of all company under Admin Company (remove Admin Company From List)
+    //      b. Document Management, admin's Site Document will be managed
+    // 2. If the user is Client:
+    //      a. Company Management, Sites Info
+    //      b. No Document Management 
     vm.isAdmin = (localStorage.getItem("isAdmin") === 'true');
     params.page = 1;
-    companyAPIservice.getCompany(params).success(function (response, status) {
-        // From Company Managemnt : Remove Admin Company from Company List from View fetch It
-        // TODO: id is hardcoded
-        var companyArr = response.results;
-        companyArr = _.without(companyArr, _.findWhere(companyArr, {
-          id: 1
-        }));
-        $scope.companyMangement = {
-            'Company Management': {
-                'Company': companyArr,
+    if (vm.isAdmin) {
+        // fetch all company Info
+        companyAPIservice.getCompany(params).success(function (response, status) {
+            // From Company Managemnt : Remove Admin Company from Company List from View fetch It
+            // TODO: id is hardcoded
+            var companyArr = response.results;
+            companyArr = _.without(companyArr, _.findWhere(companyArr, {
+              id: vm.adminSiteId
+            }));
+            $scope.companyMangement = {
+                'Company Management': {
+                    'Company': companyArr,
+                }
             }
-        }
-    })
+        })
+    }
+    else {
+        vm.companyId = localStorage.getItem("company");
+        companyAPIservice.getCompanyDetails(vm.companyId).success(function(response, status) {
+            $scope.SiteMangement = {}
+            $scope.SiteMangement[response.name] = response.sites;
+        })
+    }
+    
+    
 
     $scope.isNavCollapsed = true;
     $scope.isCollapsed = false;

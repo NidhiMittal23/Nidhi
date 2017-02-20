@@ -13,47 +13,74 @@
       <!-- Show Document mangement When User is Admin -->
       <!-- Admin Site : 1 Hardcoded -->
       <div ng-if="home.isAdmin === true">
-        <li><a ui-sref="siteDocument({siteId: 1})"><h5>Document Management</h5></a></li>
+        <li><a ui-sref="siteDocument({siteId: home.adminSiteId})"><h5>Document Management</h5></a></li>
       </div>
     </ul>
-    <uib-accordion ng-repeat="(managerName, manager) in companyMangement">
-      <div uib-accordion-group class="panel-default" is-open="status.open">
-        <uib-accordion-heading>
-          {{managerName}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-        </uib-accordion-heading>
-        <uib-accordion ng-repeat="(header, content) in manager">
-          <div uib-accordion-group class="panel-default" is-open="status.nestOpen">
-            <uib-accordion-heading>
-              {{header}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.nestOpen, 'glyphicon-chevron-right': !status.nestOpen}"></i>
-            </uib-accordion-heading>
-            <!-- get company object -->
-            <uib-accordion ng-repeat="company in content">
-              <div uib-accordion-group class="panel-default" heading="{{company.name}}">
-                <!-- Sites Accordion -->
-                <uib-accordion>
-                  <div uib-accordion-group class="panel-default">
-                    <uib-accordion-heading>Sites
-                    </uib-accordion-heading>
-                    <!-- get sites object correponding to Company -->
-                    <uib-accordion ng-repeat="site in company.sites">
-                      <a ui-sref="siteDocument({siteId: site.id})">{{site.name}}</a>
-                    </uib-accordion>
-                  </div>
-                </uib-accordion>
-                <!-- User accordion  -->
-                <uib-accordion>
-                  <a>Users</a>
-                </uib-accordion>
-              </div>
-            </uib-accordion>
-            <!-- go to Company Table -->
-            <uib-accordion>
-              <a ui-sref="company"> Check Companies </a>
-            </uib-accordion>
-          </div>
-        </uib-accordion>
-      </div>
-    </uib-accordion>
+    <div ng-if="home.isAdmin === true">
+      <uib-accordion ng-repeat="(managerName, manager) in companyMangement">
+        <div uib-accordion-group class="panel-default" is-open="status.open">
+          <uib-accordion-heading>
+            {{managerName}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+          </uib-accordion-heading>
+          <uib-accordion ng-repeat="(header, content) in manager">
+            <div uib-accordion-group class="panel-default" is-open="status.nestOpen">
+              <uib-accordion-heading>
+                {{header}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.nestOpen, 'glyphicon-chevron-right': !status.nestOpen}"></i>
+              </uib-accordion-heading>
+              <!-- get company object -->
+              <uib-accordion ng-repeat="company in content">
+                <div uib-accordion-group class="panel-default" heading="{{company.name}}">
+                  <!-- Sites Accordion -->
+                  <uib-accordion>
+                    <div uib-accordion-group class="panel-default">
+                      <uib-accordion-heading>Sites
+                      </uib-accordion-heading>
+                      <!-- get sites object correponding to Company -->
+                      <uib-accordion ng-repeat="site in company.sites">
+                        <a ui-sref="siteDocument({siteId: site.id})">{{site.name}}</a>
+                      </uib-accordion>
+                    </div>
+                  </uib-accordion>
+                  <!-- User accordion  -->
+                  <uib-accordion>
+                    <a>Users</a>
+                  </uib-accordion>
+                </div>
+              </uib-accordion>
+              <!-- go to Company Table -->
+              <uib-accordion>
+                <a ui-sref="company"> Check Companies </a>
+              </uib-accordion>
+            </div>
+          </uib-accordion>
+        </div>
+      </uib-accordion>
+    </div>
+    <!-- if logged in user is Client -->
+    <div ng-if="home.isAdmin === false">
+      <uib-accordion ng-repeat="(a, sites) in SiteMangement">
+        <div uib-accordion-group class="panel-default">
+          <uib-accordion-heading>
+            {{a}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+          </uib-accordion-heading>
+          <!-- Sites Accordion -->
+          <uib-accordion>
+            <div uib-accordion-group class="panel-default">
+              <uib-accordion-heading>Sites
+              </uib-accordion-heading>
+              <!-- get sites object correponding to Company -->
+              <uib-accordion ng-repeat="site in sites">
+                <a ui-sref="siteDocument({siteId: site.id})">{{site.name}}</a>
+              </uib-accordion>
+            </div>
+          </uib-accordion>
+          <!-- User accordion  -->
+          <uib-accordion>
+            <a>Users</a>
+          </uib-accordion>
+        </div>
+      </uib-accordion>
+    </div>
   </div>
 
   <div class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg">
@@ -80,14 +107,17 @@
         <div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
           <ul class="nav navbar-nav pull-right">
             <li><a tooltip-placement="bottom" uib-tooltip="Platform Settings" ui-sref="home"><i class="glyphicon glyphicon-tasks"></i></a></li>
-            <li><a tooltip-placement="bottom" uib-tooltip="logout" href="javascript:"><i ng-click="home.logout()" class="glyphicon glyphicon-log-out"></i></a></li>
+            <li><a tooltip-placement="bottom" uib-tooltip="logout" ng-click="home.logout()"><i class="glyphicon glyphicon-log-out"></i></a></li>
           </ul>
         </div>
       </nav>
     </div>
     <div ui-view>
-      <div class="row">
-          <tiles tile-params="tileSettings" />
+      <div class="row" ng-if="home.isAdmin === true">
+        <tiles tile-params="tileSettings" />
+      </div>
+      <div class="row" ng-if="home.isAdmin === false">
+      <h1>Heelo</h1>
       </div>
     </div>
   </div>
