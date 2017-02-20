@@ -32,20 +32,19 @@
                     </uib-accordion-heading>
                     <!-- get sites object correponding to Company -->
                     <uib-accordion ng-repeat="site in company.sites">
-                      <div uib-accordion-group class="panel-default" heading="{{site.name}}">
-                      </div>
+                      <a ui-sref="siteDocument({siteId: site.id})">{{site.name}}</a>
                     </uib-accordion>
                   </div>
                 </uib-accordion>
                 <!-- User accordion  -->
                 <uib-accordion>
-                  <button class="btn btn-default">User </button>
+                  <a>Users</a>
                 </uib-accordion>
               </div>
             </uib-accordion>
             <!-- go to Company Table -->
             <uib-accordion>
-              <button class="btn btn-default"> Check Company </button>
+              <a> Check Companies </a>
             </uib-accordion>
           </div>
         </uib-accordion>

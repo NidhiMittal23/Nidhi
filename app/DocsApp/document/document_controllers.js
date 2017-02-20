@@ -1,7 +1,7 @@
 var documentController = angular.module('document.controllers', ['ui-notification']);
 
 documentController.controller('documentCtrl', function($state, $window ,$scope, documentAPIservice,
-    _, categoryAPIservice, companyAPIservice, Notification, $http) {
+    _, categoryAPIservice, companyAPIservice, Notification, $http, $stateParams) {
 
     $scope.addNewDocument = function() {
         $state.go('addDocument', {});
@@ -96,7 +96,7 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
     if ($state.current.name == "siteDocument") {
         // TODO: Write logic to who call the siteDocuemnt and what should me userSite ?
         // Document Managemet is available for admin to access
-        var userSite = "1";
+        // var userSite = "1";
         // if ('owner' in $stateParams) {
         //     var owner = $stateParams.owner;
         //     if (owner == "admin") {
@@ -109,6 +109,7 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
         //         var userSite = parseInt(userSiteStr);
         //     }
         // }
+        userSite = $stateParams.siteId;
         companyAPIservice.getSiteDocuments(userSite)
         .then(function(response) {
             var siteDocuments = response.data

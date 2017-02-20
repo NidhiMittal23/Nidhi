@@ -30,7 +30,6 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
                 'Company': response.results,
             }
         }
-        console.log(response);
     })
 
     $scope.isNavCollapsed = true;
