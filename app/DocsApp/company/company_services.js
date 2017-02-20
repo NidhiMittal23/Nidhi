@@ -17,10 +17,11 @@ companyService.factory('companyAPIservice', function($http, _) {
         })
     }
 
-    companyAPI.getCompany =function() {
+    companyAPI.getCompany =function(params) {
         return $http({
             method: 'GET',
-            url: companyUrl.endpoint
+            url: companyUrl.endpoint,
+            params: params
         });
     }
 

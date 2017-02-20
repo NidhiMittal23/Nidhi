@@ -197,10 +197,11 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     };
 
     $scope.init = function() {
-
+        var params = {};
+        params.page = 1;
         var categories = categoryAPIservice.getcategory();
-        var verticals = verticalAPIservice.getVertical();
-        var licenses = licenseAPIservice.getlicense();
+        var verticals = verticalAPIservice.getVertical(params);
+        var licenses = licenseAPIservice.getlicense(params);
 
 
         $q.all([verticals, licenses, categories]).then(function(values) {

@@ -1,6 +1,15 @@
 var companyController = angular.module('company.controllers', ['ui-notification']);
 
 companyController.controller('companyCtrl', function($state, $scope, companyAPIservice) {
+    var params = {};
+    $scope.companyInitial = function () {
+        // pagination control
+        $scope.bigTotalItems;
+        $scope.maxSize = 5;
+        $scope.bigCurrentPage = 1;
+
+        $scope.pageChanged();
+    }
 
     $scope.addNewCompany = function() {
         $state.go('addCompany', {});
@@ -14,21 +23,13 @@ companyController.controller('companyCtrl', function($state, $scope, companyAPIs
         $state.go('editCompany', {id: id, name: name});
     }
 
-    companyAPIservice.getCompany().success(function (response, status) {
-        $scope.companyList = response;
-    }).error(function(response, status) {
-        if (status == 400) {
-            if ('name' in response) {
-                Notification.error(response['name'][0]);
-            }
-        }
-        else if (status == 500) {
-            Notification.error("Server error occured, Contact Admin");
-        }
-        else {
-            Notification.error("Error occured, contact Admin");
-        }
-    })
+    $scope.pageChanged = function() {
+        params.page = $scope.bigCurrentPage;
+        companyAPIservice.getCompany(params).success(function (response, status) {
+            $scope.companyList = response;
+            $scope.bigTotalItems = response.count;
+        })
+    }
 });
 
 companyController.controller('companyAlterCtrl', function($scope, $state, $stateParams, $q, Notification, companyAPIservice, industryAPIservice,

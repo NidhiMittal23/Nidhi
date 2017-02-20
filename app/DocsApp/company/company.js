@@ -11,7 +11,7 @@ companyApp.config(function($stateProvider, $urlRouterProvider){
         })
 
         .state('companySite', {
-            url: '/company-name:{name}',
+            url: '/company-name/:id?name',
             parent: 'home',
             templateUrl: 'DocsApp/company/templates/companySite-list.html',
             controller: 'companySiteCtrl',
@@ -20,7 +20,7 @@ companyApp.config(function($stateProvider, $urlRouterProvider){
         })
 
         .state('siteDoc', {
-            url: '/company/site-name:{name}',
+            url: '/company/site-name/:id?name',
             parent: 'home',
             templateUrl: 'DocsApp/company/templates/companySiteDoc-list.html',
             controller: 'siteDocCtrl',

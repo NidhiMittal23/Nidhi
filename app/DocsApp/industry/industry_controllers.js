@@ -21,7 +21,7 @@ industryController.controller('industryCtrl', function($state, $scope, industryA
 
     $scope.pageChanged = function() {
         params.page = $scope.bigCurrentPage;
-        industryAPIservice.getIndustry().success(function (response, status) {
+        industryAPIservice.getIndustry(params).success(function (response, status) {
             $scope.industryList = response;
             $scope.bigTotalItems = response.count;
         })

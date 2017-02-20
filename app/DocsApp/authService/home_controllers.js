@@ -1,10 +1,12 @@
 var homeController = angular.module('authService.home', ['ui-notification', 'satellizer']);
 
-homeController.controller('HomeController', function($http, $auth, $scope, $state, authAPIservice) {
+homeController.controller('HomeController', function($http, $auth, $scope, $state, authAPIservice,
+    companyAPIservice) {
     var vm = this;
 
     vm.users;
     vm.error;
+    var params = {};
 
     vm.logout = function() {
 
@@ -18,6 +20,18 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
             birds: ['hawk', 'sparrow']
         }
     };
+
+    // [{name: 'FoodDocs', sites: [{name: 'FoodDocs-Site1'}, {name: 'FoodDocs-Site2'}]}]
+
+    params.page = 1;
+    companyAPIservice.getCompany(params).success(function (response, status) {
+        $scope.companyMangement = {
+            'Company Management': {
+                'Company': response.results,
+            }
+        }
+        console.log(response);
+    })
 
     $scope.isNavCollapsed = true;
     $scope.isCollapsed = false;
