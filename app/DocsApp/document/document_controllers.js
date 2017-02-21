@@ -1,8 +1,9 @@
 var documentController = angular.module('document.controllers', ['ui-notification']);
 
 documentController.controller('documentCtrl', function($state, $window ,$scope, documentAPIservice,
-    _, categoryAPIservice, Notification, $http) {
-
+    _, categoryAPIservice, companyAPIservice, Notification, $http, $stateParams) {
+    $scope.serverDomain = documentAPIservice.serverDomain;
+    console.log($scope.serverDomain);
     $scope.addNewDocument = function() {
         $state.go('addDocument', {});
     }
@@ -38,8 +39,26 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
         documentAPIservice.getFileSource(docfileUrl).success(function(response) {
             response = response.replace("textarea", "div");
             var wnd = window.open("about:blank", "", "_blank");
+            if (wnd) {
+                //Browser has allowed it to be opened
+                wnd.focus();
+            } else {
+                //Browser has blocked it
+                alert('Please allow popups for this website');
+            }
             wnd.document.write(response);
         })
+    }
+
+    $scope.versionFileEdit = function(docfileUrl) {
+        var win = window.open(docfileUrl, '_blank');
+        if (win) {
+            //Browser has allowed it to be opened
+            win.focus();
+        } else {
+            //Browser has blocked it
+            alert('Please allow popups for this website');
+        }
     }
 
     $scope.reloadRoute = function() {
@@ -61,9 +80,6 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
 
         });
         //console.log($scope.groupByCategory);
-        
-
-
     })
 
     }
@@ -78,21 +94,38 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
         //console.log($scope.categoryName);
     })
 
-    documentAPIservice.getDocument().success(function (response, status) {
-        $scope.documentList = response;
+    if ($state.current.name == "siteDocument") {
+        userSite = $stateParams.siteId;
+        companyAPIservice.getSiteDocuments(userSite)
+        .then(function(response) {
+            var siteDocuments = response.data
+            // todo: build site TOC
+            // embed server domain Name to docfile if not present
+            $scope.groupByCategory = _.groupBy(siteDocuments.results, function(obj){
+                if (obj.subcategory == null) {
+                    return obj.subcategory;
+                }
+                else {
+                    return obj.subcategory.category;
+                }
+            });
+        })
+    }
+    else {
+        documentAPIservice.getDocument().success(function (response, status) {
+            $scope.documentList = response;
+            $scope.groupByCategory = _.groupBy(response.results, function(obj) {
+                if (obj.subcategory == null) {
+                    return obj.subcategory;
+                }
+                else {
+                    return obj.subcategory.category;
+                }
 
-        // some subcategories may be null
-        $scope.groupByCategory = _.groupBy(response.results, function(obj) {
-            if (obj.subcategories == null) {
-                return obj.subcategories;
-            }
-            else {
-                return obj.subcategories.category;
-            }
+            });
+        })
+    }
 
-        });
-        //console.log($scope.groupByCategory);
-    })
 });
 
 
@@ -151,10 +184,11 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     };
 
     $scope.init = function() {
-
+        var params = {};
+        params.page = 1;
         var categories = categoryAPIservice.getcategory();
-        var verticals = verticalAPIservice.getVertical();
-        var licenses = licenseAPIservice.getlicense();
+        var verticals = verticalAPIservice.getVertical(params);
+        var licenses = licenseAPIservice.getlicense(params);
 
 
         $q.all([verticals, licenses, categories]).then(function(values) {

@@ -1,6 +1,15 @@
 var industryController = angular.module('industry.controllers', ['ui-notification']);
 
 industryController.controller('industryCtrl', function($state, $scope, industryAPIservice) {
+    var params = {};
+    $scope.industryInitial = function () {
+        // pagination control
+        $scope.bigTotalItems;
+        $scope.maxSize = 5;
+        $scope.bigCurrentPage = 1;
+
+        $scope.pageChanged();
+    }
 
     $scope.addNewIndustry = function() {
         $state.go('addIndustry', {});
@@ -10,21 +19,13 @@ industryController.controller('industryCtrl', function($state, $scope, industryA
         $state.go('editIndustry', {id: id, name: name});
     }
 
-    industryAPIservice.getIndustry().success(function (response, status) {
-        $scope.industryList = response;
-    }).error(function(response, status) {
-        if (status == 400) {
-            if ('name' in response) {
-                Notification.error(response['name'][0]);
-            }
-        }
-        else if (status == 500) {
-            Notification.error("Server error occured, Contact Admin");
-        }
-        else {
-            Notification.error("Error occured, contact Admin");
-        }
-    })
+    $scope.pageChanged = function() {
+        params.page = $scope.bigCurrentPage;
+        industryAPIservice.getIndustry(params).success(function (response, status) {
+            $scope.industryList = response;
+            $scope.bigTotalItems = response.count;
+        })
+    }
 });
 
 industryController.controller('industryAlterCtrl', function($scope, $state, $stateParams, industryAPIservice, Notification) {

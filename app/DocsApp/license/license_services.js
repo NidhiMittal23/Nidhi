@@ -9,10 +9,12 @@ licenseService.factory('licenseAPIservice', function($http) {
         'endpoint': 'http://localhost:9000/license/'
     }
 
-    licenseAPI.getlicense = function() {
+    licenseAPI.getlicense = function(params) {
         return $http({
-            method: 'GET', 
-            url: licenseUrl.endpoint
+            method: 'GET',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: licenseUrl.endpoint,
+            params: params
         });
     }
 

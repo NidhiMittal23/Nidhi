@@ -1,14 +1,128 @@
-<nav class="navbar navbar-inverse" role="navigation">
-    <div class="navbar-header">
-        <a class="navbar-brand" ui-sref="#">Food Pro Docs</a>
+<div ng-cloak>
+  <div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
+    <a class="navmenu-brand visible-md visible-lg" ui-sref="Link to Dashboard">Food Pro Docs</a>
+    <ul class="nav navmenu-nav">
+      <li>
+        <div class="company-logo">
+          <a class="company-logo-logo">
+              <img src="DocsApp/authService/styles/angular-logo.svg" alt="">
+          </a>
+        </div>
+      </li>
+      <hr>
+      <!-- Show Document mangement When User is Admin -->
+      <!-- Admin Site : 1 Hardcoded -->
+      <div ng-if="home.isAdmin === true">
+        <li><a ui-sref="siteDocument({siteId: home.adminSiteId})"><h5>Document Management</h5></a></li>
+      </div>
+    </ul>
+    <div ng-if="home.isAdmin === true">
+      <uib-accordion ng-repeat="(managerName, manager) in companyMangement">
+        <div uib-accordion-group class="panel-default" is-open="status.open">
+          <uib-accordion-heading>
+            {{managerName}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+          </uib-accordion-heading>
+          <uib-accordion ng-repeat="(header, content) in manager">
+            <div uib-accordion-group class="panel-default" is-open="status.nestOpen">
+              <uib-accordion-heading>
+                {{header}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.nestOpen, 'glyphicon-chevron-right': !status.nestOpen}"></i>
+              </uib-accordion-heading>
+              <!-- get company object -->
+              <uib-accordion ng-repeat="company in content">
+                <div uib-accordion-group class="panel-default" heading="{{company.name}}">
+                  <!-- Sites Accordion -->
+                  <uib-accordion>
+                    <div uib-accordion-group class="panel-default">
+                      <uib-accordion-heading>Sites
+                      </uib-accordion-heading>
+                      <!-- get sites object correponding to Company -->
+                      <uib-accordion ng-repeat="site in company.sites">
+                        <a ui-sref="siteDocument({siteId: site.id})">{{site.name}}</a>
+                      </uib-accordion>
+                    </div>
+                  </uib-accordion>
+                  <!-- User accordion  -->
+                  <uib-accordion>
+                    <a>Users</a>
+                  </uib-accordion>
+                </div>
+              </uib-accordion>
+              <!-- go to Company Table -->
+              <uib-accordion>
+                <a ui-sref="company"> Check Companies </a>
+              </uib-accordion>
+            </div>
+          </uib-accordion>
+        </div>
+      </uib-accordion>
     </div>
-    <ul class="nav navbar-nav" ng-repeat="option in navList" >
-        <li><a ui-sref="{{option.val}}">{{option.name}}</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <button class="btn btn-danger navbar-btn" ng-click="home.logout()">Logout</button>
-    </ul>
-</nav>
+    <!-- if logged in user is Client -->
+    <div ng-if="home.isAdmin === false">
+      <uib-accordion ng-repeat="(companyName, companySites) in SiteMangement">
+        <div uib-accordion-group class="panel-default">
+          <uib-accordion-heading>
+            {{companyName}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+          </uib-accordion-heading>
+          <!-- Sites Accordion -->
+          <uib-accordion>
+            <div uib-accordion-group class="panel-default">
+              <uib-accordion-heading>Sites
+              </uib-accordion-heading>
+              <!-- get sites object correponding to Company -->
+              <uib-accordion ng-repeat="site in companySites">
+                <a ui-sref="siteDocument({siteId: site.id})">{{site.name}}</a>
+              </uib-accordion>
+            </div>
+          </uib-accordion>
+          <!-- User accordion  -->
+          <uib-accordion>
+            <a>Users</a>
+          </uib-accordion>
+        </div>
+      </uib-accordion>
+    </div>
+  </div>
 
-<div class="container" ui-view></div>
+  <div class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg">
+    <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">Project name</a>
+  </div>
 
+  <div class="container">
+    <div class="page-header">
+      <nav class="navbar navbar-header-bar" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- <a class="navbar-brand" href="#">A menu</a> -->
+        </div>
+        <div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
+          <ul class="nav navbar-nav pull-right">
+            <li><a tooltip-placement="bottom" uib-tooltip="Platform Settings" ui-sref="home"><i class="glyphicon glyphicon-tasks"></i></a></li>
+            <li><a tooltip-placement="bottom" uib-tooltip="logout" ng-click="home.logout()"><i class="glyphicon glyphicon-log-out"></i></a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div ui-view>
+      <div class="row" ng-if="home.isAdmin === true">
+        <tiles tile-params="tileSettings" />
+      </div>
+      <div class="row" ng-if="home.isAdmin === false">
+      <h1>Heelo</h1>
+      </div>
+    </div>
+  </div>
+
+  <!-- .glyphicon-tasks -->
+  <!-- .glyphicon-log-out -->
+  <!-- .glyphicon-blackboard -->
+</div>

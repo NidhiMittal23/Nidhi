@@ -14,6 +14,10 @@ var myApp = angular.module('myApp', [
   'authService',
   '720kb.tooltips',
   'ngTagsInput',
+  'ngAnimate',
+  'ngTouch',
+  'ui.bootstrap',
+  'ngTile'
 ])
 
 myApp.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider) {

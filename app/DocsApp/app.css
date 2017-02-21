@@ -23,3 +23,22 @@
   content: "|";
   padding-right: 0.3em;
 }
+
+
+.login{
+	height: 100vh;
+	font-size: 20px;
+}
+
+.match{
+	color: red;
+	width: 500px;
+}
+
+.layer{
+	position: absolute;
+	top:0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}

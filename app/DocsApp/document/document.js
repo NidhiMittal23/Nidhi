@@ -11,7 +11,7 @@ documentApp.config(function($stateProvider, $urlRouterProvider){
         })
 
 		.state('docVersion', {
-			url: '/document-name:{name}',
+			url: '/document-name/:id?name',
 			parent: 'home',
 			templateUrl: 'DocsApp/document/templates/docVersion-list.html',
 			controller: 'docVersionCtrl',
@@ -37,11 +37,23 @@ documentApp.config(function($stateProvider, $urlRouterProvider){
         })
 
         .state('editDocument', {
-            url: '/document/edit/{name}',
+            url: '/document/edit/:id?name',
             parent: 'home',
             templateUrl: 'DocsApp/document/templates/document-alter.html',
             controller: 'documentAlterCtrl',
             params: {id: null, name: null},
+            authenticate: true
+        })
+
+        .state('siteDocument', {
+            url: '/site-document/:siteId?owner',
+            parent: 'home',
+            templateUrl: 'DocsApp/document/templates/document-list.html',
+            controller: 'documentCtrl as document',
+            params : {
+                siteId: null,
+                owner: null
+            },
             authenticate: true
         })
 

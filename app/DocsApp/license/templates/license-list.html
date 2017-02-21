@@ -1,21 +1,24 @@
-<button type="button" class="btn btn-primary" ng-click="addNewLicense()">Add License</button>
-<div class="table-responsive">
-  <table class="table table-hover">
-    <thead>
-            <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Abbreviate</th>
-              <th>Granting Authority</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="license in licenseList.results" style="cursor: hand;cursor: pointer;" ng-click="editExistLicense(license.id, license.name)">
-              <td>{{license.id ? license.id : "N/A"}}</td>
-              <td>{{license.name ? license.name : 'N/A'}}</td>
-              <td>{{license.abbreviate ? license.abbreviate : 'N/A'}}</td>
-              <td>{{license.granting_authority ? license.granting_authority : 'N/A' }}</td>
-            </tr>
-          </tbody>
-  </table>
+<div ng-init="licenseInitial()">
+  <button type="button" class="btn btn-default" ng-click="addNewLicense()">Add License</button>
+  <div class="table-responsive">
+    <table class="table table-hover table-striped">
+      <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Abbreviate</th>
+                <th>Granting Authority</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="license in licenseList.results" style="cursor: hand;cursor: pointer;" ng-click="editExistLicense(license.id, license.name)">
+                <td>{{license.id ? license.id : "N/A"}}</td>
+                <td>{{license.name ? license.name : 'N/A'}}</td>
+                <td>{{license.abbreviate ? license.abbreviate : 'N/A'}}</td>
+                <td>{{license.granting_authority ? license.granting_authority : 'N/A' }}</td>
+              </tr>
+            </tbody>
+    </table>
+  </div>
+  <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged()"></ul>
 </div>

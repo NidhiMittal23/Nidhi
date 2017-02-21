@@ -1,21 +1,28 @@
-<div class="col-sm-4 col-sm-offset-4">
-    <div class="well">
-        <h3>Register Company</h3>
+<div class="row layer"  style=" background-color: #f4f5f7; height: 100vh ; width: 101vw; min-width: 400px; min-height: 500px">
+    <div class="regForm" style="background-color: #dbdcdd; margin: auto; height: 80%; width: 40%; min-height: 400px; min-width: 400px">
+
+        <div style="padding: 20%; font-size: 15px">
+        
         <form>
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="User Name" ng-model="auth.userName">
-            </div>
+            <h3 style="text-align: center;">register here</h3><br>
             <div class="form-group">
                 <input type="email" class="form-control" placeholder="Email" ng-model="auth.email">
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" placeholder="Password" ng-model="auth.password">
             </div>
-            <button class="btn btn-success" ng-click="auth.register()">Sign Up</button>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Confirm password" ng-class="{'(auth.chkpassword !== auth.password)': match}" ng-model="auth.chkpassword">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            </div>
+            <button class="btn" style="background-color: #393b3f; color: #ffffff" ng-click="auth.register()" ng-disabled="auth.password !== auth.chkpassword">Sign Up</button>
         </form>
+
+        </div>
+
     </div>
+</div>
     <div class="alert alert-info" ng-if="auth.authStatus.alert">
         {{ auth.authStatus.message }}
         <span ng-if="auth.authStatus.register"><a ui-sref='auth'><font size="3" color="red">login</font></a></span>
     </div>
-</div>

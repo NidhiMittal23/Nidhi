@@ -1,6 +1,16 @@
 var licenseController = angular.module('license.controllers', ['ui-notification']);
 
-licenseController.controller('licenseCtrl', function($state, $scope, licenseAPIservice) {
+licenseController.controller('licenseCtrl', function($state, $scope, licenseAPIservice, $log) {
+    var params = {};
+    $scope.licenseInitial = function () {
+        // pagination control
+        $scope.bigTotalItems;
+        $scope.maxSize = 5;
+        $scope.bigCurrentPage = 1;
+
+        $scope.pageChanged();
+    }
+    
 
     $scope.addNewLicense = function() {
         $state.go('addLicense', {});
@@ -10,21 +20,15 @@ licenseController.controller('licenseCtrl', function($state, $scope, licenseAPIs
         $state.go('editLicense', {id: id, name: name});
     }
 
-    licenseAPIservice.getlicense().success(function (response, status) {
-        $scope.licenseList = response;
-    }).error( function(response, status) {
-        if (status == 400) {
-            if ('name' in response) {
-                Notification.error(response['name'][0]);
-            }
-        }
-        else if (status == 500) {
-            Notification.error("Server error occured, Contact Admin");
-        }
-        else {
-            Notification.error("Error occured, Contact Admin");
-        }
-    })
+
+    $scope.pageChanged = function() {
+        // $log.log('Page changed to: ' + $scope.bigCurrentPage);
+        params.page = $scope.bigCurrentPage;
+        licenseAPIservice.getlicense(params).success(function (response, status) {
+            $scope.licenseList = response;
+            $scope.bigTotalItems = response.count;
+        })
+    };
 });
 
 
