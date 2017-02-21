@@ -47,10 +47,13 @@ authController.controller('AuthController', function($auth, $state, authAPIservi
                     })
                     // Store locally User related info
                     // Remove item key on logout
+                    // TODO: If user have multiple Site have to look into docuemnt management System
+                    // IMP
                     localStorage.setItem('company', String(site_filter.company));
                     localStorage.setItem('sites', String(sites));
                     localStorage.setItem('isAdmin', response.data.is_superuser);
                     localStorage.setItem('isLead', response.data.is_lead);
+                    localStorage.setItem('userId', response.data.id);
                 })   
             }
             else{

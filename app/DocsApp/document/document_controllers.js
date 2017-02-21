@@ -3,7 +3,7 @@ var documentController = angular.module('document.controllers', ['ui-notificatio
 documentController.controller('documentCtrl', function($state, $window ,$scope, documentAPIservice,
     _, categoryAPIservice, companyAPIservice, Notification, $http, $stateParams) {
     $scope.serverDomain = documentAPIservice.serverDomain;
-    console.log($scope.serverDomain);
+
     $scope.addNewDocument = function() {
         $state.go('addDocument', {});
     }
@@ -275,6 +275,10 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     // Add new Document  
     $scope.addNewDocument = function() {
         var params = $scope.documentModel;
+        params.subcategory_id = $scope.documentRelationModel.subcategoryAddedId;
+        params.owner = localStorage.getItem("userId");
+        params.site = localStorage.getItem("sites");
+
         documentAPIservice.postDocumentDetail(params).success(function (response, status) {
             var documentName = response.name;
             $scope.documentModel.newDocumentId = response.id;
@@ -319,7 +323,6 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     // Associate Subcategory to newly Created Document
     $scope.addDocumentSubCategory = function() {
         var params = $scope.documentSubCategoryModel;
-        params.document = $scope.documentModel.newDocumentId;
         params.category = $scope.documentSubCategoryModel.categorySelected.id;
         categoryAPIservice.postSubCategoryDetail(params).success(function (response, status) {
             $scope.documentRelationModel.subcategoryAddedId = response.id;
@@ -337,40 +340,48 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         params.category = $scope.documentSubCategoryModel.categorySelected.id;
         categoryAPIservice.putSubCategoryDetail(params, subCatId).success(function (response, status) {
             Notification.success(params.name + ' updated successfully');
-        }).error(function (response, status) {
-            if (status == 400) {
-                if ('name' in response) {
-                    Notification.error(response['name'][0]);
-                }
-            }
-            else if (status == 500) {
-                Notification.error("Server error occured, Contact Admin");
-            }
-            else {
-                Notification.error("Error occured, Contact Admin");
-            }
         })
     }
 
 
     $scope.buildDocumentRelation = function() {
-        var promiseList = [];
-        _.each($scope.documentRelationModel.licenseSelected, function(licenseObj) {
-            _.each($scope.documentRelationModel.verticalSelected, function(verticalObj) {
-                var params = {
-                    vertical_id : verticalObj.id,
-                    license_id : licenseObj.id,
-                    subcategory_id : $scope.documentRelationModel.subcategoryAddedId,
-                };
-                promiseList.push(documentAPIservice.postDocumentRelationDetail(params));
-            })
-        })
-
-        $q.all(promiseList).then(function(values) {
-            // have to make request failure more concreate #todo
-            Notification.success('Relation created successfully');
-            $scope.relMile = true;
+        var verticalSelectedList = $scope.documentRelationModel.verticalSelected;
+        var licenseSelectedList = $scope.documentRelationModel.licenseSelected;
+        var subCatId = $scope.documentRelationModel.subcategoryAddedId;
+        var licenseList = _.map(licenseSelectedList, function(licenseObj) {
+            return licenseObj.id
         });
+        var verticalList = _.map(verticalSelectedList, function(verticalObj) {
+            return verticalObj.id
+        });
+        var licenseStr = licenseList.toString();
+        var verticalStr = verticalList.toString();
+        var params = {
+            license: licenseStr,
+            vertical: verticalStr,
+            subcategory: subCatId
+        }
+
+        documentAPIservice.setRelation(params).success(function (response, status) {
+            Notification.success('Relationship Established');
+        });
+        // _.each(licenseSelectedList, function(licenseObj) {
+        //     _.each(verticalSelectedList, function(verticalObj) {
+        //         var params = {
+        //             vertical : verticalObj.id,
+        //             license : licenseObj.id,
+        //             subcategory : subCatId,
+        //         };
+        //         promiseList.push(documentAPIservice.setRelation(params));
+        //     })
+        // })
+
+        // $q.all(promiseList).then(function(values) {
+        //     console.log(values);
+        //     // have to make request failure more concreate #todo
+        //     Notification.success('Relation created successfully');
+        //     $scope.relMile = true;
+        // });
     }
 
     $scope.editBuildDocumentRelation = function() {

@@ -46,6 +46,21 @@ documentService.factory('documentAPIservice', function($http, Notification) {
         });
     }
 
+    documentAPI.setRelation = function(params) {
+        return $http({
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: documentUrl.relationEndPoint + 'null' + '/set_relation/',
+            transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+            data: params
+        })
+    }
+
     documentAPI.getRelationDetail = function(id) {
         return $http({
             method: 'GET',
@@ -53,21 +68,6 @@ documentService.factory('documentAPIservice', function($http, Notification) {
         });
     }
 
-    // documentAPI.putDocumentDetail = function(params) {
-    //     var id = params.id;
-    //     return $http({
-    //         method: 'PUT',
-    //         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    //         url: verticalUrl.endpoint + id + '/',
-    //         transformRequest: function(obj) {
-    //             var str = [];
-    //             for(var p in obj)
-    //                 str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-    //             return str.join("&");
-    //         },
-    //         data: params
-    //     });
-    // }
 
     documentAPI.postDocVersionDetail = function(uploadUrl, data){
         var fd = new FormData();
@@ -135,7 +135,7 @@ documentService.factory('documentAPIservice', function($http, Notification) {
 
     documentAPI.putDocumentDetail = function(params) {
         return $http({
-           method: 'PUT',
+            method: 'PUT',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             url: documentUrl.endpoint + params.id + '/',
             transformRequest: function(obj) {

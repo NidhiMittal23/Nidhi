@@ -12,7 +12,6 @@ var myApp = angular.module('myApp', [
   'company',
   'document',
   'authService',
-  '720kb.tooltips',
   'ngTagsInput',
   'ngAnimate',
   'ngTouch',
@@ -56,6 +55,9 @@ myApp.directive('fileModel', ['$parse', function($parse){
 myApp.factory('RequestsErrorHandler', function($q) {
   return {
     'responseError': function(rejection) {
+      if (rejection.status == 401) {
+        console.log("Refresh token...or logout user and ask him to re-login..and digest rest requests");
+      }
       if (rejection.status == 400) {
         if ('data' in rejection){
           if (('non_field_errors') in rejection.data) {

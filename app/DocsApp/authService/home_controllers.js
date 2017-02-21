@@ -16,6 +16,7 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
         localStorage.removeItem('sites');
         localStorage.removeItem('isAdmin');
         localStorage.removeItem('isLead');
+        localStorage.removeItem('userId');
         $state.go('auth');
     }
 
