@@ -1,27 +1,67 @@
 <ul ng-if="isEdit===false" class="milestones" ng-init="initMile()">
   <li>
+    <i ng-if="catMile == false" class="milestone-default glyphicon glyphicon-ok"></i>
+    <i ng-if="catMile == true" class="milestone-primary glyphicon glyphicon-ok"></i>
+
+    <div class="panel panel-default" ng-init="init()">
+
+      <div class="panel-heading font-bold">Add Sub-Category</div>
+      <div class="panel-body">
+        <form class="form-horizontal">
+
+          <div class="form-group">
+           <label class="control-label col-sm-2" for="selectCategory">Select Category:</label>
+           <div class="col-sm-4">
+              <select name="selectCategory" id="selectCategory"
+               ng-options="option.name for option in documentSubCategoryModel.categoryOption track by option.id"
+                ng-model="documentSubCategoryModel.categorySelected" class="form-control custom-form-control" required>
+              </select>
+            </div>
+            <a ui-sref="category" tooltip-placement="bottom" uib-tooltip="Manage Category"><span class="glyphicon glyphicon-cog"></span></a>
+          </div>
+
+          <!-- ############################### -->
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="name">Sub-Category Name:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="name" placeholder="Enter Name" ng-model="documentSubCategoryModel.name" ng-required="true">
+            </div>
+          </div>
+
+
+          <!-- <div ng-if="docMile==false" class="form-group"> -->
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary" ng-click="addDocumentSubCategory()">Add SubCategory</button>
+            </div>
+          <!-- </div> -->
+        </form>
+      </div>
+    </div>
+  </li>
+
+  <li>
     <i ng-if="docMile == false" class="milestone-default glyphicon glyphicon-ok"></i>
     <i ng-if="docMile == true" class="milestone-primary glyphicon glyphicon-ok"></i>
 
     <div class="panel panel-default">
 
-    <div class="panel-heading font-bold">Add document</div>
-    <div class="panel-body">
-      <form class="form-horizontal">
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="name">Name:</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="name" placeholder="Enter Name" ng-model="documentModel.name" ng-required="true">
+      <div class="panel-heading font-bold">Add document</div>
+      <div class="panel-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="name">Name:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="name" placeholder="Enter Name" ng-model="documentModel.name" ng-required="true">
+            </div>
           </div>
-        </div>
-        <div ng-if="docMile==false" class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary" ng-click="addNewDocument()">Add Document</button>
-          </div>
-        </div>
-      </form>
+          <!-- <div ng-if="catMile==true && relMile==false" class="form-group"> -->
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary" ng-click="addNewDocument()">Add Document</button>
+            </div>
+          <!-- </div> -->
+        </form>
+      </div>
     </div>
-  </div>
 
   </li>
 
@@ -46,54 +86,13 @@
               <input type="file" id="docfile" file-model=documentVersionModel.docfile>
             </div>
           </div>
-          <div ng-if="docMile == true && verMile==false" class="form-group">
+          <!-- <div ng-if="docMile == true && verMile==false" class="form-group"> -->
             <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary" ng-click="addNewDocumentVersion()" >Add</button>
+              <button type="submit" class="btn btn-primary" ng-click="addNewDocumentVersion()" >Add</button>
             </div>
-          </div>
+          <!-- </div> -->
         </form>
       </div>
-  </div>
-
-  </li>
-
-  <li>
-    <i ng-if="catMile == false" class="milestone-default glyphicon glyphicon-ok"></i>
-    <i ng-if="catMile == true" class="milestone-primary glyphicon glyphicon-ok"></i>
-
-    <div class="panel panel-default" ng-init="init()">
-
-    <div class="panel-heading font-bold">Add Sub-Category</div>
-    <div class="panel-body">
-      <form class="form-horizontal">
-
-        <div class="form-group">
-         <label class="control-label col-sm-2" for="selectCategory">Select Category:</label>
-         <div class="col-sm-4">
-            <select name="selectCategory" id="selectCategory"
-             ng-options="option.name for option in documentSubCategoryModel.categoryOption track by option.id"
-              ng-model="documentSubCategoryModel.categorySelected" class="form-control custom-form-control" required>
-            </select>
-          </div>
-          <a ui-sref="category" tooltips tooltip-template="Manage Category"><span class="glyphicon glyphicon-cog"></span></a>
-        </div>
-
-        <!-- ############################### -->
-        <div class="form-group">
-          <label class="control-label col-sm-2" for="name">Sub-Category Name:</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="name" placeholder="Enter Name" ng-model="documentSubCategoryModel.name" ng-required="true">
-          </div>
-        </div>
-
-
-        <div ng-if="verMile==true && catMile==false" class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary" ng-click="addDocumentSubCategory()">Add SubCategory</button>
-          </div>
-        </div>
-      </form>
-    </div>
   </div>
 
   </li>
@@ -115,7 +114,7 @@
               <option ng-repeat="option in documentRelationModel.licenseOption" ng-model="documentRelationModel.licenseSelected" value="{{option.id}}">{{option.name}}</option>
             </select>
           </div>
-          <a ui-sref="license" tooltips tooltip-template="Manage License"><span class="glyphicon glyphicon-cog" /></a>
+          <a ui-sref="license" tooltip-placement="bottom" uib-tooltip="Manage License"><span class="glyphicon glyphicon-cog" /></a>
         </div>
 
 
@@ -127,15 +126,14 @@
               <option ng-repeat="option in documentRelationModel.verticalOption" ng-model="documentRelationModel.verticalSelected" value="{{option.id}}">{{option.name}}</option>
             </select>
           </div>
-          <a ui-sref="vertical" tooltips tooltip-template="Manage Vertical"><span class="glyphicon glyphicon-cog"></span></a>
+          <a ui-sref="vertical" tooltip-placement="bottom" uib-tooltip="Manage Vertical"><span class="glyphicon glyphicon-cog"></span></a>
         </div>
 
-
-        <div ng-if="catMile==true && relMile==false" class="form-group">
+        <!-- <div ng-if="verMile==true && catMile==false" class="form-group">  -->
           <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-danger" ng-click="buildDocumentRelation()">Add Relation</button>
           </div>
-    
+        <!-- </div> -->
       </form>
     </div>
   </div>
@@ -192,7 +190,7 @@
               ng-model="documentSubCategoryModel.categorySelected" class="form-control custom-form-control" required>
             </select>
           </div>
-          <a ui-sref="category" tooltips tooltip-template="Manage Category"><span class="glyphicon glyphicon-cog"></span></a>
+          <a ui-sref="category" tooltip-placement="bottom" uib-tooltip="Manage Category"><span class="glyphicon glyphicon-cog"></span></a>
         </div>
 
         <!-- ############################### -->
@@ -232,7 +230,7 @@
               </select>
             </div>
             <div class="col-sm-4">
-            <a ui-sref="license" tooltips tooltip-template="Manage License"><span class="glyphicon glyphicon-cog" /></a>
+            <a ui-sref="license" tooltip-placement="bottom" uib-tooltip="Manage License"><span class="glyphicon glyphicon-cog" /></a>
               <tags-input name="tags" placeholder="selected licences" ng-model="documentRelationModel.licenseSelected" display-property="name" add-from-autocomplete-only="true">
                 <auto-complete min-length="1" source="licenseQuery()"></auto-complete>
               </tags-input>
@@ -247,7 +245,7 @@
               ng-options="option.name for option in documentRelationModel.verticalOption track by option.id" class="form-control custom-form-control" required>
                 <option ng-repeat="option in documentRelationModel.verticalOption" ng-model="documentRelationModel.verticalSelected" value="{{option.id}}">{{option.name}}</option>
               </select>
-              <a align='right' ui-sref="vertical" tooltips tooltip-template="Manage Vertical"><span class="glyphicon glyphicon-cog"></span></a>
+              <a align='right' ui-sref="vertical" tooltip-placement="bottom" uib-tooltip="Manage Vertical"><span class="glyphicon glyphicon-cog"></span></a>
             </div>
             <div class="col-sm-4">
               <tags-input name="tags" placeholder="selected verticals" ng-model="documentRelationModel.verticalSelected" display-property="name" add-from-autocomplete-only="true">
