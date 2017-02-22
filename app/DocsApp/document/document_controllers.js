@@ -364,24 +364,8 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
 
         documentAPIservice.setRelation(params).success(function (response, status) {
             Notification.success('Relationship Established');
+            $scope.relMile = true;
         });
-        // _.each(licenseSelectedList, function(licenseObj) {
-        //     _.each(verticalSelectedList, function(verticalObj) {
-        //         var params = {
-        //             vertical : verticalObj.id,
-        //             license : licenseObj.id,
-        //             subcategory : subCatId,
-        //         };
-        //         promiseList.push(documentAPIservice.setRelation(params));
-        //     })
-        // })
-
-        // $q.all(promiseList).then(function(values) {
-        //     console.log(values);
-        //     // have to make request failure more concreate #todo
-        //     Notification.success('Relation created successfully');
-        //     $scope.relMile = true;
-        // });
     }
 
     $scope.editBuildDocumentRelation = function() {
