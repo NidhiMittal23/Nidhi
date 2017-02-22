@@ -29,11 +29,11 @@
           </div>
 
 
-          <!-- <div ng-if="docMile==false" class="form-group"> -->
+          <div ng-if="catMile==false" class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-primary" ng-click="addDocumentSubCategory()">Add SubCategory</button>
+              <button type="submit" class="btn btn-default" ng-click="addDocumentSubCategory()">Add SubCategory</button>
             </div>
-          <!-- </div> -->
+          </div>
         </form>
       </div>
     </div>
@@ -54,11 +54,11 @@
               <input type="text" class="form-control" id="name" placeholder="Enter Name" ng-model="documentModel.name" ng-required="true">
             </div>
           </div>
-          <!-- <div ng-if="catMile==true && relMile==false" class="form-group"> -->
+          <div ng-if="catMile==true && docMile==false" class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <button type="submit" class="btn btn-primary" ng-click="addNewDocument()">Add Document</button>
             </div>
-          <!-- </div> -->
+          </div>
         </form>
       </div>
     </div>
@@ -86,11 +86,11 @@
               <input type="file" id="docfile" file-model=documentVersionModel.docfile>
             </div>
           </div>
-          <!-- <div ng-if="docMile == true && verMile==false" class="form-group"> -->
+          <div ng-if="docMile == true && verMile==false" class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <button type="submit" class="btn btn-primary" ng-click="addNewDocumentVersion()" >Add</button>
             </div>
-          <!-- </div> -->
+          </div>
         </form>
       </div>
   </div>
@@ -129,18 +129,18 @@
           <a ui-sref="vertical" tooltip-placement="bottom" uib-tooltip="Manage Vertical"><span class="glyphicon glyphicon-cog"></span></a>
         </div>
 
-        <!-- <div ng-if="verMile==true && catMile==false" class="form-group">  -->
+        <div ng-if="verMile==true && relMile==false" class="form-group"> 
           <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-danger" ng-click="buildDocumentRelation()">Add Relation</button>
           </div>
-        <!-- </div> -->
+        </div>
       </form>
     </div>
   </div>
 
   </li>
 
-  <li ng-if="docMile == true && catMile == true && relMile == true">
+  <li ng-if="catMile == true && docMile == true && verMile==true && relMile == true">
     <i  class="milestone-success glyphicon glyphicon-ok"></i>
      <div>You're good to go..!</div>
   </li>
