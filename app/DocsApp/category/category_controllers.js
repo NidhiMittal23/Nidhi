@@ -1,7 +1,15 @@
 var categoryController = angular.module('category.controllers', ['ui-notification']);
 
 categoryController.controller('categoryCtrl', function($state, $scope, categoryAPIservice) {
+    var params = {};
+    $scope.categoryInitial = function () {
+        // pagination control
+        $scope.bigTotalItems;
+        $scope.maxSize = 5;
+        $scope.bigCurrentPage = 1;
 
+        $scope.pageChanged();
+    }
     $scope.addNewCategory = function() {
         $state.go('addCategory', {});
     }
@@ -10,9 +18,13 @@ categoryController.controller('categoryCtrl', function($state, $scope, categoryA
         $state.go('editCategory', {id: id, name: name});
     }
 
-    categoryAPIservice.getcategory().success(function (response, status) {
-        $scope.categoryList = response;
-    })
+    $scope.pageChanged = function() {
+        params.page = $scope.bigCurrentPage;
+        categoryAPIservice.getcategory().success(function (response, status) {
+            $scope.categoryList = response;
+            $scope.bigTotalItems = response.count;
+        })
+    }
 });
 
 

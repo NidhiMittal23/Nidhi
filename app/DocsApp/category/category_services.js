@@ -10,10 +10,11 @@ categoryService.factory('categoryAPIservice', function($http) {
         'subcategoryEndpoint': 'http://localhost:9000/subcategory/'
     }
 
-    categoryAPI.getcategory = function() {
+    categoryAPI.getcategory = function(params) {
         return $http({
             method: 'GET', 
-            url: categoryUrl.endpoint
+            url: categoryUrl.endpoint,
+            params: params
         });
     }
 

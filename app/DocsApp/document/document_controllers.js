@@ -166,7 +166,7 @@ documentController.controller('docVersionAlterCtrl', function($scope, $state, $s
 
 documentController.controller('documentAlterCtrl', function($state, $stateParams, $scope,
         documentAPIservice, verticalAPIservice, licenseAPIservice, categoryAPIservice, $q,
-        Notification) {
+        Notification, $timeout) {
     $scope.documentModel = {};
     $scope.documentRelationModel = {};
     $scope.documentSubCategoryModel = {};
@@ -186,10 +186,11 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     $scope.init = function() {
         var params = {};
         params.page = 1;
-        var categories = categoryAPIservice.getcategory();
+        // TODO: have to configure way to should to data in dropdown
+        // Or choose any different UX
+        var categories = categoryAPIservice.getcategory(params);
         var verticals = verticalAPIservice.getVertical(params);
         var licenses = licenseAPIservice.getlicense(params);
-
 
         $q.all([verticals, licenses, categories]).then(function(values) {
             $scope.documentRelationModel.verticalOption = values[0].data.results;
@@ -212,20 +213,23 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         $scope.isEdit = true;
         var docId = $stateParams.id;
         var docName = $stateParams.name;
+        $scope.documentRelationModel.licenseSelected = [];
+        $scope.documentRelationModel.verticalSelected = [];
 
         // request to server to get detail of perticular vertical.
         documentAPIservice.getDocumentDetail(docId).success(function (response, status) {
             //populate the input field with data.
             $scope.documentModel = response;
             
-            if (response.subcategories !== null) {
-
-                $scope.documentRelationModel.subcategoryAddedId = response.subcategories.id;
-                $scope.documentSubCategoryModel.name = response.subcategories.name;
-                categoryAPIservice.getCategoryDetails(response.subcategories.category).success(function (response, status) {
+            if (response.subcategory !== null) {
+                $scope.documentRelationModel.subcategoryAddedId = response.subcategory.id;
+                $scope.documentSubCategoryModel.name = response.subcategory.name;
+                var categoryId = response.subcategory.category;
+                categoryAPIservice.getCategoryDetails(categoryId).success(function (response, status) {
 
                     //selected Category object
                     $scope.documentSubCategoryModel.categorySelected = response;
+                    $scope.documentSubCategoryModel.categoryNameSelected = response.name; 
                 });
 
 
@@ -236,29 +240,31 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
                 var relLicense = [];// $scope.documentRelationModel.licenseSelected is not defined so creating separate array to store objects
                 var relVertical = [];
 
-                $scope.relExisting = response.subcategories.relations;
+                $scope.relExisting = response.subcategory.relations;
+                // console.log($scope.relExisting);
 
-                _.each($scope.relExisting, function(id) {
-                    documentAPIservice.getRelationDetail(id).success(function (response, status) {
-                        //console.log(response);
+                // get licId and verId after 1 sec..
+                // or create documentRelationModel.licenseSelected after 1 sec
+                $timeout(function () {
+                    _.each($scope.relExisting, function(id) {
+                        documentAPIservice.getRelationDetail(id).success(function (response, status) {
+                            if(licId.indexOf(response.license.id) === -1) {
+                                licId.push(response.license.id);
+                                // relLicense.push(response.license);
+                                $scope.documentRelationModel.licenseSelected.push(response.license);
+                            }
 
-                        if(licId.indexOf(response.license.id) === -1) {
-                            licId.push(response.license.id);
-                            relLicense.push(response.license);
-                        }
-
-                        if(verId.indexOf(response.vertical.id) === -1) {
-                            verId.push(response.vertical.id);
-                            relVertical.push(response.vertical);
-                        }
-                        
+                            if(verId.indexOf(response.vertical.id) === -1) {
+                                verId.push(response.vertical.id);
+                                // relVertical.push(response.vertical);
+                                $scope.documentRelationModel.verticalSelected.push(response.vertical);
+                            }
+                            
+                        })
                     })
-                })
-
-                //console.log(relLicense);
-                //console.log(relVertical);
-                $scope.documentRelationModel.licenseSelected = relLicense;
-                $scope.documentRelationModel.verticalSelected = relVertical;
+                }, 1000);
+                // $scope.documentRelationModel.licenseSelected = relLicense;
+                // $scope.documentRelationModel.verticalSelected = relVertical;
             }
             else{
                 $scope.noSubCategory = true;
@@ -301,23 +307,16 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     };
 
     $scope.editExistDocument = function() {
-        var params = $scope.documentModel;
-        documentAPIservice.putDocumentDetail(params).success(function (response, status) {
-            Notification.success(params.name + ' updated successfully');
-        }).error(function (response, status) {
-            if (status == 400) {
-                if ('name' in response) {
-                    Notification.error(response['name'][0]);
-                }
-            }
-            else if (status == 500) {
-                Notification.error("Server error occured, Contact Admin");
-            }
-            else {
-                Notification.error("Error occured, Contact Admin");
-            }
-        })
-
+        // TODO: update Exist Document not working
+        Notification.error("Edit document Name; Feature coming soon");
+        // var params = {};
+        // params.site = $scope.documentModel.site;
+        // params.subcategory_id = $scope.documentRelationModel.subcategoryAddedId;
+        // params.name = $scope.documentModel.name;
+        // params.id = $scope.documentModel.id;
+        // documentAPIservice.putDocumentDetail(params).success(function (response, status) {
+        //     Notification.success(params.name + ' updated successfully');
+        // })
     }
 
     // Associate Subcategory to newly Created Document
@@ -334,9 +333,10 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     }
 
     $scope.editDocumentSubCategory = function() {
+        // debugger;
         var params = $scope.documentSubCategoryModel;
         var subCatId = $scope.documentRelationModel.subcategoryAddedId;
-        params.document = $scope.documentModel.id;
+        // params.document = $scope.documentModel.id;
         params.category = $scope.documentSubCategoryModel.categorySelected.id;
         categoryAPIservice.putSubCategoryDetail(params, subCatId).success(function (response, status) {
             Notification.success(params.name + ' updated successfully');
@@ -369,45 +369,40 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     }
 
     $scope.editBuildDocumentRelation = function() {
-        var promiseList = [];
-        var deleteList = [];
+        // TODO: send request to server to delete provided sub category from (license, vertical) tuple
+        Notification.error("Edit Relations; Feature coming soon");
+        // var promiseList = [];
+        // var deleteList = [];
 
-        
+        // _.each($scope.relExisting, function(id) {
+        //     deleteList.push(documentAPIservice.deleteRelation(id));
+        // })
 
-        
-        _.each($scope.relExisting, function(id) {
-            deleteList.push(documentAPIservice.deleteRelation(id));
-        })
+        // console.log($scope.relExisting);
 
-        //console.log(deleteList);
-
-        $q.all(deleteList).then(function(values) {
-            Notification.error('deleted old relations');
-            deleteList.length = 0;
-            //console.log(deleteList);
+        // $q.all(deleteList).then(function(values) {
+        //     Notification.error('deleted old relations');
+        //     deleteList.length = 0;
+        //     //console.log(deleteList);
 
 
-            _.each($scope.documentRelationModel.licenseSelected, function(licenseObj) {
-                _.each($scope.documentRelationModel.verticalSelected, function(verticalObj) {
-                    var params = {
-                        vertical_id : verticalObj.id,
-                        license_id : licenseObj.id,
-                        subcategory_id : $scope.documentRelationModel.subcategoryAddedId,
-                    };
-                    documentAPIservice.postDocumentRelationDetail(params).success(function(response){
-                        //console.log(response);
-                    });
-                })
-            })
+        //     _.each($scope.documentRelationModel.licenseSelected, function(licenseObj) {
+        //         _.each($scope.documentRelationModel.verticalSelected, function(verticalObj) {
+        //             var params = {
+        //                 vertical_id : verticalObj.id,
+        //                 license_id : licenseObj.id,
+        //                 subcategory_id : $scope.documentRelationModel.subcategoryAddedId,
+        //             };
+        //             documentAPIservice.postDocumentRelationDetail(params).success(function(response){
+        //                 //console.log(response);
+        //             });
+        //         })
+        //     })
 
-        }).then(function(values){
-            Notification.success('new relations created');
-            $scope.buttonHide = true;
-        });
-
-        
-        
-
+        // }).then(function(values){
+        //     Notification.success('new relations created');
+        //     $scope.buttonHide = true;
+        // });
         
     }
     //code for autofill tags, present in edit relation
