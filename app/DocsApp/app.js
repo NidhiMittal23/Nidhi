@@ -56,7 +56,8 @@ myApp.factory('RequestsErrorHandler', function($q) {
   return {
     'responseError': function(rejection) {
       if (rejection.status == 401) {
-        console.log("Refresh token...or logout user and ask him to re-login..and digest rest requests");
+        console.log("Refresh token...or logout user and ask him to re-login..");
+        $state.transitionTo("auth");
       }
       if (rejection.status == 400) {
         if ('data' in rejection){

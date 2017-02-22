@@ -8,6 +8,24 @@ companyService.factory('companyAPIservice', function($http, _) {
         'endpoint': 'http://localhost:9000/company/',
         'siteEndpoint': 'http://localhost:9000/site/',
         'relationEndpoint':'http://localhost:9000/relation/',
+        'user': "http://localhost:9000/user/"
+    }
+
+    // while adding new company fetch user whose has not been assigned to any site
+    // http://localhost:9000/user/null/no_company
+
+    companyAPI.getUserWithNoCompany = function() {
+        return $http({
+            method: 'GET',
+            url: companyUrl.user + 'null' + '/no_company/'
+        })
+    }
+
+    companyAPI.getCompanyEmployees = function(companyId) {
+        return $http({
+            method: 'GET',
+            url: companyUrl.endpoint + companyId + '/get_company_employees/'
+        })
     }
 
     companyAPI.getSiteDocuments = function(siteId) {

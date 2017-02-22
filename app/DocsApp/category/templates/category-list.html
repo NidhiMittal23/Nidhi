@@ -1,17 +1,21 @@
-<button type="button" class="btn btn-primary" ng-click="addNewCategory()">Add Category</button>
-<div class="table-responsive">
-  <table class="table table-hover">
-    <thead>
-            <tr>
-              <th>Id</th>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="category in categoryList.results" style="cursor: hand;cursor: pointer;" ng-click="editExistCategory(category.id, category.name)">
-              <td>{{category.id ? category.id : 'N/A'}}</td>
-              <td>{{category.name ? category.name : 'N/A'}}</td>
-            </tr>
-          </tbody>
-  </table>
+<div ng-init="categoryInitial()">
+  <button type="button" class="btn btn-default" ng-click="addNewCategory()">Add Category</button>
+  <div class="table-responsive">
+    <table class="table table-hover table-striped">
+      <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="category in categoryList.results" style="cursor: hand;cursor: pointer;" ng-click="editExistCategory(category.id, category.name)">
+                <td>{{category.id ? category.id : 'N/A'}}</td>
+                <td>{{category.name ? category.name : 'N/A'}}</td>
+              </tr>
+            </tbody>
+    </table>
+  </div>
+  <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged()"></ul>
+  </div>
 </div>
