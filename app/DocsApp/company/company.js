@@ -10,6 +10,15 @@ companyApp.config(function($stateProvider, $urlRouterProvider){
             authenticate: true
         })
 
+        .state('users',{
+            url: '/{name}/users',
+            parent: 'home',
+            templateUrl: 'DocsApp/company/templates/user-list.html',
+            controller: 'userCtrl',
+            params: {id: null, name: null},
+            authenticate: true
+        })
+
         .state('companySite', {
             url: '/company-name/:id?name',
             parent: 'home',

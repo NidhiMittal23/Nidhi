@@ -32,6 +32,14 @@ companyController.controller('companyCtrl', function($state, $scope, companyAPIs
     }
 });
 
+companyController.controller('userCtrl', function($state, $stateParams, $scope, companyAPIservice) {
+    var companyId = $stateParams.id;
+
+    companyAPIservice.getCompanyUsers(companyId).success(function(response, status) {
+        $scope.userList = response.results[0];
+    })
+});
+
 companyController.controller('companyAlterCtrl', function($scope, $state, $stateParams, $q, Notification, companyAPIservice, industryAPIservice,
     licenseAPIservice, verticalAPIservice) {
     $scope.companyModel = {};
@@ -233,3 +241,4 @@ companyController.controller('siteDocCtrl', function($state, $stateParams, $scop
 
 
 });
+

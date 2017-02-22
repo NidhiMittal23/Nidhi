@@ -25,6 +25,13 @@ companyService.factory('companyAPIservice', function($http, _) {
         });
     }
 
+    companyAPI.getCompanyUsers =function(params) {
+        return $http({
+            method: 'GET',
+            url: companyUrl.endpoint + params +"/get_company_employees/",
+        });
+    }
+
     companyAPI.getCompanyDetails = function(id) {
         return $http({
             method: 'GET', 

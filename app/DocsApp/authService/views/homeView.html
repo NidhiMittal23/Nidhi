@@ -1,4 +1,4 @@
-<div ng-cloak>
+<div ng-cloak class="navg">
   <div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
     <a class="navmenu-brand visible-md visible-lg" ui-sref="Link to Dashboard">Food Pro Docs</a>
     <ul class="nav navmenu-nav">
@@ -13,7 +13,7 @@
       <!-- Show Document mangement When User is Admin -->
       <!-- Admin Site : 1 Hardcoded -->
       <div ng-if="home.isAdmin === true">
-        <li><a ui-sref="siteDocument({siteId: home.adminSiteId})"><h5>Document Management</h5></a></li>
+        <li  style="padding-left: 15px"><a ui-sref="siteDocument({siteId: home.adminSiteId})"><h4>Document Management</h4></a></li>
       </div>
     </ul>
     <div ng-if="home.isAdmin === true">
@@ -43,7 +43,7 @@
                   </uib-accordion>
                   <!-- User accordion  -->
                   <uib-accordion>
-                    <a>Users</a>
+                    <a ui-sref="users({id: company.id, name: company.name})">Users</a>
                   </uib-accordion>
                 </div>
               </uib-accordion>
