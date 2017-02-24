@@ -33,10 +33,23 @@ companyController.controller('companyCtrl', function($state, $scope, companyAPIs
 });
 
 companyController.controller('userCtrl', function($state, $stateParams, $scope, companyAPIservice) {
+
+    $scope.userList = {};
+    $scope.siteList = {};
+    $scope.selectSite = {};
     var companyId = $stateParams.id;
 
+
+    companyAPIservice.getCompanyDetails(companyId).success(function(response, status) {
+        $scope.siteList = response.sites;
+    })
+
     companyAPIservice.getCompanyUsers(companyId).success(function(response, status) {
-        $scope.userList = response.results[0];
+        var users = response.results[0];
+        for (k in users){
+            $scope.userList = users[k];
+        }
+        console.log($scope.userList);
     })
 });
 
