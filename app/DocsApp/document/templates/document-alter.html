@@ -22,15 +22,15 @@
 
           <!-- ############################### -->
           <div class="form-group">
-            <label class="control-label col-sm-2" for="name">Sub-Category Name:</label>
-            <div class="col-sm-10">
+            <label class="control-label col-sm-2" for="name">Sub-Category Number:</label>
+            <div class="col-sm-6">
               <input type="text" class="form-control" id="name" placeholder="Enter Name" ng-model="documentSubCategoryModel.name" ng-required="true">
             </div>
           </div>
 
 
           <div ng-if="catMile==false" class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-2 col-sm-6">
               <button type="submit" class="btn btn-default" ng-click="addDocumentSubCategory()">Add SubCategory</button>
             </div>
           </div>
@@ -50,12 +50,12 @@
         <form class="form-horizontal">
           <div class="form-group">
             <label class="control-label col-sm-2" for="name">Name:</label>
-            <div class="col-sm-10">
+            <div class="col-sm-6">
               <input type="text" class="form-control" id="name" placeholder="Enter Name" ng-model="documentModel.name" ng-required="true">
             </div>
           </div>
           <div ng-if="catMile==true && docMile==false" class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-2 col-sm-6">
               <button type="submit" class="btn btn-primary" ng-click="addNewDocument()">Add Document</button>
             </div>
           </div>
@@ -76,18 +76,18 @@
         <form class="form-horizontal">
           <div class="form-group">
             <label class="control-label col-sm-2" for="name">Name:</label>
-            <div class="col-sm-10">
+            <div class="col-sm-6">
               <input type="text" class="form-control" id="name" placeholder="Enter Name" ng-model="documentVersionModel.name" ng-required="true">
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-2" for="file">File:</label>
-            <div class="col-sm-10">
+            <div class="col-sm-6">
               <input type="file" id="docfile" file-model=documentVersionModel.docfile>
             </div>
           </div>
           <div ng-if="docMile == true && verMile==false" class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-2 col-sm-6">
               <button type="submit" class="btn btn-primary" ng-click="addNewDocumentVersion()" >Add</button>
             </div>
           </div>
@@ -130,7 +130,7 @@
         </div>
 
         <div ng-if="verMile==true && relMile==false" class="form-group"> 
-          <div class="col-sm-offset-2 col-sm-10">
+          <div class="col-sm-offset-2 col-sm-6">
             <button type="submit" class="btn btn-danger" ng-click="buildDocumentRelation()">Add Relation</button>
           </div>
         </div>
@@ -174,7 +174,7 @@
 
         <!-- ############################### -->
         <div class="form-group">
-          <label class="control-label col-sm-3" for="name">Sub-Category Name:</label>
+          <label class="control-label col-sm-3" for="name">Sub-Category Number:</label>
           <div class="col-sm-6">
             <input type="text" class="form-control" id="name" placeholder="Enter Name" ng-model="documentSubCategoryModel.name" ng-required="true">
           </div>
@@ -182,10 +182,10 @@
 
 
         <div class="form-group">
-          <div ng-if="noSubCategory==false" class="col-sm-offset-2 col-sm-10">
+          <div ng-if="noSubCategory==false" class="col-sm-offset-2 col-sm-6">
             <button type="submit" class="btn btn-primary" ng-click="editDocumentSubCategory()">Edit SubCategory</button>
           </div>
-          <div ng-if="noSubCategory==true" class="col-sm-offset-2 col-sm-10">
+          <div ng-if="noSubCategory==true" class="col-sm-offset-2 col-sm-6">
             <button type="submit" class="btn btn-primary" ng-click="addDocumentSubCategory()">Add SubCategory</button>
           </div>
         </div>
@@ -206,7 +206,7 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
+          <div class="col-sm-offset-2 col-sm-6">
             <button type="submit" class="btn btn-primary" ng-click="editExistDocument()">Edit Document</button>
           </div>
         </div>
@@ -255,12 +255,12 @@
           </div>
 
           <div ng-if="buttonHide == false && noSubCategory==false" class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-2 col-sm-6">
             <button type="submit" class="btn btn-primary" ng-click="editBuildDocumentRelation()">Edit Relation</button>
             </div>
           </div>
           <div ng-if="buttonHide == true" class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-2 col-sm-6">
               <div>Relations Updated!<span  class="glyphicon glyphicon-ok"></span> *to re-Edit relations, visit settings page again.</div>
             </div>
           </div>

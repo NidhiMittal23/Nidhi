@@ -37,6 +37,7 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
     $scope.companyModel = {};
     $scope.companySiteModel = {};
     $scope.companyModel.phone_number;
+    $scope.companyModel.email;
     $scope.companyModel.isActive;
     $scope.companyModel.paymentDate;
     $scope.companyModel.citySelected = "";

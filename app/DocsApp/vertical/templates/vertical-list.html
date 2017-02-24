@@ -9,9 +9,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="vertical in verticalList.results" style="cursor: hand;cursor: pointer;" ng-click="editExistVertical(vertical.id, vertical.name)">
+              <tr ng-repeat="vertical in verticalList.results">
                 <td>{{vertical.id ? vertical.id : 'N/A'}}</td>
                 <td>{{vertical.name ? vertical.name : 'N/A'}}</td>
+                <td style="cursor: pointer" ng-click="editExistVertical(vertical.id, vertical.name)" >Setting<span> </span><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></td>
               </tr>
             </tbody>
     </table>

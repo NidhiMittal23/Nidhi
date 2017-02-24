@@ -89,6 +89,7 @@ companyService.factory('companyAPIservice', function($http, _) {
         payload.append('logo', params.logo);
         payload.append('phone_number', IndiaMobileCode + params.phone_number);
         payload.append('payment_date', params.paymentDate);
+        payload.append('email', params.email);
 
         return $http({
             url: companyUrl.endpoint,

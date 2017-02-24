@@ -53,18 +53,6 @@ categoryController.controller('categoryAlterCtrl', function($scope, $state, $sta
         categoryAPIservice.postCategoryDetail(params).success(function (response, status) {
             var categoryName = params.name;
             Notification.success(categoryName+' added successfully');
-        }).error( function(response, status) {
-            if (status == 400) {
-                if ('name' in response) {
-                    Notification.error(response['name'][0]);
-                }
-            }
-            else if (status == 500) {
-                Notification.error("Server error occured, Contact Admin");
-            }
-            else {
-                Notification.error("Error occured, Contact Admin");
-            }
         })
     }
 

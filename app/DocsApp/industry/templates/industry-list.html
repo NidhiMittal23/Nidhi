@@ -9,9 +9,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="industry in industryList.results" style="cursor: hand;cursor: pointer;" ng-click="editExistIndustry(industry.id, industry.name)">
+              <tr ng-repeat="industry in industryList.results">
                 <td>{{industry.id ? industry.id : 'N/A'}}</td>
                 <td>{{industry.name ? industry.name : 'N/A'}}</td>
+                <td style="cursor: pointer" ng-click="editExistIndustry(industry.id, industry.name)" >Setting<span> </span><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></td>
               </tr>
             </tbody>
     </table>
