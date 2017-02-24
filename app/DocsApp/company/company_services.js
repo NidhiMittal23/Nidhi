@@ -11,6 +11,7 @@ companyService.factory('companyAPIservice', function($http, _) {
         'user': "http://localhost:9000/user/"
     }
 
+    var IndiaMobileCode = "+91"
     // while adding new company fetch user whose has not been assigned to any site
     // http://localhost:9000/user/null/no_company
 
@@ -78,28 +79,10 @@ companyService.factory('companyAPIservice', function($http, _) {
         });
     }
 
-
-
-    companyAPI.postCompanyDetail = function(params) {
-        var payload = new FormData();
-
-        payload.append('name', params.name);
-        payload.append('industry', params.industry);
-
-        return $http({
-            url: companyUrl.endpoint,
-            method: 'POST',
-            data: payload,
-            //assign content-type as undefined, the browser
-            //will assign the correct boundary for us
-            headers: { 'Content-Type': undefined},
-            //prevents serializing payload.  don't do it.
-            transformRequest: angular.identity
-        });
-    }
-
     companyAPI.postCompanyDetail = function(params) {
 
+        // Enhance: there can be a form TEMPLATE ; because chances of 
+        // getting this wrong is highly likable
         var payload = new FormData();
 
         payload.append('name', params.name);
@@ -107,6 +90,12 @@ companyService.factory('companyAPIservice', function($http, _) {
         _.each(params.industrySelected, function(industry) {
             payload.append('industry', industry);
         });
+
+        payload.append('is_active', params.isActive);
+        payload.append('city', params.citySelected);
+        payload.append('logo', params.logo);
+        payload.append('phone_number', IndiaMobileCode + params.phone_number);
+        payload.append('payment_date', params.paymentDate);
 
         return $http({
             url: companyUrl.endpoint,
@@ -122,11 +111,10 @@ companyService.factory('companyAPIservice', function($http, _) {
 
     companyAPI.postCompanySiteDetail = function(params) {
         var payload = new FormData();
-
-        payload.append('company', params.siteCompanyId);
+        payload.append('company', params.companyId);
         payload.append('name', params.name);
         payload.append('location', params.location);
-        
+
         _.each(params.licenseSelected, function(license) {
             payload.append('license', license);
         });
@@ -134,6 +122,11 @@ companyService.factory('companyAPIservice', function($http, _) {
         _.each(params.verticalSelected, function(vertical) {
             payload.append('vertical', vertical);
         });
+
+        _.each(params.companyEmployeesSelected, function(employee) {
+            payload.append('employee', employee);
+        });
+
 
         return $http({
             url: companyUrl.siteEndpoint,

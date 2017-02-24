@@ -16,7 +16,10 @@ var myApp = angular.module('myApp', [
   'ngAnimate',
   'ngTouch',
   'ui.bootstrap',
-  'ngTile'
+  'ngTile',
+  'ngSanitize',
+  'ui.utils',
+  'ui.bootstrap.datetimepicker'
 ])
 
 myApp.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider) {
