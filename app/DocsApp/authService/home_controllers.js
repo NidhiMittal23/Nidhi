@@ -51,6 +51,9 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
             })
         }
         else {
+            // TODO: populate this based on sites user is registered into
+            // This will solve case when user is involved in many sites
+            // create a side nave based on user's site not company..
             vm.companyId = localStorage.getItem("company");
             companyAPIservice.getCompanyDetails(vm.companyId).success(function(response, status) {
                 $scope.SiteMangement = {}

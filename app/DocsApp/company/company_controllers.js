@@ -33,9 +33,37 @@ companyController.controller('companyCtrl', function($state, $scope, companyAPIs
 });
 
 companyController.controller('companyAlterCtrl', function($scope, $state, $stateParams, $q, Notification, companyAPIservice, industryAPIservice,
-    licenseAPIservice, verticalAPIservice) {
+    licenseAPIservice, verticalAPIservice, $filter) {
     $scope.companyModel = {};
     $scope.companySiteModel = {};
+    $scope.companyModel.phone_number;
+    $scope.companyModel.isActive;
+    $scope.companyModel.paymentDate;
+    $scope.companyModel.citySelected = "";
+    $scope.companyModel.logo;
+    $scope.companyModel.citylist = [
+        "Agra", "Ahmedabad", "Alappuzha", "Alwar", "Amritsar", "Aurangabad",
+        "Bangalore", "Bharatpur", "Bhavnagar", "Bhikaner", "Bhopal", "Bhubaneshwar",
+        "Bodh Gaya", "Calangute", "Chandigarh", "Chennai", "Chittaurgarh", "Coimbatore",
+        "Cuttack", "Dalhousie", "Dehradun", "Delhi", "Diu-Island", "Ernakulam", "Faridabad", "Gaya",
+        "Gangtok", "Ghaziabad", "Gurgaon", "Guwahati", "Gwalior", "Haridwar", "Hyderabad",
+        "Imphal", "Indore", "Jabalpur", "Jaipur", "Jaisalmer", "Jalandhar", "Jamshedpur",
+        "Jodhpur", "Junagadh", "Kanpur", "Kanyakumari", "Khajuraho", "Khandala", "Kochi",
+        "Kodaikanal", "Kolkata", "Kota", "Kottayam", "Kovalam", "Lucknow", "Ludhiana", "Madurai",
+        "Manali", "Mangalore", "Margao", "Mathura", "Mountabu", "Mumbai", "Mussoorie", "Mysore",
+        "Nagpur", "Nainital", "Noida", "Ooty", "Orchha", "Panaji", "Patna", "Pondicherry",
+        "Porbandar", "Portblair", "Pune", "Puri", "Pushkar", "Rajkot", "Rameswaram", "Ranchi", "Sanchi",
+        "Secunderabad", "Shimla", "Surat", "Thanjavur", "Thiruchchirapalli", "Thrissur", "Tirumala",
+        "Udaipur", "Vadodra", "Varanasi", "Vasco-Da-Gama", "Vijayawada", "Visakhapatnam"
+    ];
+
+    $scope.onTimeSet = function (newDate, oldDate) {
+        $scope.companyModel.paymentDate = $filter('date')(newDate, "yyyy-MM-ddThh:mm");
+    }
+
+    $scope.getCountryStates = function() {
+    }
+    
     
     if ($state.current.name == 'editCompany') {
         $scope.isEdit = true;
@@ -63,51 +91,17 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
         });
     }
 
-    // $scope.initSite = function () {
-    //     $scope.companySiteModel.licenseSelected = [];
-    //     $scope.companySiteModel.verticalSelected = [];
-
-    //     $scope.companySiteModel.selectedLicenseId = function(licenseId) {
-    //         $scope.companySiteModel.licenseSelected = licenseId;
-    //     }
-
-    //     $scope.companySiteModel.selectedVerticalId = function(verticalId) {
-    //         $scope.companySiteModel.verticalSelected = verticalId;
-    //     }
-
-    //     var licenses = licenseAPIservice.getlicense();
-    //     var verticals = verticalAPIservice.getVertical();
-
-    //     $q.all([verticals, licenses]).then(function(values) {
-    //         $scope.companySiteModel.verticalOption = values[0].data.results;
-    //         $scope.companySiteModel.licenseOption = values[1].data.results;
-    //     });
-    // }
-
     // on submit button click
     $scope.addNewCompany = function() {
         var params = $scope.companyModel;
         // default industry has been to set to {'1': 'Food'}
-        console.log(params);
         companyAPIservice.postCompanyDetail(params).success(function (response, status) {
             $scope.siteCompany = response;
             var companyName = response.name;
             $scope.companyIdAdded = response.id;
             Notification.success(companyName+' added successfully');
-            // $scope.companyIdAdded = 
         })
     }
-
-
-    // $scope.addNewCompanySite = function() {
-    //     var params = $scope.companySiteModel;
-    //     params.siteCompanyId = $scope.siteCompany.id;
-        
-    //     companyAPIservice.postCompanySiteDetail(params).success(function (response, status) {
-    //         var siteName = params.name;
-    //         Notification.success(siteName+' added successfully');
-    //     })
-    // }
 });
 
 companyController.controller('companySiteCtrl', function($state, $stateParams, $scope, companyAPIservice) {
@@ -188,7 +182,7 @@ companyController.controller('siteDocCtrl', function($state, $stateParams, $scop
 });
 
 companyController.controller('siteCtrl', function($state, $stateParams, $scope, companyAPIservice,
-    licenseAPIservice, verticalAPIservice, $q) {
+    licenseAPIservice, verticalAPIservice, $q, Notification) {
     $scope.companySiteModel = {};
 
     if ($state.current.name == 'addCompanySite') {
@@ -228,19 +222,9 @@ companyController.controller('siteCtrl', function($state, $stateParams, $scope, 
     }
 
     $scope.addNewCompanySite = function() {
-        var params = {}
-        params.name = $scope.companySiteModel.name;
-        params.location = $scope.companySiteModel.location;
-        params.employee = // ask for user to input from pertical drop dwon
-        params.company = $scope.companySiteModel.companyId;
-        params.license = $scope.companySiteModel.licenseSelected;
-        params.vertical = $scope.companySiteModel.verticalSelected;
-
-        // params.siteCompanyId = $scope.siteCompany.id;
-        console.log(params);
-        // companyAPIservice.postCompanySiteDetail(params).success(function (response, status) {
-        //     var siteName = params.name;
-        //     Notification.success(siteName+' added successfully');
-        // })
+        companyAPIservice.postCompanySiteDetail($scope.companySiteModel).success(function (response, status) {
+            var siteName = response.name;
+            Notification.success(siteName+' added successfully');
+        })
     }
 })
