@@ -1,15 +1,45 @@
-<button type="button" class="btn btn-primary" ng-click="addNewCompanySite()">Add new Site</button>
+<div class="row">
+  <div class="col-md-10"><h4>Sites</h4>
+  </div>
+  <div>
+    <button type="button" class="btn btn-default" ng-click="addNewCompanySite()">Add Site</button>
+  </div>
+</div>
 <div class="table-responsive">
-  <table class="table table-hover">
+  <table class="table table-hover table-striped">
     <thead>
-            <tr>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="companySite in companySiteList.sites" style="cursor: hand;cursor: pointer;">
-              <td ng-click="gotoSiteDoc(companySite.id, companySite.name)">{{companySite.name ? companySite.name : 'N/A'}}</td>
-            </tr>
-          </tbody>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="companySite in companySiteList.sites" style="cursor: hand;cursor: pointer;">
+        <td ui-sref="siteDocument({siteId: companySite.id})">{{companySite.name ? companySite.name : 'N/A'}}</td>
+        <td ng-click="editcompanySite(companySite.id, companySite.name)" ><span style="cursor: hand;cursor: pointer;">Setting<span> </span><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<hr>
+<!-- Site User -->
+<div class="row">
+  <div class="col-md-10"><h4>Users</h4>
+  </div>
+  <div>
+    <button type="button" class="btn btn-default" ng-click="addNewCompanySite()">Add User</button>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="companySite in companySiteList.sites" style="cursor: hand;cursor: pointer;">
+        <td ng-click="gotoSiteDoc(companySite.id, companySite.name)">{{companySite.name ? companySite.name : 'N/A'}}</td>
+      </tr>
+    </tbody>
   </table>
 </div>
