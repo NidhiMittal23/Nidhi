@@ -32,25 +32,54 @@ companyController.controller('companyCtrl', function($state, $scope, companyAPIs
     }
 });
 
-companyController.controller('userCtrl', function($state, $stateParams, $scope, companyAPIservice) {
+companyController.controller('userCtrl', function($state, $stateParams, $scope, companyAPIservice, _) {
+    if ($state.current.name == 'users') {
+        $scope.user = {};
+        $scope.site = {};
+        $scope.selectedUser = {};
 
-    $scope.userList = {};
-    $scope.siteList = {};
-    $scope.selectSite = {};
-    var companyId = $stateParams.id;
-
-
-    companyAPIservice.getCompanyDetails(companyId).success(function(response, status) {
-        $scope.siteList = response.sites;
-    })
-
-    companyAPIservice.getCompanyUsers(companyId).success(function(response, status) {
-        var users = response.results[0];
-        for (k in users){
-            $scope.userList = users[k];
+        $scope.user.userList = [];
+        $scope.site.siteList = [];
+        $scope.site.siteChosen;
+        $scope.site.checkUserSite = function(siteObj, user) {
+            var userSiteObjList = user.sites;
+            var userSiteIdList = _.map(userSiteObjList, function(obj) { return obj.id})
+            if (_.contains(userSiteIdList, siteObj.id)) {
+                $scope.selectedUser.role = user.is_lead;
+                if (user.is_lead) {
+                    $scope.selectedUser.roleOption = ["Member", "None"];
+                }
+                else{
+                    $scope.selectedUser.roleOption = ["Lead", "None"];
+                }
+            }
+            else{
+                $scope.selectedUser.role = undefined;
+                $scope.selectedUser.roleOption = ["Member", "Lead", "None"];
+            }
         }
-        console.log($scope.userList);
-    })
+
+        $scope.selectedUser.changeUserRole = function(newRole) {
+            console.log("call server to change role");
+        }
+
+        var companyId = $stateParams.id;
+
+        companyAPIservice.getCompanyDetails(companyId).success(function(response, status) {
+            $scope.site.siteList = response.sites;
+            console.log(response);
+        })
+
+        companyAPIservice.getCompanyUsers(companyId).success(function(response, status) {
+            $scope.user.userList = response.results;
+            console.log(response);
+            // var users = response.results[0];
+            // for (k in users){
+            //     $scope.userList = users[k];
+            // }
+            // console.log($scope.userList);
+        })
+    }
 });
 
 companyController.controller('companyAlterCtrl', function($scope, $state, $stateParams, $q, Notification, companyAPIservice, industryAPIservice,

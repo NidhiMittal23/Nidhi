@@ -1,7 +1,39 @@
 <div ng-init="userInitial()">
 <button type="button" class="btn btn-default" ng-click="addNewUser()">Add User</button>
   <div class="table-responsive">
-    <table ng-repeat="site in siteList" class="table table-hover table-striped">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in user.userList">
+          <td>{{user.email}}</td>
+          <td>
+            <select ng-model="site.siteChosen" ng-change="site.checkUserSite(site.siteChosen, user)"
+              ng-options="option as option.name for option in site.siteList track by option.id">
+              </select>
+          </td>
+          <td><span ng-if="selectedUser">
+              <a ng-if="selectedUser.role === true"><span style="cursor: hand;cursor: pointer;"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Lead &nbsp;</span></a>
+              <a ng-if="selectedUser.role === false"><span style="cursor: hand;cursor: pointer;"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Member &nbsp;</span></a>
+              <a ng-if="selectedUser.role === undefined"><span style="cursor: hand;cursor: pointer;"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i> None &nbsp;</span></a>
+            </span>
+          </td>
+          <td>
+            <select ng-model="selectedUser.newRole"
+            ng-options="option for option in selectedUser.roleOption">
+            </select>
+            <span ng-if="selectedUser.newRole">
+              <button ng-click="selectedUser.changeUserRole(selectedUser.newRole)">Save</button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<!--     <table ng-repeat="site in siteList" class="table table-hover table-striped">
       <thead>
               <tr>
                 <th class="col-md-4"><span style="padding-left: 40px">{{site.name}}</span></th>
@@ -9,7 +41,7 @@
             </thead>
             <tbody>
               <tr ng-repeat="user in userList" ng-if="site.employee.indexOf(user.id) >= 0">
-                <td class="col-md-4" style="cursor: hand;cursor: pointer;padding-left: 40px" ng-click="gotoCompanySite(company.id, company.name)">{{user.username ? user.username : 'N/A'}}</td>
+                <td class="col-md-4" style="cursor: hand;cursor: pointer;padding-left: 40px" ng-click="gotoCompanySite(company.id, company.name)">{{user.email ? user.email : 'N/A'}}</td>
                 <td class="col-md-4">
                   <select
                     ng-options = "option.name for option in siteList track by option.id" ng-selected="user.sites.id"
@@ -28,6 +60,4 @@
                 <td ng-click="editExistCompany(company.id, company.name)" ><span style="cursor: hand;cursor: pointer;">Edit<span> </span><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span></td>
               </tr>
             </tbody>
-    </table>
-  </div>
-  </div>
+    </table> -->

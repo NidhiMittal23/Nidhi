@@ -11,7 +11,7 @@ companyApp.config(function($stateProvider, $urlRouterProvider){
         })
 
         .state('users',{
-            url: '/{name}/users',
+            url: '/users/:id?name',
             parent: 'home',
             templateUrl: 'DocsApp/company/templates/user-list.html',
             controller: 'userCtrl',
