@@ -51,7 +51,15 @@ categoryController.controller('categoryAlterCtrl', function($scope, $state, $sta
     // on submit button click
     $scope.addNewCategory = function() {
         categoryAPIservice.postCategoryDetail(params).success(function (response, status) {
-            var categoryName = params.name;
+            var categoryName = response.name;
+            Notification.success(categoryName+' added successfully');
+        })
+    }
+
+    $scope.editExistCategory = function() {
+        var newVal = $scope.categoryModel;
+        categoryAPIservice.putCategoryDetail(newVal).success(function (response, status) {
+            var categoryName = response.name;
             Notification.success(categoryName+' added successfully');
         })
     }

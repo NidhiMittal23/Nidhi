@@ -53,18 +53,6 @@ industryController.controller('industryAlterCtrl', function($scope, $state, $sta
         industryAPIservice.postIndustryDetail(params).success(function (response, status) {
             var industryName = params.name;
             Notification.success(industryName+' added successfully');
-        }).error(function (response, status) {
-            if (status == 400) {
-                if ('name' in response) {
-                    Notification.error(response['name'][0]);
-                }
-            }
-            else if (status == 500) {
-                Notification.error("Server error occured, Contact Admin");
-            }
-            else {
-                Notification.error("Error occured, Contact Admin");
-            }
         })
     }
 
@@ -74,18 +62,6 @@ industryController.controller('industryAlterCtrl', function($scope, $state, $sta
         industryAPIservice.putIndustryDetail(pid, newval).success(function (response, status) {
 
             Notification.success(newval.name+' updated successfully');
-        }).error(function (response, status) {
-            if (status == 400) {
-                if ('name' in response) {
-                    Notification.error(response['name'][0]);
-                }
-            }
-            else if (status == 500) {
-                Notification.error("Server error occured, Contact Admin");
-            }
-            else {
-                Notification.error("Error occured, Contact Admin");
-            }
         })
     }
 

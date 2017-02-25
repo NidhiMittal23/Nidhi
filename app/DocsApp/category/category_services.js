@@ -10,6 +10,8 @@ categoryService.factory('categoryAPIservice', function($http) {
         'subcategoryEndpoint': 'http://localhost:9000/subcategory/'
     }
 
+    //Enhance: Use Protype inheritance to Make a single function and inherit it to 
+    // get basic request like getcategory, post, etc..
     categoryAPI.getcategory = function(params) {
         return $http({
             method: 'GET', 
@@ -67,6 +69,21 @@ categoryService.factory('categoryAPIservice', function($http) {
             method: 'PUT',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             url: categoryUrl.subcategoryEndpoint + id + '/',
+            transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+            data: params
+        });
+    }
+
+    categoryAPI.putCategoryDetail = function(params) {
+        return $http({
+            method: 'PUT',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: categoryUrl.endpoint + params.id + '/',
             transformRequest: function(obj) {
                 var str = [];
                 for(var p in obj)

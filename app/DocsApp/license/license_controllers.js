@@ -55,20 +55,16 @@ licenseController.controller('licenseAlterCtrl', function($scope, $state, $state
     // on submit button click
     $scope.addNewLicense = function() {
         licenseAPIservice.postLicenseDetail(params).success(function (response, status) {
-            var licenseName = params.name;
+            var licenseName = response.name;
             Notification.success(licenseName+' added successfully');
-        }).error( function(response, status) {
-            if (status == 400) {
-                if ('name' in response) {
-                    Notification.error(response['name'][0]);
-                }
-            }
-            else if (status == 500) {
-                Notification.error("Server error occured, Contact Admin");
-            }
-            else {
-                Notification.error("Error occured, Contact Admin");
-            }
+        })
+    }
+
+    $scope.editExistLicense = function() {
+        var newval = $scope.licenseModel;
+        licenseAPIservice.putLicenseDetail(newval).success(function (response, status) {
+            var licenseName = response.name;
+            Notification.success(licenseName+' Edited successfully');
         })
     }
 
