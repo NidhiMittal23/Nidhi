@@ -141,6 +141,23 @@ companyService.factory('companyAPIservice', function($http, _) {
         });
     }
 
+    companyAPI.transferSiteEmployee = function(params) {
+        var siteId = params.site;
+        return $http({
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: companyUrl.siteEndpoint + siteId + '/transfer_site_employee/',
+            transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            },
+            data: params
+        });
+
+    }
+
     return companyAPI;
 
 });

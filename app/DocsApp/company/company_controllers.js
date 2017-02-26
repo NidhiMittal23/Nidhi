@@ -32,38 +32,61 @@ companyController.controller('companyCtrl', function($state, $scope, companyAPIs
     }
 });
 
-companyController.controller('userCtrl', function($state, $stateParams, $scope, companyAPIservice, _) {
+companyController.controller('userCtrl', function($state, $stateParams, $scope, companyAPIservice, _,
+    Notification) {
+    // Enhance: There should be a intial definition function w.r.t to state.
+    // So, when state are called across, we have intial definition defined
+    // eg. initial_variables = function () {} ... initial_call - function () {}
+    // function_visible_to_view = function () {}
+
     if ($state.current.name == 'users') {
+        var companyId = $stateParams.id;
+
         $scope.user = {};
         $scope.site = {};
+
+        // In order to make selections w.r.t user
+        // Dynamically Store user information $scope.selectedUser['abc@gmail.com'] like info
+        // Help in selecting role options specific to "abc@gmail.com" 
         $scope.selectedUser = {};
+        $scope.selectedUser.role = {};
+        $scope.selectedUser.newRole = {};
+        $scope.selectedUser.roleOption = {};
 
         $scope.user.userList = [];
         $scope.site.siteList = [];
-        $scope.site.siteChosen;
+        $scope.site.siteChosen = {};
+
+
         $scope.site.checkUserSite = function(siteObj, user) {
             var userSiteObjList = user.sites;
             var userSiteIdList = _.map(userSiteObjList, function(obj) { return obj.id})
             if (_.contains(userSiteIdList, siteObj.id)) {
-                $scope.selectedUser.role = user.is_lead;
+                $scope.selectedUser.role[user.email] = user.is_lead;
                 if (user.is_lead) {
-                    $scope.selectedUser.roleOption = ["Member", "None"];
+                    $scope.selectedUser.roleOption[user.email] = ["Member", "None"];
                 }
                 else{
-                    $scope.selectedUser.roleOption = ["Lead", "None"];
+                    $scope.selectedUser.roleOption[user.email] = ["Lead", "None"];
                 }
             }
             else{
-                $scope.selectedUser.role = undefined;
-                $scope.selectedUser.roleOption = ["Member", "Lead", "None"];
+                $scope.selectedUser.role[user.email] = undefined;
+                $scope.selectedUser.roleOption[user.email] = ["Member", "Lead", "None"];
             }
         }
 
-        $scope.selectedUser.changeUserRole = function(newRole) {
-            console.log("call server to change role");
+        $scope.selectedUser.changeUserRole = function(newRole, siteChosen, user) {
+            var params = {
+                'role': newRole,
+                'site': siteChosen.id,
+                'email': user.email
+            }
+            companyAPIservice.transferSiteEmployee(params).success(function(response, status) {
+                Notification.success(response.message);
+                $state.go('users', {id: companyId});
+            })
         }
-
-        var companyId = $stateParams.id;
 
         companyAPIservice.getCompanyDetails(companyId).success(function(response, status) {
             $scope.site.siteList = response.sites;
@@ -73,11 +96,6 @@ companyController.controller('userCtrl', function($state, $stateParams, $scope, 
         companyAPIservice.getCompanyUsers(companyId).success(function(response, status) {
             $scope.user.userList = response.results;
             console.log(response);
-            // var users = response.results[0];
-            // for (k in users){
-            //     $scope.userList = users[k];
-            // }
-            // console.log($scope.userList);
         })
     }
 });
