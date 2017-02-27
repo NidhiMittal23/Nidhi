@@ -111,6 +111,7 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
     $scope.companyModel.paymentDate;
     $scope.companyModel.citySelected = "";
     $scope.companyModel.logo;
+    $scope.companyModel.industrySelected = [];
 
     if ($state.current.name == 'editCompany') {
         $scope.isEdit = true;
@@ -125,6 +126,9 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
             $scope.companyModel.phone_number = response.phone_number.substr(3, 10);
             $scope.companyModel.email = response.email;
             $scope.companyModel.paymentDate = response.payment_date;
+            _.each(response.industry, function(industry) {
+                $scope.companyModel.industrySelected.push(String(industry));
+            });
         })
 
     }
@@ -160,7 +164,6 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
     
 
     $scope.initCompany = function () {
-        $scope.companyModel.industrySelected = [];
         $scope.companyModel.selectedIndustryId = function(industryId) {
             $scope.companyModel.industrySelected = industryId;
         }
