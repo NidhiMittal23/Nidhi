@@ -110,6 +110,31 @@ companyService.factory('companyAPIservice', function($http, _) {
         });
     }
 
+    companyAPI.putCompanyDetail = function(params) {
+        var payload = new FormData();
+
+        payload.append('name', params.name);
+
+        _.each(params.industrySelected, function(industry) {
+            payload.append('industry', industry);
+        });
+
+        payload.append('is_active', params.isActive);
+        payload.append('city', params.citySelected);
+        payload.append('logo', params.logo);
+        payload.append('phone_number', IndiaMobileCode + params.phone_number);
+        payload.append('payment_date', params.paymentDate);
+        payload.append('email', params.email);
+
+        return $http({
+            url: companyUrl.endpoint + params.id + '/',
+            method: 'PUT',
+            data: payload,
+            headers: { 'Content-Type': undefined},
+            transformRequest: angular.identity
+        });
+    }
+
     companyAPI.postCompanySiteDetail = function(params) {
         var payload = new FormData();
         payload.append('company', params.companyId);

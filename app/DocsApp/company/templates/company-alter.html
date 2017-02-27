@@ -16,7 +16,7 @@
           <div class="col-sm-6">
             <select multiple ng-model="companyModel.industrySelected" ng-change="companyModel.selectedIndustryId(companyModel.industrySelected)" class="form-control custom-form-control" required>
               <options value="">Select any option</options>
-              <option ng-repeat="option in companyModel.industryOption" ng-model="companyModel.industrySelected" value="{{option.id}}">{{option.name}}</option>
+              <option ng-repeat="option in companyModelOptions.industryOption" ng-model="companyModel.industrySelected" value="{{option.id}}">{{option.name}}</option>
             </select>
           </div>
         </div>
@@ -37,7 +37,7 @@
                   ng-required="true"
                   id="country">
             <option value="">-- Choose City --</option>
-            <option ng-repeat="option in companyModel.citylist" ng-model="companyModel.citySelected" value="{{option}}">{{option}}</option>
+            <option ng-repeat="option in companyModelOptions.citylist" ng-model="companyModel.citySelected" value="{{option}}">{{option}}</option>
             </select>      
           </div>
         </div>
@@ -68,7 +68,7 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-6">
-            <button type="submit" class="btn btn-default" ng-if="isEdit===true">Edit</button>
+            <button type="submit" class="btn btn-default" ng-click="editExistCompany()" ng-if="isEdit===true">Edit</button>
             <button type="submit" class="btn btn-default" ng-click="addNewCompany()" ng-if="isEdit===false">Add</button>
           </div>
         </div>

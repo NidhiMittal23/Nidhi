@@ -46,6 +46,15 @@ companyApp.config(function($stateProvider, $urlRouterProvider){
             authenticate: true
         })
 
+        .state('editCompany', {
+            url: '/company/edit/:id?name',
+            parent: 'home',
+            templateUrl: 'DocsApp/company/templates/company-alter.html',
+            controller: 'companyAlterCtrl',
+            params: {id: null, name: null},
+            authenticate: true
+        })
+
         .state('addCompanySite', {
             url: '/company-site/:id?name',
             parent: 'home',

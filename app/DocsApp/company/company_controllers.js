@@ -103,6 +103,7 @@ companyController.controller('userCtrl', function($state, $stateParams, $scope, 
 companyController.controller('companyAlterCtrl', function($scope, $state, $stateParams, $q, Notification, companyAPIservice, industryAPIservice,
     licenseAPIservice, verticalAPIservice, $filter) {
     $scope.companyModel = {};
+    $scope.companyModelOptions = {};
     $scope.companySiteModel = {};
     $scope.companyModel.phone_number;
     $scope.companyModel.email;
@@ -110,7 +111,29 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
     $scope.companyModel.paymentDate;
     $scope.companyModel.citySelected = "";
     $scope.companyModel.logo;
-    $scope.companyModel.citylist = [
+
+    if ($state.current.name == 'editCompany') {
+        $scope.isEdit = true;
+        var id = $stateParams.id
+        
+        // request to server to get detail of perticular company.
+        companyAPIservice.getCompanyDetails(id).success(function (response, status) {
+            //populate the input field with data.
+            $scope.companyModel.name = response.name;
+            $scope.companyModel.citySelected = response.city;
+            $scope.companyModel.isActive = response.is_active;
+            $scope.companyModel.phone_number = response.phone_number.substr(3, 10);
+            $scope.companyModel.email = response.email;
+            $scope.companyModel.paymentDate = response.payment_date;
+        })
+
+    }
+    else if ($state.current.name == 'addCompany') {
+        $scope.isEdit = false;
+    }
+
+
+    $scope.companyModelOptions.citylist = [
         "Agra", "Ahmedabad", "Alappuzha", "Alwar", "Amritsar", "Aurangabad",
         "Bangalore", "Bharatpur", "Bhavnagar", "Bhikaner", "Bhopal", "Bhubaneshwar",
         "Bodh Gaya", "Calangute", "Chandigarh", "Chennai", "Chittaurgarh", "Coimbatore",
@@ -134,20 +157,7 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
     }
     
     
-    if ($state.current.name == 'editCompany') {
-        $scope.isEdit = true;
-        var id = $stateParams.id
-        
-        // request to server to get detail of perticular company.
-        companyAPIservice.getCompanyDetails(id).success(function (response, status) {
-            //populate the input field with data.
-            $scope.companyModel = response;
-        })
-
-    }
-    else if ($state.current.name == 'addCompany') {
-        $scope.isEdit = false;
-    }
+    
 
     $scope.initCompany = function () {
         $scope.companyModel.industrySelected = [];
@@ -156,7 +166,7 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
         }
 
         industryAPIservice.getIndustry().success(function(response){
-            $scope.companyModel.industryOption = response.results;
+            $scope.companyModelOptions.industryOption = response.results;
         });
     }
 
@@ -171,6 +181,15 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
             Notification.success(companyName+' added successfully');
         })
     }
+
+    $scope.editExistCompany = function() {
+        var params = $scope.companyModel;
+        params.id = $stateParams.id;
+        companyAPIservice.putCompanyDetail(params).success(function(response, status) {
+            Notification.success(response.name+ ' saved')
+        })
+    }
+
 });
 
 companyController.controller('companySiteCtrl', function($state, $stateParams, $scope, companyAPIservice) {
