@@ -53,6 +53,8 @@ companyService.factory('companyAPIservice', function($http, _) {
     }
 
     companyAPI.getCompany =function(params) {
+        params.is_approved = params.isApproved;
+        delete params.isApproved;
         return $http({
             method: 'GET',
             url: companyUrl.endpoint,
@@ -71,6 +73,16 @@ companyService.factory('companyAPIservice', function($http, _) {
         return $http({
             method: 'GET', 
             url: companyUrl.endpoint + id + '/'
+        });
+    }
+
+    companyAPI.getCompanyDetailsWithFilter = function(params) {
+        var id = params.id;
+        var isApproved = params.isApproved;
+        return $http({
+            method: 'GET', 
+            url: companyUrl.endpoint + id + '/',
+            params: params
         });
     }
 
@@ -133,7 +145,7 @@ companyService.factory('companyAPIservice', function($http, _) {
 
     companyAPI.putCompanyDetail = function(params) {
         var payload = new FormData();
-
+        console.log(params);
         payload.append('name', params.name);
 
         _.each(params.industrySelected, function(industry) {
@@ -142,7 +154,9 @@ companyService.factory('companyAPIservice', function($http, _) {
 
         payload.append('is_active', params.isActive);
         payload.append('city', params.citySelected);
-        payload.append('logo', params.logo);
+        if (params.hasOwnProperty('logo')){
+            payload.append('logo', params.logo);
+        }
         payload.append('phone_number', IndiaMobileCode + params.phone_number);
         payload.append('payment_date', params.paymentDate);
         payload.append('email', params.email);

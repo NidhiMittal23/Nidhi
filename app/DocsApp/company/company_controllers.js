@@ -8,7 +8,8 @@ companyController.controller('companyCtrl', function($state, $scope, companyAPIs
         $scope.maxSize = 5;
         $scope.bigCurrentPage = 1;
 
-        $scope.pageChanged();
+        $scope.checkApprove = false;
+        $scope.pageChanged(true);
     }
 
     $scope.addNewCompany = function() {
@@ -23,12 +24,19 @@ companyController.controller('companyCtrl', function($state, $scope, companyAPIs
         $state.go('editCompany', {id: id, name: name});
     }
 
-    $scope.pageChanged = function() {
+    $scope.pageChanged = function(isApproved) {
         params.page = $scope.bigCurrentPage;
+        // By default show Approved Company
+        params.isApproved = isApproved;
         companyAPIservice.getCompany(params).success(function (response, status) {
             $scope.companyList = response;
             $scope.bigTotalItems = response.count;
         })
+    }
+
+    $scope.listDisApprovedCompany = function() {
+        $scope.pageChanged(false); 
+        $scope.checkApprove = true; 
     }
 });
 
@@ -115,16 +123,18 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
     $scope.companyModel.email;
     $scope.companyModel.isActive;
     $scope.companyModel.paymentDate;
-    $scope.companyModel.citySelected = "";
+    $scope.companyModel.citySelected;
     $scope.companyModel.logo;
     $scope.companyModel.industrySelected = [];
 
     if ($state.current.name == 'editCompany') {
         $scope.isEdit = true;
-        var id = $stateParams.id
+        var params = {
+            'id': $stateParams.id,
+        }
         
         // request to server to get detail of perticular company.
-        companyAPIservice.getCompanyDetails(id).success(function (response, status) {
+        companyAPIservice.getCompanyDetails(params.id).success(function (response, status) {
             //populate the input field with data.
             $scope.companyModel.name = response.name;
             $scope.companyModel.citySelected = response.city;
@@ -132,6 +142,8 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
             $scope.companyModel.phone_number = response.phone_number.substr(3, 10);
             $scope.companyModel.email = response.email;
             $scope.companyModel.paymentDate = response.payment_date;
+            $scope.companyModel.isApproved = response.is_approved;
+            $scope.companyModel.logoUrl = response.logo;
             _.each(response.industry, function(industry) {
                 $scope.companyModel.industrySelected.push(String(industry));
             });
@@ -142,7 +154,7 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
         $scope.isEdit = false;
     }
 
-    $scope.companyModel.citylist = companyAPIservice.citylist;
+    $scope.companyModelOptions.citylist = companyAPIservice.citylist;
 
     $scope.onTimeSet = function (newDate, oldDate) {
         $scope.companyModel.paymentDate = $filter('date')(newDate, "yyyy-MM-ddThh:mm");
