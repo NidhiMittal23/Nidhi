@@ -16,7 +16,13 @@ authServiceApp.config(function($stateProvider, $urlRouterProvider, $authProvider
 
         .state('signup', {
             url: '/signup',
-            templateUrl: 'DocsApp/authService/views/registerView.html',
+            templateUrl: 'DocsApp/authService/views/registerUserView.html',
+            controller: 'AuthController as auth',
+        })
+
+        .state('registerCompany', {
+            url: '/register-company',
+            templateUrl: 'DocsApp/authService/views/registerCompanyView.html',
             controller: 'AuthController as auth',
         })
 

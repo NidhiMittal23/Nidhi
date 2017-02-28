@@ -5,6 +5,7 @@ var myApp = angular.module('myApp', [
   'ui.router',
   'satellizer',
   'myApp.version',
+  'parent',
   'license',
   'category',
   'industry',
@@ -55,32 +56,32 @@ myApp.directive('fileModel', ['$parse', function($parse){
     }
 }])
 
-myApp.factory('RequestsErrorHandler', function($q) {
+myApp.factory('RequestsErrorHandler', function($q, _, $injector) {
+  // Notification injection causes circular dependencies error while using ui.state
+  // $injector is used to solve this issue
+  var errorMessage;
   return {
     'responseError': function(rejection) {
       if (rejection.status == 401) {
-        console.log("Refresh token...or logout user and ask him to re-login..");
-        $state.transitionTo("auth");
+        errorMessage = "Logout.. your key has expired";
       }
       if (rejection.status == 400) {
-        if ('data' in rejection){
-          if (('non_field_errors') in rejection.data) {
-            // have to include Notification #todo
-            alert(rejection.data.non_field_errors);
-          }
-          if (('name') in rejection.data) {
-            alert(rejection.data.name[0]);
-          }
-        }
+        var error = _.map(rejection.data, function(obj) {
+          return obj
+        });
+        errorMessage = error.toString();
       }
       else if (rejection.status == 500) {
-        alert("Server error occured, Contact Admin");
-        // Notification.error("Server error occured, Contact Admin");
+        var error = _.map(rejection.data, function(obj) {
+          return obj
+        })
+        errorMessage = error.toString() + "...Contact ADMIN";
       }
       else {
-        alert("Error occured, contact Admin");
-        // Notification.error("Error occured, contact Admin");
+        errorMessage = "Error Occured...Contact ADMIN ";
       }
+      var Notification = $injector.get('Notification');
+      Notification.error(errorMessage);
       return $q.reject(rejection);
     },
   }

@@ -1,8 +1,23 @@
 var authController = angular.module('authService.auth', ['ui-notification', 'satellizer']);
 
-authController.controller('AuthController', function($auth, $state, authAPIservice) {
+authController.controller('AuthController', function($auth, $state, $scope, authAPIservice,
+    companyAPIservice) {
     var vm = this;
-    vm.authStatus = {}
+    vm.authStatus = {};
+    $scope.companyModel = {};
+
+    if ($state.current.name == 'registerCompany') {
+        $scope.companyModel.citylist = companyAPIservice.citylist;
+
+        $scope.registerNewCompany = function () {
+            console.log($scope.companyModel);
+            var params = $scope.companyModel;
+            authAPIservice.registerCompany(params)
+            .then(function(data) {
+                console.log(data);
+            })
+        }
+    }
 
     vm.register = function() {
         var user = {
@@ -13,24 +28,11 @@ authController.controller('AuthController', function($auth, $state, authAPIservi
 
         $auth.signup(user)
         .then(function(data) {
+            console.log(data);
             vm.authStatus.alert = true;
             vm.authStatus.message = "You have registered successfully ";
-            vm.authStatus.register = true
+            vm.authStatus.register = true;   
         })
-        .catch(function(response) {
-            // Handle errors here.
-            var status = response['status'].toString();
-            if (['400', '405'].indexOf(status) >= 0) {
-                vm.authStatus.alert = true;
-                if ('username' in response.data) {
-                    vm.authStatus.message = response.data.username[0];
-                }
-                else {
-                    vm.authStatus.message = "Error occured while Register !";
-                }
-                
-            }
-        });
     }
 
     vm.login = function() {
@@ -80,19 +82,5 @@ authController.controller('AuthController', function($auth, $state, authAPIservi
             // If login is successful, redirect to the users state
             $state.go('home', {});
         })
-        .catch(function(response) {
-            // Handle errors here.
-            var status = response['status'].toString();
-            if (['400', '405'].indexOf(status) >= 0) {
-                vm.authStatus.alert = true;
-                // debugger;
-                if ('non_field_errors' in response.data) {
-                    vm.authStatus.message = response.data.non_field_errors[0];
-                }
-                else {
-                    vm.authStatus.message = "Invalid Credentials";
-                }
-            }
-        });
     }
 });

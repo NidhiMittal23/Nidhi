@@ -9,6 +9,7 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
     vm.adminSiteId = authAPIservice.adminSiteId;
     vm.companyId;
     var params = {};
+    vm.companyImageUrl = authAPIservice.companyImageUrl;
 
     vm.logout = function() {
         $auth.logout();

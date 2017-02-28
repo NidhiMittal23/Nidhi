@@ -19,6 +19,15 @@ companyApp.config(function($stateProvider, $urlRouterProvider){
             authenticate: true
         })
 
+        .state('addUser',{
+            url: '/user/add:id?name',
+            parent: 'home',
+            templateUrl: 'DocsApp/company/templates/user-alter.html',
+            controller: 'userCtrl',
+            params: {id: null, name: null},
+            authenticate: true
+        })
+
         .state('companySite', {
             url: '/company-name/:id?name',
             parent: 'home',

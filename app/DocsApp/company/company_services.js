@@ -11,6 +11,22 @@ companyService.factory('companyAPIservice', function($http, _) {
         'user': "http://localhost:9000/user/"
     }
 
+    companyAPI.citylist = [
+        "Agra", "Ahmedabad", "Alappuzha", "Alwar", "Amritsar", "Aurangabad",
+        "Bangalore", "Bharatpur", "Bhavnagar", "Bhikaner", "Bhopal", "Bhubaneshwar",
+        "Bodh Gaya", "Calangute", "Chandigarh", "Chennai", "Chittaurgarh", "Coimbatore",
+        "Cuttack", "Dalhousie", "Dehradun", "Delhi", "Diu-Island", "Ernakulam", "Faridabad", "Gaya",
+        "Gangtok", "Ghaziabad", "Gurgaon", "Guwahati", "Gwalior", "Haridwar", "Hyderabad",
+        "Imphal", "Indore", "Jabalpur", "Jaipur", "Jaisalmer", "Jalandhar", "Jamshedpur",
+        "Jodhpur", "Junagadh", "Kanpur", "Kanyakumari", "Khajuraho", "Khandala", "Kochi",
+        "Kodaikanal", "Kolkata", "Kota", "Kottayam", "Kovalam", "Lucknow", "Ludhiana", "Madurai",
+        "Manali", "Mangalore", "Margao", "Mathura", "Mountabu", "Mumbai", "Mussoorie", "Mysore",
+        "Nagpur", "Nainital", "Noida", "Ooty", "Orchha", "Panaji", "Patna", "Pondicherry",
+        "Porbandar", "Portblair", "Pune", "Puri", "Pushkar", "Rajkot", "Rameswaram", "Ranchi", "Sanchi",
+        "Secunderabad", "Shimla", "Surat", "Thanjavur", "Thiruchchirapalli", "Thrissur", "Tirumala",
+        "Udaipur", "Vadodra", "Varanasi", "Vasco-Da-Gama", "Vijayawada", "Visakhapatnam"
+    ];
+
     var IndiaMobileCode = "+91"
     // while adding new company fetch user whose has not been assigned to any site
     // http://localhost:9000/user/null/no_company
@@ -83,6 +99,8 @@ companyService.factory('companyAPIservice', function($http, _) {
 
         // Enhance: there can be a form TEMPLATE ; because chances of 
         // getting this wrong is highly likable
+        console.log(params);
+
         var payload = new FormData();
 
         payload.append('name', params.name);
@@ -97,6 +115,9 @@ companyService.factory('companyAPIservice', function($http, _) {
         payload.append('phone_number', IndiaMobileCode + params.phone_number);
         payload.append('payment_date', params.paymentDate);
         payload.append('email', params.email);
+        // Admin is building this company from his portal
+        payload.append('is_approved', params.isApproved);
+        // isApproved
 
         return $http({
             url: companyUrl.endpoint,
@@ -140,19 +161,9 @@ companyService.factory('companyAPIservice', function($http, _) {
         payload.append('company', params.companyId);
         payload.append('name', params.name);
         payload.append('location', params.location);
-
-        _.each(params.licenseSelected, function(license) {
-            payload.append('license', license);
-        });
-
-        _.each(params.verticalSelected, function(vertical) {
-            payload.append('vertical', vertical);
-        });
-
-        _.each(params.companyEmployeesSelected, function(employee) {
-            payload.append('employee', employee);
-        });
-
+        payload.append('license', params.licenseSelected);
+        payload.append('vertical', params.verticalSelected);
+        payload.append('employee', params.companyEmployeesSelected);
 
         return $http({
             url: companyUrl.siteEndpoint,
@@ -181,6 +192,20 @@ companyService.factory('companyAPIservice', function($http, _) {
             data: params
         });
 
+    }
+
+    companyAPI.constructSiteDocument = function(siteId) {
+        return $http({
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: companyUrl.siteEndpoint + siteId + '/construct_site_documents/',
+            transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            }
+        });
     }
 
     return companyAPI;

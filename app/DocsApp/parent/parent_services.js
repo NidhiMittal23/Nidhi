@@ -1,0 +1,1 @@
+var parentService = angular.module('parent.services', []);

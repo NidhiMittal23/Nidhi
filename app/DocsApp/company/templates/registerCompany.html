@@ -1,0 +1,42 @@
+<div class="panel-body">
+    <form class="form-horizontal">
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Name:</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="name" placeholder="Enter Name" ng-model="companyModel.name" ng-required="true">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="country" class="col-sm-2 control-label">City:</label>
+          <div class="col-sm-6">             
+            <select ng-model="companyModel.citySelected"                
+                  ng-change="getCountryStates()"
+                  class="form-control" 
+                  ng-required="true"
+                  id="country">
+            <option value="">-- Choose City --</option>
+            <option ng-repeat="option in companyModel.citylist" ng-model="companyModel.citySelected" value="{{option}}">{{option}}</option>
+            </select>      
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="file">Company Logo:</label>
+          <div class="col-sm-6">
+            <input type="file" id="docfile" file-model=companyModel.logo>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Phone Number:</label>
+          <div class="col-sm-6">
+            <input class="form-control" ui-mask="999-999-9999" placeholder="xxx-xxx-xxxx"
+              ng-model="companyModel.phone_number"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="email">Email:</label>
+          <div class="col-sm-6">
+            <input type="email" class="form-control" placeholder="Email" ng-model="companyModel.email">
+          </div>
+        </div>
+    </form>
+</div>

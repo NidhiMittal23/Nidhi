@@ -7,20 +7,34 @@
       <form class="form-horizontal">
         <div class="form-group">
           <label class="control-label col-sm-2" for="name">Name:</label>
-          <div class="col-sm-10">
+          <div class="col-sm-6">
             <input type="text" class="form-control" id="name" placeholder="Enter Name" ng-model="companySiteModel.name" ng-required="true">
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label col-sm-2" for="location">Location:</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="location" placeholder="Enter Location" ng-model="companySiteModel.location" ng-required="true">
+          <label for="country" class="col-sm-2 control-label">City:</label>
+          <div class="col-sm-6">             
+            <select ng-model="companySiteModel.location"                
+                  ng-change="getCountryStates()"
+                  class="form-control" 
+                  ng-required="true"
+                  id="country">
+            <option value="">-- Choose City --</option>
+            <option ng-repeat="option in companySiteModel.citylist" ng-model="companySiteModel.location" value="{{option}}">{{option}}</option>
+            </select>      
           </div>
         </div>
+
+        <!-- <div class="form-group">
+          <label class="control-label col-sm-2" for="location">Location:</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="location" placeholder="Enter Location" ng-model="companySiteModel.location" ng-required="true">
+          </div>
+        </div> -->
         <div class="form-group">
           <label class="control-label col-sm-2">Select Employees:</label>
           <div class="col-sm-6">
-            <select multiple ng-model="companySiteModel.companyEmployeesSelected" ng-change="companySiteModel.selectedcompanyEmployeesId(companySiteModel.companyEmployeesSelected)"
+            <select ng-model="companySiteModel.companyEmployeesSelected" ng-change="companySiteModel.selectedcompanyEmployeesId(companySiteModel.companyEmployeesSelected)"
             class="form-control custom-form-control" required>
               <option ng-repeat="option in companySiteModel.companyEmployeesOption" ng-model="companySiteModel.companyEmployeesSelected" value="{{option.id}}">{{option.email}}</option>
             </select>
@@ -46,7 +60,6 @@
           <div class="col-sm-offset-2 col-sm-10">
             <!-- <button type="submit" class="btn btn-primary" ng-if="isEdit===true">Edit</button> -->
             <button type="submit" class="btn btn-primary" ng-click="addNewCompanySite()">Add Site</button>
-            <p>Ask for more company site's info to be filled</p>
           </div>
         </div>
       </form>

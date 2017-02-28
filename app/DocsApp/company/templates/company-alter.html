@@ -68,6 +68,12 @@
           </div>
         </div>
         <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Active:</label>
+          <div class="col-sm-6">
+            <input type="checkbox" ng-model="companyModel.isApproved">
+          </div>
+        </div>
+        <div class="form-group">
           <div class="col-sm-offset-2 col-sm-6">
             <button type="submit" class="btn btn-default" ng-click="editExistCompany()" ng-if="isEdit===true">Edit</button>
             <button type="submit" class="btn btn-default" ng-click="addNewCompany()" ng-if="isEdit===false">Add</button>

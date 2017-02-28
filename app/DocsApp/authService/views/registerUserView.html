@@ -1,4 +1,9 @@
-<div class="row layer"  style=" background-color: #f4f5f7; height: 100vh ; width: 101vw; min-width: 400px; min-height: 500px">
+<!-- <div class="row" class="alert alert-info" ng-if="auth.authStatus.alert===true"> -->
+    {{ auth.authStatus.message }}
+    <!-- <span ng-if="auth.authStatus.register===true"><a ui-sref='auth'><font size="3" color="red">login</font></a></span> -->
+    <a ui-sref='registerCompany'><font size="3" color="red">Register Company</font></a>
+<!-- </div> -->
+<div class="row"  style=" background-color: #f4f5f7; height: 100vh ; width: 101vw; min-width: 400px; min-height: 500px">
     <div class="regForm" style="background-color: #dbdcdd; margin: auto; height: 80%; width: 40%; min-height: 400px; min-width: 400px">
 
         <div style="padding: 20%; font-size: 15px">
@@ -8,6 +13,9 @@
             <div class="form-group">
                 <input type="email" class="form-control" placeholder="Email" ng-model="auth.email">
             </div>
+            <!-- <div class="form-group">
+                <input type="email" class="form-control" placeholder="User Name" ng-model="auth.username">
+            </div> -->
             <div class="form-group">
                 <input type="password" class="form-control" placeholder="Password" ng-model="auth.password">
             </div>
@@ -22,7 +30,3 @@
 
     </div>
 </div>
-    <div class="alert alert-info" ng-if="auth.authStatus.alert">
-        {{ auth.authStatus.message }}
-        <span ng-if="auth.authStatus.register"><a ui-sref='auth'><font size="3" color="red">login</font></a></span>
-    </div>
