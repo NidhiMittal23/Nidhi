@@ -61,6 +61,17 @@ myApp.factory('RequestsErrorHandler', function($q, _, $injector) {
   // $injector is used to solve this issue
   var errorMessage;
   return {
+    'request': function(config) {
+      // can be done better
+      // Trying to change url in fly to Production server;
+      if ('url' in config ) {
+        var url = config.url;
+        if ((config.url).search("localhost:9000") !== -1) {
+          config.url = (config.url).replace("localhost:9000", "35.154.197.42:9010");
+        }
+      }
+      return config || $q.when(config);
+    },
     'responseError': function(rejection) {
       if (rejection.status == 401) {
         errorMessage = "Logout.. your key has expired";
@@ -83,10 +94,16 @@ myApp.factory('RequestsErrorHandler', function($q, _, $injector) {
       var Notification = $injector.get('Notification');
       Notification.error(errorMessage);
       return $q.reject(rejection);
-    },
+    }
   }
 });
 
 myApp.constant('_',
     window._
 );
+
+// myApp.constant('config', {  
+//   apiUrl: 'https://35.154.197.42:9010',
+//   baseUrl: '/',
+//   enableDebug: true
+// });
