@@ -145,7 +145,6 @@ companyService.factory('companyAPIservice', function($http, _) {
 
     companyAPI.putCompanyDetail = function(params) {
         var payload = new FormData();
-        console.log(params);
         payload.append('name', params.name);
 
         _.each(params.industrySelected, function(industry) {
@@ -160,6 +159,7 @@ companyService.factory('companyAPIservice', function($http, _) {
         payload.append('phone_number', IndiaMobileCode + params.phone_number);
         payload.append('payment_date', params.paymentDate);
         payload.append('email', params.email);
+        payload.append('is_approved', params.isApproved);
 
         return $http({
             url: companyUrl.endpoint + params.id + '/',

@@ -14,7 +14,9 @@ authController.controller('AuthController', function($auth, $state, $scope, auth
             var params = $scope.companyModel;
             authAPIservice.registerCompany(params)
             .then(function(data) {
-                console.log(data);
+                vm.authStatus.alert = true;
+                vm.authStatus.message = "Your company have registered successfully; Our executives will be in touch with you";
+                vm.authStatus.register = true;  
             })
         }
     }

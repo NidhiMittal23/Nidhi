@@ -35,9 +35,14 @@ companyController.controller('companyCtrl', function($state, $scope, companyAPIs
     }
 
     $scope.listDisApprovedCompany = function() {
-        $scope.pageChanged(false); 
+        $scope.pageChanged(false);
         $scope.checkApprove = true; 
-    }
+    };
+
+    $scope.listApprovedCompany = function() {
+        $scope.pageChanged(true);
+        $scope.checkApprove = false; 
+    };
 });
 
 companyController.controller('userCtrl', function($state, $stateParams, $scope, companyAPIservice, _,
