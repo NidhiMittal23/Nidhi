@@ -1,4 +1,4 @@
-var licenseApp = angular.module('license', ['ui.router', 'license.controllers', 'license.services'])
+var licenseApp = angular.module('license', ['ui.router', 'license.controllers', 'license.services']);
 
 licenseApp.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -26,5 +26,5 @@ licenseApp.config(function($stateProvider, $urlRouterProvider) {
             controller: 'licenseAlterCtrl',
             params: {id: null, name: null},
             authenticate: true
-        })
-})
+        });
+});

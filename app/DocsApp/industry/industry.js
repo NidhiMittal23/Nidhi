@@ -1,4 +1,4 @@
-var industryApp = angular.module('industry', ['ui.router', 'industry.controllers', 'industry.services'])
+var industryApp = angular.module('industry', ['ui.router', 'industry.controllers', 'industry.services']);
 
 industryApp.config(function($stateProvider, $urlRouterProvider){
     $stateProvider
@@ -26,5 +26,5 @@ industryApp.config(function($stateProvider, $urlRouterProvider){
             controller: 'industryAlterCtrl',
             params: {id: null, name: null},
             authenticate: true
-        })
-})
+        });
+});

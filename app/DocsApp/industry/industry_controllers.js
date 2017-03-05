@@ -4,28 +4,28 @@ industryController.controller('industryCtrl', function($state, $scope, industryA
     var params = {};
     $scope.industryInitial = function () {
         // pagination control
-        $scope.bigTotalItems;
+        $scope.bigTotalItems=undefined;
         $scope.maxSize = 5;
         $scope.bigCurrentPage = 1;
 
         $scope.pageChanged();
-    }
+    };
 
     $scope.addNewIndustry = function() {
         $state.go('addIndustry', {});
-    }
+    };
 
     $scope.editExistIndustry = function(id, name) {
         $state.go('editIndustry', {id: id, name: name});
-    }
+    };
 
     $scope.pageChanged = function() {
         params.page = $scope.bigCurrentPage;
         industryAPIservice.getIndustry(params).success(function (response, status) {
             $scope.industryList = response;
             $scope.bigTotalItems = response.count;
-        })
-    }
+        });
+    };
 });
 
 industryController.controller('industryAlterCtrl', function($scope, $state, $stateParams, industryAPIservice, Notification) {
@@ -34,13 +34,13 @@ industryController.controller('industryAlterCtrl', function($scope, $state, $sta
 
     if ($state.current.name == 'editIndustry') {
         $scope.isEdit = true;
-        var id = $stateParams.id
+        var id = $stateParams.id;
         
         // request to server to get detail of perticular industry.
         industryAPIservice.getIndustryDetails(id).success(function (response, status) {
             //populate the input field with data.
             $scope.industryModel = response;
-        })
+        });
 
     }
     else if ($state.current.name == 'addIndustry') {
@@ -53,8 +53,8 @@ industryController.controller('industryAlterCtrl', function($scope, $state, $sta
         industryAPIservice.postIndustryDetail(params).success(function (response, status) {
             var industryName = params.name;
             Notification.success(industryName+' added successfully');
-        })
-    }
+        });
+    };
 
     $scope.editExistIndustry = function() {
         var newval = $scope.industryModel;
@@ -62,7 +62,7 @@ industryController.controller('industryAlterCtrl', function($scope, $state, $sta
         industryAPIservice.putIndustryDetail(pid, newval).success(function (response, status) {
 
             Notification.success(newval.name+' updated successfully');
-        })
-    }
+        });
+    };
 
-})
+});

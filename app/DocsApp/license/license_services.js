@@ -7,7 +7,7 @@ licenseService.factory('licenseAPIservice', function($http) {
     //endpoints corresponding to license
     var licenseUrl = {
         'endpoint': 'http://localhost:9000/license/'
-    }
+    };
 
     licenseAPI.getlicense = function(params) {
         return $http({
@@ -16,14 +16,14 @@ licenseService.factory('licenseAPIservice', function($http) {
             url: licenseUrl.endpoint,
             params: params
         });
-    }
+    };
 
     licenseAPI.getLicenseDetails = function(id) {
         return $http({
             method: 'GET', 
             url: licenseUrl.endpoint + id + '/'
         });
-    }
+    };
 
     licenseAPI.postLicenseDetail = function(params) {
         return $http({
@@ -38,7 +38,7 @@ licenseService.factory('licenseAPIservice', function($http) {
             },
             data: params
         });
-    }
+    };
 
     licenseAPI.putLicenseDetail = function(params) {
         return $http({
@@ -53,7 +53,7 @@ licenseService.factory('licenseAPIservice', function($http) {
             },
             data: params
         });
-    }
+    };
 
     return licenseAPI;
 });

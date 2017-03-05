@@ -29,8 +29,8 @@ parentController.controller('modalCtrl', function($uibModal, $log, $document) {
             $ctrl.selected = selectedItem;
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
-        })
-    }
+        });
+    };
 });
 
 parentController.controller('ModalInstanceCtrl', function($uibModalInstance, items) {
@@ -47,7 +47,7 @@ parentController.controller('ModalInstanceCtrl', function($uibModalInstance, ite
     $ctrl.cancel = function () {
         $uibModalInstance.dismiss('cancel');
     };
-})
+});
 
 parentController.component('modalComponent', {
     templateUrl: 'myModalContent.html',

@@ -1,4 +1,4 @@
-var documentApp = angular.module('document', ['ui.router', 'document.controllers', 'document.services', 'license.services', 'vertical.services'])
+var documentApp = angular.module('document', ['ui.router', 'document.controllers', 'document.services', 'license.services', 'vertical.services']);
 
 documentApp.config(function($stateProvider, $urlRouterProvider){
     $stateProvider
@@ -55,6 +55,6 @@ documentApp.config(function($stateProvider, $urlRouterProvider){
                 owner: null
             },
             authenticate: true
-        })
+        });
 
-})
+});

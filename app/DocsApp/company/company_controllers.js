@@ -4,25 +4,25 @@ companyController.controller('companyCtrl', function($state, $scope, companyAPIs
     var params = {};
     $scope.companyInitial = function () {
         // pagination control
-        $scope.bigTotalItems;
+        $scope.bigTotalItems = undefined;
         $scope.maxSize = 5;
         $scope.bigCurrentPage = 1;
 
         $scope.checkApprove = false;
         $scope.pageChanged(true);
-    }
+    };
 
     $scope.addNewCompany = function() {
         $state.go('addCompany', {});
-    }
+    };
 
     $scope.gotoCompanySite = function(id, name) {
         $state.go('companySite', {id: id, name : name});
-    }
+    };
 
     $scope.editExistCompany = function(id, name) {
         $state.go('editCompany', {id: id, name: name});
-    }
+    };
 
     $scope.pageChanged = function(isApproved) {
         params.page = $scope.bigCurrentPage;
@@ -31,8 +31,8 @@ companyController.controller('companyCtrl', function($state, $scope, companyAPIs
         companyAPIservice.getCompany(params).success(function (response, status) {
             $scope.companyList = response;
             $scope.bigTotalItems = response.count;
-        })
-    }
+        });
+    };
 
     $scope.listDisApprovedCompany = function() {
         $scope.pageChanged(false);
@@ -73,7 +73,7 @@ companyController.controller('userCtrl', function($state, $stateParams, $scope, 
 
         $scope.site.checkUserSite = function(siteObj, user) {
             var userSiteObjList = user.sites;
-            var userSiteIdList = _.map(userSiteObjList, function(obj) { return obj.id})
+            var userSiteIdList = _.map(userSiteObjList, function(obj) { return obj.id});
             if (_.contains(userSiteIdList, siteObj.id)) {
                 $scope.selectedUser.role[user.email] = user.is_lead;
                 if (user.is_lead) {
@@ -87,7 +87,7 @@ companyController.controller('userCtrl', function($state, $stateParams, $scope, 
                 $scope.selectedUser.role[user.email] = undefined;
                 $scope.selectedUser.roleOption[user.email] = ["Member", "Lead", "None"];
             }
-        }
+        };
 
         $scope.selectedUser.changeUserRole = function(newRole, siteChosen, user) {
             var params = {
@@ -98,24 +98,24 @@ companyController.controller('userCtrl', function($state, $stateParams, $scope, 
             companyAPIservice.transferSiteEmployee(params).success(function(response, status) {
                 Notification.success(response.message);
                 $state.go('users', {id: companyId});
-            })
-        }
+            });
+        };
 
         companyAPIservice.getCompanyDetails(companyId).success(function(response, status) {
             $scope.site.siteList = response.sites;
             console.log(response);
-        })
+        });
 
         companyAPIservice.getCompanyUsers(companyId).success(function(response, status) {
             $scope.user.userList = response.results;
             console.log(response);
-        })
+        });
 
         // New Employee can be added to a company
         $scope.addNewCompanyEmployee = function() {
             console.log('addUser');
             console.log(companyId);
-        }
+        };
     }
 });
 
@@ -152,7 +152,7 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
             _.each(response.industry, function(industry) {
                 $scope.companyModel.industrySelected.push(String(industry));
             });
-        })
+        });
 
     }
     else if ($state.current.name == 'addCompany') {
@@ -163,10 +163,10 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
 
     $scope.onTimeSet = function (newDate, oldDate) {
         $scope.companyModel.paymentDate = $filter('date')(newDate, "yyyy-MM-ddThh:mm");
-    }
+    };
 
     $scope.getCountryStates = function() {
-    }
+    };
     
     
     
@@ -174,12 +174,12 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
     $scope.initCompany = function () {
         $scope.companyModel.selectedIndustryId = function(industryId) {
             $scope.companyModel.industrySelected = industryId;
-        }
+        };
 
         industryAPIservice.getIndustry().success(function(response){
             $scope.companyModelOptions.industryOption = response.results;
         });
-    }
+    };
 
     // on submit button click
     $scope.addNewCompany = function() {
@@ -190,16 +190,16 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
             var companyName = response.name;
             $scope.companyIdAdded = response.id;
             Notification.success(companyName+' added successfully');
-        })
-    }
+        });
+    };
 
     $scope.editExistCompany = function() {
         var params = $scope.companyModel;
         params.id = $stateParams.id;
         companyAPIservice.putCompanyDetail(params).success(function(response, status) {
             Notification.success(response.name+ ' saved')
-        })
-    }
+        });
+    };
 
 });
 
@@ -209,23 +209,23 @@ companyController.controller('companySiteCtrl', function($state, $stateParams, $
 
     $scope.addNewCompanySite = function() {
         $state.go('addCompanySite', {id: companyId});
-    }
+    };
 
     $scope.gotoSiteDoc = function(id, name) {
         $state.go('siteDoc', {id: companyId, name : name});
-    }
+    };
 
     $scope.editExistCompanySite = function(id, name) {
         $state.go('editCompanySite', {id: companyId, name: name});
-    }
+    };
 
     $scope.checkCompanyUser = function() {
         $state.go('users', {id: companyId});
-    }   
+    }; 
 
     companyAPIservice.getCompanySite(companyId).success(function (response, status) {
         $scope.companySiteList = response;
-    })
+    });
 });
 
 
@@ -246,15 +246,15 @@ companyController.controller('siteCtrl', function($state, $stateParams, $scope, 
 
         $scope.companySiteModel.selectedLicenseId = function(licenseId) {
             $scope.companySiteModel.licenseSelected = licenseId;
-        }
+        };
 
         $scope.companySiteModel.selectedVerticalId = function(verticalId) {
             $scope.companySiteModel.verticalSelected = verticalId;
-        }
+        };
 
         $scope.companySiteModel.selectedcompanyEmployeesId = function(employeeId) {
             $scope.companySiteModel.companyEmployeesSelected = employeeId;
-        }
+        };
 
         var licenses = licenseAPIservice.getlicense();
         var verticals = verticalAPIservice.getVertical();
@@ -267,14 +267,14 @@ companyController.controller('siteCtrl', function($state, $stateParams, $scope, 
             $scope.companySiteModel.companyEmployeesOption = values[2].data.results;
             // TODO: think about user with multiple site access..
         });
-    } 
+    };
 
     $scope.constructSiteDocument = function(siteId, siteName) {
         companyAPIservice.constructSiteDocument(siteId).success(function (response, status) {
             Notification.success(siteName+ 'document Created');
             $state.go('home');
-        })
-    }
+        });
+    };
 
     $scope.addNewCompanySite = function() {
         var params = $scope.companySiteModel;
@@ -283,9 +283,9 @@ companyController.controller('siteCtrl', function($state, $stateParams, $scope, 
             var siteId = response.id;
             Notification.success(siteName+' added successfully');
             $scope.constructSiteDocument(siteId, siteName);
-        })
-    }
-})
+        });
+    };
+});
 
 companyController.controller('siteDocCtrl', function($state, $stateParams, $scope, companyAPIservice, licenseAPIservice, documentAPIservice) {
 
@@ -293,7 +293,7 @@ companyController.controller('siteDocCtrl', function($state, $stateParams, $scop
 
     $scope.editExistSiteDoc = function(id, name) {
         $state.go('editSiteDoc', {id: id, name: name});
-    }
+    };
 
     $scope.resultArray = [];
     $scope.siteDocList = [];
@@ -329,15 +329,15 @@ companyController.controller('siteDocCtrl', function($state, $stateParams, $scop
 
                                     documentAPIservice.getDocumentDetails(response.subcategory.document).success(function(response, status){
                                         $scope.siteDocList.push({name :response.name, id : response.id, versions : response.versions });
-                                    })
+                                    });
                                 }
                             }
                         });
                         
-                    })
+                    });
                 });
-            })
+            });
         });
         
-    })
+    });
 });

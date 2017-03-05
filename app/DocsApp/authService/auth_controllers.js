@@ -34,8 +34,8 @@ authController.controller('AuthController', function($auth, $state, $scope, auth
             vm.authStatus.alert = true;
             vm.authStatus.message = "You have registered successfully ";
             vm.authStatus.register = true;   
-        })
-    }
+        });
+    };
 
     vm.login = function() {
         var setUserLocally = function() {
@@ -45,10 +45,10 @@ authController.controller('AuthController', function($auth, $state, $scope, auth
                     var sitesObjList = response.data.sites;
                     var sites = _.map(sitesObjList, function(site){
                         return site.id
-                    })
+                    });
                     var site_filter = _.find(sitesObjList, function(site) {
                         return typeof site.company != null;
-                    })
+                    });
                     // Store locally User related info
                     // Remove item key on logout
                     // TODO: If user have multiple Site have to look into docuemnt management System
@@ -58,22 +58,22 @@ authController.controller('AuthController', function($auth, $state, $scope, auth
                     localStorage.setItem('isAdmin', response.data.is_superuser);
                     localStorage.setItem('isLead', response.data.is_lead);
                     localStorage.setItem('userId', response.data.id);
-                })   
+                });   
             }
             else{
                 alert("sorry.. No Web Storage Supported");
                 $state.go('auth', {});
             }
-        }
+        };
 
         var whenLoggedIn = function(callback) {
             callback();
-        }
+        };
 
         var credentials = {
             email: vm.email,
             password: vm.password
-        }
+        };
         
         // Use Satellizer's $auth service to login
         $auth.login(credentials)
@@ -83,6 +83,6 @@ authController.controller('AuthController', function($auth, $state, $scope, auth
             vm.authStatus.alert = false;
             // If login is successful, redirect to the users state
             $state.go('home', {});
-        })
-    }
+        });
+    };
 });

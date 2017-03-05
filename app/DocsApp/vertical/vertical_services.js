@@ -6,7 +6,7 @@ verticalService.factory('verticalAPIservice', function($http) {
 
     var verticalUrl = {
         'endpoint': 'http://localhost:9000/vertical/'
-    }
+    };
 
     verticalAPI.getVertical =function(params) {
         return $http({
@@ -15,14 +15,14 @@ verticalService.factory('verticalAPIservice', function($http) {
             url: verticalUrl.endpoint,
             params: params
         });
-    }
+    };
 
     verticalAPI.getVerticalDetails = function(id) {
         return $http({
             method: 'GET', 
             url: verticalUrl.endpoint + id + '/'
         });
-    }
+    };
 
     verticalAPI.postVerticalDetail = function(params) {
         return $http({
@@ -37,7 +37,7 @@ verticalService.factory('verticalAPIservice', function($http) {
             },
             data: params
         });
-    }
+    };
 
     verticalAPI.putVerticalDetail = function(params) {
         var id = params.id;
@@ -53,7 +53,7 @@ verticalService.factory('verticalAPIservice', function($http) {
             },
             data: params
         });
-    }
+    };
 
 
     return verticalAPI;

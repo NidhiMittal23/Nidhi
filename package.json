@@ -1,5 +1,5 @@
 {
-  "name": "angular-seed",
+  "name": "foodprodocs",
   "private": true,
   "version": "0.0.0",
   "description": "A starter project for AngularJS",
@@ -7,6 +7,13 @@
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.7.7",
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-qunit": "^1.3.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^2.2.0",
+    "grunt-contrib-watch": "^1.0.0",
     "http-server": "^0.9.0",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.22",

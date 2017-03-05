@@ -6,7 +6,7 @@ industryService.factory('industryAPIservice', function($http) {
 
     var industryUrl = {
         'endpoint': 'http://localhost:9000/industry/'
-    }
+    };
 
     industryAPI.getIndustry = function(params) {
         return $http({
@@ -15,14 +15,14 @@ industryService.factory('industryAPIservice', function($http) {
             url: industryUrl.endpoint,
             params: params
         });
-    }
+    };
 
     industryAPI.getIndustryDetails = function(id) {
         return $http({
             method: 'GET', 
             url: industryUrl.endpoint + id + '/'
         });
-    }
+    };
 
     industryAPI.postIndustryDetail = function(params) {
         return $http({
@@ -37,7 +37,7 @@ industryService.factory('industryAPIservice', function($http) {
             },
             data: params
         });
-    }
+    };
 
 
     industryAPI.putIndustryDetail = function(id,params) {
@@ -53,7 +53,7 @@ industryService.factory('industryAPIservice', function($http) {
             },
             data: { id: id, name: params.name }
         });
-    }
+    };
 
     return industryAPI;
 });

@@ -16,35 +16,35 @@ documentService.factory('documentAPIservice', function($http, Notification) {
             method: 'GET',
             url: documentUrl.endpoint
         });
-    }
+    };
 
     documentAPI.getDocumentPage =function(url) {
         return $http({
             method: 'GET',
             url: url
         });
-    }
+    };
 
     documentAPI.getDocumentDetails =function(id) {
         return $http({
             method: 'GET',
             url: documentUrl.endpoint+ id + '/'
         });
-    }
+    };
 
     documentAPI.getDocumentDetail = function (id) {
         return $http({
             method: 'GET',
             url: documentUrl.endpoint + id + "/"
         });
-    }
+    };
 
     documentAPI.getDocVersion =function(id) {
         return $http({
             method: 'GET',
             url: documentUrl.endpoint + id + '/'
         });
-    }
+    };
 
     documentAPI.setRelation = function(params) {
         return $http({
@@ -58,15 +58,15 @@ documentService.factory('documentAPIservice', function($http, Notification) {
                 return str.join("&");
             },
             data: params
-        })
-    }
+        });
+    };
 
     documentAPI.getRelationDetail = function(id) {
         return $http({
             method: 'GET',
             url: documentUrl.relationEndPoint + id + '/'
         });
-    }
+    };
 
 
     documentAPI.postDocVersionDetail = function(uploadUrl, data){
@@ -79,8 +79,8 @@ documentService.factory('documentAPIservice', function($http, Notification) {
         }).success(function(data, status) {
             // file is uploaded successfully
             Notification.success(data.name+' added successfully');
-        })
-    }
+        });
+    };
 
     documentAPI.postDocumentDetail = function(params) {
         return $http({
@@ -95,7 +95,7 @@ documentService.factory('documentAPIservice', function($http, Notification) {
             },
             data: params
         });
-    }
+    };
 
     documentAPI.postDocumentRelationDetail = function(params) {
         return $http({
@@ -110,28 +110,28 @@ documentService.factory('documentAPIservice', function($http, Notification) {
             },
             data: params
         });
-    }
+    };
 
     documentAPI.deleteVersion = function(id) {
         return $http({
             method: 'DELETE',
             url: documentUrl.versionEndPoint + id + '/'
         });
-    }
+    };
 
     documentAPI.resetVersion = function(id) {
         return $http({
             method: 'POST',
             url: documentUrl.versionEndPoint + id + '/version_reset/'
         });
-    }
+    };
 
     documentAPI.deleteRelation = function(id) {
         return $http({
             method: 'DELETE',
             url: documentUrl.relationEndPoint + id + '/'
         });
-    }
+    };
 
     documentAPI.putDocumentDetail = function(params) {
         return $http({
@@ -146,14 +146,14 @@ documentService.factory('documentAPIservice', function($http, Notification) {
             },
             data: params
         });
-    }
+    };
 
     documentAPI.getFileSource = function(url) {
         return $http({
             method: 'GET',
             url: url
-        })
-    }
+        });
+    };
 
     return documentAPI;
 

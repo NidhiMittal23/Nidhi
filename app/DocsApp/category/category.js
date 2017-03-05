@@ -1,4 +1,4 @@
-var categoryApp = angular.module('category', ['ui.router', 'category.controllers', 'category.services'])
+var categoryApp = angular.module('category', ['ui.router', 'category.controllers', 'category.services']);
 
 categoryApp.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -26,5 +26,5 @@ categoryApp.config(function($stateProvider, $urlRouterProvider) {
             controller: 'categoryAlterCtrl',
             params: {id: null, name: null},
             authenticate: true
-        })
-})
+        });
+});

@@ -19,7 +19,7 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
         localStorage.removeItem('isLead');
         localStorage.removeItem('userId');
         $state.go('auth');
-    }
+    };
 
     // TODO: Set company Drop Dwon based on User's Company
 
@@ -49,7 +49,7 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
                         'Company': companyArr,
                     }
                 }
-            })
+            });
         }
         else {
             // TODO: populate this based on sites user is registered into
@@ -59,7 +59,7 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
             companyAPIservice.getCompanyDetails(vm.companyId).success(function(response, status) {
                 $scope.SiteMangement = {}
                 $scope.SiteMangement[response.name] = response.sites;
-            })
+            });
         }
     }
     

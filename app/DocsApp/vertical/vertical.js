@@ -1,4 +1,4 @@
-var verticalApp = angular.module('vertical', ['ui.router', 'vertical.controllers', 'vertical.services'])
+var verticalApp = angular.module('vertical', ['ui.router', 'vertical.controllers', 'vertical.services']);
 
 verticalApp.config(function($stateProvider, $urlRouterProvider){
     $stateProvider
@@ -26,5 +26,5 @@ verticalApp.config(function($stateProvider, $urlRouterProvider){
             controller: 'verticalAlterCtrl',
             params: {id: null, name: null},
             authenticate: true
-        })
-})
+        });
+});

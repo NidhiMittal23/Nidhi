@@ -9,7 +9,7 @@ companyService.factory('companyAPIservice', function($http, _) {
         'siteEndpoint': 'http://localhost:9000/site/',
         'relationEndpoint':'http://localhost:9000/relation/',
         'user': "http://localhost:9000/user/"
-    }
+    };
 
     companyAPI.citylist = [
         "Agra", "Ahmedabad", "Alappuzha", "Alwar", "Amritsar", "Aurangabad",
@@ -27,7 +27,7 @@ companyService.factory('companyAPIservice', function($http, _) {
         "Udaipur", "Vadodra", "Varanasi", "Vasco-Da-Gama", "Vijayawada", "Visakhapatnam"
     ];
 
-    var IndiaMobileCode = "+91"
+    var IndiaMobileCode = "+91";
     // while adding new company fetch user whose has not been assigned to any site
     // http://localhost:9000/user/null/no_company
 
@@ -35,22 +35,22 @@ companyService.factory('companyAPIservice', function($http, _) {
         return $http({
             method: 'GET',
             url: companyUrl.user + 'null' + '/no_company/'
-        })
-    }
+        });
+    };
 
     companyAPI.getCompanyEmployees = function(companyId) {
         return $http({
             method: 'GET',
             url: companyUrl.endpoint + companyId + '/get_company_employees/'
-        })
-    }
+        });
+    };
 
     companyAPI.getSiteDocuments = function(siteId) {
         return $http({
             method: 'GET',
             url: companyUrl.siteEndpoint + siteId + '/get_site_documents/'
-        })
-    }
+        });
+    };
 
     companyAPI.getCompany =function(params) {
         params.is_approved = params.isApproved;
@@ -60,21 +60,21 @@ companyService.factory('companyAPIservice', function($http, _) {
             url: companyUrl.endpoint,
             params: params
         });
-    }
+    };
 
     companyAPI.getCompanyUsers =function(params) {
         return $http({
             method: 'GET',
             url: companyUrl.endpoint + params +"/get_company_employees/",
         });
-    }
+    };
 
     companyAPI.getCompanyDetails = function(id) {
         return $http({
             method: 'GET', 
             url: companyUrl.endpoint + id + '/'
         });
-    }
+    };
 
     companyAPI.getCompanyDetailsWithFilter = function(params) {
         var id = params.id;
@@ -84,28 +84,28 @@ companyService.factory('companyAPIservice', function($http, _) {
             url: companyUrl.endpoint + id + '/',
             params: params
         });
-    }
+    };
 
     companyAPI.getCompanySite =function(id) {
         return $http({
             method: 'GET',
             url: companyUrl.endpoint + id + "/"
         });
-    }
+    };
 
     companyAPI.getCompanySiteDetails =function(id) {
         return $http({
             method: 'GET',
             url: companyUrl.siteEndpoint + id + "/"
         });
-    }
+    };
 
     companyAPI.getRelationDetails = function(id) {
         return $http({
             method: 'GET', 
             url: companyUrl.relationEndpoint + id + '/'
         });
-    }
+    };
 
     companyAPI.postCompanyDetail = function(params) {
 
@@ -141,7 +141,7 @@ companyService.factory('companyAPIservice', function($http, _) {
             //prevents serializing payload.  don't do it.
             transformRequest: angular.identity
         });
-    }
+    };
 
     companyAPI.putCompanyDetail = function(params) {
         var payload = new FormData();
@@ -168,7 +168,7 @@ companyService.factory('companyAPIservice', function($http, _) {
             headers: { 'Content-Type': undefined},
             transformRequest: angular.identity
         });
-    }
+    };
 
     companyAPI.postCompanySiteDetail = function(params) {
         var payload = new FormData();
@@ -189,7 +189,7 @@ companyService.factory('companyAPIservice', function($http, _) {
             //prevents serializing payload.  don't do it.
             transformRequest: angular.identity
         });
-    }
+    };
 
     companyAPI.transferSiteEmployee = function(params) {
         var siteId = params.site;
@@ -206,7 +206,7 @@ companyService.factory('companyAPIservice', function($http, _) {
             data: params
         });
 
-    }
+    };
 
     companyAPI.constructSiteDocument = function(siteId) {
         return $http({
@@ -220,7 +220,7 @@ companyService.factory('companyAPIservice', function($http, _) {
                 return str.join("&");
             }
         });
-    }
+    };
 
     return companyAPI;
 

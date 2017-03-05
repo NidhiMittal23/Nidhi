@@ -4,21 +4,21 @@ licenseController.controller('licenseCtrl', function($state, $scope, licenseAPIs
     var params = {};
     $scope.licenseInitial = function () {
         // pagination control
-        $scope.bigTotalItems;
+        $scope.bigTotalItems=undefined;
         $scope.maxSize = 5;
         $scope.bigCurrentPage = 1;
 
         $scope.pageChanged();
-    }
+    };
     
 
     $scope.addNewLicense = function() {
         $state.go('addLicense', {});
-    }
+    };
 
     $scope.editExistLicense = function(id, name) {
         $state.go('editLicense', {id: id, name: name});
-    }
+    };
 
 
     $scope.pageChanged = function() {
@@ -27,7 +27,7 @@ licenseController.controller('licenseCtrl', function($state, $scope, licenseAPIs
         licenseAPIservice.getlicense(params).success(function (response, status) {
             $scope.licenseList = response;
             $scope.bigTotalItems = response.count;
-        })
+        });
     };
 });
 
@@ -38,13 +38,13 @@ licenseController.controller('licenseAlterCtrl', function($scope, $state, $state
     
     if ($state.current.name == 'editLicense') {
         $scope.isEdit = true;
-        var id = $stateParams.id
+        var id = $stateParams.id;
         
         // request to server to get detail of perticular license.
         licenseAPIservice.getLicenseDetails(id).success(function (response, status) {
             //populate the input field with data.
             $scope.licenseModel = response;
-        })
+        });
 
     }
     else if ($state.current.name == 'addLicense') {
@@ -57,15 +57,15 @@ licenseController.controller('licenseAlterCtrl', function($scope, $state, $state
         licenseAPIservice.postLicenseDetail(params).success(function (response, status) {
             var licenseName = response.name;
             Notification.success(licenseName+' added successfully');
-        })
-    }
+        });
+    };
 
     $scope.editExistLicense = function() {
         var newval = $scope.licenseModel;
         licenseAPIservice.putLicenseDetail(newval).success(function (response, status) {
             var licenseName = response.name;
             Notification.success(licenseName+' Edited successfully');
-        })
-    }
+        });
+    };
 
-})
+});

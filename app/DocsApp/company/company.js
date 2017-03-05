@@ -1,4 +1,4 @@
-var companyApp = angular.module('company', ['ui.router', 'company.controllers', 'company.services'])
+var companyApp = angular.module('company', ['ui.router', 'company.controllers', 'company.services']);
 
 companyApp.config(function($stateProvider, $urlRouterProvider){
     $stateProvider
@@ -71,5 +71,5 @@ companyApp.config(function($stateProvider, $urlRouterProvider){
             controller: 'siteCtrl',
             params: {id: null, name: null},
             authenticate: true
-        })
-})
+        });
+});

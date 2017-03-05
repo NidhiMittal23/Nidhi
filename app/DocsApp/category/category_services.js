@@ -8,7 +8,7 @@ categoryService.factory('categoryAPIservice', function($http) {
     var categoryUrl = {
         'endpoint': 'http://localhost:9000/category/',
         'subcategoryEndpoint': 'http://localhost:9000/subcategory/'
-    }
+    };
 
     //Enhance: Use Protype inheritance to Make a single function and inherit it to 
     // get basic request like getcategory, post, etc..
@@ -18,21 +18,21 @@ categoryService.factory('categoryAPIservice', function($http) {
             url: categoryUrl.endpoint,
             params: params
         });
-    }
+    };
 
     categoryAPI.getSubcategory = function() {
         return $http({
             method: 'GET', 
             url: categoryUrl.subcategoryEndpoint
         });
-    }
+    };
 
     categoryAPI.getCategoryDetails = function(id) {
         return $http({
             method: 'GET', 
             url: categoryUrl.endpoint + id + '/'
         });
-    }
+    };
 
     categoryAPI.postCategoryDetail = function(params) {
         return $http({
@@ -47,7 +47,7 @@ categoryService.factory('categoryAPIservice', function($http) {
             },
             data: params
         });
-    }
+    };
 
     categoryAPI.postSubCategoryDetail = function(params) {
         return $http({
@@ -62,7 +62,7 @@ categoryService.factory('categoryAPIservice', function($http) {
             },
             data: params
         });
-    }
+    };
 
     categoryAPI.putSubCategoryDetail = function(params, id) {
         return $http({
@@ -77,7 +77,7 @@ categoryService.factory('categoryAPIservice', function($http) {
             },
             data: params
         });
-    }
+    };
 
     categoryAPI.putCategoryDetail = function(params) {
         return $http({
@@ -92,7 +92,7 @@ categoryService.factory('categoryAPIservice', function($http) {
             },
             data: params
         });
-    }
+    };
 
     return categoryAPI;
 });

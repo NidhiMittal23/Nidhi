@@ -8,7 +8,7 @@ authService.factory('authAPIservice', function($http, $auth) {
         'endpoint': 'http://localhost:9000/auth/',
         'siteDocs': 'http://localhost:9000/site/',
         'company': 'http://localhost:9000/company/'
-    }
+    };
 
     authAPI.adminSiteId = 1;
     var IndiaMobileCode = "+91";
@@ -18,8 +18,8 @@ authService.factory('authAPIservice', function($http, $auth) {
         return $http({
             method: 'GET', 
             url: authUrl.endpoint + 'me/'
-        })
-    }
+        });
+    };
 
     authAPI.registerCompany = function(params) {
         var payload = new FormData();
@@ -43,8 +43,8 @@ authService.factory('authAPIservice', function($http, $auth) {
             headers: { 'Content-Type': undefined},
             //prevents serializing payload.  don't do it.
             transformRequest: angular.identity
-        })
-    }
+        });
+    };
 
 
 

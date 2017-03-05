@@ -1,4 +1,4 @@
-var authServiceApp = angular.module('authService', ['ui.router', 'authService.auth', 'authService.home', 'authService.services'])
+var authServiceApp = angular.module('authService', ['ui.router', 'authService.auth', 'authService.home', 'authService.services']);
 
 
 authServiceApp.config(function($stateProvider, $urlRouterProvider, $authProvider) {

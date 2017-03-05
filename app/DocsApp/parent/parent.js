@@ -7,5 +7,5 @@ parentApp.config(function($stateProvider) {
 			templateUrl: 'DocsApp/parent/templates/modals.html',
 			controller: 'modalCtrl as $ctrl',
 			parent: 'home'
-		})
-})
+		});
+});

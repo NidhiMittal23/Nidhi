@@ -6,31 +6,31 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
 
     $scope.addNewDocument = function() {
         $state.go('addDocument', {});
-    }
+    };
 
     $scope.gotoDocVersion = function(id, name) {
         $state.go('docVersion', {id: id, name : name});
-    }
+    };
 
     $scope.editExistDocument = function(id, name) {
         $state.go('editDocument', {id: id, name: name});
-    }
+    };
 
     $scope.versionDelete = function(id) {
         documentAPIservice.deleteVersion(id).success(function(response) {
             // add notification message #todo
             // hint add callback
             $scope.reloadRoute();
-        })
-    }
+        });
+    };
 
     $scope.versionReset = function(id) {
         documentAPIservice.resetVersion(id).success(function(response) {
             // add notification message #todo
             // hint add callback
             $scope.reloadRoute();
-        })
-    }
+        });
+    };
 
 
     $scope.versionFileView = function(docfileUrl) {
@@ -47,8 +47,8 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
                 alert('Please allow popups for this website');
             }
             wnd.document.write(response);
-        })
-    }
+        });
+    };
 
     $scope.versionFileEdit = function(docfileUrl) {
         var win = window.open(docfileUrl, '_blank');
@@ -59,11 +59,11 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
             //Browser has blocked it
             alert('Please allow popups for this website');
         }
-    }
+    };
 
     $scope.reloadRoute = function() {
         $window.location.reload();
-    }
+    };
 
     $scope.getDocumentByPage = function(link) {
         documentAPIservice.getDocumentPage(link).success(function (response, status) {
@@ -80,9 +80,9 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
 
         });
         //console.log($scope.groupByCategory);
-    })
+    });
 
-    }
+    };
 
     categoryAPIservice.getcategory().success(function(response,status) {
         $scope.categoryName = [];
@@ -92,7 +92,7 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
             $scope.categoryName[obj.id]= obj.name;
         });
         //console.log($scope.categoryName);
-    })
+    });
 
     if ($state.current.name == "siteDocument") {
         userSite = $stateParams.siteId;
@@ -109,7 +109,7 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
                     return obj.subcategory.category;
                 }
             });
-        })
+        });
     }
     else {
         documentAPIservice.getDocument().success(function (response, status) {
@@ -123,7 +123,7 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
                 }
 
             });
-        })
+        });
     }
 
 });
@@ -131,19 +131,19 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
 
 documentController.controller('docVersionCtrl', function($state, $stateParams, $scope, Notification, documentAPIservice) {
 
-    var id = $stateParams.id
+    var id = $stateParams.id;
 
     $scope.addNewDocVersion = function() {
         $state.go('addDocVersion', {docId: id});
-    }
+    };
 
     $scope.editExistDocVersion = function(id, name) {
         $state.go('editDocVersion', {id: id, name: name});
-    }
+    };
 
     documentAPIservice.getDocVersion(id).success(function (response, status) {
         $scope.docVersionList = response;
-    })
+    });
 });
 
 
@@ -201,13 +201,13 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
 
         $scope.documentRelationModel.selectedLicenseId = function(licenseId) {
             $scope.documentRelationModel.licenseSelected = licenseId;
-        }
+        };
 
         $scope.documentRelationModel.selectedVerticalId = function(verticalId) {
             $scope.documentRelationModel.verticalSelected = verticalId;
-        }
+        };
 
-    }
+    };
 
     if ($state.current.name == 'editDocument') {
         $scope.isEdit = true;
@@ -260,8 +260,8 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
                                 $scope.documentRelationModel.verticalSelected.push(response.vertical);
                             }
                             
-                        })
-                    })
+                        });
+                    });
                 }, 1000);
                 // $scope.documentRelationModel.licenseSelected = relLicense;
                 // $scope.documentRelationModel.verticalSelected = relVertical;
@@ -270,7 +270,7 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
                 $scope.noSubCategory = true;
                 $scope.documentModel.newDocumentId = docId;
             }
-        })
+        });
 
     }
     else if ($state.current.name == 'addDocument') {
@@ -293,8 +293,8 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
             // todo
             // Add version: Upload file
 
-        })
-    }
+        });
+    };
 
     $scope.addNewDocumentVersion = function(){
 
@@ -317,7 +317,7 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         // documentAPIservice.putDocumentDetail(params).success(function (response, status) {
         //     Notification.success(params.name + ' updated successfully');
         // })
-    }
+    };
 
     // Associate Subcategory to newly Created Document
     $scope.addDocumentSubCategory = function() {
@@ -329,8 +329,8 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
             Notification.success(subCategoryName+' added successfully');
             $scope.catMile = true;
             $scope.noSubCategory = false ;
-        })
-    }
+        });
+    };
 
     $scope.editDocumentSubCategory = function() {
         // debugger;
@@ -340,8 +340,8 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         params.category = $scope.documentSubCategoryModel.categorySelected.id;
         categoryAPIservice.putSubCategoryDetail(params, subCatId).success(function (response, status) {
             Notification.success(params.name + ' updated successfully');
-        })
-    }
+        });
+    };
 
 
     $scope.buildDocumentRelation = function() {
@@ -360,13 +360,13 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
             license: licenseStr,
             vertical: verticalStr,
             subcategory: subCatId
-        }
+        };
 
         documentAPIservice.setRelation(params).success(function (response, status) {
             Notification.success('Relationship Established');
             $scope.relMile = true;
         });
-    }
+    };
 
     $scope.editBuildDocumentRelation = function() {
         // TODO: send request to server to delete provided sub category from (license, vertical) tuple
@@ -408,10 +408,10 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
     //code for autofill tags, present in edit relation
     $scope.verticalQuery = function() {
         return $scope.documentRelationModel.verticalOption;
-    }
+    };
 
     $scope.licenseQuery = function() {
         return $scope.documentRelationModel.licenseOption;
-    }
+    };
 
 });
