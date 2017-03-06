@@ -67,7 +67,7 @@ myApp.factory('RequestsErrorHandler', function($q, _, $injector) {
       if ('url' in config ) {
         var url = config.url;
         if ((config.url).search("localhost:9000") !== -1) {
-          config.url = (config.url).replace("localhost:9000", "35.154.197.42:9010");
+          config.url = (config.url).replace("localhost:9000", "35.154.197.42:8010");
         }
       }
       return config || $q.when(config);
