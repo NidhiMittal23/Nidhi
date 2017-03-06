@@ -64,12 +64,12 @@ myApp.factory('RequestsErrorHandler', function($q, _, $injector) {
     'request': function(config) {
       // can be done better
       // Trying to change url in fly to Production server;
-      if ('url' in config ) {
-        var url = config.url;
-        if ((config.url).search("localhost:9000") !== -1) {
-          config.url = (config.url).replace("localhost:9000", "127.0.0.1:8010");
-        }
-      }
+      // if ('url' in config ) {
+      //   var url = config.url;
+      //   if ((config.url).search("localhost:9000") !== -1) {
+      //     config.url = (config.url).replace("localhost:9000", "127.0.0.1:8010");
+      //   }
+      // }
       return config || $q.when(config);
     },
     'responseError': function(rejection) {
