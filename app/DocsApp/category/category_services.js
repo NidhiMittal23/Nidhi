@@ -94,5 +94,13 @@ categoryService.factory('categoryAPIservice', function($http) {
         });
     };
 
+    categoryAPI.deleteCategoryDetail = function(params) {
+        var id = params.id;
+        return $http({
+            method: 'DELETE',
+            url: categoryUrl.endpoint + id + '/',
+        })
+    }
+
     return categoryAPI;
 });

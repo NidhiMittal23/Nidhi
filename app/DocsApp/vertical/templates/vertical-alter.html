@@ -12,9 +12,12 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-8">
-          <button type="submit" class="btn btn-primary" ng-click="editExistVertical()" ng-if="isEdit===true">Edit</button>
+          <div class="col-sm-offset-2 col-sm-7">
+            <button type="submit" class="btn btn-primary" ng-click="editExistVertical()" ng-if="isEdit===true">Edit</button>
             <button type="submit" class="btn btn-primary" ng-click="addNewVertical()" ng-if="isEdit===false">Add</button>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-danger" ng-click="deleteExistVertical()" ng-if="isEdit===true">Delete</button>
           </div>
         </div>
       </form>

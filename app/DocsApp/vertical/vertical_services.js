@@ -55,6 +55,14 @@ verticalService.factory('verticalAPIservice', function($http) {
         });
     };
 
+    verticalAPI.deleteVerticalDetail = function(params) {
+        var id = params.id;
+        return $http({
+            method: 'DELETE',
+            url: verticalUrl.endpoint + id + '/',
+        })
+    }
+
 
     return verticalAPI;
 });

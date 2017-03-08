@@ -68,4 +68,12 @@ licenseController.controller('licenseAlterCtrl', function($scope, $state, $state
         });
     };
 
+    $scope.deleteExistLicense = function() {
+        var newval = $scope.licenseModel;
+        licenseAPIservice.deleteLicenseDetail(newval).success(function (response, status) {
+            Notification.success('Delete successfully');
+            $state.go('license');
+        });
+    };
+
 });

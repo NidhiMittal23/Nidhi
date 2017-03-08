@@ -5,8 +5,8 @@
 <div class="panel panel-default">
 
   <!-- check if state is edit -->
-  <div class="panel-heading font-bold" ng-if="isEdit===true">Sub Category</div>
-  <div class="panel-heading font-bold" ng-if="isEdit===false">Add sub-Category</div>
+  <div class="panel-heading font-bold" ng-if="isEdit===true">Sub-Category</div>
+  <div class="panel-heading font-bold" ng-if="isEdit===false">Sub-Category</div>
     
     <div class="table-responsive">
       <table class="table table-hover">
@@ -40,9 +40,12 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-6">
+          <div class="col-sm-offset-2 col-sm-7">
             <button type="submit" class="btn btn-primary" ng-click="editExistCategory()" ng-if="isEdit===true">Edit</button>
             <button type="submit" class="btn btn-primary" ng-click="addNewCategory()" ng-if="isEdit===false">Add</button>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-danger" ng-click="deleteExistCategory()" ng-if="isEdit===true">Delete</button>
           </div>
         </div>
       </form>

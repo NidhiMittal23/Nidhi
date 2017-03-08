@@ -64,4 +64,12 @@ categoryController.controller('categoryAlterCtrl', function($scope, $state, $sta
         });
     };
 
+    $scope.deleteExistCategory = function() {
+        var newval = $scope.categoryModel;
+        categoryAPIservice.deleteCategoryDetail(newval).success(function (response, status) {
+            Notification.success('Delete successfully');
+            $state.go('category');
+        });
+    };
+
 });

@@ -55,5 +55,13 @@ licenseService.factory('licenseAPIservice', function($http) {
         });
     };
 
+    licenseAPI.deleteLicenseDetail = function(params) {
+        var id = params.id;
+        return $http({
+            method: 'DELETE',
+            url: licenseUrl.endpoint + id + '/',
+        })
+    }
+
     return licenseAPI;
 });

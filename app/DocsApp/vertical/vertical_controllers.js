@@ -63,4 +63,12 @@ verticalController.controller('verticalAlterCtrl', function($scope, $state, $sta
         });
     };
 
+    $scope.deleteExistVertical = function() {
+        var newval = $scope.verticalModel;
+        verticalAPIservice.deleteVerticalDetail(newval).success(function (response, status) {
+            Notification.success('Delete successfully');
+            $state.go('vertical');
+        });
+    };
+
 });
