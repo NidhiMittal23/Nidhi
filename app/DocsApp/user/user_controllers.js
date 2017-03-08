@@ -59,7 +59,6 @@ userController.controller('userAlterCtrl', function($scope, $state, $stateParams
     $scope.addNewUser = function() {
         $scope.userModel.phone_number = userAPIservice.IndiaMobileCode + $scope.userModel.phone_number;
         userAPIservice.params = $scope.userModel;
-        console.log(userAPIservice);
         userAPIservice.post().then(function (response) {
             var email = userAPIservice.response.email;
             Notification.success(email+' added successfully');
@@ -71,6 +70,14 @@ userController.controller('userAlterCtrl', function($scope, $state, $stateParams
         userAPIservice.put().then(function (response) {
             var email = userAPIservice.response.email;
             Notification.success(email+' updated successfully');
+        });
+    };
+
+    $scope.deleteExistUser = function() {
+        userAPIservice.params = $scope.userModel;
+        userAPIservice.delete().then(function (response) {
+            Notification.success("Delete successfully");
+            $state.go('user');
         });
     };
 

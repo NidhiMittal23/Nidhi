@@ -76,9 +76,9 @@ parentController.component('modalComponent', {
     }
 });
 
-// TODO: basic controller pattern that has been getting repitive in all conponents developed
+// TODO: basic controller pattern that has been getting repitive in all conponents
 // Create a template of controller on top and inherit it further to expand or resuse this controller
-// Basic contoller operation handled are: 1. add 2. edit 
+// Basic contoller operation((CRUD)) handled
 
 // var userController = angular.module('user.controllers', ['ui-notification']);
 
@@ -141,7 +141,6 @@ parentController.component('modalComponent', {
 //     $scope.addNewUser = function() {
 //         $scope.userModel.phone_number = userAPIservice.IndiaMobileCode + $scope.userModel.phone_number;
 //         userAPIservice.params = $scope.userModel;
-//         console.log(userAPIservice);
 //         userAPIservice.post().then(function (response) {
 //             var email = userAPIservice.response.email;
 //             Notification.success(email+' added successfully');
@@ -153,6 +152,14 @@ parentController.component('modalComponent', {
 //         userAPIservice.put().then(function (response) {
 //             var email = userAPIservice.response.email;
 //             Notification.success(email+' updated successfully');
+//         });
+//     };
+
+//     $scope.deleteExistUser = function() {
+//         userAPIservice.params = $scope.userModel;
+//         userAPIservice.delete().then(function (response) {
+//             Notification.success("Delete successfully");
+//             $state.go('user');
 //         });
 //     };
 

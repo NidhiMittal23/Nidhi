@@ -50,9 +50,12 @@
         </div> -->
 
         <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-8">
+          <div class="col-sm-offset-2 col-sm-7">
             <button type="submit" class="btn btn-default" ng-click="editExistUser()" ng-if="isEdit===true">Edit</button>
             <button type="submit" class="btn btn-default" ng-click="addNewUser()" ng-if="isEdit===false">Add</button>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-danger" ng-click="deleteExistUser()" ng-if="isEdit===true">Delete</button>
           </div>
         </div>
       </form>
