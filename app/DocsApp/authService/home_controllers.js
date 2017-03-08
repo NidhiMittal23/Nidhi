@@ -36,7 +36,8 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
         vm.isAdmin = (localStorage.getItem("isAdmin") === 'true');
         params.page = 1;
         if (vm.isAdmin) {
-            // fetch all company Info
+            // fetch all approved company Info; for SideNav
+            params.isApproved = true;
             companyAPIservice.getCompany(params).success(function (response, status) {
                 // From Company Managemnt : Remove Admin Company from Company List from View fetch It
                 // TODO: id is hardcoded

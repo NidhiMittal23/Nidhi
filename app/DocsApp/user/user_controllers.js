@@ -44,6 +44,8 @@ userController.controller('userAlterCtrl', function($scope, $state, $stateParams
         userAPIservice.get().then(function (response) {
             //populate the input field with data.
             $scope.userModel = userAPIservice.response;
+            // remove +91 from beginning
+            $scope.userModel.phone_number = $scope.userModel.phone_number.substring(3);
         });
 
     }
