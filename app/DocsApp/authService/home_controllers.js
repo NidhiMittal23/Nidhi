@@ -98,10 +98,16 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
                 // stat: '365',
                 title: 'Company',
                 link: '#/home/company',
+            },
+            {
+                icon: 'fa fa-user-o',
+                // stat: '365',
+                title: 'User',
+                link: '#/home/user',
             }],
         colSize: "col-lg-4",
         tileType: "tile-md-square",
-        colors: ["#fca9cf", "#a8a5f7", "#efd2a0", "#8f8e91", "#5893f4"]
+        colors: ["#fca9cf", "#a8a5f7", "#efd2a0", "#8f8e91", "#5893f4", "#bcce75"]
     };
 
 });

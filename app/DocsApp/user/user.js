@@ -6,7 +6,7 @@ userApp.config(function($stateProvider, $urlRouterProvider){
             url: '/user',
             parent: 'home',
             templateUrl: 'DocsApp/user/templates/user-list.html',
-            controller: 'userCtrl',
+            controller: 'userController',
             authenticate: true
         })
 
@@ -20,7 +20,7 @@ userApp.config(function($stateProvider, $urlRouterProvider){
         })
 
         .state('userEdit', {
-            url: '/user/edit/{name}',
+            url: '/user/edit/:id?name',
             parent: 'home',
             templateUrl: 'DocsApp/user/templates/user-alter.html',
             controller: 'userAlterCtrl',
