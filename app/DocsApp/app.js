@@ -77,7 +77,7 @@ myApp.factory('RequestsErrorHandler', function($q, _, $injector) {
       if (rejection.status == 401) {
         errorMessage = "Logout.. your key has expired";
       }
-      if (rejection.status == 400) {
+      if (rejection.status == 400 || rejection.status == 403) {
         var error = _.map(rejection.data, function(obj) {
           return obj
         });

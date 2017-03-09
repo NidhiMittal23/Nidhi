@@ -58,8 +58,14 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
             // create a side nave based on user's site not company..
             vm.companyId = localStorage.getItem("company");
             companyAPIservice.getCompanyDetails(vm.companyId).success(function(response, status) {
-                $scope.SiteMangement = {}
-                $scope.SiteMangement[response.name] = response.sites;
+                var employeeSites = localStorage.getItem("sites");
+                var employeeSiteList = JSON.parse("[" + employeeSites + "]");
+                employeeSites = _.filter(response.sites, function(site) {
+                    return _.contains(employeeSiteList, site.id);
+                });
+
+                $scope.SiteMangement = {};
+                $scope.SiteMangement[response.name] = employeeSites;
             });
         }
     }
