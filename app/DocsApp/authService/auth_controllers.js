@@ -10,7 +10,6 @@ authController.controller('AuthController', function($auth, $state, $scope, auth
         $scope.companyModel.citylist = companyAPIservice.citylist;
 
         $scope.registerNewCompany = function () {
-            console.log($scope.companyModel);
             var params = $scope.companyModel;
             authAPIservice.registerCompany(params)
             .then(function(data) {
@@ -30,7 +29,6 @@ authController.controller('AuthController', function($auth, $state, $scope, auth
 
         $auth.signup(user)
         .then(function(data) {
-            console.log(data);
             vm.authStatus.alert = true;
             vm.authStatus.message = "You have registered successfully ";
             vm.authStatus.register = true;   

@@ -201,6 +201,15 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
         });
     };
 
+    $scope.deleteExistCompany = function() {
+        var params = $scope.companyModel;
+        params.id = $stateParams.id;
+        companyAPIservice.deleteCompanyDetail(params).success(function(response, status) {
+            Notification.success('Delete successfully');
+            $state.go('company');
+        });
+    }
+
 });
 
 companyController.controller('companySiteCtrl', function($state, $stateParams, $scope, companyAPIservice) {

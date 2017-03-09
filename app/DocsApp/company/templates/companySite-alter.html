@@ -34,7 +34,7 @@
         <div class="form-group">
           <label class="control-label col-sm-2">Select Employees:</label>
           <div class="col-sm-6">
-            <select ng-model="companySiteModel.companyEmployeesSelected" ng-change="companySiteModel.selectedcompanyEmployeesId(companySiteModel.companyEmployeesSelected)"
+            <select multiple ng-model="companySiteModel.companyEmployeesSelected" ng-change="companySiteModel.selectedcompanyEmployeesId(companySiteModel.companyEmployeesSelected)"
             class="form-control custom-form-control" required>
               <option ng-repeat="option in companySiteModel.companyEmployeesOption" ng-model="companySiteModel.companyEmployeesSelected" value="{{option.id}}">{{option.email}}</option>
             </select>

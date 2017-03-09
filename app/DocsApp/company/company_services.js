@@ -170,6 +170,13 @@ companyService.factory('companyAPIservice', function($http, _) {
         });
     };
 
+    companyAPI.deleteCompanyDetail = function(params) {
+        return $http({
+            method: 'DELETE',
+            url: companyUrl.endpoint + params.id + '/'
+        })
+    }
+
     companyAPI.postCompanySiteDetail = function(params) {
         var payload = new FormData();
         payload.append('company', params.companyId);
@@ -177,7 +184,10 @@ companyService.factory('companyAPIservice', function($http, _) {
         payload.append('location', params.location);
         payload.append('license', params.licenseSelected);
         payload.append('vertical', params.verticalSelected);
-        payload.append('employee', params.companyEmployeesSelected);
+        // payload.append('employee', params.companyEmployeesSelected);
+        _.each(params.companyEmployeesSelected, function(employee) {
+            payload.append('employee', employee);
+        });
 
         return $http({
             url: companyUrl.siteEndpoint,

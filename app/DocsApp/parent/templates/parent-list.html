@@ -1,0 +1,21 @@
+<div ng-init="parentInitial()">
+  <button type="button" class="btn btn-default" ng-click="addNewParent()">Add Parent</button>
+    <div class="table-responsive">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="parent in parentList">
+            <td>{{parent.id ? parent.id : 'N/A'}}</td>
+            <td>{{parent.email ? parent.email : 'N/A'}}</td>
+            <td style="cursor: pointer" ng-click="editExistParent(parent.id, parent.email)" >Setting<span> </span><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" ng-change="pageChanged()"></ul>
+</div>
