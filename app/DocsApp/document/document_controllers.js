@@ -3,6 +3,7 @@ var documentController = angular.module('document.controllers', ['ui-notificatio
 documentController.controller('documentCtrl', function($state, $window ,$scope, documentAPIservice,
     _, categoryAPIservice, companyAPIservice, Notification, $http, $stateParams) {
     $scope.serverDomain = documentAPIservice.serverDomain;
+    $scope.isEmployeeLead = localStorage.getItem('isLead') === 'true';
 
     $scope.addNewDocument = function() {
         $state.go('addDocument', {});
