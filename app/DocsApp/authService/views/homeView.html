@@ -39,6 +39,10 @@
                       <uib-accordion ng-repeat="site in company.sites">
                         <a ui-sref="siteDocument({siteId: site.id})">{{site.name}}</a>
                       </uib-accordion>
+                      <!-- User accordion  -->
+                      <uib-accordion>
+                        <a ui-sref="addCompanySite({id: company.id})">Add sites..</a>
+                      </uib-accordion>
                     </div>
                   </uib-accordion>
                   <!-- User accordion  -->
@@ -73,10 +77,6 @@
                 <a ui-sref="siteDocument({siteId: site.id})">{{site.name}}</a>
               </uib-accordion>
             </div>
-          </uib-accordion>
-          <!-- User accordion  -->
-          <uib-accordion>
-            <a>Users</a>
           </uib-accordion>
         </div>
       </uib-accordion>
