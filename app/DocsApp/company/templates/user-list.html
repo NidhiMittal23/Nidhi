@@ -5,6 +5,10 @@
       <thead>
         <tr>
           <th>Email</th>
+          <th>Select Site</th>
+          <th>Current Role</th>
+          <th>Choose Site</th>
+          <th>Shift User</th>
         </tr>
       </thead>
       <tbody>
@@ -16,48 +20,23 @@
               </select>
           </td>
           <td><span ng-if="selectedUser">
-              <a ng-if="selectedUser.role[user.email] === true"><span style="cursor: hand;cursor: pointer;"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Lead &nbsp;</span></a>
-              <a ng-if="selectedUser.role[user.email] === false"><span style="cursor: hand;cursor: pointer;"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Member &nbsp;</span></a>
-              <a ng-if="selectedUser.role[user.email] === undefined"><span style="cursor: hand;cursor: pointer;"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i> None &nbsp;</span></a>
+              <a ng-if="selectedUser.role[user.email] === true"><span style="cursor: hand;cursor: pointer;"><i class="fa fa-user fa-fw" aria-hidden="true"></i> Lead &nbsp;</span></a>
+              <a ng-if="selectedUser.role[user.email] === false"><span style="cursor: hand;cursor: pointer;"><i class="fa fa-user fa-fw" aria-hidden="true"></i> Member &nbsp;</span></a>
+              <a ng-if="selectedUser.role[user.email] === undefined"><span style="cursor: hand;cursor: pointer;"><i class="fa fa-user fa-fw" aria-hidden="true"></i> None &nbsp;</span></a>
             </span>
           </td>
           <td>
             <select ng-model="selectedUser.newRole[user.email]"
             ng-options="option for option in selectedUser.roleOption[user.email]">
             </select>
-            <span ng-if="selectedUser.newRole">
-              <button ng-click="selectedUser.changeUserRole(selectedUser.newRole[user.email], site.siteChosen[user.email], user)">Save</button>
+          </td>
+          <td>
+            <span ng-if="selectedUser.newRole[user.email]">
+              <button class="btn btn-default" ng-click="selectedUser.changeUserRole(selectedUser.newRole[user.email], site.siteChosen[user.email], user)">Shift</button>
             </span>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
-<!--     <table ng-repeat="site in siteList" class="table table-hover table-striped">
-      <thead>
-              <tr>
-                <th class="col-md-4"><span style="padding-left: 40px">{{site.name}}</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="user in userList" ng-if="site.employee.indexOf(user.id) >= 0">
-                <td class="col-md-4" style="cursor: hand;cursor: pointer;padding-left: 40px" ng-click="gotoCompanySite(company.id, company.name)">{{user.email ? user.email : 'N/A'}}</td>
-                <td class="col-md-4">
-                  <select
-                    ng-options = "option.name for option in siteList track by option.id" ng-selected="user.sites.id"
-                    ng-model = "userSite" style="width: 200px; max-height: 28px" class="form-control custom-form-control">
-                  </select>
-                </td>
-                <td>
-                  <div ng-if="user.is_staff == true">
-                    <button ng-if="user.is_lead == true" type="button" class="btn btn-primary">team lead</button>
-                    <button ng-if="user.is_lead == false" type="button" class="btn btn-success">member</button>
-                  </div>
-                  <button ng-if="user.is_staff == false" type="button" class="btn btn-warning">ex-employee</button>
-                                    
-                </td>
-
-                <td ng-click="editExistCompany(company.id, company.name)" ><span style="cursor: hand;cursor: pointer;">Edit<span> </span><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span></td>
-              </tr>
-            </tbody>
-    </table> -->
+</div>
