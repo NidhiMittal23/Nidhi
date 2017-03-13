@@ -3,7 +3,6 @@ var homeController = angular.module('authService.home', ['ui-notification', 'sat
 homeController.controller('HomeController', function($http, $auth, $scope, $state, authAPIservice,
     companyAPIservice, _, $timeout) {
     var vm = this;
-    $timeout(callAtTimeout, 700);
     vm.users;
     vm.error;
     vm.adminSiteId = authAPIservice.adminSiteId;
@@ -32,7 +31,7 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
     
     // Timeout is called as asynchronsly home.controllers runs before auth.controller after login
     // Hence localStorage.getItem run before localStorage.setItem
-    function callAtTimeout() {
+    $timeout(function () {
         vm.isAdmin = (localStorage.getItem("isAdmin") === 'true');
         params.page = 1;
         if (vm.isAdmin) {
@@ -68,8 +67,7 @@ homeController.controller('HomeController', function($http, $auth, $scope, $stat
                 $scope.SiteMangement[response.name] = employeeSites;
             });
         }
-    }
-    
+    }, 1000);
 
     $scope.isNavCollapsed = true;
     $scope.isCollapsed = false;
