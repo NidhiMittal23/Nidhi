@@ -65,12 +65,12 @@ myApp.factory('RequestsErrorHandler', function($q, _, $injector) {
     'request': function(config) {
       // can be done better
       // Trying to change url in fly to Production server;
-      if ('url' in config ) {
-        var url = config.url;
-        if ((config.url).search("localhost:9000") !== -1) {
-          config.url = (config.url).replace("localhost:9000", "35.154.197.42:8010");
-        }
-      }
+      // if ('url' in config ) {
+      //   var url = config.url;
+      //   if ((config.url).search("localhost:9000") !== -1) {
+      //     config.url = (config.url).replace("localhost:9000", "35.154.197.42:8010");
+      //   }
+      // }
       return config || $q.when(config);
     },
     'responseError': function(rejection) {
@@ -103,8 +103,10 @@ myApp.constant('_',
     window._
 );
 
-// myApp.constant('config', {  
-//   apiUrl: 'https://35.154.197.42:9010',
-//   baseUrl: '/',
-//   enableDebug: true
-// });
+myApp.constant('config', {
+  // apiUrl: 'http://localhost:9000/',
+  apiUrl: 'http://35.154.197.42:8010/',
+  baseUrl: '/',
+  enableDebug: true,
+  IndiaMobileCode: '+91'
+});

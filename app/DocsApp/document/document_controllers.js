@@ -149,7 +149,7 @@ documentController.controller('docVersionCtrl', function($state, $stateParams, $
 
 
 documentController.controller('docVersionAlterCtrl', function($scope, $state, $stateParams,
-    documentAPIservice, Notification /*, Upload */) {
+    documentAPIservice, Notification, config /*, Upload */) {
 
     $scope.docVersionModel = {};
 
@@ -159,7 +159,7 @@ documentController.controller('docVersionAlterCtrl', function($scope, $state, $s
 
     // have to move this login to service
     $scope.addNewDocVersion = function(){
-        var uploadUrl = 'http://localhost:9000/version/';
+        var uploadUrl = config.apiUrl + 'version/';
         documentAPIservice.postDocVersionDetail(uploadUrl, $scope.docVersionModel)
     };
 });
@@ -167,7 +167,7 @@ documentController.controller('docVersionAlterCtrl', function($scope, $state, $s
 
 documentController.controller('documentAlterCtrl', function($state, $stateParams, $scope,
         documentAPIservice, verticalAPIservice, licenseAPIservice, categoryAPIservice, $q,
-        Notification, $timeout) {
+        Notification, $timeout, config) {
     $scope.documentModel = {};
     $scope.documentRelationModel = {};
     $scope.documentSubCategoryModel = {};
@@ -302,7 +302,7 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         var params = $scope.documentVersionModel;
         var docid = $scope.documentModel.newDocumentId;
         params.document = docid;
-        var uploadUrl = 'http://localhost:9000/version/';
+        var uploadUrl = config.apiUrl + 'version/';
         documentAPIservice.postDocVersionDetail(uploadUrl, $scope.documentVersionModel);
         $scope.verMile = true;
     };

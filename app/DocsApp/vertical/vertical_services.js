@@ -1,11 +1,11 @@
 var verticalService = angular.module('vertical.services', []);
 
-verticalService.factory('verticalAPIservice', function($http) {
+verticalService.factory('verticalAPIservice', function($http, config) {
 
     var verticalAPI = {};
 
     var verticalUrl = {
-        'endpoint': 'http://localhost:9000/vertical/'
+        'endpoint': config.apiUrl + 'vertical/'
     };
 
     verticalAPI.getVertical =function(params) {

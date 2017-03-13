@@ -1,11 +1,11 @@
 var industryService = angular.module('industry.services', []);
 
-industryService.factory('industryAPIservice', function($http) {
+industryService.factory('industryAPIservice', function($http, config) {
     
     var industryAPI = {};
 
     var industryUrl = {
-        'endpoint': 'http://localhost:9000/industry/'
+        'endpoint': config.apiUrl + 'industry/'
     };
 
     industryAPI.getIndustry = function(params) {

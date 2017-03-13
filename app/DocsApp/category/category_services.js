@@ -1,13 +1,13 @@
 var categoryService = angular.module('category.services', []);
 
-categoryService.factory('categoryAPIservice', function($http) {
+categoryService.factory('categoryAPIservice', function($http, config) {
 
     var categoryAPI = {};
 
     //endpoints corresponding to category
     var categoryUrl = {
-        'endpoint': 'http://localhost:9000/category/',
-        'subcategoryEndpoint': 'http://localhost:9000/subcategory/'
+        'endpoint': config.apiUrl + 'category/',
+        'subcategoryEndpoint': config.apiUrl + 'subcategory/'
     };
 
     //Enhance: Use Protype inheritance to Make a single function and inherit it to 

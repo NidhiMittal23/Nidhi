@@ -1,14 +1,14 @@
 var companyService = angular.module('company.services', []);
 
-companyService.factory('companyAPIservice', function($http, _) {
+companyService.factory('companyAPIservice', function($http, _, config) {
 
     var companyAPI = {};
 
     var companyUrl = {
-        'endpoint': 'http://localhost:9000/company/',
-        'siteEndpoint': 'http://localhost:9000/site/',
-        'relationEndpoint':'http://localhost:9000/relation/',
-        'user': "http://localhost:9000/user/"
+        'endpoint': config.apiUrl + 'company/',
+        'siteEndpoint': config.apiUrl + 'site/',
+        'relationEndpoint': config.apiUrl + 'relation/',
+        'user': config.apiUrl + 'user/'
     };
 
     companyAPI.citylist = [
@@ -27,7 +27,7 @@ companyService.factory('companyAPIservice', function($http, _) {
         "Udaipur", "Vadodra", "Varanasi", "Vasco-Da-Gama", "Vijayawada", "Visakhapatnam"
     ];
 
-    var IndiaMobileCode = "+91";
+    var IndiaMobileCode = config.IndiaMobileCode;
     // while adding new company fetch user whose has not been assigned to any site
     // http://localhost:9000/user/null/no_company
 

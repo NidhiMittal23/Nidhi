@@ -1,6 +1,6 @@
 var userService = angular.module('user.services', []);
 
-userService.factory('userAPIservice', function($http, parentAPIService) {
+userService.factory('userAPIservice', function($http, parentAPIService, config) {
     // userAPIservice is subclass for parentAPIService
     function userAPIservice () {
         parentAPIService.call(this); // call super constructor
@@ -25,7 +25,7 @@ userService.factory('userAPIservice', function($http, parentAPIService) {
     };
 
     var userAPIserviceObj = new userAPIservice();
-    userAPIserviceObj.apiUrl = "http://localhost:9000/user/";
+    userAPIserviceObj.apiUrl = config.apiUrl + "user/";
     // set userAPIserviceObj.params = {} from controller;
     // userParams member method extends userAPIserviceObj
     return userAPIserviceObj; 

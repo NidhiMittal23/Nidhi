@@ -1,17 +1,17 @@
 var authService = angular.module('authService.services', []);
 
-authService.factory('authAPIservice', function($http, $auth) {
+authService.factory('authAPIservice', function($http, $auth, config) {
 
     var authAPI = {};
 
     var authUrl = {
-        'endpoint': 'http://localhost:9000/auth/',
-        'siteDocs': 'http://localhost:9000/site/',
-        'company': 'http://localhost:9000/company/'
+        'endpoint': config.apiUrl+ 'auth/',
+        'siteDocs': config.apiUrl + 'site/',
+        'company': config.apiUrl + 'company/'
     };
 
     authAPI.adminSiteId = 1;
-    var IndiaMobileCode = "+91";
+    var IndiaMobileCode = config.IndiaMobileCode;
     authAPI.companyImageUrl = "DocsApp/authService/styles/foodprodocs.jpg";
 
     authAPI.getUserSites = function() {

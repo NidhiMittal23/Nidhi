@@ -1,15 +1,15 @@
 var documentService = angular.module('document.services', []);
 
-documentService.factory('documentAPIservice', function($http, Notification) {
+documentService.factory('documentAPIservice', function($http, Notification, config) {
 
     var documentAPI = {};
     var documentUrl = {
-        'endpoint': 'http://localhost:9000/document/',
-        'relationEndPoint': 'http://localhost:9000/relation/',
-        'versionEndPoint': 'http://localhost:9000/version/',
+        'endpoint': config.apiUrl + 'document/',
+        'relationEndPoint': config.apiUrl + 'relation/',
+        'versionEndPoint': config.apiUrl + 'version/',
     }
 
-    documentAPI.serverDomain = "http://localhost:9000";
+    documentAPI.serverDomain = (config.apiUrl).slice(0, -1);
 
     documentAPI.getDocument =function() {
         return $http({
