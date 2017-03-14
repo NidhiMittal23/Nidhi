@@ -30,15 +30,15 @@
 
         <div class="form-group">
           <label for="country" class="col-sm-2 control-label">City:</label>
-          <div class="col-sm-6">             
-            <select ng-model="companyModel.citySelected"                
+          <div class="col-sm-6">
+            <select ng-model="companyModel.citySelected"
                   ng-change="getCountryStates()"
-                  class="form-control" 
+                  class="form-control"
                   ng-required="true"
                   id="country">
             <option value="">-- Choose City --</option>
             <option ng-repeat="option in companyModelOptions.citylist" ng-model="companyModel.citySelected" value="{{option}}">{{option}}</option>
-            </select>      
+            </select>
           </div>
         </div>
         <div class="form-group" ng-if="isEdit===false">
@@ -84,7 +84,7 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-7">
-            <button type="submit" class="btn btn-default" ng-click="editExistCompany()" ng-if="isEdit===true">Edit</button>
+            <button type="submit" class="btn btn-default" ng-click="editExistCompany()" ng-if="isEdit===true">Save</button>
             <button type="submit" class="btn btn-default" ng-click="addNewCompany()" ng-if="isEdit===false">Add</button>
           </div>
           <div>
