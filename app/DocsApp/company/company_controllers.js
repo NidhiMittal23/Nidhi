@@ -36,12 +36,12 @@ companyController.controller('companyCtrl', function($state, $scope, companyAPIs
 
     $scope.listDisApprovedCompany = function() {
         $scope.pageChanged(false);
-        $scope.checkApprove = true; 
+        $scope.checkApprove = true;
     };
 
     $scope.listApprovedCompany = function() {
         $scope.pageChanged(true);
-        $scope.checkApprove = false; 
+        $scope.checkApprove = false;
     };
 });
 
@@ -60,7 +60,7 @@ companyController.controller('userCtrl', function($state, $stateParams, $scope, 
 
         // In order to make selections w.r.t user
         // Dynamically Store user information $scope.selectedUser['abc@gmail.com'] like info
-        // Help in selecting role options specific to "abc@gmail.com" 
+        // Help in selecting role options specific to "abc@gmail.com"
         $scope.selectedUser = {};
         $scope.selectedUser.role = {};
         $scope.selectedUser.newRole = {};
@@ -137,7 +137,7 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
         var params = {
             'id': $stateParams.id,
         }
-        
+
         // request to server to get detail of perticular company.
         companyAPIservice.getCompanyDetails(params.id).success(function (response, status) {
             //populate the input field with data.
@@ -167,9 +167,9 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
 
     $scope.getCountryStates = function() {
     };
-    
-    
-    
+
+
+
 
     $scope.initCompany = function () {
         $scope.companyModel.selectedIndustryId = function(industryId) {
@@ -190,6 +190,7 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
             var companyName = response.name;
             $scope.companyIdAdded = response.id;
             Notification.success(companyName+' added successfully');
+            $scope.goBackToCompany();
         });
     };
 
@@ -197,8 +198,13 @@ companyController.controller('companyAlterCtrl', function($scope, $state, $state
         var params = $scope.companyModel;
         params.id = $stateParams.id;
         companyAPIservice.putCompanyDetail(params).success(function(response, status) {
+            $scope.goBackToCompany();
             Notification.success(response.name+ ' saved')
         });
+    };
+
+    $scope.goBackToCompany = function() {
+      $state.go('company', {});
     };
 
     $scope.deleteExistCompany = function() {
@@ -230,7 +236,7 @@ companyController.controller('companySiteCtrl', function($state, $stateParams, $
 
     $scope.checkCompanyUser = function() {
         $state.go('users', {id: companyId});
-    }; 
+    };
 
     companyAPIservice.getCompanySite(companyId).success(function (response, status) {
         $scope.companySiteList = response;
@@ -309,7 +315,7 @@ companyController.controller('siteDocCtrl', function($state, $stateParams, $scop
     var params = $scope.siteDocModel;
     //getting site detail...
     companyAPIservice.getCompanySiteDetails(id).success(function (response, status) {
-        
+
 
         //getting license and vertical from site for intersection...
         var licences=response.license;
@@ -342,11 +348,11 @@ companyController.controller('siteDocCtrl', function($state, $stateParams, $scop
                                 }
                             }
                         });
-                        
+
                     });
                 });
             });
         });
-        
+
     });
 });
