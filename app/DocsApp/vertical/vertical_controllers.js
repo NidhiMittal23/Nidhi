@@ -35,7 +35,7 @@ verticalController.controller('verticalAlterCtrl', function($scope, $state, $sta
     if ($state.current.name == 'editVertical') {
         $scope.isEdit = true;
         var id = $stateParams.id;
-        
+
         // request to server to get detail of perticular vertical.
         verticalAPIservice.getVerticalDetails(id).success(function (response, status) {
             //populate the input field with data.
@@ -53,6 +53,7 @@ verticalController.controller('verticalAlterCtrl', function($scope, $state, $sta
         verticalAPIservice.postVerticalDetail(params).success(function (response, status) {
             var verticalName = params.name;
             Notification.success(verticalName+' added successfully');
+            $scope.goBackToVertical();
         });
     };
 
@@ -60,8 +61,13 @@ verticalController.controller('verticalAlterCtrl', function($scope, $state, $sta
         var newval = $scope.verticalModel;
         verticalAPIservice.putVerticalDetail(newval).success(function (response, status) {
             Notification.success(newval.name+' updated successfully');
+            $scope.goBackToVertical();
         });
     };
+
+    $scope.goBackToVertical = function() {
+      $state.go('vertical', {});
+    }
 
     $scope.deleteExistVertical = function() {
         var newval = $scope.verticalModel;
