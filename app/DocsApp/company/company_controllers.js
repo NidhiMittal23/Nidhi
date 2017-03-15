@@ -251,6 +251,19 @@ companyController.controller('siteCtrl', function($state, $stateParams, $scope, 
 
     if ($state.current.name == 'addCompanySite') {
         $scope.companySiteModel.companyId = $stateParams.id;
+        $scope.isEdit = false;
+    }
+
+    if ($state.current.name == 'editCompanySite') {
+      $scope.isEdit = true;
+
+      companyAPIservice.getCompanySiteDetails($stateParams.id).success(function(response, status) {
+        $scope.companySiteModel.name = response.name;
+        $scope.companySiteModel.location = response.location;
+        $scope.companySiteModel.companyEmployeesSelected = response.companyEmployeesSelected;
+        $scope.companySiteModel.licenseSelected = response.license;
+
+      });
     }
 
     $scope.initSite = function () {
@@ -300,6 +313,11 @@ companyController.controller('siteCtrl', function($state, $stateParams, $scope, 
             $scope.constructSiteDocument(siteId, siteName);
         });
     };
+
+    $scope.editExistCompanySite = function() {
+      Notification.error("Edit document Name; Feature coming soon");
+    };
+
 });
 
 companyController.controller('siteDocCtrl', function($state, $stateParams, $scope, companyAPIservice, licenseAPIservice, documentAPIservice) {

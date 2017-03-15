@@ -15,7 +15,7 @@
     <tbody>
       <tr ng-repeat="companySite in companySiteList.sites" style="cursor: hand;cursor: pointer;">
         <td ui-sref="siteDocument({siteId: companySite.id})">{{companySite.name ? companySite.name : 'N/A'}}</td>
-        <td ng-click="editcompanySite(companySite.id, companySite.name)" ><span style="cursor: hand;cursor: pointer;">Setting<span> </span><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></span></td>
+        <td ng-click="editExistCompanySite(companySite.id, companySite.name)" ><span style="cursor: hand;cursor: pointer;">Setting<span> </span><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></span></td>
       </tr>
     </tbody>
   </table>

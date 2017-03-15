@@ -71,5 +71,14 @@ companyApp.config(function($stateProvider, $urlRouterProvider){
             controller: 'siteCtrl',
             params: {id: null, name: null},
             authenticate: true
+        })
+
+        .state('editCompanySite', {
+            url: '/site/:id?name',
+            parent: 'home',
+            templateUrl: 'DocsApp/company/templates/companySite-alter.html',
+            controller: 'siteCtrl',
+            params: {id: null, name: null},
+            authenticate: true
         });
 });

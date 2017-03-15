@@ -2,7 +2,8 @@
 
   <!-- check if state is edit -->
   <!-- <div class="panel-heading font-bold" ng-if="isEdit===true">Edit Company Site</div> -->
-  <div class="panel-heading font-bold">Add Company Site</div>
+  <div ng-if="isEdit == false" class="panel-heading font-bold">Add Company Site</div>
+  <div ng-if="isEdit == true" class="panel-heading font-bold">Edit Company Site</div>
     <div class="panel-body">
       <form class="form-horizontal">
         <div class="form-group">
@@ -13,15 +14,15 @@
         </div>
         <div class="form-group">
           <label for="country" class="col-sm-2 control-label">City:</label>
-          <div class="col-sm-6">             
-            <select ng-model="companySiteModel.location"                
+          <div class="col-sm-6">
+            <select ng-model="companySiteModel.location"
                   ng-change="getCountryStates()"
-                  class="form-control" 
+                  class="form-control"
                   ng-required="true"
                   id="country">
             <option value="">-- Choose City --</option>
             <option ng-repeat="option in companySiteModel.citylist" ng-model="companySiteModel.location" value="{{option}}">{{option}}</option>
-            </select>      
+            </select>
           </div>
         </div>
 
@@ -58,8 +59,8 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <!-- <button type="submit" class="btn btn-primary" ng-if="isEdit===true">Edit</button> -->
-            <button type="submit" class="btn btn-primary" ng-click="addNewCompanySite()">Add Site</button>
+            <button ng-if="isEdit == true" type="submit" class="btn btn-primary" ng-click="editExistCompanySite()">Edit Site</button>
+            <button ng-if="isEdit == false" type="submit" class="btn btn-primary" ng-click="addNewCompanySite()">Add Site</button>
           </div>
         </div>
       </form>
