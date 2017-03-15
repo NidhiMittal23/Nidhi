@@ -267,6 +267,7 @@ companyController.controller('siteCtrl', function($state, $stateParams, $scope, 
     }
 
     $scope.initSite = function () {
+      //license and vertical need not be array!!
         $scope.companySiteModel.licenseSelected = [];
         $scope.companySiteModel.verticalSelected = [];
         $scope.companySiteModel.companyEmployeesSelected = [];
