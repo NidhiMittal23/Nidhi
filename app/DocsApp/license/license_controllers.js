@@ -57,6 +57,7 @@ licenseController.controller('licenseAlterCtrl', function($scope, $state, $state
         licenseAPIservice.postLicenseDetail(params).success(function (response, status) {
             var licenseName = response.name;
             Notification.success(licenseName+' added successfully');
+            $state.go('license');
         });
     };
 
@@ -65,6 +66,7 @@ licenseController.controller('licenseAlterCtrl', function($scope, $state, $state
         licenseAPIservice.putLicenseDetail(newval).success(function (response, status) {
             var licenseName = response.name;
             Notification.success(licenseName+' Edited successfully');
+            $state.go('license');
         });
     };
 

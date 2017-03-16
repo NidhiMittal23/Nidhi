@@ -29,7 +29,9 @@ authService.factory('authAPIservice', function($http, $auth, config) {
         payload.append('name', params.name);
         payload.append('is_active', false);
         payload.append('city', params.citySelected);
-        payload.append('logo', params.logo);
+        if ('logo' in params) {
+            payload.append('logo', params.logo);
+        }
         payload.append('phone_number', IndiaMobileCode + params.phone_number);
         payload.append('email', params.email);
         payload.append('is_approved', false);

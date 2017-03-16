@@ -64,6 +64,7 @@ userController.controller('userAlterCtrl', function($scope, $state, $stateParams
         userAPIservice.post().then(function (response) {
             var email = userAPIservice.response.email;
             Notification.success(email+' added successfully');
+            $state.go('user');
         });
     };
 
@@ -72,6 +73,7 @@ userController.controller('userAlterCtrl', function($scope, $state, $stateParams
         userAPIservice.put().then(function (response) {
             var email = userAPIservice.response.email;
             Notification.success(email+' updated successfully');
+            $state.go('user');
         });
     };
 

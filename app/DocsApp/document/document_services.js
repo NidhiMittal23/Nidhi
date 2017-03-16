@@ -147,6 +147,14 @@ documentService.factory('documentAPIservice', function($http, Notification, conf
             data: params
         });
     };
+    
+    documentAPI.deleteDocumentDetail = function(params) {
+        return $http({
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: documentUrl.endpoint + params.id + '/'
+        });
+    };
 
     documentAPI.getFileSource = function(url) {
         return $http({

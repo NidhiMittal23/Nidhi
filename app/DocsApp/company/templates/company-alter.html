@@ -96,4 +96,4 @@
     </div>
 </div>
 
-<button class="btn btn-default" ui-sref="addCompanySite({id: companyIdAdded})">Add Sites</button>
+<button class="btn btn-default" ng-if="isEdit===false"><a ui-sref="addCompanySite({id: companyIdAdded})">Add Sites</a></button>

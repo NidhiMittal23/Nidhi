@@ -320,6 +320,15 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         // })
     };
 
+    $scope.deleteExistDocument = function() {
+        var params = {};
+        params.id = $scope.documentModel.id;
+        documentAPIservice.deleteDocumentDetail(params).success(function (response, status) {
+            Notification.success('Deleted successfully');
+            $state.go('document');
+        })
+    }
+
     // Associate Subcategory to newly Created Document
     $scope.addDocumentSubCategory = function() {
         var params = $scope.documentSubCategoryModel;

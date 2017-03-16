@@ -231,7 +231,7 @@ companyController.controller('companySiteCtrl', function($state, $stateParams, $
     };
 
     $scope.editExistCompanySite = function(id, name) {
-        $state.go('editCompanySite', {id: companyId, name: name});
+        $state.go('editCompanySite', {id: id, name: name});
     };
 
     $scope.checkCompanyUser = function() {
@@ -245,7 +245,7 @@ companyController.controller('companySiteCtrl', function($state, $stateParams, $
 
 
 companyController.controller('siteCtrl', function($state, $stateParams, $scope, companyAPIservice,
-    licenseAPIservice, verticalAPIservice, $q, Notification) {
+    licenseAPIservice, verticalAPIservice, $q, Notification, $window) {
     $scope.companySiteModel = {};
     $scope.companySiteModel.citylist = companyAPIservice.citylist;
 
@@ -255,15 +255,17 @@ companyController.controller('siteCtrl', function($state, $stateParams, $scope, 
     }
 
     if ($state.current.name == 'editCompanySite') {
-      $scope.isEdit = true;
-
-      companyAPIservice.getCompanySiteDetails($stateParams.id).success(function(response, status) {
-        $scope.companySiteModel.name = response.name;
-        $scope.companySiteModel.location = response.location;
-        $scope.companySiteModel.companyEmployeesSelected = response.companyEmployeesSelected;
-        $scope.companySiteModel.licenseSelected = response.license;
-
-      });
+        $scope.isEdit = true;
+        $scope.companySiteModel.siteId = $stateParams.id;
+        $scope.companySiteModel.siteName = $stateParams.name;
+        companyAPIservice.getCompanySiteDetails($stateParams.id).success(function(response, status) {
+            $scope.companySiteModel.name = response.name;
+            $scope.companySiteModel.location = response.location;
+            $scope.companySiteModel.licenseSelected = response.license.toString();
+            $scope.companySiteModel.verticalSelected = response.vertical.toString();
+            $scope.companySiteModel.companyEmployeesSelected = response.companyEmployeesSelected.toString();
+            
+        });
     }
 
     $scope.initSite = function () {
@@ -302,6 +304,7 @@ companyController.controller('siteCtrl', function($state, $stateParams, $scope, 
         companyAPIservice.constructSiteDocument(siteId).success(function (response, status) {
             Notification.success(siteName+ 'document Created');
             $state.go('home');
+            $window.location.reload();
         });
     };
 
@@ -321,11 +324,12 @@ companyController.controller('siteCtrl', function($state, $stateParams, $scope, 
 
     $scope.deleteExistCompanySite = function() {
         var params = {
-            id: $stateParams.id
+            id: $scope.companySiteModel.siteId,
+            name: $scope.companySiteModel.siteName
         }
         companyAPIservice.deleteExistCompanySite(params).success(function(response, status) {
-            Notification.error("Edit document Name; Feature coming soon");
-            $state.go('companySite', {id: params.id, name: params.name})
+            Notification.success("Deleted successfully");
+            // $state.go('companySite', {id: params., name: params.name})
         })
     };
 

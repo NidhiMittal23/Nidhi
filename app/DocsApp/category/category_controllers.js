@@ -53,6 +53,7 @@ categoryController.controller('categoryAlterCtrl', function($scope, $state, $sta
         categoryAPIservice.postCategoryDetail(params).success(function (response, status) {
             var categoryName = response.name;
             Notification.success(categoryName+' added successfully');
+            $state.go('category');
         });
     };
 
@@ -61,6 +62,7 @@ categoryController.controller('categoryAlterCtrl', function($scope, $state, $sta
         categoryAPIservice.putCategoryDetail(newVal).success(function (response, status) {
             var categoryName = response.name;
             Notification.success(categoryName+' added successfully');
+            $state.go('category');
         });
     };
 
