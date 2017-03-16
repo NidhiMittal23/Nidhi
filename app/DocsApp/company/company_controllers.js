@@ -316,7 +316,17 @@ companyController.controller('siteCtrl', function($state, $stateParams, $scope, 
     };
 
     $scope.editExistCompanySite = function() {
-      Notification.error("Edit document Name; Feature coming soon");
+        Notification.error("Edit document Feature coming soon");
+    };
+
+    $scope.deleteExistCompanySite = function() {
+        var params = {
+            id: $stateParams.id
+        }
+        companyAPIservice.deleteExistCompanySite(params).success(function(response, status) {
+            Notification.error("Edit document Name; Feature coming soon");
+            $state.go('companySite', {id: params.id, name: params.name})
+        })
     };
 
 });

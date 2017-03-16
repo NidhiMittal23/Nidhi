@@ -201,6 +201,13 @@ companyService.factory('companyAPIservice', function($http, _, config) {
         });
     };
 
+    companyAPI.deleteExistCompanySite = function(params) {
+        return $http({
+            method: 'DELETE',
+            url: companyUrl.siteEndpoint + params.id + '/'
+        })
+    }
+
     companyAPI.transferSiteEmployee = function(params) {
         var siteId = params.site;
         return $http({
