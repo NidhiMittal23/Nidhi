@@ -304,7 +304,7 @@ companyController.controller('siteCtrl', function($state, $stateParams, $scope, 
         companyAPIservice.constructSiteDocument(siteId).success(function (response, status) {
             Notification.success(siteName+ 'document Created');
             $state.go('home');
-            $window.location.reload();
+            // $window.location.reload();
         });
     };
 

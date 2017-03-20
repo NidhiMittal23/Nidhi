@@ -7,6 +7,7 @@ documentService.factory('documentAPIservice', function($http, Notification, conf
         'endpoint': config.apiUrl + 'document/',
         'relationEndPoint': config.apiUrl + 'relation/',
         'versionEndPoint': config.apiUrl + 'version/',
+        'siteEndPoint': config.apiUrl + 'site/'
     }
 
     documentAPI.serverDomain = (config.apiUrl).slice(0, -1);
@@ -24,6 +25,20 @@ documentService.factory('documentAPIservice', function($http, Notification, conf
             url: url
         });
     };
+
+    documentAPI.getMasterDocument = function(siteId) {
+        return $http({
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            url: documentUrl.siteEndPoint + siteId + '/master_document/',
+            transformRequest: function(obj) {
+                var str = [];
+                for(var p in obj)
+                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                return str.join("&");
+            }
+        });
+    }
 
     documentAPI.getDocumentDetails =function(id) {
         return $http({

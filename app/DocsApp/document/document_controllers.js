@@ -5,6 +5,8 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
     $scope.serverDomain = documentAPIservice.serverDomain;
     $scope.isEmployeeLead = localStorage.getItem('isLead') === 'true';
 
+    $scope.userSiteId;
+
     $scope.addNewDocument = function() {
         $state.go('addDocument', {});
     };
@@ -15,6 +17,13 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
 
     $scope.editExistDocument = function(id, name) {
         $state.go('editDocument', {id: id, name: name});
+    };
+
+    $scope.showMasterDocument = function() {
+        documentAPIservice.getMasterDocument($scope.userSiteId).success(function(response) {
+            $scope.isMasterUrl = true;
+            $scope.master_page_url = response.master_page_url;
+        })
     };
 
     $scope.versionDelete = function(id) {
@@ -97,6 +106,7 @@ documentController.controller('documentCtrl', function($state, $window ,$scope, 
 
     if ($state.current.name == "siteDocument") {
         userSite = $stateParams.siteId;
+        $scope.userSiteId = userSite
         companyAPIservice.getSiteDocuments(userSite)
         .then(function(response) {
             var siteDocuments = response.data
@@ -297,6 +307,7 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         });
     };
 
+
     $scope.addNewDocumentVersion = function(){
 
         var params = $scope.documentVersionModel;
@@ -325,7 +336,7 @@ documentController.controller('documentAlterCtrl', function($state, $stateParams
         params.id = $scope.documentModel.id;
         documentAPIservice.deleteDocumentDetail(params).success(function (response, status) {
             Notification.success('Deleted successfully');
-            $state.go('document');
+            // $state.go('document');
         })
     }
 

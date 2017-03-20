@@ -1,4 +1,8 @@
 <div class="row">
+  <div>
+    <button type="button" class="btn btn-default" ng-if="isEmployeeLead===true" ng-click="showMasterDocument()">Show Master Document</button>
+  </div>
+  <a href="{{serverDomain + master_page_url}}" ng-if="isMasterUrl===true" target="_blank">{{master_page_url}}</a>
   <div class="col-md-10"><h4>Table of Content</h4>
   </div>
   <div>
