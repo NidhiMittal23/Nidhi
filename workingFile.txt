@@ -1,0 +1,4 @@
+Currently working branch is production..
+1. Before running production locally
+    a. change the server endpoint to localhost (This can be done better by involving env variables)
+    b. There is no such centralized configure file as of now. So, error may occur due to improper settings.
